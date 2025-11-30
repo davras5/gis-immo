@@ -2791,10 +2791,16 @@
         
         function updateMenuTogglePosition() {
             var mainRect = document.getElementById('map-view').getBoundingClientRect();
-            
+
             if (menuOpen) {
                 var panelRect = accordionPanel.getBoundingClientRect();
-                menuToggle.style.top = (panelRect.bottom - mainRect.top) + 'px';
+                var calculatedTop = panelRect.bottom - mainRect.top;
+                // Ensure button stays below the panel - if panel hasn't rendered yet, retry
+                if (panelRect.height < 50) {
+                    setTimeout(updateMenuTogglePosition, 50);
+                    return;
+                }
+                menuToggle.style.top = calculatedTop + 'px';
             } else {
                 menuToggle.style.top = '10px';
             }
