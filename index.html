@@ -291,7 +291,13 @@
             min-width: 250px;
             justify-content: flex-end;
         }
-        
+
+        #filter-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         #object-count {
             font-size: 14px;
             color: var(--grey-900);
@@ -1351,14 +1357,18 @@
         </div>
         
         <div id="header-right">
-            <span id="object-count">10 Objekte</span>
-            <button class="header-btn" id="filter-btn">
-                <span class="material-symbols-outlined">filter_list</span>
-                Filter
-            </button>
-            <button id="login-btn" title="Anmelden">
-                <span class="material-symbols-outlined">person</span>
-            </button>
+            <div id="filter-controls">
+                <span id="object-count">10 Objekte</span>
+                <button class="header-btn" id="filter-btn">
+                    <span class="material-symbols-outlined">filter_list</span>
+                    Filter
+                </button>
+            </div>
+            <div id="login-area">
+                <button id="login-btn" title="Anmelden">
+                    <span class="material-symbols-outlined">person</span>
+                </button>
+            </div>
         </div>
     </header>
     
