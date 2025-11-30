@@ -1322,6 +1322,292 @@
             color: var(--primary-red);
             font-weight: 600;
         }
+
+        /* ===== TAB CONTENT SWITCHING ===== */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ===== MEASUREMENTS TAB ===== */
+        .measurements-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .measurements-section {
+            background: var(--white);
+            border: 1px solid var(--grey-300);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .measurements-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--grey-300);
+        }
+
+        .measurements-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--grey-900);
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--grey-600);
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: var(--grey-100);
+            color: var(--grey-900);
+        }
+
+        .btn-icon .material-symbols-outlined {
+            font-size: 20px;
+        }
+
+        .measurements-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--grey-100);
+            background: var(--grey-50);
+        }
+
+        .measurements-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--grey-300);
+            border-radius: 4px;
+            padding: 8px 12px;
+            min-width: 250px;
+        }
+
+        .measurements-search .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--grey-400);
+        }
+
+        .measurements-search input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            background: transparent;
+        }
+
+        .measurements-search input::placeholder {
+            color: var(--grey-400);
+        }
+
+        .measurements-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-action {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--grey-600);
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-action:hover:not(:disabled) {
+            background: var(--grey-100);
+            color: var(--grey-900);
+        }
+
+        .btn-action:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-action .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .btn-add {
+            background: #1a7f64;
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .btn-add:hover {
+            background: #15654f;
+        }
+
+        .btn-add .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* Measurements Table */
+        .measurements-table-container {
+            overflow-x: auto;
+        }
+
+        .measurements-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .measurements-table th {
+            background: var(--white);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            color: var(--grey-600);
+            border-bottom: 1px solid var(--grey-300);
+            white-space: nowrap;
+        }
+
+        .measurements-table th.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .measurements-table th.sortable:hover {
+            background: var(--grey-50);
+        }
+
+        .measurements-table th .sort-icon {
+            font-size: 16px;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        .measurements-table th.sort-asc .sort-icon {
+            content: 'arrow_upward';
+        }
+
+        .measurements-table th.sort-desc .sort-icon {
+            content: 'arrow_downward';
+        }
+
+        .measurements-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--grey-100);
+            color: var(--grey-900);
+        }
+
+        .measurements-table tbody tr:hover {
+            background: var(--grey-50);
+        }
+
+        .measurements-table tbody tr.selected {
+            background: #e3f2fd;
+        }
+
+        .measurements-table .col-checkbox {
+            width: 50px;
+            text-align: center;
+        }
+
+        .measurements-table .col-asset {
+            width: 100px;
+        }
+
+        .measurements-table .col-type {
+            min-width: 140px;
+        }
+
+        .measurements-table .col-area {
+            width: 100px;
+            text-align: right;
+        }
+
+        .measurements-table td.col-area {
+            font-weight: 500;
+        }
+
+        .measurements-table .col-set {
+            min-width: 180px;
+        }
+
+        .measurements-table .col-accuracy {
+            width: 100px;
+        }
+
+        .measurements-table .col-estimate {
+            width: 100px;
+            text-align: center;
+        }
+
+        .measurements-table .col-standard {
+            width: 80px;
+        }
+
+        .measurements-table .col-from,
+        .measurements-table .col-until {
+            width: 100px;
+        }
+
+        .measurements-table input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .check-icon {
+            color: #1a7f64;
+            font-size: 20px;
+        }
+
+        .accuracy-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .accuracy-badge.aggregated {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .accuracy-badge.estimated {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
     </style>
 </head>
 <body>
@@ -1527,7 +1813,7 @@
             <div class="detail-tabs">
                 <div class="detail-tabs-inner">
                     <div class="detail-tab active" data-tab="uebersicht">Übersicht</div>
-                    <div class="detail-tab disabled" data-tab="bemessungen">Bemessungen</div>
+                    <div class="detail-tab" data-tab="bemessungen">Bemessungen</div>
                     <div class="detail-tab disabled" data-tab="belegung">Belegung</div>
                     <div class="detail-tab disabled" data-tab="kosten">Kosten</div>
                     <div class="detail-tab disabled" data-tab="vertraege">Verträge</div>
@@ -1537,6 +1823,8 @@
             </div>
             
             <div class="detail-content">
+                <!-- Tab Content: Übersicht -->
+                <div class="tab-content active" data-content="uebersicht">
                 <div class="detail-grid">
                     <div class="detail-left">
                         <div class="detail-section">
@@ -1705,6 +1993,79 @@
                                             <td id="detail-housenumber">—</td>
                                             <td id="detail-plz">—</td>
                                         </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Tab Content: Bemessungen -->
+                <div class="tab-content" data-content="bemessungen">
+                    <div class="measurements-container">
+                        <!-- Area Measurements Section -->
+                        <div class="measurements-section">
+                            <div class="measurements-section-header">
+                                <div class="measurements-section-title">
+                                    <span>Area measurements</span>
+                                    <button class="btn-icon" title="Expand">
+                                        <span class="material-symbols-outlined">open_in_full</span>
+                                    </button>
+                                </div>
+                                <button class="btn-icon" title="More options">
+                                    <span class="material-symbols-outlined">more_horiz</span>
+                                </button>
+                            </div>
+
+                            <div class="measurements-toolbar">
+                                <div class="measurements-search">
+                                    <span class="material-symbols-outlined">search</span>
+                                    <input type="text" id="measurements-filter" placeholder="Filter all columns">
+                                </div>
+                                <div class="measurements-actions">
+                                    <button class="btn-action" disabled>
+                                        <span class="material-symbols-outlined">edit</span>
+                                        Edit
+                                    </button>
+                                    <button class="btn-action" disabled>
+                                        <span class="material-symbols-outlined">delete</span>
+                                        Delete
+                                    </button>
+                                    <button class="btn-action" disabled>
+                                        <span class="material-symbols-outlined">open_in_new</span>
+                                        View
+                                    </button>
+                                    <button class="btn-add">
+                                        <span class="material-symbols-outlined">add</span>
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="measurements-table-container">
+                                <table class="measurements-table" id="measurements-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-checkbox">
+                                                <input type="checkbox" id="select-all-measurements">
+                                            </th>
+                                            <th class="col-asset sortable" data-sort="asset">
+                                                Asset
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-type">Area type</th>
+                                            <th class="col-area">Area</th>
+                                            <th class="col-set">Set</th>
+                                            <th class="col-accuracy">Accuracy</th>
+                                            <th class="col-estimate">BM Estimate</th>
+                                            <th class="col-standard">Standard</th>
+                                            <th class="col-from">Valid from</th>
+                                            <th class="col-until">Valid until</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="measurements-tbody">
+                                        <!-- Populated by JavaScript -->
                                     </tbody>
                                 </table>
                             </div>
@@ -2575,10 +2936,27 @@
                 if (this.classList.contains('disabled')) {
                     return;
                 }
+                var targetTab = this.dataset.tab;
+
+                // Update active tab
                 document.querySelectorAll('.detail-tab').forEach(function(t) {
                     t.classList.remove('active');
                 });
                 this.classList.add('active');
+
+                // Switch content
+                document.querySelectorAll('.tab-content').forEach(function(content) {
+                    content.classList.remove('active');
+                });
+                var targetContent = document.querySelector('.tab-content[data-content="' + targetTab + '"]');
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+
+                // Render measurements table when switching to Bemessungen tab
+                if (targetTab === 'bemessungen') {
+                    renderMeasurementsTable();
+                }
             });
         });
 
@@ -2694,6 +3072,246 @@
         // Initialize thumbnails after a short delay to ensure token is available
         setTimeout(initStyleThumbnails, 100);
         updateActiveStyleButton();
+
+        // ===== MEASUREMENTS TAB =====
+
+        // Demo data for measurements
+        var measurementsData = [
+            {
+                id: 'meas-001',
+                asset: 'DE-BE-11',
+                areaType: 'Gross floor area',
+                value: 4200,
+                unit: 'm²',
+                set: 'Set 06.04.2020-27.11.2025',
+                accuracy: 'Aggregated',
+                bmEstimate: false,
+                standard: 'MFG',
+                validFrom: '06.04.2020',
+                validUntil: '27.11.2025'
+            },
+            {
+                id: 'meas-002',
+                asset: 'DE-BE-11',
+                areaType: 'Gross internal area',
+                value: 3900,
+                unit: 'm²',
+                set: 'Set 06.04.2020-27.11.2025',
+                accuracy: 'Estimated',
+                bmEstimate: true,
+                standard: 'n/a',
+                validFrom: '06.04.2020',
+                validUntil: '27.11.2025'
+            },
+            {
+                id: 'meas-003',
+                asset: 'DE-BE-11',
+                areaType: 'Energy ref. area',
+                value: 4100,
+                unit: 'm²',
+                set: 'Set 06.04.2020-27.11.2025',
+                accuracy: 'Estimated',
+                bmEstimate: true,
+                standard: 'n/a',
+                validFrom: '06.04.2020',
+                validUntil: '27.11.2025'
+            },
+            {
+                id: 'meas-004',
+                asset: 'DE-BE-11',
+                areaType: 'Volume',
+                value: 12600,
+                unit: 'm³',
+                set: 'Set 06.04.2020-27.11.2025',
+                accuracy: 'Estimated',
+                bmEstimate: true,
+                standard: 'n/a',
+                validFrom: '06.04.2020',
+                validUntil: '27.11.2025'
+            },
+            {
+                id: 'meas-005',
+                asset: 'DE-BE-11',
+                areaType: 'Workplaces',
+                value: 85,
+                unit: 'Stk',
+                set: 'Set 06.04.2020-27.11.2025',
+                accuracy: 'Aggregated',
+                bmEstimate: false,
+                standard: 'n/a',
+                validFrom: '06.04.2020',
+                validUntil: '27.11.2025'
+            },
+            {
+                id: 'meas-006',
+                asset: 'DE-BE-11',
+                areaType: 'Cleaning area',
+                value: 3200,
+                unit: 'm²',
+                set: 'Set 06.04.2020-27.11.2025',
+                accuracy: 'Estimated',
+                bmEstimate: true,
+                standard: 'n/a',
+                validFrom: '06.04.2020',
+                validUntil: '27.11.2025'
+            }
+        ];
+
+        var filteredMeasurements = measurementsData.slice();
+        var measurementsSortDirection = 'asc';
+        var measurementsSortColumn = 'asset';
+
+        function renderMeasurementsTable() {
+            var tbody = document.getElementById('measurements-tbody');
+            if (!tbody) return;
+
+            var html = '';
+            filteredMeasurements.forEach(function(m) {
+                var formattedValue = Number(m.value).toLocaleString('de-CH') + ' ' + m.unit;
+                var accuracyClass = m.accuracy.toLowerCase();
+                var checkIcon = m.bmEstimate ? '<span class="material-symbols-outlined check-icon">check</span>' : '';
+
+                html += '<tr data-id="' + m.id + '">' +
+                    '<td class="col-checkbox"><input type="checkbox" class="measurement-checkbox"></td>' +
+                    '<td class="col-asset">' + m.asset + '</td>' +
+                    '<td class="col-type">' + m.areaType + '</td>' +
+                    '<td class="col-area">' + formattedValue + '</td>' +
+                    '<td class="col-set">' + m.set + '</td>' +
+                    '<td class="col-accuracy"><span class="accuracy-badge ' + accuracyClass + '">' + m.accuracy + '</span></td>' +
+                    '<td class="col-estimate">' + checkIcon + '</td>' +
+                    '<td class="col-standard">' + m.standard + '</td>' +
+                    '<td class="col-from">' + m.validFrom + '</td>' +
+                    '<td class="col-until">' + m.validUntil + '</td>' +
+                '</tr>';
+            });
+
+            tbody.innerHTML = html;
+
+            // Add checkbox event listeners
+            document.querySelectorAll('.measurement-checkbox').forEach(function(cb) {
+                cb.addEventListener('change', updateMeasurementsSelection);
+            });
+        }
+
+        function updateMeasurementsSelection() {
+            var checkboxes = document.querySelectorAll('.measurement-checkbox');
+            var checkedCount = document.querySelectorAll('.measurement-checkbox:checked').length;
+            var selectAll = document.getElementById('select-all-measurements');
+
+            // Update select all checkbox state
+            if (selectAll) {
+                selectAll.checked = checkedCount === checkboxes.length && checkboxes.length > 0;
+                selectAll.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
+            }
+
+            // Update row selection styling
+            document.querySelectorAll('.measurements-table tbody tr').forEach(function(row) {
+                var cb = row.querySelector('.measurement-checkbox');
+                if (cb && cb.checked) {
+                    row.classList.add('selected');
+                } else {
+                    row.classList.remove('selected');
+                }
+            });
+
+            // Enable/disable action buttons based on selection
+            var actionBtns = document.querySelectorAll('.measurements-actions .btn-action');
+            actionBtns.forEach(function(btn) {
+                btn.disabled = checkedCount === 0;
+            });
+        }
+
+        // Select All checkbox handler
+        var selectAllCheckbox = document.getElementById('select-all-measurements');
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('change', function() {
+                var checkboxes = document.querySelectorAll('.measurement-checkbox');
+                var isChecked = this.checked;
+                checkboxes.forEach(function(cb) {
+                    cb.checked = isChecked;
+                });
+                updateMeasurementsSelection();
+            });
+        }
+
+        // Filter functionality
+        var measurementsFilter = document.getElementById('measurements-filter');
+        if (measurementsFilter) {
+            measurementsFilter.addEventListener('input', function() {
+                var term = this.value.toLowerCase().trim();
+
+                if (term === '') {
+                    filteredMeasurements = measurementsData.slice();
+                } else {
+                    filteredMeasurements = measurementsData.filter(function(m) {
+                        return m.asset.toLowerCase().includes(term) ||
+                               m.areaType.toLowerCase().includes(term) ||
+                               m.accuracy.toLowerCase().includes(term) ||
+                               m.standard.toLowerCase().includes(term) ||
+                               m.set.toLowerCase().includes(term) ||
+                               String(m.value).includes(term);
+                    });
+                }
+
+                sortMeasurements();
+                renderMeasurementsTable();
+            });
+        }
+
+        // Sort functionality
+        function sortMeasurements() {
+            filteredMeasurements.sort(function(a, b) {
+                var valA = a[measurementsSortColumn];
+                var valB = b[measurementsSortColumn];
+
+                if (typeof valA === 'string') {
+                    valA = valA.toLowerCase();
+                    valB = valB.toLowerCase();
+                }
+
+                if (valA < valB) return measurementsSortDirection === 'asc' ? -1 : 1;
+                if (valA > valB) return measurementsSortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // Sort column click handler
+        document.querySelectorAll('.measurements-table th.sortable').forEach(function(th) {
+            th.addEventListener('click', function() {
+                var column = this.dataset.sort;
+
+                // Toggle direction if same column, else default to asc
+                if (column === measurementsSortColumn) {
+                    measurementsSortDirection = measurementsSortDirection === 'asc' ? 'desc' : 'asc';
+                } else {
+                    measurementsSortColumn = column;
+                    measurementsSortDirection = 'asc';
+                }
+
+                // Update sort icons
+                document.querySelectorAll('.measurements-table th.sortable').forEach(function(header) {
+                    header.classList.remove('sort-asc', 'sort-desc');
+                    var icon = header.querySelector('.sort-icon');
+                    if (icon) icon.textContent = 'unfold_more';
+                });
+
+                this.classList.add('sort-' + measurementsSortDirection);
+                var sortIcon = this.querySelector('.sort-icon');
+                if (sortIcon) {
+                    sortIcon.textContent = measurementsSortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward';
+                }
+
+                sortMeasurements();
+                renderMeasurementsTable();
+            });
+        });
+
+        // Placeholder click handlers for Add button
+        document.querySelectorAll('.btn-add').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                alert('Add measurement functionality coming soon...');
+            });
+        });
     </script>
 </body>
 </html>
