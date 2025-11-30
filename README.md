@@ -4,8 +4,8 @@ A single-page web application for geographic information systems (GIS) designed 
 
 <table align="center" border="0" cellspacing="0" cellpadding="10">
   <tr>
-    <td><img src="assets/images/preview1.png"/></td>
-    <td><img src="assets/images/preview2.png"/></td>
+    <td><img src="assets/images/preview1.jpg"/></td>
+    <td><img src="assets/images/preview2.jpg"/></td>
     <td><img src="assets/images/preview3.jpg"/></td>
   </tr>
 </table>
