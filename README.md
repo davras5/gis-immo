@@ -2,6 +2,8 @@
 
 A single-page web application for geographic information systems (GIS) designed to visualize and manage the real estate portfolio of BBL (Bundesamt für Bauten und Logistik - Swiss Federal Office of Buildings and Logistics).
 
+![image](assets/images/preview.JPG)
+
 ## Features
 
 ### Multiple View Modes
