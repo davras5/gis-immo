@@ -1338,52 +1338,6 @@
             margin: 0 auto;
         }
 
-        .measurements-section {
-            background: var(--white);
-            border: 1px solid var(--grey-300);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .measurements-section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--grey-300);
-        }
-
-        .measurements-section-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--grey-900);
-        }
-
-        .btn-icon {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--grey-600);
-            border-radius: 4px;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .btn-icon:hover {
-            background: var(--grey-100);
-            color: var(--grey-900);
-        }
-
-        .btn-icon .material-symbols-outlined {
-            font-size: 20px;
-        }
-
         .measurements-toolbar {
             display: flex;
             justify-content: space-between;
@@ -1558,8 +1512,8 @@
             font-weight: 500;
         }
 
-        .measurements-table .col-set {
-            min-width: 180px;
+        .measurements-table .col-unit {
+            width: 80px;
         }
 
         .measurements-table .col-accuracy {
@@ -2005,40 +1959,30 @@
                 <div class="tab-content" data-content="bemessungen">
                     <div class="measurements-container">
                         <!-- Area Measurements Section -->
-                        <div class="measurements-section">
-                            <div class="measurements-section-header">
-                                <div class="measurements-section-title">
-                                    <span>Area measurements</span>
-                                    <button class="btn-icon" title="Expand">
-                                        <span class="material-symbols-outlined">open_in_full</span>
-                                    </button>
-                                </div>
-                                <button class="btn-icon" title="More options">
-                                    <span class="material-symbols-outlined">more_horiz</span>
-                                </button>
-                            </div>
+                        <div class="detail-section">
+                            <div class="detail-section-title">Flächenbemessungen</div>
 
                             <div class="measurements-toolbar">
                                 <div class="measurements-search">
                                     <span class="material-symbols-outlined">search</span>
-                                    <input type="text" id="measurements-filter" placeholder="Filter all columns">
+                                    <input type="text" id="measurements-filter" placeholder="Alle Spalten filtern">
                                 </div>
                                 <div class="measurements-actions">
                                     <button class="btn-action" disabled>
                                         <span class="material-symbols-outlined">edit</span>
-                                        Edit
+                                        Bearbeiten
                                     </button>
                                     <button class="btn-action" disabled>
                                         <span class="material-symbols-outlined">delete</span>
-                                        Delete
+                                        Löschen
                                     </button>
                                     <button class="btn-action" disabled>
                                         <span class="material-symbols-outlined">open_in_new</span>
-                                        View
+                                        Anzeigen
                                     </button>
                                     <button class="btn-add">
                                         <span class="material-symbols-outlined">add</span>
-                                        Add
+                                        Hinzufügen
                                     </button>
                                 </div>
                             </div>
@@ -2051,17 +1995,17 @@
                                                 <input type="checkbox" id="select-all-measurements">
                                             </th>
                                             <th class="col-asset sortable" data-sort="asset">
-                                                Asset
+                                                Objekt
                                                 <span class="material-symbols-outlined sort-icon">unfold_more</span>
                                             </th>
-                                            <th class="col-type">Area type</th>
-                                            <th class="col-area">Area</th>
-                                            <th class="col-set">Set</th>
-                                            <th class="col-accuracy">Accuracy</th>
-                                            <th class="col-estimate">BM Estimate</th>
+                                            <th class="col-type">Bemessungsart</th>
+                                            <th class="col-area">Wert</th>
+                                            <th class="col-unit">Einheit</th>
+                                            <th class="col-accuracy">Genauigkeit</th>
+                                            <th class="col-estimate">BM Schätzung</th>
                                             <th class="col-standard">Standard</th>
-                                            <th class="col-from">Valid from</th>
-                                            <th class="col-until">Valid until</th>
+                                            <th class="col-from">Gültig von</th>
+                                            <th class="col-until">Gültig bis</th>
                                         </tr>
                                     </thead>
                                     <tbody id="measurements-tbody">
@@ -3080,11 +3024,10 @@
             {
                 id: 'meas-001',
                 asset: 'DE-BE-11',
-                areaType: 'Gross floor area',
+                areaType: 'Bruttogeschossfläche',
                 value: 4200,
                 unit: 'm²',
-                set: 'Set 06.04.2020-27.11.2025',
-                accuracy: 'Aggregated',
+                accuracy: 'Aggregiert',
                 bmEstimate: false,
                 standard: 'MFG',
                 validFrom: '06.04.2020',
@@ -3093,11 +3036,10 @@
             {
                 id: 'meas-002',
                 asset: 'DE-BE-11',
-                areaType: 'Gross internal area',
+                areaType: 'Nettogeschossfläche',
                 value: 3900,
                 unit: 'm²',
-                set: 'Set 06.04.2020-27.11.2025',
-                accuracy: 'Estimated',
+                accuracy: 'Geschätzt',
                 bmEstimate: true,
                 standard: 'n/a',
                 validFrom: '06.04.2020',
@@ -3106,11 +3048,10 @@
             {
                 id: 'meas-003',
                 asset: 'DE-BE-11',
-                areaType: 'Energy ref. area',
+                areaType: 'Energiebezugsfläche',
                 value: 4100,
                 unit: 'm²',
-                set: 'Set 06.04.2020-27.11.2025',
-                accuracy: 'Estimated',
+                accuracy: 'Geschätzt',
                 bmEstimate: true,
                 standard: 'n/a',
                 validFrom: '06.04.2020',
@@ -3119,11 +3060,10 @@
             {
                 id: 'meas-004',
                 asset: 'DE-BE-11',
-                areaType: 'Volume',
+                areaType: 'Volumen',
                 value: 12600,
                 unit: 'm³',
-                set: 'Set 06.04.2020-27.11.2025',
-                accuracy: 'Estimated',
+                accuracy: 'Geschätzt',
                 bmEstimate: true,
                 standard: 'n/a',
                 validFrom: '06.04.2020',
@@ -3132,11 +3072,10 @@
             {
                 id: 'meas-005',
                 asset: 'DE-BE-11',
-                areaType: 'Workplaces',
+                areaType: 'Arbeitsplätze',
                 value: 85,
                 unit: 'Stk',
-                set: 'Set 06.04.2020-27.11.2025',
-                accuracy: 'Aggregated',
+                accuracy: 'Aggregiert',
                 bmEstimate: false,
                 standard: 'n/a',
                 validFrom: '06.04.2020',
@@ -3145,11 +3084,10 @@
             {
                 id: 'meas-006',
                 asset: 'DE-BE-11',
-                areaType: 'Cleaning area',
+                areaType: 'Reinigungsfläche',
                 value: 3200,
                 unit: 'm²',
-                set: 'Set 06.04.2020-27.11.2025',
-                accuracy: 'Estimated',
+                accuracy: 'Geschätzt',
                 bmEstimate: true,
                 standard: 'n/a',
                 validFrom: '06.04.2020',
@@ -3167,8 +3105,8 @@
 
             var html = '';
             filteredMeasurements.forEach(function(m) {
-                var formattedValue = Number(m.value).toLocaleString('de-CH') + ' ' + m.unit;
-                var accuracyClass = m.accuracy.toLowerCase();
+                var formattedValue = Number(m.value).toLocaleString('de-CH');
+                var accuracyClass = m.accuracy === 'Aggregiert' ? 'aggregated' : 'estimated';
                 var checkIcon = m.bmEstimate ? '<span class="material-symbols-outlined check-icon">check</span>' : '';
 
                 html += '<tr data-id="' + m.id + '">' +
@@ -3176,7 +3114,7 @@
                     '<td class="col-asset">' + m.asset + '</td>' +
                     '<td class="col-type">' + m.areaType + '</td>' +
                     '<td class="col-area">' + formattedValue + '</td>' +
-                    '<td class="col-set">' + m.set + '</td>' +
+                    '<td class="col-unit">' + m.unit + '</td>' +
                     '<td class="col-accuracy"><span class="accuracy-badge ' + accuracyClass + '">' + m.accuracy + '</span></td>' +
                     '<td class="col-estimate">' + checkIcon + '</td>' +
                     '<td class="col-standard">' + m.standard + '</td>' +
@@ -3248,7 +3186,7 @@
                                m.areaType.toLowerCase().includes(term) ||
                                m.accuracy.toLowerCase().includes(term) ||
                                m.standard.toLowerCase().includes(term) ||
-                               m.set.toLowerCase().includes(term) ||
+                               m.unit.toLowerCase().includes(term) ||
                                String(m.value).includes(term);
                     });
                 }
