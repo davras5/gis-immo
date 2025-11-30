@@ -1204,6 +1204,112 @@
             top: 10px;
             right: 10px;
         }
+
+        /* ===== STYLE SWITCHER ===== */
+        .style-switcher {
+            position: absolute;
+            bottom: 30px;
+            right: 10px;
+            z-index: 500;
+        }
+
+        .style-switcher-btn {
+            background: var(--white);
+            border: 2px solid var(--grey-300);
+            border-radius: 4px;
+            padding: 4px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .style-switcher-btn:hover {
+            border-color: var(--grey-400);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .style-switcher-btn img {
+            width: 80px;
+            height: 60px;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+
+        .style-switcher-btn span {
+            font-size: 11px;
+            color: var(--grey-600);
+            font-weight: 500;
+        }
+
+        .style-switcher-panel {
+            position: absolute;
+            bottom: 0;
+            right: 100%;
+            margin-right: 10px;
+            background: var(--white);
+            border-radius: 4px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            padding: 8px;
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+        }
+
+        .style-switcher-panel.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .style-option {
+            background: var(--white);
+            border: 2px solid var(--grey-300);
+            border-radius: 4px;
+            padding: 4px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: border-color 0.2s, transform 0.15s;
+        }
+
+        .style-option:hover {
+            border-color: var(--grey-400);
+            transform: translateY(-2px);
+        }
+
+        .style-option.active {
+            border-color: var(--primary-red);
+            border-width: 3px;
+            padding: 3px;
+        }
+
+        .style-option img {
+            width: 70px;
+            height: 50px;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+
+        .style-option span {
+            font-size: 10px;
+            color: var(--grey-600);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .style-option.active span {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -1334,6 +1440,32 @@
                 </div>
                 <div id="info-body"></div>
             </aside>
+
+            <!-- Style Switcher -->
+            <div class="style-switcher">
+                <div class="style-switcher-panel" id="style-panel">
+                    <button class="style-option active" data-style="light-v11" title="Light">
+                        <img id="thumb-light-v11" src="" alt="Light">
+                        <span>Light</span>
+                    </button>
+                    <button class="style-option" data-style="streets-v12" title="Standard">
+                        <img id="thumb-streets-v12" src="" alt="Standard">
+                        <span>Standard</span>
+                    </button>
+                    <button class="style-option" data-style="satellite-v9" title="Luftbild">
+                        <img id="thumb-satellite-v9" src="" alt="Luftbild">
+                        <span>Luftbild</span>
+                    </button>
+                    <button class="style-option" data-style="satellite-streets-v12" title="Luftbild + Strassen">
+                        <img id="thumb-satellite-streets-v12" src="" alt="Luftbild + Strassen">
+                        <span>Hybrid</span>
+                    </button>
+                </div>
+                <button class="style-switcher-btn" id="style-switcher-btn" title="Hintergrund wechseln">
+                    <img id="current-style-thumb" src="" alt="Aktueller Stil">
+                    <span>Hintergrund</span>
+                </button>
+            </div>
         </div>
         
         <div id="list-view">
@@ -2433,6 +2565,119 @@
                 this.classList.add('active');
             });
         });
+
+        // ===== STYLE SWITCHER =====
+        var currentMapStyle = localStorage.getItem('mapStyle') || 'light-v11';
+        var styleSwitcherBtn = document.getElementById('style-switcher-btn');
+        var stylePanel = document.getElementById('style-panel');
+        var stylePanelOpen = false;
+
+        // Map style definitions
+        var mapStyles = {
+            'light-v11': { name: 'Light', url: 'mapbox://styles/mapbox/light-v11' },
+            'streets-v12': { name: 'Standard', url: 'mapbox://styles/mapbox/streets-v12' },
+            'satellite-v9': { name: 'Luftbild', url: 'mapbox://styles/mapbox/satellite-v9' },
+            'satellite-streets-v12': { name: 'Hybrid', url: 'mapbox://styles/mapbox/satellite-streets-v12' }
+        };
+
+        // Generate thumbnail URL using Mapbox Static Images API
+        function getStyleThumbnail(styleId, width, height) {
+            var lon = 8.2275;
+            var lat = 46.8182;
+            var zoom = 6;
+            return 'https://api.mapbox.com/styles/v1/mapbox/' + styleId + '/static/' +
+                   lon + ',' + lat + ',' + zoom + '/' + width + 'x' + height +
+                   '?access_token=' + mapboxgl.accessToken;
+        }
+
+        // Initialize thumbnails
+        function initStyleThumbnails() {
+            Object.keys(mapStyles).forEach(function(styleId) {
+                var thumbEl = document.getElementById('thumb-' + styleId);
+                if (thumbEl) {
+                    thumbEl.src = getStyleThumbnail(styleId, 140, 100);
+                }
+            });
+            // Set current style thumbnail
+            document.getElementById('current-style-thumb').src = getStyleThumbnail(currentMapStyle, 160, 120);
+        }
+
+        // Update active style button
+        function updateActiveStyleButton() {
+            document.querySelectorAll('.style-option').forEach(function(btn) {
+                btn.classList.remove('active');
+                if (btn.dataset.style === currentMapStyle) {
+                    btn.classList.add('active');
+                }
+            });
+            document.getElementById('current-style-thumb').src = getStyleThumbnail(currentMapStyle, 160, 120);
+        }
+
+        // Toggle style panel
+        function toggleStylePanel() {
+            stylePanelOpen = !stylePanelOpen;
+            if (stylePanelOpen) {
+                stylePanel.classList.add('show');
+            } else {
+                stylePanel.classList.remove('show');
+            }
+        }
+
+        // Close panel when clicking outside
+        document.addEventListener('click', function(e) {
+            if (stylePanelOpen && !e.target.closest('.style-switcher')) {
+                stylePanelOpen = false;
+                stylePanel.classList.remove('show');
+            }
+        });
+
+        // Style switcher button click
+        styleSwitcherBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleStylePanel();
+        });
+
+        // Style option click handlers
+        document.querySelectorAll('.style-option').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var styleId = this.dataset.style;
+                if (styleId === currentMapStyle) {
+                    toggleStylePanel();
+                    return;
+                }
+
+                currentMapStyle = styleId;
+                localStorage.setItem('mapStyle', styleId);
+                updateActiveStyleButton();
+
+                // Change map style
+                map.setStyle(mapStyles[styleId].url);
+
+                // Close panel
+                stylePanelOpen = false;
+                stylePanel.classList.remove('show');
+            });
+        });
+
+        // Re-add layers after style change
+        map.on('style.load', function() {
+            // Only re-add if portfolio data is loaded and source doesn't exist
+            if (portfolioData && !map.getSource('portfolio')) {
+                addMapLayers();
+            }
+        });
+
+        // Apply saved style on load (if different from default)
+        if (currentMapStyle !== 'light-v11') {
+            map.once('load', function() {
+                map.setStyle(mapStyles[currentMapStyle].url);
+            });
+        }
+
+        // Initialize thumbnails after a short delay to ensure token is available
+        setTimeout(initStyleThumbnails, 100);
+        updateActiveStyleButton();
     </script>
 </body>
 </html>
