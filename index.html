@@ -479,6 +479,11 @@
             background: #fff;
             border-bottom: 1px solid #e0e0e0;
             padding: 12px 24px;
+        }
+        
+        .detail-header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -563,6 +568,11 @@
             background: #fff;
             border-bottom: 1px solid #e0e0e0;
             padding: 0 24px;
+        }
+        
+        .detail-tabs-inner {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             gap: 0;
         }
@@ -599,6 +609,13 @@
             gap: 24px;
             max-width: 1400px;
             margin: 0 auto;
+        }
+        
+        .detail-left,
+        .detail-right {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
         
         .detail-section {
@@ -1154,32 +1171,36 @@
         <!-- Detail View -->
         <div id="detail-view">
             <div class="detail-header">
-                <div class="breadcrumb" id="detail-breadcrumb">
-                    <span class="material-symbols-outlined">public</span>
-                    <a href="#" onclick="switchView('gallery'); return false;">Alle Objekte</a>
-                    <span>></span>
-                    <span class="current" id="breadcrumb-name">Gebäude</span>
-                </div>
-                <div class="detail-header-actions">
-                    <button class="btn-edit">
-                        <span class="material-symbols-outlined">edit</span>
-                        Bearbeiten
-                    </button>
-                    <button class="btn-back" id="btn-back">
-                        <span class="material-symbols-outlined">arrow_back</span>
-                        Zurück
-                    </button>
+                <div class="detail-header-inner">
+                    <div class="breadcrumb" id="detail-breadcrumb">
+                        <span class="material-symbols-outlined">public</span>
+                        <a href="#" onclick="switchView('gallery'); return false;">Alle Objekte</a>
+                        <span>></span>
+                        <span class="current" id="breadcrumb-name">Gebäude</span>
+                    </div>
+                    <div class="detail-header-actions">
+                        <button class="btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Bearbeiten
+                        </button>
+                        <button class="btn-back" id="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Zurück
+                        </button>
+                    </div>
                 </div>
             </div>
             
             <div class="detail-tabs">
-                <div class="detail-tab active" data-tab="uebersicht">Übersicht</div>
-                <div class="detail-tab" data-tab="bemessungen">Bemessungen</div>
-                <div class="detail-tab" data-tab="belegung">Belegung</div>
-                <div class="detail-tab" data-tab="kosten">Kosten</div>
-                <div class="detail-tab" data-tab="vertraege">Verträge</div>
-                <div class="detail-tab" data-tab="ausstattung">Ausstattung</div>
-                <div class="detail-tab" data-tab="dokumente">Dokumente</div>
+                <div class="detail-tabs-inner">
+                    <div class="detail-tab active" data-tab="uebersicht">Übersicht</div>
+                    <div class="detail-tab" data-tab="bemessungen">Bemessungen</div>
+                    <div class="detail-tab" data-tab="belegung">Belegung</div>
+                    <div class="detail-tab" data-tab="kosten">Kosten</div>
+                    <div class="detail-tab" data-tab="vertraege">Verträge</div>
+                    <div class="detail-tab" data-tab="ausstattung">Ausstattung</div>
+                    <div class="detail-tab" data-tab="dokumente">Dokumente</div>
+                </div>
             </div>
             
             <div class="detail-content">
