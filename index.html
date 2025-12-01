@@ -2189,6 +2189,9 @@
             document.getElementById('detail-objektart2').textContent = props.objektart2 || '—';
             document.getElementById('detail-eigentum').textContent = props.eigentum || '—';
 
+            // Load measurements for this building
+            loadMeasurementsForBuilding(building);
+
             // Initialize carousel
             initCarousel();
 
@@ -3009,83 +3012,32 @@
 
         // ===== MEASUREMENTS TAB =====
 
-        // Demo data for measurements
-        var measurementsData = [
-            {
-                id: 'meas-001',
-                asset: 'DE-BE-11',
-                areaType: 'Bruttogeschossfläche',
-                value: 4200,
-                unit: 'm²',
-                accuracy: 'Aggregiert',
-                bmEstimate: false,
-                standard: 'MFG',
-                validFrom: '06.04.2020',
-                validUntil: '27.11.2025'
-            },
-            {
-                id: 'meas-002',
-                asset: 'DE-BE-11',
-                areaType: 'Nettogeschossfläche',
-                value: 3900,
-                unit: 'm²',
-                accuracy: 'Geschätzt',
-                bmEstimate: true,
-                standard: 'n/a',
-                validFrom: '06.04.2020',
-                validUntil: '27.11.2025'
-            },
-            {
-                id: 'meas-003',
-                asset: 'DE-BE-11',
-                areaType: 'Energiebezugsfläche',
-                value: 4100,
-                unit: 'm²',
-                accuracy: 'Geschätzt',
-                bmEstimate: true,
-                standard: 'n/a',
-                validFrom: '06.04.2020',
-                validUntil: '27.11.2025'
-            },
-            {
-                id: 'meas-004',
-                asset: 'DE-BE-11',
-                areaType: 'Volumen',
-                value: 12600,
-                unit: 'm³',
-                accuracy: 'Geschätzt',
-                bmEstimate: true,
-                standard: 'n/a',
-                validFrom: '06.04.2020',
-                validUntil: '27.11.2025'
-            },
-            {
-                id: 'meas-005',
-                asset: 'DE-BE-11',
-                areaType: 'Arbeitsplätze',
-                value: 85,
-                unit: 'Stk',
-                accuracy: 'Aggregiert',
-                bmEstimate: false,
-                standard: 'n/a',
-                validFrom: '06.04.2020',
-                validUntil: '27.11.2025'
-            },
-            {
-                id: 'meas-006',
-                asset: 'DE-BE-11',
-                areaType: 'Reinigungsfläche',
-                value: 3200,
-                unit: 'm²',
-                accuracy: 'Geschätzt',
-                bmEstimate: true,
-                standard: 'n/a',
-                validFrom: '06.04.2020',
-                validUntil: '27.11.2025'
-            }
-        ];
+        // Measurements data loaded dynamically from current building
+        var measurementsData = [];
+        var filteredMeasurements = [];
 
-        var filteredMeasurements = measurementsData.slice();
+        function loadMeasurementsForBuilding(building) {
+            if (building && building.properties && building.properties.bemessungen) {
+                // Map bemessungen to measurementsData format with asset field
+                measurementsData = building.properties.bemessungen.map(function(m) {
+                    return {
+                        id: m.id,
+                        asset: building.properties.id,
+                        areaType: m.areaType,
+                        value: m.value,
+                        unit: m.unit,
+                        accuracy: m.accuracy,
+                        bmEstimate: m.bmEstimate,
+                        standard: m.standard,
+                        validFrom: m.validFrom,
+                        validUntil: m.validUntil || '—'
+                    };
+                });
+            } else {
+                measurementsData = [];
+            }
+            filteredMeasurements = measurementsData.slice();
+        }
         var measurementsSortDirection = 'asc';
         var measurementsSortColumn = 'asset';
 

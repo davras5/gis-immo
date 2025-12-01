@@ -34,7 +34,75 @@
         "objektart1": "Bürogebäude",
         "teilportfolio_gruppe": "Bundesverwaltung",
         "objektart2": "Parlamentsgebäude",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-001-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 15000,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "15.03.2019",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-001-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 12500,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "15.03.2019",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-001-M3",
+            "areaType": "Energiebezugsfläche",
+            "value": 13200,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "bmEstimate": false,
+            "standard": "SIA 380/1",
+            "validFrom": "15.03.2019",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-001-M4",
+            "areaType": "Volumen",
+            "value": 52500,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "15.03.2019",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-001-M5",
+            "areaType": "Arbeitsplätze",
+            "value": 320,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-001-M6",
+            "areaType": "Reinigungsfläche",
+            "value": 11800,
+            "unit": "m²",
+            "accuracy": "Geschätzt",
+            "bmEstimate": true,
+            "standard": "n/a",
+            "validFrom": "01.01.2020",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -73,7 +141,75 @@
         "objektart1": "Bürogebäude",
         "teilportfolio_gruppe": "EDA Auslandsvertretungen",
         "objektart2": "Botschaftsgebäude",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-002-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 3850,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "DIN 277",
+            "validFrom": "01.09.2000",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-002-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 3200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "DIN 277",
+            "validFrom": "01.09.2000",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-002-M3",
+            "areaType": "Energiebezugsfläche",
+            "value": 3400,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "bmEstimate": false,
+            "standard": "EnEV",
+            "validFrom": "15.06.2021",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-002-M4",
+            "areaType": "Volumen",
+            "value": 13475,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "DIN 277",
+            "validFrom": "01.09.2000",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-002-M5",
+            "areaType": "Arbeitsplätze",
+            "value": 45,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-002-M6",
+            "areaType": "Repräsentationsfläche",
+            "value": 650,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.09.2000",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -112,7 +248,86 @@
         "objektart1": "Lager-/Logistikgebäude",
         "teilportfolio_gruppe": "Logistik & Infrastruktur",
         "objektart2": "Zentrallager",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-003-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 10500,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "20.11.1985",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-003-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 8750,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "20.11.1985",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-003-M3",
+            "areaType": "Lagerfläche",
+            "value": 6200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2017",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-003-M4",
+            "areaType": "Volumen",
+            "value": 42000,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "20.11.1985",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-003-M5",
+            "areaType": "Rampen/Andockstellen",
+            "value": 12,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2017",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-003-M6",
+            "areaType": "Arbeitsplätze",
+            "value": 65,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-003-M7",
+            "areaType": "Palettenstellplätze",
+            "value": 2400,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2017",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -151,7 +366,64 @@
         "objektart1": "Bürogebäude",
         "teilportfolio_gruppe": "EDA Auslandsvertretungen",
         "objektart2": "Konsulat",
-        "eigentum": "Miete (langfristig)"
+        "eigentum": "Miete (langfristig)",
+        "bemessungen": [
+          {
+            "id": "BBL-004-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 2200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "BOMA",
+            "validFrom": "01.01.2020",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-004-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 1850,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "BOMA",
+            "validFrom": "01.01.2020",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-004-M3",
+            "areaType": "Mietfläche",
+            "value": 1950,
+            "unit": "sqft",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "BOMA",
+            "validFrom": "01.01.2020",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-004-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 28,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-004-M5",
+            "areaType": "Schalterbereich",
+            "value": 180,
+            "unit": "m²",
+            "accuracy": "Geschätzt",
+            "bmEstimate": true,
+            "standard": "n/a",
+            "validFrom": "01.01.2020",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -190,7 +462,86 @@
         "objektart1": "Bildungsgebäude",
         "teilportfolio_gruppe": "Ausbildung & Schulung",
         "objektart2": "Schulungsgebäude",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-005-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 5100,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "15.08.1965",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-005-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 4200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "15.08.1965",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-005-M3",
+            "areaType": "Schulungsräume",
+            "value": 1800,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2020",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-005-M4",
+            "areaType": "Energiebezugsfläche",
+            "value": 4400,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "bmEstimate": false,
+            "standard": "SIA 380/1",
+            "validFrom": "01.01.2024",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-005-M5",
+            "areaType": "Volumen",
+            "value": 17850,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "15.08.1965",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-005-M6",
+            "areaType": "Schulungsplätze",
+            "value": 120,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-005-M7",
+            "areaType": "Arbeitsplätze",
+            "value": 25,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -229,7 +580,75 @@
         "objektart1": "Bürogebäude",
         "teilportfolio_gruppe": "EDA Auslandsvertretungen",
         "objektart2": "Botschaftsgebäude",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-006-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 2520,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "JIS A",
+            "validFrom": "01.03.1991",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-006-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 2100,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "JIS A",
+            "validFrom": "01.03.1991",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-006-M3",
+            "areaType": "Volumen",
+            "value": 7350,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "JIS A",
+            "validFrom": "01.03.1991",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-006-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 32,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-006-M5",
+            "areaType": "Repräsentationsfläche",
+            "value": 420,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.03.1991",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-006-M6",
+            "areaType": "Residenzfläche",
+            "value": 380,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.03.1991",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -268,7 +687,86 @@
         "objektart1": "Wohngebäude",
         "teilportfolio_gruppe": "Wohnliegenschaften",
         "objektart2": "Mehrfamilienhaus",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-007-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 3360,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-007-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 2800,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-007-M3",
+            "areaType": "Wohnfläche",
+            "value": 2450,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-007-M4",
+            "areaType": "Energiebezugsfläche",
+            "value": 2900,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "bmEstimate": false,
+            "standard": "SIA 380/1",
+            "validFrom": "01.06.2015",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-007-M5",
+            "areaType": "Volumen",
+            "value": 9800,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-007-M6",
+            "areaType": "Wohneinheiten",
+            "value": 18,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2015",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-007-M7",
+            "areaType": "Kellerabteile",
+            "value": 18,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2015",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -307,7 +805,75 @@
         "objektart1": "Bürogebäude",
         "teilportfolio_gruppe": "EDA Auslandsvertretungen",
         "objektart2": "Botschaftsgebäude",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-008-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 1980,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "ABNT NBR",
+            "validFrom": "15.06.1972",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-008-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 1650,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "ABNT NBR",
+            "validFrom": "15.06.1972",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-008-M3",
+            "areaType": "Volumen",
+            "value": 5775,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "ABNT NBR",
+            "validFrom": "15.06.1972",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-008-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 22,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-008-M5",
+            "areaType": "Grundstücksfläche",
+            "value": 4500,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "15.06.1972",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-008-M6",
+            "areaType": "Gartenfläche",
+            "value": 2800,
+            "unit": "m²",
+            "accuracy": "Geschätzt",
+            "bmEstimate": true,
+            "standard": "n/a",
+            "validFrom": "01.01.2022",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -346,7 +912,86 @@
         "objektart1": "Technisches Gebäude",
         "teilportfolio_gruppe": "IT Infrastruktur",
         "objektart2": "Rechenzentrum",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-009-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 6500,
+            "unit": "m²",
+            "accuracy": "Projektiert",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "01.06.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-009-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 5400,
+            "unit": "m²",
+            "accuracy": "Projektiert",
+            "bmEstimate": false,
+            "standard": "SIA 416",
+            "validFrom": "01.06.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-009-M3",
+            "areaType": "Serverraumfläche",
+            "value": 3200,
+            "unit": "m²",
+            "accuracy": "Projektiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-009-M4",
+            "areaType": "IT-Leistung",
+            "value": 8,
+            "unit": "MW",
+            "accuracy": "Projektiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-009-M5",
+            "areaType": "Rack-Stellplätze",
+            "value": 480,
+            "unit": "Stk",
+            "accuracy": "Projektiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-009-M6",
+            "areaType": "Arbeitsplätze",
+            "value": 35,
+            "unit": "Stk",
+            "accuracy": "Projektiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-009-M7",
+            "areaType": "Grundstücksfläche",
+            "value": 12000,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
@@ -385,7 +1030,75 @@
         "objektart1": "Bürogebäude",
         "teilportfolio_gruppe": "EDA Auslandsvertretungen",
         "objektart2": "Botschaftsgebäude",
-        "eigentum": "Eigentum Bund"
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-010-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 1440,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "AS/NZS",
+            "validFrom": "01.09.1968",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-010-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 1200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "AS/NZS",
+            "validFrom": "01.09.1968",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-010-M3",
+            "areaType": "Volumen",
+            "value": 4200,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "AS/NZS",
+            "validFrom": "01.09.1968",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-010-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 18,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-010-M5",
+            "areaType": "Grundstücksfläche",
+            "value": 3200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.09.1968",
+            "validUntil": null
+          },
+          {
+            "id": "BBL-010-M6",
+            "areaType": "Residenzfläche",
+            "value": 280,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "bmEstimate": false,
+            "standard": "n/a",
+            "validFrom": "01.01.2016",
+            "validUntil": null
+          }
+        ]
       },
       "geometry": {
         "type": "Point",
