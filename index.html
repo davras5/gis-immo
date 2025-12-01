@@ -1585,7 +1585,7 @@
                         <span class="accordion-arrow"><span class="material-symbols-outlined">expand_more</span></span>
                     </div>
                     <div class="accordion-content">
-                        Kartenansicht teilen via Link, E-Mail oder Social Media. (Platzhalter)
+                        Teilen Sie die aktuelle Kartenansicht inkl. Position und Zoom-Stufe per URL-Link mit Kollegen oder externen Partnern.
                     </div>
                 </div>
                 
@@ -1595,7 +1595,7 @@
                         <span class="accordion-arrow"><span class="material-symbols-outlined">expand_more</span></span>
                     </div>
                     <div class="accordion-content">
-                        Kartenausschnitt als PDF exportieren mit Legende und Massstab. (Platzhalter)
+                        Exportieren Sie den aktuellen Kartenausschnitt als PDF-Dokument mit Legende, Massstab und Nordpfeil für Berichte und Präsentationen.
                     </div>
                 </div>
                 
@@ -1605,7 +1605,7 @@
                         <span class="accordion-arrow"><span class="material-symbols-outlined">expand_more</span></span>
                     </div>
                     <div class="accordion-content">
-                        Werkzeuge zum Zeichnen von Punkten, Linien und Polygonen sowie Distanz- und Flächenmessung. (Platzhalter)
+                        Zeichnen Sie Punkte, Linien und Polygone direkt auf der Karte. Messen Sie Distanzen in Metern oder Kilometern und berechnen Sie Flächen in Quadratmetern.
                     </div>
                 </div>
                 
@@ -1615,7 +1615,7 @@
                         <span class="accordion-arrow"><span class="material-symbols-outlined">expand_more</span></span>
                     </div>
                     <div class="accordion-content">
-                        Daten exportieren als GeoJSON, CSV, KML oder Shapefile. (Platzhalter)
+                        Exportieren Sie Portfolio-Daten in verschiedenen Formaten: GeoJSON für Web-Anwendungen, CSV für Excel, KML für Google Earth oder Shapefile für GIS-Software.
                     </div>
                 </div>
                 
@@ -1625,7 +1625,7 @@
                         <span class="accordion-arrow"><span class="material-symbols-outlined">expand_more</span></span>
                     </div>
                     <div class="accordion-content">
-                        Verfügbare Hintergrundkarten und Layer durchsuchen und aktivieren. (Platzhalter)
+                        Wählen Sie aus verschiedenen Hintergrundkarten und aktivieren Sie zusätzliche Layer wie Kataster, Zonenpläne oder Infrastruktur.
                         <ul style="margin-top: 10px; padding-left: 20px;">
                             <li>OpenStreetMap</li>
                             <li>Satellite Imagery</li>
@@ -2161,9 +2161,37 @@
             document.getElementById('detail-housenumber').textContent = addressParts.number;
             document.getElementById('detail-plz').textContent = addressParts.plz || '—';
             
+            // Gebäudedaten
+            document.getElementById('detail-sanierung').textContent = props.sanierung || '—';
+            document.getElementById('detail-ladestationen').textContent = props.ladestationen !== undefined ? props.ladestationen : '—';
+            document.getElementById('detail-denkmalschutz').textContent = props.denkmalschutz || '—';
+            document.getElementById('detail-parkplaetze').textContent = props.parkplaetze !== undefined ? props.parkplaetze : '—';
+            document.getElementById('detail-geschosse').textContent = props.geschosse !== undefined ? props.geschosse : '—';
+            document.getElementById('detail-baubewilligung').textContent = props.baubewilligung || '—';
+
+            // Energie
+            document.getElementById('detail-energieklasse').textContent = props.energieklasse || '—';
+            document.getElementById('detail-waermeerzeuger').textContent = props.waermeerzeuger || '—';
+            document.getElementById('detail-waermequelle').textContent = props.waermequelle || '—';
+            document.getElementById('detail-warmwasser').textContent = props.warmwasser || '—';
+
+            // Grundstück
+            document.getElementById('detail-grundstueck-name').textContent = props.grundstueck_name || '—';
+            document.getElementById('detail-grundstueck-id').textContent = props.grundstueck_id || '—';
+            document.getElementById('detail-egid').textContent = props.egid || '—';
+            document.getElementById('detail-egrid').textContent = props.egrid || '—';
+            document.getElementById('detail-gueltig-von').textContent = props.gueltig_von || '—';
+            document.getElementById('detail-gueltig-bis').textContent = props.gueltig_bis || 'Keine Angabe';
+
+            // Klassifizierung
+            document.getElementById('detail-objektart1').textContent = props.objektart1 || '—';
+            document.getElementById('detail-teilportfolio-gruppe').textContent = props.teilportfolio_gruppe || '—';
+            document.getElementById('detail-objektart2').textContent = props.objektart2 || '—';
+            document.getElementById('detail-eigentum').textContent = props.eigentum || '—';
+
             // Initialize carousel
             initCarousel();
-            
+
             // Initialize mini map
             initMiniMap(coords);
         }
