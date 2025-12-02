@@ -1600,6 +1600,226 @@
         #documents-table .col-format { max-width: 10%; }
         #documents-table .col-date   { max-width: 10%; }
         #documents-table .col-size   { width: auto;}
+
+        /* ===== FILTER PANE ===== */
+        #filter-pane {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 380px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        #filter-pane.open {
+            transform: translateX(0);
+        }
+
+        #filter-pane-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--grey-300);
+            background: var(--white);
+        }
+
+        #filter-pane-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--grey-900);
+            margin: 0;
+        }
+
+        #filter-pane-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-pane-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--grey-600);
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .filter-pane-btn:hover {
+            background: var(--grey-100);
+            color: var(--grey-900);
+        }
+
+        .filter-pane-btn .material-symbols-outlined {
+            font-size: 22px;
+        }
+
+        #filter-pane-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .filter-section {
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .filter-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            cursor: pointer;
+            background: var(--white);
+            transition: background 0.2s;
+        }
+
+        .filter-section-header:hover {
+            background: var(--grey-50);
+        }
+
+        .filter-section-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--grey-900);
+        }
+
+        .filter-section-arrow {
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .filter-section-arrow .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--grey-600);
+        }
+
+        .filter-section.open .filter-section-arrow {
+            transform: rotate(180deg);
+        }
+
+        .filter-section-content {
+            display: none;
+            padding: 0 20px 16px 20px;
+        }
+
+        .filter-section.open .filter-section-content {
+            display: block;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: var(--primary-red);
+        }
+
+        .filter-option label {
+            font-size: 14px;
+            color: var(--grey-900);
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--grey-100);
+            border: 1px solid var(--grey-300);
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 12px;
+            color: var(--grey-900);
+            margin: 4px;
+        }
+
+        .filter-chip-remove {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            color: var(--grey-600);
+        }
+
+        .filter-chip-remove:hover {
+            color: var(--primary-red);
+        }
+
+        .filter-chip-remove .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        /* Active filter state for header button */
+        #filter-btn.has-filters {
+            background: var(--primary-red);
+            border-color: var(--primary-red);
+            color: var(--white);
+        }
+
+        #filter-btn.has-filters .material-symbols-outlined {
+            color: var(--white);
+        }
+
+        /* Filter overlay backdrop */
+        #filter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        #filter-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Filter count badge */
+        .filter-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            background: var(--white);
+            color: var(--primary-red);
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        #filter-btn.has-filters .filter-count {
+            background: var(--white);
+            color: var(--primary-red);
+        }
     </style>
 </head>
 <body>
@@ -1655,7 +1875,81 @@
             </div>
         </div>
     </header>
-    
+
+    <!-- Filter Overlay -->
+    <div id="filter-overlay"></div>
+
+    <!-- Filter Pane -->
+    <aside id="filter-pane">
+        <div id="filter-pane-header">
+            <h3>Suchfilter</h3>
+            <div id="filter-pane-actions">
+                <button class="filter-pane-btn" id="filter-reset-btn" title="Filter zurücksetzen">
+                    <span class="material-symbols-outlined">replay</span>
+                </button>
+                <button class="filter-pane-btn" id="filter-close-btn" title="Schliessen">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+        <div id="filter-pane-body">
+            <!-- Status -->
+            <div class="filter-section open" data-filter="status">
+                <div class="filter-section-header">
+                    <span class="filter-section-title">Status</span>
+                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                </div>
+                <div class="filter-section-content" id="filter-status-options">
+                    <!-- Options populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Art Eigentum -->
+            <div class="filter-section open" data-filter="eigentum">
+                <div class="filter-section-header">
+                    <span class="filter-section-title">Art Eigentum</span>
+                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                </div>
+                <div class="filter-section-content" id="filter-eigentum-options">
+                    <!-- Options populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Teilportfolio -->
+            <div class="filter-section open" data-filter="teilportfolio">
+                <div class="filter-section-header">
+                    <span class="filter-section-title">Teilportfolio</span>
+                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                </div>
+                <div class="filter-section-content" id="filter-teilportfolio-options">
+                    <!-- Options populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Gebäudeart -->
+            <div class="filter-section open" data-filter="gebaeudeart">
+                <div class="filter-section-header">
+                    <span class="filter-section-title">Gebäudeart</span>
+                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                </div>
+                <div class="filter-section-content" id="filter-gebaeudeart-options">
+                    <!-- Options populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Land / Region -->
+            <div class="filter-section open" data-filter="land">
+                <div class="filter-section-header">
+                    <span class="filter-section-title">Land / Region</span>
+                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                </div>
+                <div class="filter-section-content" id="filter-land-options">
+                    <!-- Options populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </aside>
+
     <main id="main">
         <div id="map-view" class="active">
             <div id="map"></div>
@@ -2255,12 +2549,331 @@
         
         // Variables
         var portfolioData = null;
+        var filteredData = null;
         var currentDetailBuilding = null;
         var currentCarouselIndex = 0;
         var miniMap = null;
         var previousView = 'gallery';
         var selectedBuildingId = null;
         var searchMarker = null;
+
+        // ===== FILTER STATE =====
+        var activeFilters = {
+            status: [],
+            eigentum: [],
+            teilportfolio: [],
+            gebaeudeart: [],
+            land: []
+        };
+
+        // Filter configuration - maps filter keys to data properties
+        var filterConfig = {
+            status: { property: 'status', label: 'Status' },
+            eigentum: { property: 'eigentum', label: 'Art Eigentum' },
+            teilportfolio: { property: 'teilportfolio', label: 'Teilportfolio' },
+            gebaeudeart: { property: 'objektart1', label: 'Gebäudeart' },
+            land: { property: 'land', label: 'Land / Region' }
+        };
+
+        // ===== FILTER FUNCTIONS =====
+
+        function getFiltersFromURL() {
+            var params = new URLSearchParams(window.location.search);
+            var filters = {
+                status: [],
+                eigentum: [],
+                teilportfolio: [],
+                gebaeudeart: [],
+                land: []
+            };
+
+            Object.keys(filters).forEach(function(key) {
+                var value = params.get('filter_' + key);
+                if (value) {
+                    filters[key] = value.split(',').map(function(v) {
+                        return decodeURIComponent(v);
+                    });
+                }
+            });
+
+            return filters;
+        }
+
+        function setFiltersInURL(filters) {
+            var url = new URL(window.location);
+
+            // Remove all filter params first
+            Object.keys(filters).forEach(function(key) {
+                url.searchParams.delete('filter_' + key);
+            });
+
+            // Add active filters
+            Object.keys(filters).forEach(function(key) {
+                if (filters[key].length > 0) {
+                    var encoded = filters[key].map(function(v) {
+                        return encodeURIComponent(v);
+                    }).join(',');
+                    url.searchParams.set('filter_' + key, encoded);
+                }
+            });
+
+            window.history.pushState({}, '', url);
+        }
+
+        function getActiveFilterCount() {
+            var count = 0;
+            Object.keys(activeFilters).forEach(function(key) {
+                count += activeFilters[key].length;
+            });
+            return count;
+        }
+
+        function applyFilters() {
+            if (!portfolioData) return;
+
+            // Filter the data
+            filteredData = {
+                type: portfolioData.type,
+                name: portfolioData.name,
+                features: portfolioData.features.filter(function(feature) {
+                    var props = feature.properties;
+
+                    // Check each filter category (AND between categories)
+                    for (var filterKey in activeFilters) {
+                        var filterValues = activeFilters[filterKey];
+                        if (filterValues.length === 0) continue;
+
+                        var propKey = filterConfig[filterKey].property;
+                        var propValue = props[propKey];
+
+                        // OR within category - at least one must match
+                        var matches = filterValues.some(function(filterValue) {
+                            return propValue === filterValue;
+                        });
+
+                        if (!matches) return false;
+                    }
+
+                    return true;
+                })
+            };
+
+            // Update URL
+            setFiltersInURL(activeFilters);
+
+            // Update object count
+            updateObjectCount();
+
+            // Update filter button state
+            updateFilterButtonState();
+
+            // Re-render current view
+            renderCurrentView();
+
+            // Update map layer filter if on map view
+            if (currentView === 'map' && window.map && map.getLayer('portfolio-points')) {
+                updateMapFilter();
+            }
+        }
+
+        function updateMapFilter() {
+            if (!map || !map.getLayer('portfolio-points')) return;
+
+            // If no active filters, show all buildings
+            if (getActiveFilterCount() === 0) {
+                map.setFilter('portfolio-points', null);
+                if (map.getLayer('portfolio-labels')) {
+                    map.setFilter('portfolio-labels', null);
+                }
+                return;
+            }
+
+            var filteredIds = filteredData.features.map(function(f) {
+                return f.properties.id;
+            });
+
+            // Apply filter to show only filtered buildings
+            map.setFilter('portfolio-points', ['in', ['get', 'id'], ['literal', filteredIds]]);
+
+            // Also filter labels layer if it exists
+            if (map.getLayer('portfolio-labels')) {
+                map.setFilter('portfolio-labels', ['in', ['get', 'id'], ['literal', filteredIds]]);
+            }
+        }
+
+        function resetFilters() {
+            activeFilters = {
+                status: [],
+                eigentum: [],
+                teilportfolio: [],
+                gebaeudeart: [],
+                land: []
+            };
+
+            // Uncheck all checkboxes
+            document.querySelectorAll('#filter-pane input[type="checkbox"]').forEach(function(cb) {
+                cb.checked = false;
+            });
+
+            applyFilters();
+        }
+
+        function updateObjectCount() {
+            var count = filteredData ? filteredData.features.length : (portfolioData ? portfolioData.features.length : 0);
+            var countEl = document.getElementById('object-count');
+            if (countEl) {
+                countEl.textContent = count + ' Objekte';
+            }
+        }
+
+        function updateFilterButtonState() {
+            var filterBtn = document.getElementById('filter-btn');
+            var count = getActiveFilterCount();
+
+            if (count > 0) {
+                filterBtn.classList.add('has-filters');
+                // Add or update count badge
+                var badge = filterBtn.querySelector('.filter-count');
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'filter-count';
+                    filterBtn.appendChild(badge);
+                }
+                badge.textContent = count;
+            } else {
+                filterBtn.classList.remove('has-filters');
+                var badge = filterBtn.querySelector('.filter-count');
+                if (badge) {
+                    badge.remove();
+                }
+            }
+        }
+
+        function renderCurrentView() {
+            if (currentView === 'list') {
+                renderListView();
+            } else if (currentView === 'gallery') {
+                renderGalleryView();
+            }
+            // Map view updates via updateMapFilter()
+        }
+
+        function toggleFilterPane(open) {
+            var pane = document.getElementById('filter-pane');
+            var overlay = document.getElementById('filter-overlay');
+
+            if (open === undefined) {
+                open = !pane.classList.contains('open');
+            }
+
+            if (open) {
+                pane.classList.add('open');
+                overlay.classList.add('open');
+            } else {
+                pane.classList.remove('open');
+                overlay.classList.remove('open');
+            }
+        }
+
+        function initFilterOptions() {
+            if (!portfolioData) return;
+
+            // Collect unique values for each filter category
+            var uniqueValues = {
+                status: new Set(),
+                eigentum: new Set(),
+                teilportfolio: new Set(),
+                gebaeudeart: new Set(),
+                land: new Set()
+            };
+
+            portfolioData.features.forEach(function(feature) {
+                var props = feature.properties;
+                if (props.status) uniqueValues.status.add(props.status);
+                if (props.eigentum) uniqueValues.eigentum.add(props.eigentum);
+                if (props.teilportfolio) uniqueValues.teilportfolio.add(props.teilportfolio);
+                if (props.objektart1) uniqueValues.gebaeudeart.add(props.objektart1);
+                if (props.land) uniqueValues.land.add(props.land);
+            });
+
+            // Render options for each filter
+            Object.keys(uniqueValues).forEach(function(filterKey) {
+                var container = document.getElementById('filter-' + filterKey + '-options');
+                if (!container) return;
+
+                var values = Array.from(uniqueValues[filterKey]).sort();
+                var html = '';
+
+                values.forEach(function(value) {
+                    var id = 'filter-' + filterKey + '-' + value.replace(/[^a-zA-Z0-9]/g, '_');
+                    var checked = activeFilters[filterKey].includes(value) ? 'checked' : '';
+
+                    html += '<div class="filter-option">' +
+                        '<input type="checkbox" id="' + id + '" data-filter="' + filterKey + '" data-value="' + value + '" ' + checked + '>' +
+                        '<label for="' + id + '">' + value + '</label>' +
+                        '</div>';
+                });
+
+                container.innerHTML = html;
+
+                // Add event listeners to checkboxes
+                container.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        var filterKey = this.dataset.filter;
+                        var value = this.dataset.value;
+
+                        if (this.checked) {
+                            if (!activeFilters[filterKey].includes(value)) {
+                                activeFilters[filterKey].push(value);
+                            }
+                        } else {
+                            activeFilters[filterKey] = activeFilters[filterKey].filter(function(v) {
+                                return v !== value;
+                            });
+                        }
+
+                        applyFilters();
+                    });
+                });
+            });
+        }
+
+        function initFilterPane() {
+            // Toggle filter pane
+            document.getElementById('filter-btn').addEventListener('click', function() {
+                toggleFilterPane(true);
+            });
+
+            // Close filter pane
+            document.getElementById('filter-close-btn').addEventListener('click', function() {
+                toggleFilterPane(false);
+            });
+
+            // Close on overlay click
+            document.getElementById('filter-overlay').addEventListener('click', function() {
+                toggleFilterPane(false);
+            });
+
+            // Reset filters
+            document.getElementById('filter-reset-btn').addEventListener('click', function() {
+                resetFilters();
+            });
+
+            // Filter section accordion toggle
+            document.querySelectorAll('.filter-section-header').forEach(function(header) {
+                header.addEventListener('click', function() {
+                    var section = this.parentElement;
+                    section.classList.toggle('open');
+                });
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    toggleFilterPane(false);
+                }
+            });
+        }
 
         // ===== LIST VIEW TOOLBAR FUNCTIONS =====
 
@@ -2379,7 +2992,17 @@
             })
             .then(function(data) {
                 portfolioData = data;
-                document.getElementById('object-count').textContent = portfolioData.features.length + ' Objekte';
+
+                // Initialize filters from URL
+                activeFilters = getFiltersFromURL();
+
+                // Initialize filter pane with options
+                initFilterOptions();
+                initFilterPane();
+
+                // Apply initial filters (this sets filteredData and updates count)
+                applyFilters();
+
                 renderListView();
                 renderGalleryView();
                 initListToolbar();
@@ -2455,10 +3078,16 @@
             
             // Resize map if switching to map view
             if (view === 'map' && window.map) {
-                setTimeout(function() { map.resize(); }, 100);
+                setTimeout(function() {
+                    map.resize();
+                    // Apply filters to map when switching to map view
+                    if (map.getLayer('portfolio-points')) {
+                        updateMapFilter();
+                    }
+                }, 100);
             }
         }
-        
+
         function showDetailView(buildingId) {
             if (!portfolioData) return;
             
@@ -2738,10 +3367,11 @@
         function renderListView() {
             if (!portfolioData) return;
 
+            var dataToRender = filteredData || portfolioData;
             var listBody = document.getElementById('list-body');
             var html = '';
 
-            portfolioData.features.forEach(function(feature) {
+            dataToRender.features.forEach(function(feature) {
                 var props = feature.properties;
                 var statusClass = props.status === 'In Betrieb' ? 'in-betrieb' :
                                   props.status === 'In Renovation' ? 'in-renovation' :
@@ -2774,11 +3404,12 @@
         // ===== RENDER GALLERY VIEW =====
         function renderGalleryView() {
             if (!portfolioData) return;
-            
+
+            var dataToRender = filteredData || portfolioData;
             var galleryGrid = document.getElementById('gallery-grid');
             var html = '';
-            
-            portfolioData.features.forEach(function(feature, index) {
+
+            dataToRender.features.forEach(function(feature, index) {
                 var props = feature.properties;
                 var flaeche = Number(props.flaeche_ngf).toLocaleString('de-CH');
                 // Use placeholder images
@@ -2931,8 +3562,13 @@
                     document.getElementById('info-panel').classList.remove('show');
                 }
             });
+
+            // Apply initial filters to map if any
+            if (filteredData && getActiveFilterCount() > 0) {
+                updateMapFilter();
+            }
         }
-        
+
         // Reusable function to select a building
         // UPDATED: Added flyToBuilding parameter (default false)
         function selectBuilding(buildingId, flyToBuilding = false) {
