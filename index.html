@@ -91,7 +91,6 @@
             overflow: hidden;
             background: var(--white);
             height: 40px;
-            box-sizing: border-box;
         }
         
         #search-icon-btn {
@@ -106,7 +105,7 @@
         }
         
         #search-icon-btn:hover {
-            background: var(--grey-100);
+            background: #e8e8e8;
         }
         
         #search-icon-btn .material-symbols-outlined {
@@ -237,7 +236,6 @@
             overflow: hidden;
             flex-shrink: 0;
             height: 40px;
-            box-sizing: border-box;
         }
         
         .view-toggle-btn {
@@ -317,7 +315,6 @@
             display: flex;
             align-items: center;
             height: 40px;
-            box-sizing: border-box;
             gap: 6px;
             transition: background 0.2s;
         }
@@ -388,8 +385,8 @@
             display: flex;
         }
 
-        /* List View Toolbar */
-        .list-toolbar {
+        /* ===== SHARED TOOLBAR STYLES ===== */
+        .toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -398,7 +395,7 @@
             background: var(--grey-50);
         }
 
-        .list-toolbar-search {
+        .toolbar-search {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -406,15 +403,15 @@
             border: 1px solid var(--grey-300);
             border-radius: 4px;
             padding: 8px 12px;
-            min-width: 280px;
+            min-width: 250px;
         }
 
-        .list-toolbar-search .material-symbols-outlined {
+        .toolbar-search .material-symbols-outlined {
             font-size: 20px;
             color: var(--grey-400);
         }
 
-        .list-toolbar-search input {
+        .toolbar-search input {
             border: none;
             outline: none;
             font-size: 14px;
@@ -422,14 +419,19 @@
             background: transparent;
         }
 
-        .list-toolbar-search input::placeholder {
+        .toolbar-search input::placeholder {
             color: var(--grey-400);
         }
 
-        .list-toolbar-actions {
+        .toolbar-actions {
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        /* List View Toolbar - extends .toolbar */
+        .list-toolbar-search {
+            min-width: 280px;
         }
 
         /* Dropdown Button Styles */
@@ -1483,46 +1485,8 @@
             margin: 0 auto;
         }
 
-        .detail-table-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--grey-100);
-            background: var(--grey-50);
-        }
-
-        .detail-table-search {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--white);
-            border: 1px solid var(--grey-300);
-            border-radius: 4px;
-            padding: 8px 12px;
-            min-width: 250px;
-        }
-
-        .detail-table-search .material-symbols-outlined {
-            font-size: 20px;
-            color: var(--grey-400);
-        }
-
-        .detail-table-search input {
-            border: none;
-            outline: none;
-            font-size: 14px;
-            width: 100%;
-            background: transparent;
-        }
-
-        .detail-table-search input::placeholder {
-            color: var(--grey-400);
-        }
-
+        /* Detail Table Toolbar - extends .toolbar */
         .detail-table-actions {
-            display: flex;
-            align-items: center;
             gap: 12px;
         }
 
@@ -1589,14 +1553,6 @@
             font-size: 16px;
             vertical-align: middle;
             margin-left: 4px;
-        }
-
-        .detail-table th.sort-asc .sort-icon {
-            content: 'arrow_upward';
-        }
-
-        .detail-table th.sort-desc .sort-icon {
-            content: 'arrow_downward';
         }
 
         .detail-table td {
@@ -1808,12 +1764,12 @@
         
         <div id="list-view">
             <!-- Toolbar -->
-            <div class="list-toolbar">
-                <div class="list-toolbar-search">
+            <div class="toolbar">
+                <div class="toolbar-search list-toolbar-search">
                     <span class="material-symbols-outlined">search</span>
                     <input type="text" id="list-search-input" placeholder="Tabelle durchsuchen...">
                 </div>
-                <div class="list-toolbar-actions">
+                <div class="toolbar-actions">
                     <!-- Export Dropdown -->
                     <div class="dropdown-container">
                         <button class="dropdown-btn" id="export-dropdown-btn">
@@ -2130,12 +2086,12 @@
                         <div class="detail-section">
                             <div class="detail-section-title">Bemessungen</div>
 
-                            <div class="detail-table-toolbar">
-                                <div class="detail-table-search">
+                            <div class="toolbar">
+                                <div class="toolbar-search">
                                     <span class="material-symbols-outlined">search</span>
                                     <input type="text" id="measurements-filter" placeholder="Alle Spalten filtern">
                                 </div>
-                                <div class="detail-table-actions">
+                                <div class="toolbar-actions detail-table-actions">
                                     <button class="btn-action measurements-action" disabled>
                                         <span class="material-symbols-outlined">edit</span>
                                         Bearbeiten
@@ -2205,12 +2161,12 @@
                         <div class="detail-section">
                             <div class="detail-section-title">Dokumente</div>
 
-                            <div class="detail-table-toolbar">
-                                <div class="detail-table-search">
+                            <div class="toolbar">
+                                <div class="toolbar-search">
                                     <span class="material-symbols-outlined">search</span>
                                     <input type="text" id="documents-filter" placeholder="Alle Spalten filtern">
                                 </div>
-                                <div class="detail-table-actions">
+                                <div class="toolbar-actions detail-table-actions">
                                     <button class="btn-action documents-action" disabled>
                                         <span class="material-symbols-outlined">edit</span>
                                         Bearbeiten
@@ -3453,26 +3409,113 @@
         setTimeout(initStyleThumbnails, 100);
         updateActiveStyleButton();
 
-        // ===== MEASUREMENTS TAB =====
+        // ===== SHARED TABLE UTILITIES =====
 
-        // Measurements data loaded dynamically from current building
+        // Generic sort function for table data
+        function sortTableData(data, column, direction) {
+            return data.sort(function(a, b) {
+                var valA = a[column];
+                var valB = b[column];
+                if (typeof valA === 'string') {
+                    valA = valA.toLowerCase();
+                    valB = valB.toLowerCase();
+                }
+                if (valA < valB) return direction === 'asc' ? -1 : 1;
+                if (valA > valB) return direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // Generic selection update for detail tables
+        function updateTableSelection(config) {
+            var checkboxes = document.querySelectorAll('.' + config.checkboxClass);
+            var checkedCount = document.querySelectorAll('.' + config.checkboxClass + ':checked').length;
+            var selectAll = document.getElementById(config.selectAllId);
+
+            if (selectAll) {
+                selectAll.checked = checkedCount === checkboxes.length && checkboxes.length > 0;
+                selectAll.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
+            }
+
+            document.querySelectorAll('#' + config.tableId + ' tbody tr').forEach(function(row) {
+                var cb = row.querySelector('.' + config.checkboxClass);
+                row.classList.toggle('selected', cb && cb.checked);
+            });
+
+            document.querySelectorAll('.' + config.actionClass).forEach(function(btn) {
+                btn.disabled = checkedCount === 0;
+            });
+        }
+
+        // Generic sort column click handler setup
+        function initTableSorting(config) {
+            document.querySelectorAll('#' + config.tableId + ' th.sortable').forEach(function(th) {
+                th.addEventListener('click', function() {
+                    var column = this.dataset.sort;
+
+                    if (column === config.state.column) {
+                        config.state.direction = config.state.direction === 'asc' ? 'desc' : 'asc';
+                    } else {
+                        config.state.column = column;
+                        config.state.direction = 'asc';
+                    }
+
+                    document.querySelectorAll('#' + config.tableId + ' th.sortable').forEach(function(header) {
+                        header.classList.remove('sort-asc', 'sort-desc');
+                        var icon = header.querySelector('.sort-icon');
+                        if (icon) icon.textContent = 'unfold_more';
+                    });
+
+                    this.classList.add('sort-' + config.state.direction);
+                    var sortIcon = this.querySelector('.sort-icon');
+                    if (sortIcon) {
+                        sortIcon.textContent = config.state.direction === 'asc' ? 'arrow_upward' : 'arrow_downward';
+                    }
+
+                    config.onSort();
+                });
+            });
+        }
+
+        // Generic select-all checkbox setup
+        function initSelectAll(config) {
+            var selectAll = document.getElementById(config.selectAllId);
+            if (selectAll) {
+                selectAll.addEventListener('change', function() {
+                    var isChecked = this.checked;
+                    document.querySelectorAll('.' + config.checkboxClass).forEach(function(cb) {
+                        cb.checked = isChecked;
+                    });
+                    config.onUpdate();
+                });
+            }
+        }
+
+        // ===== MEASUREMENTS TAB =====
         var measurementsData = [];
         var filteredMeasurements = [];
+        var measurementsSort = { column: 'id', direction: 'asc' };
+
+        var measurementsConfig = {
+            tableId: 'measurements-table',
+            checkboxClass: 'measurement-checkbox',
+            selectAllId: 'select-all-measurements',
+            actionClass: 'measurements-action',
+            state: measurementsSort,
+            onSort: function() {
+                sortTableData(filteredMeasurements, measurementsSort.column, measurementsSort.direction);
+                renderMeasurementsTable();
+            },
+            onUpdate: function() { updateTableSelection(measurementsConfig); }
+        };
 
         function loadMeasurementsForBuilding(building) {
             if (building && building.properties && building.properties.bemessungen) {
-                // Map bemessungen to measurementsData format
                 measurementsData = building.properties.bemessungen.map(function(m) {
                     return {
-                        id: m.id,
-                        areaType: m.areaType,
-                        value: m.value,
-                        unit: m.unit,
-                        source: m.source || 'Manuell',
-                        accuracy: m.accuracy,
-                        standard: m.standard,
-                        validFrom: m.validFrom,
-                        validUntil: m.validUntil || '—'
+                        id: m.id, areaType: m.areaType, value: m.value, unit: m.unit,
+                        source: m.source || 'Manuell', accuracy: m.accuracy,
+                        standard: m.standard, validFrom: m.validFrom, validUntil: m.validUntil || '—'
                     };
                 });
             } else {
@@ -3480,8 +3523,6 @@
             }
             filteredMeasurements = measurementsData.slice();
         }
-        var measurementsSortDirection = 'asc';
-        var measurementsSortColumn = 'id';
 
         function renderMeasurementsTable() {
             var tbody = document.getElementById('measurements-tbody');
@@ -3490,7 +3531,6 @@
             var html = '';
             filteredMeasurements.forEach(function(m) {
                 var formattedValue = Number(m.value).toLocaleString('de-CH');
-
                 html += '<tr data-id="' + m.id + '">' +
                     '<td class="col-checkbox"><input type="checkbox" class="measurement-checkbox"></td>' +
                     '<td class="col-id">' + m.id + '</td>' +
@@ -3503,67 +3543,23 @@
                     '<td class="col-until">' + m.validUntil + '</td>' +
                 '</tr>';
             });
-
             tbody.innerHTML = html;
 
-            // Add checkbox event listeners
             document.querySelectorAll('.measurement-checkbox').forEach(function(cb) {
-                cb.addEventListener('change', updateMeasurementsSelection);
+                cb.addEventListener('change', function() { updateTableSelection(measurementsConfig); });
             });
         }
 
-        function updateMeasurementsSelection() {
-            var checkboxes = document.querySelectorAll('.measurement-checkbox');
-            var checkedCount = document.querySelectorAll('.measurement-checkbox:checked').length;
-            var selectAll = document.getElementById('select-all-measurements');
-
-            // Update select all checkbox state
-            if (selectAll) {
-                selectAll.checked = checkedCount === checkboxes.length && checkboxes.length > 0;
-                selectAll.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
-            }
-
-            // Update row selection styling
-            document.querySelectorAll('#measurements-table tbody tr').forEach(function(row) {
-                var cb = row.querySelector('.measurement-checkbox');
-                if (cb && cb.checked) {
-                    row.classList.add('selected');
-                } else {
-                    row.classList.remove('selected');
-                }
-            });
-
-            // Enable/disable action buttons based on selection
-            var actionBtns = document.querySelectorAll('.measurements-action');
-            actionBtns.forEach(function(btn) {
-                btn.disabled = checkedCount === 0;
-            });
-        }
-
-        // Select All checkbox handler
-        var selectAllCheckbox = document.getElementById('select-all-measurements');
-        if (selectAllCheckbox) {
-            selectAllCheckbox.addEventListener('change', function() {
-                var checkboxes = document.querySelectorAll('.measurement-checkbox');
-                var isChecked = this.checked;
-                checkboxes.forEach(function(cb) {
-                    cb.checked = isChecked;
-                });
-                updateMeasurementsSelection();
-            });
-        }
-
-        // Filter functionality
+        // Measurements filter
         var measurementsFilter = document.getElementById('measurements-filter');
         if (measurementsFilter) {
             measurementsFilter.addEventListener('input', function() {
                 var term = this.value.toLowerCase().trim();
-
                 if (term === '') {
                     filteredMeasurements = measurementsData.slice();
                 } else {
                     filteredMeasurements = measurementsData.filter(function(m) {
-                        return m.asset.toLowerCase().includes(term) ||
+                        return m.id.toLowerCase().includes(term) ||
                                m.areaType.toLowerCase().includes(term) ||
                                m.accuracy.toLowerCase().includes(term) ||
                                m.standard.toLowerCase().includes(term) ||
@@ -3571,61 +3567,14 @@
                                String(m.value).includes(term);
                     });
                 }
-
-                sortMeasurements();
+                sortTableData(filteredMeasurements, measurementsSort.column, measurementsSort.direction);
                 renderMeasurementsTable();
             });
         }
 
-        // Sort functionality
-        function sortMeasurements() {
-            filteredMeasurements.sort(function(a, b) {
-                var valA = a[measurementsSortColumn];
-                var valB = b[measurementsSortColumn];
+        initTableSorting(measurementsConfig);
+        initSelectAll(measurementsConfig);
 
-                if (typeof valA === 'string') {
-                    valA = valA.toLowerCase();
-                    valB = valB.toLowerCase();
-                }
-
-                if (valA < valB) return measurementsSortDirection === 'asc' ? -1 : 1;
-                if (valA > valB) return measurementsSortDirection === 'asc' ? 1 : -1;
-                return 0;
-            });
-        }
-
-        // Sort column click handler for measurements
-        document.querySelectorAll('#measurements-table th.sortable').forEach(function(th) {
-            th.addEventListener('click', function() {
-                var column = this.dataset.sort;
-
-                // Toggle direction if same column, else default to asc
-                if (column === measurementsSortColumn) {
-                    measurementsSortDirection = measurementsSortDirection === 'asc' ? 'desc' : 'asc';
-                } else {
-                    measurementsSortColumn = column;
-                    measurementsSortDirection = 'asc';
-                }
-
-                // Update sort icons
-                document.querySelectorAll('#measurements-table th.sortable').forEach(function(header) {
-                    header.classList.remove('sort-asc', 'sort-desc');
-                    var icon = header.querySelector('.sort-icon');
-                    if (icon) icon.textContent = 'unfold_more';
-                });
-
-                this.classList.add('sort-' + measurementsSortDirection);
-                var sortIcon = this.querySelector('.sort-icon');
-                if (sortIcon) {
-                    sortIcon.textContent = measurementsSortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward';
-                }
-
-                sortMeasurements();
-                renderMeasurementsTable();
-            });
-        });
-
-        // Placeholder click handler for Add button in measurements
         var addMeasurementBtn = document.getElementById('btn-add-measurement');
         if (addMeasurementBtn) {
             addMeasurementBtn.addEventListener('click', function() {
@@ -3634,22 +3583,30 @@
         }
 
         // ===== DOCUMENTS TAB =====
-
-        // Documents data loaded dynamically from current building
         var documentsData = [];
         var filteredDocuments = [];
+        var documentsSort = { column: 'id', direction: 'asc' };
+
+        var documentsConfig = {
+            tableId: 'documents-table',
+            checkboxClass: 'document-checkbox',
+            selectAllId: 'select-all-documents',
+            actionClass: 'documents-action',
+            state: documentsSort,
+            onSort: function() {
+                sortTableData(filteredDocuments, documentsSort.column, documentsSort.direction);
+                renderDocumentsTable();
+            },
+            onUpdate: function() { updateTableSelection(documentsConfig); }
+        };
 
         function loadDocumentsForBuilding(building) {
             if (building && building.properties && building.properties.dokumente) {
                 documentsData = building.properties.dokumente.map(function(d) {
                     return {
-                        id: d.id,
-                        titel: d.titel,
-                        dokumentTyp: d.dokumentTyp,
-                        dateiformat: d.dateiformat,
-                        datum: d.datum,
-                        dateigroesse: d.dateigroesse,
-                        url: d.url || '#'
+                        id: d.id, titel: d.titel, dokumentTyp: d.dokumentTyp,
+                        dateiformat: d.dateiformat, datum: d.datum,
+                        dateigroesse: d.dateigroesse, url: d.url || '#'
                     };
                 });
             } else {
@@ -3657,9 +3614,6 @@
             }
             filteredDocuments = documentsData.slice();
         }
-
-        var documentsSortDirection = 'asc';
-        var documentsSortColumn = 'id';
 
         function renderDocumentsTable() {
             var tbody = document.getElementById('documents-tbody');
@@ -3677,62 +3631,18 @@
                     '<td class="col-size">' + d.dateigroesse + '</td>' +
                 '</tr>';
             });
-
             tbody.innerHTML = html;
 
-            // Add checkbox event listeners
             document.querySelectorAll('.document-checkbox').forEach(function(cb) {
-                cb.addEventListener('change', updateDocumentsSelection);
+                cb.addEventListener('change', function() { updateTableSelection(documentsConfig); });
             });
         }
 
-        function updateDocumentsSelection() {
-            var checkboxes = document.querySelectorAll('.document-checkbox');
-            var checkedCount = document.querySelectorAll('.document-checkbox:checked').length;
-            var selectAll = document.getElementById('select-all-documents');
-
-            // Update select all checkbox state
-            if (selectAll) {
-                selectAll.checked = checkedCount === checkboxes.length && checkboxes.length > 0;
-                selectAll.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
-            }
-
-            // Update row selection styling
-            document.querySelectorAll('#documents-table tbody tr').forEach(function(row) {
-                var cb = row.querySelector('.document-checkbox');
-                if (cb && cb.checked) {
-                    row.classList.add('selected');
-                } else {
-                    row.classList.remove('selected');
-                }
-            });
-
-            // Enable/disable action buttons based on selection
-            var actionBtns = document.querySelectorAll('.documents-action');
-            actionBtns.forEach(function(btn) {
-                btn.disabled = checkedCount === 0;
-            });
-        }
-
-        // Select All checkbox handler for documents
-        var selectAllDocsCheckbox = document.getElementById('select-all-documents');
-        if (selectAllDocsCheckbox) {
-            selectAllDocsCheckbox.addEventListener('change', function() {
-                var checkboxes = document.querySelectorAll('.document-checkbox');
-                var isChecked = this.checked;
-                checkboxes.forEach(function(cb) {
-                    cb.checked = isChecked;
-                });
-                updateDocumentsSelection();
-            });
-        }
-
-        // Filter functionality for documents
+        // Documents filter
         var documentsFilter = document.getElementById('documents-filter');
         if (documentsFilter) {
             documentsFilter.addEventListener('input', function() {
                 var term = this.value.toLowerCase().trim();
-
                 if (term === '') {
                     filteredDocuments = documentsData.slice();
                 } else {
@@ -3745,61 +3655,14 @@
                                d.dateigroesse.toLowerCase().includes(term);
                     });
                 }
-
-                sortDocuments();
+                sortTableData(filteredDocuments, documentsSort.column, documentsSort.direction);
                 renderDocumentsTable();
             });
         }
 
-        // Sort functionality for documents
-        function sortDocuments() {
-            filteredDocuments.sort(function(a, b) {
-                var valA = a[documentsSortColumn];
-                var valB = b[documentsSortColumn];
+        initTableSorting(documentsConfig);
+        initSelectAll(documentsConfig);
 
-                if (typeof valA === 'string') {
-                    valA = valA.toLowerCase();
-                    valB = valB.toLowerCase();
-                }
-
-                if (valA < valB) return documentsSortDirection === 'asc' ? -1 : 1;
-                if (valA > valB) return documentsSortDirection === 'asc' ? 1 : -1;
-                return 0;
-            });
-        }
-
-        // Sort column click handler for documents
-        document.querySelectorAll('#documents-table th.sortable').forEach(function(th) {
-            th.addEventListener('click', function() {
-                var column = this.dataset.sort;
-
-                // Toggle direction if same column, else default to asc
-                if (column === documentsSortColumn) {
-                    documentsSortDirection = documentsSortDirection === 'asc' ? 'desc' : 'asc';
-                } else {
-                    documentsSortColumn = column;
-                    documentsSortDirection = 'asc';
-                }
-
-                // Update sort icons
-                document.querySelectorAll('#documents-table th.sortable').forEach(function(header) {
-                    header.classList.remove('sort-asc', 'sort-desc');
-                    var icon = header.querySelector('.sort-icon');
-                    if (icon) icon.textContent = 'unfold_more';
-                });
-
-                this.classList.add('sort-' + documentsSortDirection);
-                var sortIcon = this.querySelector('.sort-icon');
-                if (sortIcon) {
-                    sortIcon.textContent = documentsSortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward';
-                }
-
-                sortDocuments();
-                renderDocumentsTable();
-            });
-        });
-
-        // Placeholder click handler for Add button in documents
         var addDocumentBtn = document.getElementById('btn-add-document');
         if (addDocumentBtn) {
             addDocumentBtn.addEventListener('click', function() {
