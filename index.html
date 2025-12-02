@@ -1508,6 +1508,33 @@
             height: 16px;
             cursor: pointer;
         }
+
+        /* Documents Table Column Widths */
+        .measurements-table .col-doc-id {
+            width: 100px;
+        }
+
+        .measurements-table .col-doc-title {
+            width: auto;
+            min-width: 200px;
+        }
+
+        .measurements-table .col-doc-type {
+            width: 140px;
+        }
+
+        .measurements-table .col-doc-format {
+            width: 80px;
+        }
+
+        .measurements-table .col-doc-date {
+            width: 100px;
+        }
+
+        .measurements-table .col-doc-size {
+            width: 90px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -1718,7 +1745,7 @@
                     <div class="detail-tab disabled" data-tab="kosten">Kosten</div>
                     <div class="detail-tab disabled" data-tab="vertraege">Verträge</div>
                     <div class="detail-tab disabled" data-tab="ausstattung">Ausstattung</div>
-                    <div class="detail-tab disabled" data-tab="dokumente">Dokumente</div>
+                    <div class="detail-tab" data-tab="dokumente">Dokumente</div>
                 </div>
             </div>
             
@@ -1962,10 +1989,77 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Tab Content: Dokumente -->
+                <div class="tab-content" data-content="dokumente">
+                    <div class="measurements-container">
+                        <div class="detail-section">
+                            <div class="detail-section-title">Dokumente</div>
+
+                            <div class="measurements-toolbar">
+                                <div class="measurements-search">
+                                    <span class="material-symbols-outlined">search</span>
+                                    <input type="text" id="documents-filter" placeholder="Alle Spalten filtern">
+                                </div>
+                                <div class="measurements-actions">
+                                    <button class="btn-action documents-action" disabled>
+                                        <span class="material-symbols-outlined">edit</span>
+                                        Bearbeiten
+                                    </button>
+                                    <button class="btn-action documents-action" disabled>
+                                        <span class="material-symbols-outlined">delete</span>
+                                        Löschen
+                                    </button>
+                                    <button class="btn-action documents-action" disabled>
+                                        <span class="material-symbols-outlined">download</span>
+                                        Herunterladen
+                                    </button>
+                                    <button class="btn-back" id="btn-add-document">
+                                        <span class="material-symbols-outlined">add</span>
+                                        Hinzufügen
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="measurements-table-container">
+                                <table class="measurements-table" id="documents-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-checkbox">
+                                                <input type="checkbox" id="select-all-documents">
+                                            </th>
+                                            <th class="col-doc-id sortable" data-sort="id">
+                                                ID
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-doc-title sortable" data-sort="titel">
+                                                Titel
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-doc-type sortable" data-sort="dokumentTyp">
+                                                Typ
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-doc-format">Format</th>
+                                            <th class="col-doc-date sortable" data-sort="datum">
+                                                Datum
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-doc-size">Grösse</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="documents-tbody">
+                                        <!-- Populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-    
+
     <footer id="footer">
         <div id="coordinates">WGS 84 | Koordinaten: --</div>
         <div id="footer-links">
@@ -2181,6 +2275,9 @@
 
             // Load measurements for this building
             loadMeasurementsForBuilding(building);
+
+            // Load documents for this building
+            loadDocumentsForBuilding(building);
 
             // Initialize carousel
             initCarousel();
@@ -2884,6 +2981,11 @@
                 if (targetTab === 'bemessungen') {
                     renderMeasurementsTable();
                 }
+
+                // Render documents table when switching to Dokumente tab
+                if (targetTab === 'dokumente') {
+                    renderDocumentsTable();
+                }
             });
         });
 
@@ -3178,6 +3280,180 @@
         if (addMeasurementBtn) {
             addMeasurementBtn.addEventListener('click', function() {
                 alert('Bemessung hinzufügen - kommt bald...');
+            });
+        }
+
+        // ===== DOCUMENTS TAB =====
+
+        // Documents data loaded dynamically from current building
+        var documentsData = [];
+        var filteredDocuments = [];
+
+        function loadDocumentsForBuilding(building) {
+            if (building && building.properties && building.properties.dokumente) {
+                documentsData = building.properties.dokumente.map(function(d) {
+                    return {
+                        id: d.id,
+                        titel: d.titel,
+                        dokumentTyp: d.dokumentTyp,
+                        dateiformat: d.dateiformat,
+                        datum: d.datum,
+                        dateigroesse: d.dateigroesse,
+                        url: d.url || '#'
+                    };
+                });
+            } else {
+                documentsData = [];
+            }
+            filteredDocuments = documentsData.slice();
+        }
+
+        var documentsSortDirection = 'asc';
+        var documentsSortColumn = 'id';
+
+        function renderDocumentsTable() {
+            var tbody = document.getElementById('documents-tbody');
+            if (!tbody) return;
+
+            var html = '';
+            filteredDocuments.forEach(function(d) {
+                html += '<tr data-id="' + d.id + '">' +
+                    '<td class="col-checkbox"><input type="checkbox" class="document-checkbox"></td>' +
+                    '<td class="col-doc-id">' + d.id + '</td>' +
+                    '<td class="col-doc-title">' + d.titel + '</td>' +
+                    '<td class="col-doc-type">' + d.dokumentTyp + '</td>' +
+                    '<td class="col-doc-format">' + d.dateiformat + '</td>' +
+                    '<td class="col-doc-date">' + d.datum + '</td>' +
+                    '<td class="col-doc-size">' + d.dateigroesse + '</td>' +
+                '</tr>';
+            });
+
+            tbody.innerHTML = html;
+
+            // Add checkbox event listeners
+            document.querySelectorAll('.document-checkbox').forEach(function(cb) {
+                cb.addEventListener('change', updateDocumentsSelection);
+            });
+        }
+
+        function updateDocumentsSelection() {
+            var checkboxes = document.querySelectorAll('.document-checkbox');
+            var checkedCount = document.querySelectorAll('.document-checkbox:checked').length;
+            var selectAll = document.getElementById('select-all-documents');
+
+            // Update select all checkbox state
+            if (selectAll) {
+                selectAll.checked = checkedCount === checkboxes.length && checkboxes.length > 0;
+                selectAll.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
+            }
+
+            // Update row selection styling
+            document.querySelectorAll('#documents-table tbody tr').forEach(function(row) {
+                var cb = row.querySelector('.document-checkbox');
+                if (cb && cb.checked) {
+                    row.classList.add('selected');
+                } else {
+                    row.classList.remove('selected');
+                }
+            });
+
+            // Enable/disable action buttons based on selection
+            var actionBtns = document.querySelectorAll('.documents-action');
+            actionBtns.forEach(function(btn) {
+                btn.disabled = checkedCount === 0;
+            });
+        }
+
+        // Select All checkbox handler for documents
+        var selectAllDocsCheckbox = document.getElementById('select-all-documents');
+        if (selectAllDocsCheckbox) {
+            selectAllDocsCheckbox.addEventListener('change', function() {
+                var checkboxes = document.querySelectorAll('.document-checkbox');
+                var isChecked = this.checked;
+                checkboxes.forEach(function(cb) {
+                    cb.checked = isChecked;
+                });
+                updateDocumentsSelection();
+            });
+        }
+
+        // Filter functionality for documents
+        var documentsFilter = document.getElementById('documents-filter');
+        if (documentsFilter) {
+            documentsFilter.addEventListener('input', function() {
+                var term = this.value.toLowerCase().trim();
+
+                if (term === '') {
+                    filteredDocuments = documentsData.slice();
+                } else {
+                    filteredDocuments = documentsData.filter(function(d) {
+                        return d.id.toLowerCase().includes(term) ||
+                               d.titel.toLowerCase().includes(term) ||
+                               d.dokumentTyp.toLowerCase().includes(term) ||
+                               d.dateiformat.toLowerCase().includes(term) ||
+                               d.datum.toLowerCase().includes(term) ||
+                               d.dateigroesse.toLowerCase().includes(term);
+                    });
+                }
+
+                sortDocuments();
+                renderDocumentsTable();
+            });
+        }
+
+        // Sort functionality for documents
+        function sortDocuments() {
+            filteredDocuments.sort(function(a, b) {
+                var valA = a[documentsSortColumn];
+                var valB = b[documentsSortColumn];
+
+                if (typeof valA === 'string') {
+                    valA = valA.toLowerCase();
+                    valB = valB.toLowerCase();
+                }
+
+                if (valA < valB) return documentsSortDirection === 'asc' ? -1 : 1;
+                if (valA > valB) return documentsSortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // Sort column click handler for documents
+        document.querySelectorAll('#documents-table th.sortable').forEach(function(th) {
+            th.addEventListener('click', function() {
+                var column = this.dataset.sort;
+
+                // Toggle direction if same column, else default to asc
+                if (column === documentsSortColumn) {
+                    documentsSortDirection = documentsSortDirection === 'asc' ? 'desc' : 'asc';
+                } else {
+                    documentsSortColumn = column;
+                    documentsSortDirection = 'asc';
+                }
+
+                // Update sort icons
+                document.querySelectorAll('#documents-table th.sortable').forEach(function(header) {
+                    header.classList.remove('sort-asc', 'sort-desc');
+                    var icon = header.querySelector('.sort-icon');
+                    if (icon) icon.textContent = 'unfold_more';
+                });
+
+                this.classList.add('sort-' + documentsSortDirection);
+                var sortIcon = this.querySelector('.sort-icon');
+                if (sortIcon) {
+                    sortIcon.textContent = documentsSortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward';
+                }
+
+                sortDocuments();
+                renderDocumentsTable();
+            });
+        });
+
+        // Placeholder click handler for Add button in documents
+        var addDocumentBtn = document.getElementById('btn-add-document');
+        if (addDocumentBtn) {
+            addDocumentBtn.addEventListener('click', function() {
+                alert('Dokument hinzufügen - kommt bald...');
             });
         }
     </script>

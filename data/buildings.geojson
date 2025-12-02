@@ -102,6 +102,44 @@
             "validUntil": null,
             "source": "Schätzmodell"
           }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-001-D1",
+            "titel": "Grundriss Erdgeschoss",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "15.03.2019",
+            "dateigroesse": "2.4 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-001-D2",
+            "titel": "Fassadenplan West",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "DWG",
+            "datum": "15.03.2019",
+            "dateigroesse": "8.1 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-001-D3",
+            "titel": "GEAK Zertifikat 2019",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "20.06.2019",
+            "dateigroesse": "1.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-001-D4",
+            "titel": "Denkmalschutz-Verfügung",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "01.01.1950",
+            "dateigroesse": "450 KB",
+            "url": "#"
+          }
         ]
       },
       "geometry": {
@@ -211,6 +249,35 @@
             "validFrom": "01.09.2000",
             "validUntil": null,
             "source": "Vermessung"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-002-D1",
+            "titel": "Architekturpläne Gesamtobjekt",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.09.2000",
+            "dateigroesse": "15.3 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-002-D2",
+            "titel": "Energiepass EnEV",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "15.06.2021",
+            "dateigroesse": "890 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-002-D3",
+            "titel": "Sicherheitskonzept",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "10.01.2022",
+            "dateigroesse": "3.2 MB",
+            "url": "#"
           }
         ]
       },
@@ -333,6 +400,44 @@
             "validUntil": null,
             "source": "Manuell"
           }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-003-D1",
+            "titel": "Hallenlayout Lagerbereich",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "DWG",
+            "datum": "01.06.2017",
+            "dateigroesse": "12.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-003-D2",
+            "titel": "Brandschutzkonzept",
+            "dokumentTyp": "Brandschutzkonzept",
+            "dateiformat": "PDF",
+            "datum": "15.08.2017",
+            "dateigroesse": "4.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-003-D3",
+            "titel": "Wartungsprotokoll Heizung 2023",
+            "dokumentTyp": "Wartungsprotokoll",
+            "dateiformat": "PDF",
+            "datum": "12.11.2023",
+            "dateigroesse": "320 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-003-D4",
+            "titel": "Gebäudefoto Aussenansicht",
+            "dokumentTyp": "Foto",
+            "dateiformat": "JPG",
+            "datum": "20.03.2020",
+            "dateigroesse": "5.2 MB",
+            "url": "#"
+          }
         ]
       },
       "geometry": {
@@ -431,6 +536,26 @@
             "validFrom": "01.01.2020",
             "validUntil": null,
             "source": "Schätzmodell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-004-D1",
+            "titel": "Mietvertrag Third Avenue",
+            "dokumentTyp": "Mietvertrag",
+            "dateiformat": "PDF",
+            "datum": "01.01.2020",
+            "dateigroesse": "1.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-004-D2",
+            "titel": "Grundriss Büroflächen",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "01.01.2020",
+            "dateigroesse": "3.4 MB",
+            "url": "#"
           }
         ]
       },
@@ -553,6 +678,44 @@
             "validUntil": null,
             "source": "Manuell"
           }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-005-D1",
+            "titel": "Sanierungsprojekt 2024",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.01.2024",
+            "dateigroesse": "28.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-005-D2",
+            "titel": "GEAK Plus Bericht",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "15.12.2023",
+            "dateigroesse": "2.1 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-005-D3",
+            "titel": "Denkmalschutz Teilbereich",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "10.05.1980",
+            "dateigroesse": "650 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-005-D4",
+            "titel": "Raumkonzept Schulungsräume",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "DWG",
+            "datum": "01.01.2024",
+            "dateigroesse": "9.8 MB",
+            "url": "#"
+          }
         ]
       },
       "geometry": {
@@ -662,6 +825,35 @@
             "validFrom": "01.03.1991",
             "validUntil": null,
             "source": "Vermessung"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-006-D1",
+            "titel": "Architekturpläne Original",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.03.1991",
+            "dateigroesse": "18.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-006-D2",
+            "titel": "Erdbebensicherheit Gutachten",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "20.09.2018",
+            "dateigroesse": "4.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-006-D3",
+            "titel": "Residenz Grundriss",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "01.03.1991",
+            "dateigroesse": "2.8 MB",
+            "url": "#"
           }
         ]
       },
@@ -784,6 +976,53 @@
             "validUntil": null,
             "source": "Manuell"
           }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-007-D1",
+            "titel": "Wohnungsspiegel",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "01.06.2015",
+            "dateigroesse": "5.6 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D2",
+            "titel": "GEAK Zertifikat",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "01.06.2015",
+            "dateigroesse": "980 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D3",
+            "titel": "Denkmalschutz Inventar",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "15.03.1985",
+            "dateigroesse": "1.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D4",
+            "titel": "Sanierungsbericht 2015",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.06.2015",
+            "dateigroesse": "12.3 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D5",
+            "titel": "Fassadenfoto nach Sanierung",
+            "dokumentTyp": "Foto",
+            "dateiformat": "JPG",
+            "datum": "15.07.2015",
+            "dateigroesse": "4.8 MB",
+            "url": "#"
+          }
         ]
       },
       "geometry": {
@@ -893,6 +1132,35 @@
             "validFrom": "01.01.2022",
             "validUntil": null,
             "source": "Schätzmodell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-008-D1",
+            "titel": "Sanierungspläne 2022",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.03.2022",
+            "dateigroesse": "22.4 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-008-D2",
+            "titel": "Klimaanlagen-Dokumentation",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "15.05.2022",
+            "dateigroesse": "3.1 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-008-D3",
+            "titel": "Gartenpflege-Konzept",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "01.01.2022",
+            "dateigroesse": "1.5 MB",
+            "url": "#"
           }
         ]
       },
@@ -1015,6 +1283,53 @@
             "validUntil": null,
             "source": "Vermessung"
           }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-009-D1",
+            "titel": "Bauprojekt Datacenter",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.06.2023",
+            "dateigroesse": "85.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D2",
+            "titel": "BIM Modell Hauptgebäude",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "IFC",
+            "datum": "01.06.2023",
+            "dateigroesse": "156.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D3",
+            "titel": "Baubewilligung Kanton TI",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "01.06.2023",
+            "dateigroesse": "2.3 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D4",
+            "titel": "Energiekonzept Tier IV",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "15.04.2023",
+            "dateigroesse": "8.7 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D5",
+            "titel": "Sicherheitskonzept IT",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "01.06.2023",
+            "dateigroesse": "5.4 MB",
+            "url": "#"
+          }
         ]
       },
       "geometry": {
@@ -1124,6 +1439,35 @@
             "validFrom": "01.01.2016",
             "validUntil": null,
             "source": "Vermessung"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-010-D1",
+            "titel": "Originalbaupläne 1968",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.09.1968",
+            "dateigroesse": "6.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-010-D2",
+            "titel": "Sanierungsdokumentation 2016",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.01.2016",
+            "dateigroesse": "14.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-010-D3",
+            "titel": "Solar-Warmwasser Anlage",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "15.03.2016",
+            "dateigroesse": "2.1 MB",
+            "url": "#"
           }
         ]
       },
