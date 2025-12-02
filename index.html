@@ -1912,11 +1912,11 @@
                         <span class="material-symbols-outlined">public</span>
                         <a href="#" onclick="switchView('gallery'); return false;">Alle Objekte</a>
                         <span>></span>
+                        <a href="#" id="breadcrumb-country-link"><span id="breadcrumb-country">Land</span></a>
+                        <span>></span>
                         <a href="#" id="breadcrumb-region-link"><span id="breadcrumb-region">Region</span></a>
                         <span>></span>
-                        <a href="#" id="breadcrumb-city-link"><span id="breadcrumb-city">Stadt</span></a>
-                        <span>></span>
-                        <span class="current" id="breadcrumb-name">Gebäude</span>
+                        <span class="current" id="breadcrumb-name">Objekt</span>
                     </div>
                     <div class="detail-header-actions">
                         <button class="btn-edit">
@@ -2548,8 +2548,8 @@
             
             // Breadcrumb
             document.getElementById('breadcrumb-name').textContent = props.name;
+            document.getElementById('breadcrumb-country').textContent = props.land || '—';
             document.getElementById('breadcrumb-region').textContent = props.region || '—';
-            document.getElementById('breadcrumb-city').textContent = props.ort || '—';
             
             // Objekt Stammdaten
             document.getElementById('detail-name').textContent = props.name;
