@@ -1328,13 +1328,13 @@
             display: block;
         }
 
-        /* ===== MEASUREMENTS TAB ===== */
-        .measurements-container {
+        /* ===== DETAIL TABLE (shared styles for Bemessungen & Dokumente) ===== */
+        .detail-table-container {
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .measurements-toolbar {
+        .detail-table-toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1343,7 +1343,7 @@
             background: var(--grey-50);
         }
 
-        .measurements-search {
+        .detail-table-search {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1354,12 +1354,12 @@
             min-width: 250px;
         }
 
-        .measurements-search .material-symbols-outlined {
+        .detail-table-search .material-symbols-outlined {
             font-size: 20px;
             color: var(--grey-400);
         }
 
-        .measurements-search input {
+        .detail-table-search input {
             border: none;
             outline: none;
             font-size: 14px;
@@ -1367,11 +1367,11 @@
             background: transparent;
         }
 
-        .measurements-search input::placeholder {
+        .detail-table-search input::placeholder {
             color: var(--grey-400);
         }
 
-        .measurements-actions {
+        .detail-table-actions {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -1405,19 +1405,19 @@
             font-size: 18px;
         }
 
-        /* Measurements Table */
-        .measurements-table-container {
+        /* Detail Table Base */
+        .detail-table-wrapper {
             overflow-x: auto;
         }
 
-        .measurements-table {
+        .detail-table {
             width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
             font-size: 13px;
         }
 
-        .measurements-table th {
+        .detail-table th {
             background: var(--white);
             padding: 12px 16px;
             text-align: left;
@@ -1427,116 +1427,75 @@
             white-space: nowrap;
         }
 
-        .measurements-table th.sortable {
+        .detail-table th.sortable {
             cursor: pointer;
             user-select: none;
         }
 
-        .measurements-table th.sortable:hover {
+        .detail-table th.sortable:hover {
             background: var(--grey-50);
         }
 
-        .measurements-table th .sort-icon {
+        .detail-table th .sort-icon {
             font-size: 16px;
             vertical-align: middle;
             margin-left: 4px;
         }
 
-        .measurements-table th.sort-asc .sort-icon {
+        .detail-table th.sort-asc .sort-icon {
             content: 'arrow_upward';
         }
 
-        .measurements-table th.sort-desc .sort-icon {
+        .detail-table th.sort-desc .sort-icon {
             content: 'arrow_downward';
         }
 
-        .measurements-table td {
+        .detail-table td {
             padding: 14px 16px;
             border-bottom: 1px solid var(--grey-100);
             color: var(--grey-900);
         }
 
-        .measurements-table tbody tr:hover {
+        .detail-table tbody tr:hover {
             background: var(--grey-50);
         }
 
-        .measurements-table tbody tr.selected {
+        .detail-table tbody tr.selected {
             background: #e3f2fd;
         }
 
-        .measurements-table .col-checkbox {
-            width: 40px;
-            min-width: 40px;
-            max-width: 40px;
-            text-align: center;
-        }
-
-        .measurements-table input[type="checkbox"] {
+        .detail-table input[type="checkbox"] {
             width: 16px;
             height: 16px;
             cursor: pointer;
         }
 
-        /* Measurements Table Column Widths */
-        #measurements-table .col-id {
-            width: 110px;
+        /* Shared column: checkbox (4% in both tables) */
+        .detail-table .col-checkbox {
+            width: 4%;
+            text-align: center;
         }
 
-        #measurements-table .col-type {
-            width: 180px;
-        }
+        /* ===== MEASUREMENTS TABLE: 10 columns = 100% ===== */
+        /* checkbox:4% + id:10% + type:20% + area:8% + unit:5% + source:11% + accuracy:11% + standard:8% + from:11.5% + until:11.5% = 100% */
+        #measurements-table .col-id       { width: 10%; }
+        #measurements-table .col-type     { width: 20%; }
+        #measurements-table .col-area     { width: 8%; text-align: right; }
+        #measurements-table .col-unit     { width: 5%; }
+        #measurements-table .col-source   { width: 11%; }
+        #measurements-table .col-accuracy { width: 11%; }
+        #measurements-table .col-standard { width: 8%; }
+        #measurements-table .col-from     { width: 11.5%; }
+        #measurements-table .col-until    { width: 11.5%; }
 
-        #measurements-table .col-area {
-            width: 80px;
-            text-align: right;
-        }
-
-        #measurements-table .col-unit {
-            width: 60px;
-        }
-
-        #measurements-table .col-source {
-            width: 100px;
-        }
-
-        #measurements-table .col-accuracy {
-            width: 100px;
-        }
-
-        #measurements-table .col-standard {
-            width: 80px;
-        }
-
-        #measurements-table .col-from,
-        #measurements-table .col-until {
-            width: 95px;
-        }
-
-        /* Documents Table Column Widths */
-        #documents-table .col-doc-id {
-            width: 110px;
-        }
-
-        #documents-table .col-doc-title {
-            width: 280px;
-        }
-
-        #documents-table .col-doc-type {
-            width: 150px;
-        }
-
-        #documents-table .col-doc-format {
-            width: 80px;
-        }
-
-        #documents-table .col-doc-date {
-            width: 95px;
-        }
-
-        #documents-table .col-doc-size {
-            width: 80px;
-            text-align: right;
-        }
+        /* ===== DOCUMENTS TABLE: 7 columns = 100% ===== */
+        /* checkbox:4% + id:10% + title:34% + type:18% + format:10% + date:12% + size:12% = 100% */
+        #documents-table .col-id     { width: 10%; }
+        #documents-table .col-title  { width: 34%; }
+        #documents-table .col-type   { width: 18%; }
+        #documents-table .col-format { width: 10%; }
+        #documents-table .col-date   { width: 12%; }
+        #documents-table .col-size   { width: 12%; text-align: right; }
     </style>
 </head>
 <body>
@@ -1932,38 +1891,37 @@
 
                 <!-- Tab Content: Bemessungen -->
                 <div class="tab-content" data-content="bemessungen">
-                    <div class="measurements-container">
-                        <!-- Area Measurements Section -->
+                    <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Bemessungen</div>
 
-                            <div class="measurements-toolbar">
-                                <div class="measurements-search">
+                            <div class="detail-table-toolbar">
+                                <div class="detail-table-search">
                                     <span class="material-symbols-outlined">search</span>
                                     <input type="text" id="measurements-filter" placeholder="Alle Spalten filtern">
                                 </div>
-                                <div class="measurements-actions">
-                                    <button class="btn-action" disabled>
+                                <div class="detail-table-actions">
+                                    <button class="btn-action measurements-action" disabled>
                                         <span class="material-symbols-outlined">edit</span>
                                         Bearbeiten
                                     </button>
-                                    <button class="btn-action" disabled>
+                                    <button class="btn-action measurements-action" disabled>
                                         <span class="material-symbols-outlined">delete</span>
                                         Löschen
                                     </button>
-                                    <button class="btn-action" disabled>
+                                    <button class="btn-action measurements-action" disabled>
                                         <span class="material-symbols-outlined">open_in_new</span>
                                         Anzeigen
                                     </button>
-                                    <button class="btn-back">
+                                    <button class="btn-back" id="btn-add-measurement">
                                         <span class="material-symbols-outlined">add</span>
                                         Hinzufügen
                                     </button>
                                 </div>
                             </div>
 
-                            <div class="measurements-table-container">
-                                <table class="measurements-table" id="measurements-table">
+                            <div class="detail-table-wrapper">
+                                <table class="detail-table" id="measurements-table">
                                     <thead>
                                         <tr>
                                             <th class="col-checkbox">
@@ -2009,16 +1967,16 @@
 
                 <!-- Tab Content: Dokumente -->
                 <div class="tab-content" data-content="dokumente">
-                    <div class="measurements-container">
+                    <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Dokumente</div>
 
-                            <div class="measurements-toolbar">
-                                <div class="measurements-search">
+                            <div class="detail-table-toolbar">
+                                <div class="detail-table-search">
                                     <span class="material-symbols-outlined">search</span>
                                     <input type="text" id="documents-filter" placeholder="Alle Spalten filtern">
                                 </div>
-                                <div class="measurements-actions">
+                                <div class="detail-table-actions">
                                     <button class="btn-action documents-action" disabled>
                                         <span class="material-symbols-outlined">edit</span>
                                         Bearbeiten
@@ -2038,31 +1996,31 @@
                                 </div>
                             </div>
 
-                            <div class="measurements-table-container">
-                                <table class="measurements-table" id="documents-table">
+                            <div class="detail-table-wrapper">
+                                <table class="detail-table" id="documents-table">
                                     <thead>
                                         <tr>
                                             <th class="col-checkbox">
                                                 <input type="checkbox" id="select-all-documents">
                                             </th>
-                                            <th class="col-doc-id sortable" data-sort="id">
+                                            <th class="col-id sortable" data-sort="id">
                                                 ID
                                                 <span class="material-symbols-outlined sort-icon">unfold_more</span>
                                             </th>
-                                            <th class="col-doc-title sortable" data-sort="titel">
+                                            <th class="col-title sortable" data-sort="titel">
                                                 Titel
                                                 <span class="material-symbols-outlined sort-icon">unfold_more</span>
                                             </th>
-                                            <th class="col-doc-type sortable" data-sort="dokumentTyp">
+                                            <th class="col-type sortable" data-sort="dokumentTyp">
                                                 Typ
                                                 <span class="material-symbols-outlined sort-icon">unfold_more</span>
                                             </th>
-                                            <th class="col-doc-format">Format</th>
-                                            <th class="col-doc-date sortable" data-sort="datum">
+                                            <th class="col-format">Format</th>
+                                            <th class="col-date sortable" data-sort="datum">
                                                 Datum
                                                 <span class="material-symbols-outlined sort-icon">unfold_more</span>
                                             </th>
-                                            <th class="col-doc-size">Grösse</th>
+                                            <th class="col-size">Grösse</th>
                                         </tr>
                                     </thead>
                                     <tbody id="documents-tbody">
@@ -3191,7 +3149,7 @@
             }
 
             // Update row selection styling
-            document.querySelectorAll('.measurements-table tbody tr').forEach(function(row) {
+            document.querySelectorAll('#measurements-table tbody tr').forEach(function(row) {
                 var cb = row.querySelector('.measurement-checkbox');
                 if (cb && cb.checked) {
                     row.classList.add('selected');
@@ -3201,7 +3159,7 @@
             });
 
             // Enable/disable action buttons based on selection
-            var actionBtns = document.querySelectorAll('.measurements-actions .btn-action');
+            var actionBtns = document.querySelectorAll('.measurements-action');
             actionBtns.forEach(function(btn) {
                 btn.disabled = checkedCount === 0;
             });
@@ -3293,7 +3251,7 @@
         });
 
         // Placeholder click handler for Add button in measurements
-        var addMeasurementBtn = document.querySelector('.measurements-actions .btn-back');
+        var addMeasurementBtn = document.getElementById('btn-add-measurement');
         if (addMeasurementBtn) {
             addMeasurementBtn.addEventListener('click', function() {
                 alert('Bemessung hinzufügen - kommt bald...');
@@ -3336,12 +3294,12 @@
             filteredDocuments.forEach(function(d) {
                 html += '<tr data-id="' + d.id + '">' +
                     '<td class="col-checkbox"><input type="checkbox" class="document-checkbox"></td>' +
-                    '<td class="col-doc-id">' + d.id + '</td>' +
-                    '<td class="col-doc-title">' + d.titel + '</td>' +
-                    '<td class="col-doc-type">' + d.dokumentTyp + '</td>' +
-                    '<td class="col-doc-format">' + d.dateiformat + '</td>' +
-                    '<td class="col-doc-date">' + d.datum + '</td>' +
-                    '<td class="col-doc-size">' + d.dateigroesse + '</td>' +
+                    '<td class="col-id">' + d.id + '</td>' +
+                    '<td class="col-title">' + d.titel + '</td>' +
+                    '<td class="col-type">' + d.dokumentTyp + '</td>' +
+                    '<td class="col-format">' + d.dateiformat + '</td>' +
+                    '<td class="col-date">' + d.datum + '</td>' +
+                    '<td class="col-size">' + d.dateigroesse + '</td>' +
                 '</tr>';
             });
 
