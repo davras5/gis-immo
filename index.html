@@ -1681,6 +1681,10 @@
                         <span class="material-symbols-outlined">public</span>
                         <a href="#" onclick="switchView('gallery'); return false;">Alle Objekte</a>
                         <span>></span>
+                        <a href="#" id="breadcrumb-region-link"><span id="breadcrumb-region">Region</span></a>
+                        <span>></span>
+                        <a href="#" id="breadcrumb-city-link"><span id="breadcrumb-city">Stadt</span></a>
+                        <span>></span>
                         <span class="current" id="breadcrumb-name">Gebäude</span>
                     </div>
                     <div class="detail-header-actions">
@@ -1859,11 +1863,12 @@
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>Country</th>
-                                            <th>City</th>
-                                            <th>Street</th>
-                                            <th>House number</th>
-                                            <th>Postal code</th>
+                                            <th>Land</th>
+                                            <th>Region</th>
+                                            <th>Stadt</th>
+                                            <th>Postleitzahl</th>
+                                            <th>Strasse</th>
+                                            <th>Hausnummer</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1874,10 +1879,11 @@
                                                 </span>
                                             </td>
                                             <td id="detail-country">—</td>
+                                            <td id="detail-region">—</td>
                                             <td id="detail-city">—</td>
+                                            <td id="detail-plz">—</td>
                                             <td id="detail-street">—</td>
                                             <td id="detail-housenumber">—</td>
-                                            <td id="detail-plz">—</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -2201,6 +2207,8 @@
             
             // Breadcrumb
             document.getElementById('breadcrumb-name').textContent = props.name;
+            document.getElementById('breadcrumb-region').textContent = props.region || '—';
+            document.getElementById('breadcrumb-city').textContent = props.ort || '—';
             
             // Objekt Stammdaten
             document.getElementById('detail-name').textContent = props.name;
@@ -2210,13 +2218,14 @@
             
             // Address
             document.getElementById('detail-country').textContent = props.land;
+            document.getElementById('detail-region').textContent = props.region || '—';
             document.getElementById('detail-city').textContent = props.ort;
-            
-            // Parse address into street and house number
+
+            // Parse address into street, house number and PLZ
             var addressParts = parseAddress(props.adresse);
-            document.getElementById('detail-street').textContent = addressParts.street;
-            document.getElementById('detail-housenumber').textContent = addressParts.number;
             document.getElementById('detail-plz').textContent = addressParts.plz || '—';
+            document.getElementById('detail-street').textContent = addressParts.street || '—';
+            document.getElementById('detail-housenumber').textContent = addressParts.number || '—';
             
             // Gebäudedaten
             document.getElementById('detail-sanierung').textContent = props.sanierung || '—';
@@ -2260,21 +2269,49 @@
         }
         
         function parseAddress(address) {
-            // Simple address parsing
-            var parts = address.split(' ');
+            // Parse address into street, house number, and PLZ
+            // Expected formats: "Strasse Nr, PLZ Stadt" or "Nr Strasse, Stadt, State PLZ"
+            var street = '';
             var number = '';
-            var street = address;
-            
-            // Try to find house number at the end
-            if (parts.length > 1) {
-                var lastPart = parts[parts.length - 1];
-                if (/^\d/.test(lastPart)) {
-                    number = lastPart;
-                    street = parts.slice(0, -1).join(' ');
+            var plz = '';
+
+            if (!address) {
+                return { street: street, number: number, plz: plz };
+            }
+
+            // Split by comma to separate street+number from PLZ+city
+            var commaParts = address.split(',');
+            var streetPart = commaParts[0].trim();
+
+            // Extract PLZ from the part after the comma
+            if (commaParts.length > 1) {
+                var restPart = commaParts.slice(1).join(',').trim();
+                // Look for PLZ patterns: Swiss (4 digits), German (5 digits), US (5 digits), etc.
+                var plzMatch = restPart.match(/\b(\d{4,5})\b/);
+                if (plzMatch) {
+                    plz = plzMatch[1];
                 }
             }
-            
-            return { street: street, number: number, plz: '' };
+
+            // Parse street and house number from the first part
+            // Check for number at the end (European style: "Strasse 123")
+            var endNumberMatch = streetPart.match(/^(.+?)\s+(\d+[A-Za-z]?)$/);
+            if (endNumberMatch) {
+                street = endNumberMatch[1];
+                number = endNumberMatch[2];
+            } else {
+                // Check for number at the beginning (US/UK style: "123 Street")
+                var startNumberMatch = streetPart.match(/^(\d+[A-Za-z]?)\s+(.+)$/);
+                if (startNumberMatch) {
+                    number = startNumberMatch[1];
+                    street = startNumberMatch[2];
+                } else {
+                    // No clear number found, use entire part as street
+                    street = streetPart;
+                }
+            }
+
+            return { street: street, number: number, plz: plz };
         }
         
         function initCarousel() {
