@@ -520,6 +520,30 @@
             margin: 4px 0;
         }
 
+        .dropdown-menu-toggle-row {
+            display: flex;
+            gap: 8px;
+            padding: 8px 14px;
+        }
+
+        .dropdown-toggle-btn {
+            flex: 1;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--grey-700);
+            background: var(--grey-100);
+            border: 1px solid var(--grey-200);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .dropdown-toggle-btn:hover {
+            background: var(--grey-200);
+            border-color: var(--grey-300);
+        }
+
         /* List Table Container */
         .list-table-container {
             flex: 1;
@@ -528,65 +552,62 @@
             overflow: hidden;
         }
 
-        .list-header {
-            display: flex;
-            background: var(--white);
-            border-bottom: 1px solid var(--grey-300);
-            font-weight: 500;
+        .list-table-wrapper {
+            flex: 1;
+            overflow: auto;
+        }
+
+        .list-table {
+            width: 100%;
+            border-collapse: collapse;
             font-size: 13px;
-            color: var(--grey-600);
         }
 
-        .list-header-cell {
+        .list-table th {
+            position: sticky;
+            top: 0;
+            background: var(--white);
             padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
+            text-align: left;
+            font-weight: 500;
+            color: var(--grey-600);
+            border-bottom: 1px solid var(--grey-300);
             white-space: nowrap;
+            max-width: 280px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
         }
 
-        .list-header-cell:hover {
+        .list-table th:hover {
             background: var(--grey-50);
         }
 
-        .list-header-cell .material-symbols-outlined {
+        .list-table th .material-symbols-outlined {
             font-size: 16px;
             color: var(--grey-400);
+            vertical-align: middle;
+            margin-left: 4px;
         }
 
-        .list-body {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .list-row {
-            display: flex;
+        .list-table td {
+            padding: 14px 16px;
             border-bottom: 1px solid var(--grey-100);
-            transition: background 0.15s;
-            cursor: pointer;
+            color: var(--grey-900);
+            white-space: nowrap;
+            max-width: 280px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .list-row:hover {
+        .list-table tbody tr {
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .list-table tbody tr:hover {
             background: var(--grey-50);
         }
-
-        .list-cell {
-            padding: 14px 16px;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            color: var(--grey-900);
-        }
-
-        .col-id { width: 120px; flex-shrink: 0; }
-        .col-name { width: 200px; flex-shrink: 0; font-weight: 500; }
-        .col-land { width: 80px; flex-shrink: 0; }
-        .col-ort { width: 120px; flex-shrink: 0; }
-        .col-adresse { flex: 1; min-width: 200px; }
-        .col-portfolio { width: 180px; flex-shrink: 0; }
-        .col-flaeche { width: 100px; flex-shrink: 0; text-align: right; justify-content: flex-end; }
-        .col-status { width: 120px; flex-shrink: 0; }
         
         .status-badge {
             display: inline-block;
@@ -1825,6 +1846,11 @@
                         </button>
                         <div class="dropdown-menu" id="columns-dropdown-menu">
                             <div class="dropdown-menu-header">Spalten anzeigen</div>
+                            <div class="dropdown-menu-toggle-row">
+                                <button class="dropdown-toggle-btn" onclick="toggleAllColumns(true)">Alle</button>
+                                <button class="dropdown-toggle-btn" onclick="toggleAllColumns(false)">Keine</button>
+                            </div>
+                            <div class="dropdown-menu-divider"></div>
                             <label class="dropdown-menu-item">
                                 <input type="checkbox" checked data-column="col-id"> ID
                             </label>
@@ -1855,17 +1881,23 @@
             </div>
             <!-- Table Container -->
             <div class="list-table-container">
-                <div class="list-header">
-                    <div class="list-header-cell col-id">ID <span class="material-symbols-outlined">unfold_more</span></div>
-                    <div class="list-header-cell col-name">Bezeichnung <span class="material-symbols-outlined">unfold_more</span></div>
-                    <div class="list-header-cell col-land">Land <span class="material-symbols-outlined">unfold_more</span></div>
-                    <div class="list-header-cell col-ort">Ort <span class="material-symbols-outlined">unfold_more</span></div>
-                    <div class="list-header-cell col-adresse">Adresse <span class="material-symbols-outlined">unfold_more</span></div>
-                    <div class="list-header-cell col-portfolio">Teilportfolio <span class="material-symbols-outlined">unfold_more</span></div>
-                    <div class="list-header-cell col-flaeche">Fläche NGF <span class="material-symbols-outlined">unfold_more</span></div>
-                    <div class="list-header-cell col-status">Status <span class="material-symbols-outlined">unfold_more</span></div>
+                <div class="list-table-wrapper">
+                    <table class="list-table" id="list-table">
+                        <thead>
+                            <tr>
+                                <th class="col-id">ID <span class="material-symbols-outlined">unfold_more</span></th>
+                                <th class="col-name">Bezeichnung <span class="material-symbols-outlined">unfold_more</span></th>
+                                <th class="col-land">Land <span class="material-symbols-outlined">unfold_more</span></th>
+                                <th class="col-ort">Ort <span class="material-symbols-outlined">unfold_more</span></th>
+                                <th class="col-adresse">Adresse <span class="material-symbols-outlined">unfold_more</span></th>
+                                <th class="col-portfolio">Teilportfolio <span class="material-symbols-outlined">unfold_more</span></th>
+                                <th class="col-flaeche">Fläche NGF <span class="material-symbols-outlined">unfold_more</span></th>
+                                <th class="col-status">Status <span class="material-symbols-outlined">unfold_more</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-body"></tbody>
+                    </table>
                 </div>
-                <div class="list-body" id="list-body"></div>
             </div>
         </div>
         
@@ -2316,7 +2348,7 @@
             });
         }
 
-        // Column Toggle Handler (Platzhalter/Demo)
+        // Column Toggle Handler
         function handleColumnToggle(checkbox) {
             var columnClass = checkbox.getAttribute('data-column');
             var isVisible = checkbox.checked;
@@ -2327,10 +2359,20 @@
             });
         }
 
-        // List Search Handler (Platzhalter/Demo)
+        // Toggle All Columns (Alle/Keine)
+        function toggleAllColumns(showAll) {
+            var checkboxes = document.querySelectorAll('#columns-dropdown-menu input[type="checkbox"]');
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = showAll;
+                handleColumnToggle(checkbox);
+            });
+        }
+
+        // List Search Handler
         function handleListSearch(query) {
             var searchTerm = query.toLowerCase().trim();
-            var rows = document.querySelectorAll('.list-row');
+            var rows = document.querySelectorAll('#list-body tr');
 
             rows.forEach(function(row) {
                 var text = row.textContent.toLowerCase();
@@ -2739,33 +2781,33 @@
         // ===== RENDER LIST VIEW =====
         function renderListView() {
             if (!portfolioData) return;
-            
+
             var listBody = document.getElementById('list-body');
             var html = '';
-            
+
             portfolioData.features.forEach(function(feature) {
                 var props = feature.properties;
-                var statusClass = props.status === 'In Betrieb' ? 'in-betrieb' : 
-                                  props.status === 'In Renovation' ? 'in-renovation' : 
+                var statusClass = props.status === 'In Betrieb' ? 'in-betrieb' :
+                                  props.status === 'In Renovation' ? 'in-renovation' :
                                   props.status === 'In Planung' ? 'in-planung' : 'ausser-betrieb';
                 var flaeche = Number(props.flaeche_ngf).toLocaleString('de-CH');
-                
-                html += '<div class="list-row" data-id="' + props.id + '">' +
-                    '<div class="list-cell col-id">' + props.id + '</div>' +
-                    '<div class="list-cell col-name">' + props.name + '</div>' +
-                    '<div class="list-cell col-land">' + props.land + '</div>' +
-                    '<div class="list-cell col-ort">' + props.ort + '</div>' +
-                    '<div class="list-cell col-adresse">' + props.adresse + '</div>' +
-                    '<div class="list-cell col-portfolio">' + props.teilportfolio + '</div>' +
-                    '<div class="list-cell col-flaeche">' + flaeche + ' m²</div>' +
-                    '<div class="list-cell col-status"><span class="status-badge ' + statusClass + '">' + props.status + '</span></div>' +
-                '</div>';
+
+                html += '<tr data-id="' + props.id + '">' +
+                    '<td class="col-id">' + props.id + '</td>' +
+                    '<td class="col-name">' + props.name + '</td>' +
+                    '<td class="col-land">' + props.land + '</td>' +
+                    '<td class="col-ort">' + props.ort + '</td>' +
+                    '<td class="col-adresse">' + props.adresse + '</td>' +
+                    '<td class="col-portfolio">' + props.teilportfolio + '</td>' +
+                    '<td class="col-flaeche">' + flaeche + ' m²</td>' +
+                    '<td class="col-status"><span class="status-badge ' + statusClass + '">' + props.status + '</span></td>' +
+                '</tr>';
             });
-            
+
             listBody.innerHTML = html;
-            
+
             // Add click handlers
-            document.querySelectorAll('.list-row').forEach(function(row) {
+            document.querySelectorAll('#list-body tr').forEach(function(row) {
                 row.addEventListener('click', function() {
                     var buildingId = this.dataset.id;
                     showDetailView(buildingId);
