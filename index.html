@@ -2221,11 +2221,11 @@
             document.getElementById('detail-region').textContent = props.region || '—';
             document.getElementById('detail-city').textContent = props.ort;
 
-            // Parse address into street, house number and PLZ
+            // Read address parts directly from properties, parse street from address
             var addressParts = parseAddress(props.adresse);
-            document.getElementById('detail-plz').textContent = addressParts.plz || '—';
+            document.getElementById('detail-plz').textContent = props.plz || '—';
             document.getElementById('detail-street').textContent = addressParts.street || '—';
-            document.getElementById('detail-housenumber').textContent = addressParts.number || '—';
+            document.getElementById('detail-housenumber').textContent = props.hausnummer || '—';
             
             // Gebäudedaten
             document.getElementById('detail-sanierung').textContent = props.sanierung || '—';
