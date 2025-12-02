@@ -42,7 +42,6 @@
             "value": 15000,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.03.2019",
             "validUntil": null
@@ -53,7 +52,6 @@
             "value": 12500,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.03.2019",
             "validUntil": null
@@ -64,7 +62,6 @@
             "value": 13200,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "SIA 380/1",
             "validFrom": "15.03.2019",
             "validUntil": null
@@ -75,7 +72,6 @@
             "value": 52500,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.03.2019",
             "validUntil": null
@@ -86,7 +82,6 @@
             "value": 320,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -97,7 +92,6 @@
             "value": 11800,
             "unit": "m²",
             "accuracy": "Geschätzt",
-            "bmEstimate": true,
             "standard": "n/a",
             "validFrom": "01.01.2020",
             "validUntil": null
@@ -149,7 +143,6 @@
             "value": 3850,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "DIN 277",
             "validFrom": "01.09.2000",
             "validUntil": null
@@ -160,7 +153,6 @@
             "value": 3200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "DIN 277",
             "validFrom": "01.09.2000",
             "validUntil": null
@@ -171,7 +163,6 @@
             "value": 3400,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "EnEV",
             "validFrom": "15.06.2021",
             "validUntil": null
@@ -182,7 +173,6 @@
             "value": 13475,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "DIN 277",
             "validFrom": "01.09.2000",
             "validUntil": null
@@ -193,7 +183,6 @@
             "value": 45,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -204,7 +193,6 @@
             "value": 650,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.09.2000",
             "validUntil": null
@@ -256,7 +244,6 @@
             "value": 10500,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "20.11.1985",
             "validUntil": null
@@ -267,7 +254,6 @@
             "value": 8750,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "20.11.1985",
             "validUntil": null
@@ -278,7 +264,6 @@
             "value": 6200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2017",
             "validUntil": null
@@ -289,7 +274,6 @@
             "value": 42000,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "20.11.1985",
             "validUntil": null
@@ -300,7 +284,6 @@
             "value": 12,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2017",
             "validUntil": null
@@ -311,7 +294,6 @@
             "value": 65,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -322,7 +304,6 @@
             "value": 2400,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2017",
             "validUntil": null
@@ -374,7 +355,6 @@
             "value": 2200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "BOMA",
             "validFrom": "01.01.2020",
             "validUntil": null
@@ -385,7 +365,6 @@
             "value": 1850,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "BOMA",
             "validFrom": "01.01.2020",
             "validUntil": null
@@ -396,7 +375,6 @@
             "value": 1950,
             "unit": "sqft",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "BOMA",
             "validFrom": "01.01.2020",
             "validUntil": null
@@ -407,7 +385,6 @@
             "value": 28,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -418,7 +395,6 @@
             "value": 180,
             "unit": "m²",
             "accuracy": "Geschätzt",
-            "bmEstimate": true,
             "standard": "n/a",
             "validFrom": "01.01.2020",
             "validUntil": null
@@ -470,7 +446,6 @@
             "value": 5100,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.08.1965",
             "validUntil": null
@@ -481,7 +456,6 @@
             "value": 4200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.08.1965",
             "validUntil": null
@@ -492,7 +466,6 @@
             "value": 1800,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2020",
             "validUntil": null
@@ -503,7 +476,6 @@
             "value": 4400,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "SIA 380/1",
             "validFrom": "01.01.2024",
             "validUntil": null
@@ -514,7 +486,6 @@
             "value": 17850,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.08.1965",
             "validUntil": null
@@ -525,7 +496,6 @@
             "value": 120,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -536,7 +506,6 @@
             "value": 25,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -588,7 +557,6 @@
             "value": 2520,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "JIS A",
             "validFrom": "01.03.1991",
             "validUntil": null
@@ -599,7 +567,6 @@
             "value": 2100,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "JIS A",
             "validFrom": "01.03.1991",
             "validUntil": null
@@ -610,7 +577,6 @@
             "value": 7350,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "JIS A",
             "validFrom": "01.03.1991",
             "validUntil": null
@@ -621,7 +587,6 @@
             "value": 32,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -632,7 +597,6 @@
             "value": 420,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.03.1991",
             "validUntil": null
@@ -643,7 +607,6 @@
             "value": 380,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.03.1991",
             "validUntil": null
@@ -695,7 +658,6 @@
             "value": 3360,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
             "validUntil": null
@@ -706,7 +668,6 @@
             "value": 2800,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
             "validUntil": null
@@ -717,7 +678,6 @@
             "value": 2450,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
             "validUntil": null
@@ -728,7 +688,6 @@
             "value": 2900,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "SIA 380/1",
             "validFrom": "01.06.2015",
             "validUntil": null
@@ -739,7 +698,6 @@
             "value": 9800,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
             "validUntil": null
@@ -750,7 +708,6 @@
             "value": 18,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2015",
             "validUntil": null
@@ -761,7 +718,6 @@
             "value": 18,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2015",
             "validUntil": null
@@ -813,7 +769,6 @@
             "value": 1980,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "ABNT NBR",
             "validFrom": "15.06.1972",
             "validUntil": null
@@ -824,7 +779,6 @@
             "value": 1650,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "ABNT NBR",
             "validFrom": "15.06.1972",
             "validUntil": null
@@ -835,7 +789,6 @@
             "value": 5775,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "ABNT NBR",
             "validFrom": "15.06.1972",
             "validUntil": null
@@ -846,7 +799,6 @@
             "value": 22,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -857,7 +809,6 @@
             "value": 4500,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "15.06.1972",
             "validUntil": null
@@ -868,7 +819,6 @@
             "value": 2800,
             "unit": "m²",
             "accuracy": "Geschätzt",
-            "bmEstimate": true,
             "standard": "n/a",
             "validFrom": "01.01.2022",
             "validUntil": null
@@ -920,7 +870,6 @@
             "value": 6500,
             "unit": "m²",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2023",
             "validUntil": null
@@ -931,7 +880,6 @@
             "value": 5400,
             "unit": "m²",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2023",
             "validUntil": null
@@ -942,7 +890,6 @@
             "value": 3200,
             "unit": "m²",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
             "validUntil": null
@@ -953,7 +900,6 @@
             "value": 8,
             "unit": "MW",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
             "validUntil": null
@@ -964,7 +910,6 @@
             "value": 480,
             "unit": "Stk",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
             "validUntil": null
@@ -975,7 +920,6 @@
             "value": 35,
             "unit": "Stk",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
             "validUntil": null
@@ -986,7 +930,6 @@
             "value": 12000,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
             "validUntil": null
@@ -1038,7 +981,6 @@
             "value": 1440,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "AS/NZS",
             "validFrom": "01.09.1968",
             "validUntil": null
@@ -1049,7 +991,6 @@
             "value": 1200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "AS/NZS",
             "validFrom": "01.09.1968",
             "validUntil": null
@@ -1060,7 +1001,6 @@
             "value": 4200,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "AS/NZS",
             "validFrom": "01.09.1968",
             "validUntil": null
@@ -1071,7 +1011,6 @@
             "value": 18,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
             "validUntil": null
@@ -1082,7 +1021,6 @@
             "value": 3200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.09.1968",
             "validUntil": null
@@ -1093,7 +1031,6 @@
             "value": 280,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2016",
             "validUntil": null
