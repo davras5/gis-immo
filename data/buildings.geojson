@@ -42,10 +42,10 @@
             "value": 15000,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.03.2019",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-001-M2",
@@ -53,10 +53,10 @@
             "value": 12500,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.03.2019",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-001-M3",
@@ -64,10 +64,10 @@
             "value": 13200,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "SIA 380/1",
             "validFrom": "15.03.2019",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Schätzmodell"
           },
           {
             "id": "BBL-001-M4",
@@ -75,10 +75,10 @@
             "value": 52500,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.03.2019",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-001-M5",
@@ -86,10 +86,10 @@
             "value": 320,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-001-M6",
@@ -97,16 +97,19 @@
             "value": 11800,
             "unit": "m²",
             "accuracy": "Geschätzt",
-            "bmEstimate": true,
             "standard": "n/a",
             "validFrom": "01.01.2020",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Schätzmodell"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [7.4441, 46.9465]
+        "coordinates": [
+          7.4441,
+          46.9465
+        ]
       }
     },
     {
@@ -149,10 +152,10 @@
             "value": 3850,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "DIN 277",
             "validFrom": "01.09.2000",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-002-M2",
@@ -160,10 +163,10 @@
             "value": 3200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "DIN 277",
             "validFrom": "01.09.2000",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-002-M3",
@@ -171,10 +174,10 @@
             "value": 3400,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "EnEV",
             "validFrom": "15.06.2021",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Schätzmodell"
           },
           {
             "id": "BBL-002-M4",
@@ -182,10 +185,10 @@
             "value": 13475,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "DIN 277",
             "validFrom": "01.09.2000",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-002-M5",
@@ -193,10 +196,10 @@
             "value": 45,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-002-M6",
@@ -204,16 +207,19 @@
             "value": 650,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.09.2000",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [13.3695, 52.5200]
+        "coordinates": [
+          13.3695,
+          52.52
+        ]
       }
     },
     {
@@ -256,10 +262,10 @@
             "value": 10500,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "20.11.1985",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-003-M2",
@@ -267,10 +273,10 @@
             "value": 8750,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "20.11.1985",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-003-M3",
@@ -278,10 +284,10 @@
             "value": 6200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2017",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           },
           {
             "id": "BBL-003-M4",
@@ -289,10 +295,10 @@
             "value": 42000,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "20.11.1985",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-003-M5",
@@ -300,10 +306,10 @@
             "value": 12,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2017",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-003-M6",
@@ -311,10 +317,10 @@
             "value": 65,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-003-M7",
@@ -322,16 +328,19 @@
             "value": 2400,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2017",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [8.5320, 47.3769]
+        "coordinates": [
+          8.532,
+          47.3769
+        ]
       }
     },
     {
@@ -374,10 +383,10 @@
             "value": 2200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "BOMA",
             "validFrom": "01.01.2020",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-004-M2",
@@ -385,21 +394,21 @@
             "value": 1850,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "BOMA",
             "validFrom": "01.01.2020",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-004-M3",
             "areaType": "Mietfläche",
-            "value": 1950,
-            "unit": "sqft",
+            "value": 181,
+            "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "BOMA",
             "validFrom": "01.01.2020",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-004-M4",
@@ -407,10 +416,10 @@
             "value": 28,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-004-M5",
@@ -418,16 +427,19 @@
             "value": 180,
             "unit": "m²",
             "accuracy": "Geschätzt",
-            "bmEstimate": true,
             "standard": "n/a",
             "validFrom": "01.01.2020",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Schätzmodell"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-73.9712, 40.7528]
+        "coordinates": [
+          -73.9712,
+          40.7528
+        ]
       }
     },
     {
@@ -470,10 +482,10 @@
             "value": 5100,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.08.1965",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-005-M2",
@@ -481,10 +493,10 @@
             "value": 4200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.08.1965",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-005-M3",
@@ -492,10 +504,10 @@
             "value": 1800,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2020",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           },
           {
             "id": "BBL-005-M4",
@@ -503,10 +515,10 @@
             "value": 4400,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "SIA 380/1",
             "validFrom": "01.01.2024",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Schätzmodell"
           },
           {
             "id": "BBL-005-M5",
@@ -514,10 +526,10 @@
             "value": 17850,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "15.08.1965",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-005-M6",
@@ -525,10 +537,10 @@
             "value": 120,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-005-M7",
@@ -536,16 +548,19 @@
             "value": 25,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [6.1432, 46.2044]
+        "coordinates": [
+          6.1432,
+          46.2044
+        ]
       }
     },
     {
@@ -588,10 +603,10 @@
             "value": 2520,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "JIS A",
             "validFrom": "01.03.1991",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-006-M2",
@@ -599,10 +614,10 @@
             "value": 2100,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "JIS A",
             "validFrom": "01.03.1991",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-006-M3",
@@ -610,10 +625,10 @@
             "value": 7350,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "JIS A",
             "validFrom": "01.03.1991",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-006-M4",
@@ -621,10 +636,10 @@
             "value": 32,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-006-M5",
@@ -632,10 +647,10 @@
             "value": 420,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.03.1991",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           },
           {
             "id": "BBL-006-M6",
@@ -643,16 +658,19 @@
             "value": 380,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.03.1991",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [139.7350, 35.6520]
+        "coordinates": [
+          139.735,
+          35.652
+        ]
       }
     },
     {
@@ -695,10 +713,10 @@
             "value": 3360,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-007-M2",
@@ -706,10 +724,10 @@
             "value": 2800,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-007-M3",
@@ -717,10 +735,10 @@
             "value": 2450,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-007-M4",
@@ -728,10 +746,10 @@
             "value": 2900,
             "unit": "m²",
             "accuracy": "Berechnet",
-            "bmEstimate": false,
             "standard": "SIA 380/1",
             "validFrom": "01.06.2015",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Schätzmodell"
           },
           {
             "id": "BBL-007-M5",
@@ -739,10 +757,10 @@
             "value": 9800,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2015",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-007-M6",
@@ -750,10 +768,10 @@
             "value": 18,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2015",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-007-M7",
@@ -761,16 +779,19 @@
             "value": 18,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2015",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [7.5886, 47.5596]
+        "coordinates": [
+          7.5886,
+          47.5596
+        ]
       }
     },
     {
@@ -813,10 +834,10 @@
             "value": 1980,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "ABNT NBR",
             "validFrom": "15.06.1972",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-008-M2",
@@ -824,10 +845,10 @@
             "value": 1650,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "ABNT NBR",
             "validFrom": "15.06.1972",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-008-M3",
@@ -835,10 +856,10 @@
             "value": 5775,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "ABNT NBR",
             "validFrom": "15.06.1972",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-008-M4",
@@ -846,10 +867,10 @@
             "value": 22,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-008-M5",
@@ -857,10 +878,10 @@
             "value": 4500,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "15.06.1972",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           },
           {
             "id": "BBL-008-M6",
@@ -868,16 +889,19 @@
             "value": 2800,
             "unit": "m²",
             "accuracy": "Geschätzt",
-            "bmEstimate": true,
             "standard": "n/a",
             "validFrom": "01.01.2022",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Schätzmodell"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-47.8825, -15.7942]
+        "coordinates": [
+          -47.8825,
+          -15.7942
+        ]
       }
     },
     {
@@ -920,10 +944,10 @@
             "value": 6500,
             "unit": "m²",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-009-M2",
@@ -931,10 +955,10 @@
             "value": 5400,
             "unit": "m²",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "SIA 416",
             "validFrom": "01.06.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-009-M3",
@@ -942,10 +966,10 @@
             "value": 3200,
             "unit": "m²",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-009-M4",
@@ -953,10 +977,10 @@
             "value": 8,
             "unit": "MW",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-009-M5",
@@ -964,10 +988,10 @@
             "value": 480,
             "unit": "Stk",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-009-M6",
@@ -975,10 +999,10 @@
             "value": 35,
             "unit": "Stk",
             "accuracy": "Projektiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-009-M7",
@@ -986,16 +1010,19 @@
             "value": 12000,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.06.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [8.9512, 46.0037]
+        "coordinates": [
+          8.9512,
+          46.0037
+        ]
       }
     },
     {
@@ -1038,10 +1065,10 @@
             "value": 1440,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "AS/NZS",
             "validFrom": "01.09.1968",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-010-M2",
@@ -1049,10 +1076,10 @@
             "value": 1200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "AS/NZS",
             "validFrom": "01.09.1968",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-010-M3",
@@ -1060,10 +1087,10 @@
             "value": 4200,
             "unit": "m³",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "AS/NZS",
             "validFrom": "01.09.1968",
-            "validUntil": null
+            "validUntil": null,
+            "source": "CAD/BIM"
           },
           {
             "id": "BBL-010-M4",
@@ -1071,10 +1098,10 @@
             "value": 18,
             "unit": "Stk",
             "accuracy": "Aggregiert",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2023",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Manuell"
           },
           {
             "id": "BBL-010-M5",
@@ -1082,10 +1109,10 @@
             "value": 3200,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.09.1968",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           },
           {
             "id": "BBL-010-M6",
@@ -1093,16 +1120,19 @@
             "value": 280,
             "unit": "m²",
             "accuracy": "Gemessen",
-            "bmEstimate": false,
             "standard": "n/a",
             "validFrom": "01.01.2016",
-            "validUntil": null
+            "validUntil": null,
+            "source": "Vermessung"
           }
         ]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [149.1245, -35.3120]
+        "coordinates": [
+          149.1245,
+          -35.312
+        ]
       }
     }
   ]
