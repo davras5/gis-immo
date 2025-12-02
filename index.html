@@ -2531,6 +2531,10 @@
         var selectedBuildingId = null;
         var searchMarker = null;
 
+        // View dirty flags - track if view needs re-render after filter change
+        var listViewDirty = false;
+        var galleryViewDirty = false;
+
         // ===== FILTER STATE =====
         var activeFilters = {
             status: [],
@@ -2723,10 +2727,21 @@
         }
 
         function renderCurrentView() {
+            // Mark non-current views as dirty (they'll re-render when switched to)
+            if (currentView !== 'list') {
+                listViewDirty = true;
+            }
+            if (currentView !== 'gallery') {
+                galleryViewDirty = true;
+            }
+
+            // Render current view and clear its dirty flag
             if (currentView === 'list') {
                 renderListView();
+                listViewDirty = false;
             } else if (currentView === 'gallery') {
                 renderGalleryView();
+                galleryViewDirty = false;
             }
             // Map view updates via updateMapFilter()
         }
@@ -3060,6 +3075,18 @@
                         updateMapFilter();
                     }
                 }, 100);
+            }
+
+            // Re-render list view if dirty (filters changed while on another view)
+            if (view === 'list' && listViewDirty) {
+                renderListView();
+                listViewDirty = false;
+            }
+
+            // Re-render gallery view if dirty (filters changed while on another view)
+            if (view === 'gallery' && galleryViewDirty) {
+                renderGalleryView();
+                galleryViewDirty = false;
             }
         }
 
