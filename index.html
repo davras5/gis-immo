@@ -1516,23 +1516,23 @@
 
         .measurements-table .col-doc-title {
             width: auto;
-            min-width: 200px;
+            min-width: 180px;
         }
 
         .measurements-table .col-doc-type {
-            width: 140px;
+            width: 130px;
         }
 
         .measurements-table .col-doc-format {
-            width: 80px;
+            width: 70px;
         }
 
         .measurements-table .col-doc-date {
-            width: 100px;
+            width: 95px;
         }
 
         .measurements-table .col-doc-size {
-            width: 90px;
+            width: 80px;
             text-align: right;
         }
     </style>
@@ -1971,13 +1971,28 @@
                                                 ID
                                                 <span class="material-symbols-outlined sort-icon">unfold_more</span>
                                             </th>
-                                            <th class="col-type">Bemessungsart</th>
-                                            <th class="col-area">Wert</th>
+                                            <th class="col-type sortable" data-sort="areaType">
+                                                Bemessungsart
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-area sortable" data-sort="value">
+                                                Wert
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
                                             <th class="col-unit">Einheit</th>
                                             <th class="col-source">Herkunft</th>
-                                            <th class="col-accuracy">Genauigkeit</th>
-                                            <th class="col-standard">Standard</th>
-                                            <th class="col-from">Gültig von</th>
+                                            <th class="col-accuracy sortable" data-sort="accuracy">
+                                                Genauigkeit
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-standard sortable" data-sort="standard">
+                                                Standard
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-from sortable" data-sort="validFrom">
+                                                Gültig von
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
                                             <th class="col-until">Gültig bis</th>
                                         </tr>
                                     </thead>
@@ -3244,8 +3259,8 @@
             });
         }
 
-        // Sort column click handler
-        document.querySelectorAll('.measurements-table th.sortable').forEach(function(th) {
+        // Sort column click handler for measurements
+        document.querySelectorAll('#measurements-table th.sortable').forEach(function(th) {
             th.addEventListener('click', function() {
                 var column = this.dataset.sort;
 
@@ -3258,7 +3273,7 @@
                 }
 
                 // Update sort icons
-                document.querySelectorAll('.measurements-table th.sortable').forEach(function(header) {
+                document.querySelectorAll('#measurements-table th.sortable').forEach(function(header) {
                     header.classList.remove('sort-asc', 'sort-desc');
                     var icon = header.querySelector('.sort-icon');
                     if (icon) icon.textContent = 'unfold_more';
