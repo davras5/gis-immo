@@ -1603,22 +1603,21 @@
 
         /* ===== FILTER PANE ===== */
         #filter-pane {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 380px;
-            height: 100vh;
+            width: 0;
+            min-width: 0;
+            height: 100%;
             background: var(--white);
-            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-            z-index: 2000;
+            border-left: 1px solid var(--grey-300);
             display: flex;
             flex-direction: column;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
+            overflow: hidden;
+            transition: width 0.3s ease, min-width 0.3s ease;
+            flex-shrink: 0;
         }
 
         #filter-pane.open {
-            transform: translateX(0);
+            width: 340px;
+            min-width: 340px;
         }
 
         #filter-pane-header {
@@ -1628,6 +1627,7 @@
             padding: 16px 20px;
             border-bottom: 1px solid var(--grey-300);
             background: var(--white);
+            flex-shrink: 0;
         }
 
         #filter-pane-header h3 {
@@ -1782,25 +1782,6 @@
             color: var(--white);
         }
 
-        /* Filter overlay backdrop */
-        #filter-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: 1999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        #filter-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
         /* Filter count badge */
         .filter-count {
             display: inline-flex;
@@ -1875,80 +1856,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Filter Overlay -->
-    <div id="filter-overlay"></div>
-
-    <!-- Filter Pane -->
-    <aside id="filter-pane">
-        <div id="filter-pane-header">
-            <h3>Suchfilter</h3>
-            <div id="filter-pane-actions">
-                <button class="filter-pane-btn" id="filter-reset-btn" title="Filter zurücksetzen">
-                    <span class="material-symbols-outlined">replay</span>
-                </button>
-                <button class="filter-pane-btn" id="filter-close-btn" title="Schliessen">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-        </div>
-        <div id="filter-pane-body">
-            <!-- Status -->
-            <div class="filter-section open" data-filter="status">
-                <div class="filter-section-header">
-                    <span class="filter-section-title">Status</span>
-                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
-                </div>
-                <div class="filter-section-content" id="filter-status-options">
-                    <!-- Options populated dynamically -->
-                </div>
-            </div>
-
-            <!-- Art Eigentum -->
-            <div class="filter-section open" data-filter="eigentum">
-                <div class="filter-section-header">
-                    <span class="filter-section-title">Art Eigentum</span>
-                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
-                </div>
-                <div class="filter-section-content" id="filter-eigentum-options">
-                    <!-- Options populated dynamically -->
-                </div>
-            </div>
-
-            <!-- Teilportfolio -->
-            <div class="filter-section open" data-filter="teilportfolio">
-                <div class="filter-section-header">
-                    <span class="filter-section-title">Teilportfolio</span>
-                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
-                </div>
-                <div class="filter-section-content" id="filter-teilportfolio-options">
-                    <!-- Options populated dynamically -->
-                </div>
-            </div>
-
-            <!-- Gebäudeart -->
-            <div class="filter-section open" data-filter="gebaeudeart">
-                <div class="filter-section-header">
-                    <span class="filter-section-title">Gebäudeart</span>
-                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
-                </div>
-                <div class="filter-section-content" id="filter-gebaeudeart-options">
-                    <!-- Options populated dynamically -->
-                </div>
-            </div>
-
-            <!-- Land / Region -->
-            <div class="filter-section open" data-filter="land">
-                <div class="filter-section-header">
-                    <span class="filter-section-title">Land / Region</span>
-                    <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
-                </div>
-                <div class="filter-section-content" id="filter-land-options">
-                    <!-- Options populated dynamically -->
-                </div>
-            </div>
-        </div>
-    </aside>
 
     <main id="main">
         <div id="map-view" class="active">
@@ -2517,6 +2424,77 @@
                 </div>
             </div>
         </div>
+
+        <!-- Filter Pane -->
+        <aside id="filter-pane">
+            <div id="filter-pane-header">
+                <h3>Suchfilter</h3>
+                <div id="filter-pane-actions">
+                    <button class="filter-pane-btn" id="filter-reset-btn" title="Filter zurücksetzen">
+                        <span class="material-symbols-outlined">replay</span>
+                    </button>
+                    <button class="filter-pane-btn" id="filter-close-btn" title="Schliessen">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            </div>
+            <div id="filter-pane-body">
+                <!-- Status -->
+                <div class="filter-section open" data-filter="status">
+                    <div class="filter-section-header">
+                        <span class="filter-section-title">Status</span>
+                        <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                    </div>
+                    <div class="filter-section-content" id="filter-status-options">
+                        <!-- Options populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Art Eigentum -->
+                <div class="filter-section open" data-filter="eigentum">
+                    <div class="filter-section-header">
+                        <span class="filter-section-title">Art Eigentum</span>
+                        <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                    </div>
+                    <div class="filter-section-content" id="filter-eigentum-options">
+                        <!-- Options populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Teilportfolio -->
+                <div class="filter-section open" data-filter="teilportfolio">
+                    <div class="filter-section-header">
+                        <span class="filter-section-title">Teilportfolio</span>
+                        <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                    </div>
+                    <div class="filter-section-content" id="filter-teilportfolio-options">
+                        <!-- Options populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Gebäudeart -->
+                <div class="filter-section open" data-filter="gebaeudeart">
+                    <div class="filter-section-header">
+                        <span class="filter-section-title">Gebäudeart</span>
+                        <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                    </div>
+                    <div class="filter-section-content" id="filter-gebaeudeart-options">
+                        <!-- Options populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Land / Region -->
+                <div class="filter-section open" data-filter="land">
+                    <div class="filter-section-header">
+                        <span class="filter-section-title">Land / Region</span>
+                        <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                    </div>
+                    <div class="filter-section-content" id="filter-land-options">
+                        <!-- Options populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </aside>
     </main>
 
     <footer id="footer">
@@ -2760,7 +2738,6 @@
 
         function toggleFilterPane(open) {
             var pane = document.getElementById('filter-pane');
-            var overlay = document.getElementById('filter-overlay');
 
             if (open === undefined) {
                 open = !pane.classList.contains('open');
@@ -2768,10 +2745,15 @@
 
             if (open) {
                 pane.classList.add('open');
-                overlay.classList.add('open');
             } else {
                 pane.classList.remove('open');
-                overlay.classList.remove('open');
+            }
+
+            // Resize map after transition completes
+            if (window.map) {
+                setTimeout(function() {
+                    map.resize();
+                }, 350); // Slightly longer than CSS transition (300ms)
             }
         }
 
@@ -2841,16 +2823,11 @@
         function initFilterPane() {
             // Toggle filter pane
             document.getElementById('filter-btn').addEventListener('click', function() {
-                toggleFilterPane(true);
+                toggleFilterPane();
             });
 
             // Close filter pane
             document.getElementById('filter-close-btn').addEventListener('click', function() {
-                toggleFilterPane(false);
-            });
-
-            // Close on overlay click
-            document.getElementById('filter-overlay').addEventListener('click', function() {
                 toggleFilterPane(false);
             });
 
