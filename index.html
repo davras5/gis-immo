@@ -1797,32 +1797,6 @@
             margin-left: 6px;
         }
 
-        /* Reset filter button in header */
-        #filter-reset-header-btn {
-            display: none;
-            background: var(--white);
-            border: 1px solid var(--grey-300);
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        #filter-reset-header-btn:hover {
-            background: var(--grey-100);
-        }
-
-        #filter-reset-header-btn .material-symbols-outlined {
-            font-size: 20px;
-            color: var(--grey-600);
-        }
-
-        #filter-reset-header-btn.visible {
-            display: flex;
-        }
     </style>
 </head>
 <body>
@@ -1869,9 +1843,6 @@
                 <button class="header-btn" id="filter-btn">
                     <span class="material-symbols-outlined">filter_list</span>
                     Filter
-                </button>
-                <button id="filter-reset-header-btn" title="Filter zurücksetzen">
-                    <span class="material-symbols-outlined">replay</span>
                 </button>
             </div>
             <div id="login-area">
@@ -2731,7 +2702,6 @@
 
         function updateFilterButtonState() {
             var filterBtn = document.getElementById('filter-btn');
-            var resetBtn = document.getElementById('filter-reset-header-btn');
             var count = getActiveFilterCount();
 
             if (count > 0) {
@@ -2743,18 +2713,12 @@
                     filterBtn.appendChild(badge);
                 }
                 badge.textContent = count;
-
-                // Show reset button
-                resetBtn.classList.add('visible');
             } else {
                 // Remove count badge
                 var badge = filterBtn.querySelector('.filter-count');
                 if (badge) {
                     badge.remove();
                 }
-
-                // Hide reset button
-                resetBtn.classList.remove('visible');
             }
         }
 
@@ -2867,11 +2831,6 @@
 
             // Reset filters (button inside pane)
             document.getElementById('filter-reset-btn').addEventListener('click', function() {
-                resetFilters();
-            });
-
-            // Reset filters (button in header)
-            document.getElementById('filter-reset-header-btn').addEventListener('click', function() {
                 resetFilters();
             });
 
