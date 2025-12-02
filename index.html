@@ -1771,14 +1771,14 @@
             font-size: 16px;
         }
 
-        /* Active filter state for header button */
-        #filter-btn.has-filters {
-            background: var(--primary-red);
-            border-color: var(--primary-red);
+        /* Filter button - pane open state */
+        #filter-btn.pane-open {
+            background: var(--accent-panel);
+            border-color: var(--accent-panel);
             color: var(--white);
         }
 
-        #filter-btn.has-filters .material-symbols-outlined {
+        #filter-btn.pane-open .material-symbols-outlined {
             color: var(--white);
         }
 
@@ -1789,17 +1789,39 @@
             justify-content: center;
             min-width: 20px;
             height: 20px;
-            background: var(--white);
-            color: var(--primary-red);
+            background: var(--primary-red);
+            color: var(--white);
             border-radius: 10px;
             font-size: 11px;
             font-weight: 600;
             margin-left: 6px;
         }
 
-        #filter-btn.has-filters .filter-count {
+        /* Reset filter button in header */
+        #filter-reset-header-btn {
+            display: none;
             background: var(--white);
-            color: var(--primary-red);
+            border: 1px solid var(--grey-300);
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        #filter-reset-header-btn:hover {
+            background: var(--grey-100);
+        }
+
+        #filter-reset-header-btn .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--grey-600);
+        }
+
+        #filter-reset-header-btn.visible {
+            display: flex;
         }
     </style>
 </head>
@@ -1847,6 +1869,9 @@
                 <button class="header-btn" id="filter-btn">
                     <span class="material-symbols-outlined">filter_list</span>
                     Filter
+                </button>
+                <button id="filter-reset-header-btn" title="Filter zurücksetzen">
+                    <span class="material-symbols-outlined">replay</span>
                 </button>
             </div>
             <div id="login-area">
@@ -2706,10 +2731,10 @@
 
         function updateFilterButtonState() {
             var filterBtn = document.getElementById('filter-btn');
+            var resetBtn = document.getElementById('filter-reset-header-btn');
             var count = getActiveFilterCount();
 
             if (count > 0) {
-                filterBtn.classList.add('has-filters');
                 // Add or update count badge
                 var badge = filterBtn.querySelector('.filter-count');
                 if (!badge) {
@@ -2718,12 +2743,18 @@
                     filterBtn.appendChild(badge);
                 }
                 badge.textContent = count;
+
+                // Show reset button
+                resetBtn.classList.add('visible');
             } else {
-                filterBtn.classList.remove('has-filters');
+                // Remove count badge
                 var badge = filterBtn.querySelector('.filter-count');
                 if (badge) {
                     badge.remove();
                 }
+
+                // Hide reset button
+                resetBtn.classList.remove('visible');
             }
         }
 
@@ -2738,6 +2769,7 @@
 
         function toggleFilterPane(open) {
             var pane = document.getElementById('filter-pane');
+            var filterBtn = document.getElementById('filter-btn');
 
             if (open === undefined) {
                 open = !pane.classList.contains('open');
@@ -2745,8 +2777,10 @@
 
             if (open) {
                 pane.classList.add('open');
+                filterBtn.classList.add('pane-open');
             } else {
                 pane.classList.remove('open');
+                filterBtn.classList.remove('pane-open');
             }
 
             // Resize map after transition completes
@@ -2831,8 +2865,13 @@
                 toggleFilterPane(false);
             });
 
-            // Reset filters
+            // Reset filters (button inside pane)
             document.getElementById('filter-reset-btn').addEventListener('click', function() {
+                resetFilters();
+            });
+
+            // Reset filters (button in header)
+            document.getElementById('filter-reset-header-btn').addEventListener('click', function() {
                 resetFilters();
             });
 
