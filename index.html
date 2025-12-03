@@ -54,6 +54,7 @@
         #logo-area {
             display: flex;
             align-items: flex-start;
+            cursor: pointer;
         }
         
         #logo-flag {
@@ -2063,11 +2064,11 @@
                 <div class="detail-header-inner">
                     <div class="breadcrumb" id="detail-breadcrumb">
                         <span class="material-symbols-outlined">public</span>
-                        <a href="#" onclick="switchView('gallery'); return false;">Alle Objekte</a>
+                        <a href="#" onclick="navigateToAllObjects(); return false;">Alle Objekte</a>
                         <span>></span>
-                        <a href="#" id="breadcrumb-country-link"><span id="breadcrumb-country">Land</span></a>
+                        <a href="#" id="breadcrumb-country-link" onclick="navigateWithLandFilter(); return false;"><span id="breadcrumb-country">Land</span></a>
                         <span>></span>
-                        <a href="#" id="breadcrumb-region-link"><span id="breadcrumb-region">Region</span></a>
+                        <a href="#" id="breadcrumb-region-link" onclick="navigateWithRegionFilter(); return false;"><span id="breadcrumb-region">Region</span></a>
                         <span>></span>
                         <span class="current" id="breadcrumb-name">Objekt</span>
                     </div>
@@ -2479,13 +2480,24 @@
                     </div>
                 </div>
 
-                <!-- Land / Region -->
+                <!-- Land -->
                 <div class="filter-section open" data-filter="land">
                     <div class="filter-section-header">
-                        <span class="filter-section-title">Land / Region</span>
+                        <span class="filter-section-title">Land</span>
                         <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
                     </div>
                     <div class="filter-section-content" id="filter-land-options">
+                        <!-- Options populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Region -->
+                <div class="filter-section open" data-filter="region">
+                    <div class="filter-section-header">
+                        <span class="filter-section-title">Region</span>
+                        <span class="filter-section-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                    </div>
+                    <div class="filter-section-content" id="filter-region-options">
                         <!-- Options populated dynamically -->
                     </div>
                 </div>
@@ -2541,7 +2553,8 @@
             eigentum: [],
             teilportfolio: [],
             gebaeudeart: [],
-            land: []
+            land: [],
+            region: []
         };
 
         // Filter configuration - maps filter keys to data properties
@@ -2550,7 +2563,8 @@
             eigentum: { property: 'eigentum', label: 'Art Eigentum' },
             teilportfolio: { property: 'teilportfolio', label: 'Teilportfolio' },
             gebaeudeart: { property: 'objektart1', label: 'Gebäudeart' },
-            land: { property: 'land', label: 'Land / Region' }
+            land: { property: 'land', label: 'Land' },
+            region: { property: 'region', label: 'Region' }
         };
 
         // ===== FILTER FUNCTIONS =====
@@ -2562,7 +2576,8 @@
                 eigentum: [],
                 teilportfolio: [],
                 gebaeudeart: [],
-                land: []
+                land: [],
+                region: []
             };
 
             Object.keys(filters).forEach(function(key) {
@@ -2685,7 +2700,8 @@
                 eigentum: [],
                 teilportfolio: [],
                 gebaeudeart: [],
-                land: []
+                land: [],
+                region: []
             };
 
             // Uncheck all checkboxes
@@ -2694,6 +2710,45 @@
             });
 
             applyFilters();
+        }
+
+        function navigateToAllObjects() {
+            resetFilters();
+            switchView(previousView || 'gallery');
+        }
+
+        function navigateWithLandFilter() {
+            if (!currentDetailBuilding) return;
+            var land = currentDetailBuilding.properties.land;
+            if (!land) return;
+
+            // Reset all filters and set only land filter
+            resetFilters();
+            activeFilters.land = [land];
+
+            // Update checkbox state
+            var checkbox = document.querySelector('#filter-pane input[data-filter="land"][data-value="' + land + '"]');
+            if (checkbox) checkbox.checked = true;
+
+            applyFilters();
+            switchView(previousView || 'gallery');
+        }
+
+        function navigateWithRegionFilter() {
+            if (!currentDetailBuilding) return;
+            var region = currentDetailBuilding.properties.region;
+            if (!region) return;
+
+            // Reset all filters and set only region filter
+            resetFilters();
+            activeFilters.region = [region];
+
+            // Update checkbox state
+            var checkbox = document.querySelector('#filter-pane input[data-filter="region"][data-value="' + region + '"]');
+            if (checkbox) checkbox.checked = true;
+
+            applyFilters();
+            switchView(previousView || 'gallery');
         }
 
         function updateObjectCount() {
@@ -2779,7 +2834,8 @@
                 eigentum: new Set(),
                 teilportfolio: new Set(),
                 gebaeudeart: new Set(),
-                land: new Set()
+                land: new Set(),
+                region: new Set()
             };
 
             portfolioData.features.forEach(function(feature) {
@@ -2789,6 +2845,7 @@
                 if (props.teilportfolio) uniqueValues.teilportfolio.add(props.teilportfolio);
                 if (props.objektart1) uniqueValues.gebaeudeart.add(props.objektart1);
                 if (props.land) uniqueValues.land.add(props.land);
+                if (props.region) uniqueValues.region.add(props.region);
             });
 
             // Render options for each filter
@@ -2862,6 +2919,11 @@
                 if (e.key === 'Escape') {
                     toggleFilterPane(false);
                 }
+            });
+
+            // Logo click - navigate to main page
+            document.getElementById('logo-area').addEventListener('click', function() {
+                navigateToAllObjects();
             });
         }
 
