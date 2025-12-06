@@ -1183,6 +1183,20 @@
             align-items: center;
         }
 
+        .geokatalog-header .geokatalog-title {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .geokatalog-header .accordion-arrow {
+            transition: transform 0.2s;
+        }
+
+        .geokatalog-header.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+
         .geokatalog-header .geokatalog-theme-switch {
             font-size: 12px;
             color: rgba(255,255,255,0.7);
@@ -1238,14 +1252,10 @@
 
         .catalog-item {
             user-select: none;
+            border-bottom: 1px solid #ccc;
         }
 
-        /* Top-level items get divider */
-        .geokatalog-tree > .catalog-item {
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .geokatalog-tree > .catalog-item:last-child {
+        .catalog-item:last-child {
             border-bottom: none;
         }
 
@@ -1335,15 +1345,6 @@
 
         .catalog-item.expanded > .catalog-children {
             display: block;
-        }
-
-        /* Nested items dividers */
-        .catalog-children > .catalog-item {
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .catalog-children > .catalog-item:last-child {
-            border-bottom: none;
         }
 
         .geokatalog-loading {
@@ -2116,7 +2117,10 @@
                 
                 <div class="accordion-item" id="geokatalog-accordion">
                     <div class="accordion-header geokatalog-header">
-                        <span>Geokatalog</span>
+                        <span class="geokatalog-title">
+                            <span class="accordion-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                            <span>Geokatalog</span>
+                        </span>
                         <span class="geokatalog-theme-switch">Thema wechseln</span>
                     </div>
                     <div class="accordion-content geokatalog-content">
