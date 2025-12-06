@@ -1177,25 +1177,44 @@
         }
 
         /* ===== GEOKATALOG TREE ===== */
+        .geokatalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .geokatalog-header .geokatalog-theme-switch {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+            font-weight: normal;
+        }
+
+        .geokatalog-header.active .geokatalog-theme-switch {
+            color: #999;
+        }
+
         .geokatalog-content {
             padding: 0 !important;
         }
 
-        .geokatalog-subheader {
+        /* Full height when Geokatalog is expanded */
+        #geokatalog-accordion.expanded {
+            flex: 1;
             display: flex;
-            justify-content: flex-end;
-            padding: 10px 16px;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 13px;
-            color: #999;
+            flex-direction: column;
+            min-height: 0;
         }
 
-        .geokatalog-subheader span {
-            cursor: pointer;
+        #geokatalog-accordion.expanded .accordion-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
         }
 
-        .geokatalog-subheader span:hover {
-            color: var(--grey-900);
+        #geokatalog-accordion.expanded .geokatalog-tree {
+            flex: 1;
+            max-height: none;
         }
 
         .geokatalog-tree {
@@ -1263,11 +1282,50 @@
         }
 
         .catalog-node.leaf .node-arrow {
-            visibility: hidden;
+            display: none;
+        }
+
+        /* Leaf node with checkbox */
+        .catalog-node.leaf {
+            padding-left: 8px;
+        }
+
+        .catalog-node .node-checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #999;
+            border-radius: 3px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .catalog-node .node-checkbox:hover {
+            border-color: #666;
         }
 
         .catalog-node .node-label {
             flex: 1;
+        }
+
+        .catalog-node .node-info {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            color: #666;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .catalog-node .node-info .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .catalog-node .node-info:hover {
+            color: var(--grey-900);
         }
 
         .catalog-children {
@@ -2057,14 +2115,11 @@
                 </div>
                 
                 <div class="accordion-item" id="geokatalog-accordion">
-                    <div class="accordion-header">
+                    <div class="accordion-header geokatalog-header">
                         <span>Geokatalog</span>
-                        <span class="accordion-arrow"><span class="material-symbols-outlined">expand_more</span></span>
+                        <span class="geokatalog-theme-switch">Thema wechseln</span>
                     </div>
                     <div class="accordion-content geokatalog-content">
-                        <div class="geokatalog-subheader">
-                            <span>Thema wechseln</span>
-                        </div>
                         <div id="geokatalog-tree" class="geokatalog-tree">
                             <div class="geokatalog-loading">Lade Katalog...</div>
                         </div>
@@ -4111,25 +4166,30 @@
         };
         
         // ===== ACCORDION =====
+        var geokatalogAccordion = document.getElementById('geokatalog-accordion');
+
         document.querySelectorAll('.accordion-header').forEach(function(header) {
             header.addEventListener('click', function() {
                 var content = this.nextElementSibling;
                 var isActive = this.classList.contains('active');
-                
+                var isGeokatalog = this.parentElement.id === 'geokatalog-accordion';
+
                 document.querySelectorAll('.accordion-header').forEach(function(h) { h.classList.remove('active'); });
                 document.querySelectorAll('.accordion-content').forEach(function(c) { c.classList.remove('show'); });
-                
+                geokatalogAccordion.classList.remove('expanded');
+
                 if (!isActive) {
                     this.classList.add('active');
                     content.classList.add('show');
-                }
-                
-                setTimeout(updateMenuTogglePosition, 10);
 
-                // Load Geokatalog when its accordion is opened
-                if (this.parentElement.id === 'geokatalog-accordion' && !isActive) {
-                    loadGeokatalog();
+                    // Expand Geokatalog to full height
+                    if (isGeokatalog) {
+                        geokatalogAccordion.classList.add('expanded');
+                        loadGeokatalog();
+                    }
                 }
+
+                setTimeout(updateMenuTogglePosition, 10);
             });
         });
 
@@ -4174,16 +4234,32 @@
                 var nodeEl = document.createElement('div');
                 nodeEl.className = 'catalog-node' + (hasChildren ? '' : ' leaf');
 
-                var arrowEl = document.createElement('span');
-                arrowEl.className = 'node-arrow';
-                arrowEl.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
+                if (hasChildren) {
+                    // Category node with arrow
+                    var arrowEl = document.createElement('span');
+                    arrowEl.className = 'node-arrow';
+                    arrowEl.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
+                    nodeEl.appendChild(arrowEl);
+                } else {
+                    // Leaf node with checkbox
+                    var checkboxEl = document.createElement('span');
+                    checkboxEl.className = 'node-checkbox';
+                    nodeEl.appendChild(checkboxEl);
+                }
 
                 var labelEl = document.createElement('span');
                 labelEl.className = 'node-label';
                 labelEl.textContent = item.label || item.category || 'Unbekannt';
-
-                nodeEl.appendChild(arrowEl);
                 nodeEl.appendChild(labelEl);
+
+                // Add info icon to leaf nodes
+                if (!hasChildren) {
+                    var infoEl = document.createElement('span');
+                    infoEl.className = 'node-info';
+                    infoEl.innerHTML = '<span class="material-symbols-outlined">info</span>';
+                    nodeEl.appendChild(infoEl);
+                }
+
                 itemEl.appendChild(nodeEl);
 
                 if (hasChildren) {
@@ -4199,12 +4275,9 @@
                         setTimeout(updateMenuTogglePosition, 10);
                     });
                 } else {
+                    // Click on label does nothing for now (visual mockup)
                     nodeEl.addEventListener('click', function(e) {
                         e.stopPropagation();
-                        // Layer ID for future use
-                        var layerId = item.layerBodId || item.id;
-                        console.log('Layer ausgewählt:', layerId, item);
-                        alert('Layer "' + (item.label || layerId) + '" wird bald verfügbar sein.');
                     });
                 }
 
