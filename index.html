@@ -1176,6 +1176,98 @@
             display: block;
         }
 
+        /* ===== SHARE PANEL ===== */
+        .share-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .share-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .share-icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            border: none;
+            background: var(--grey-900);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .share-icon-btn:hover {
+            background: var(--grey-600);
+            transform: scale(1.05);
+        }
+
+        .share-icon-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .share-link-section {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .share-link-label {
+            font-size: 12px;
+            color: var(--grey-600);
+        }
+
+        .share-link-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .share-link-input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid var(--grey-300);
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--grey-900);
+            background: var(--grey-50);
+        }
+
+        .share-link-input:focus {
+            outline: none;
+            border-color: var(--accent-panel);
+        }
+
+        .share-copy-btn {
+            padding: 8px 14px;
+            border: 1px solid var(--grey-300);
+            border-radius: 4px;
+            background: var(--white);
+            color: var(--grey-900);
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .share-copy-btn:hover {
+            background: var(--grey-100);
+            border-color: var(--grey-400);
+        }
+
+        .share-copy-btn.copied {
+            background: #2e7d32;
+            color: white;
+            border-color: #2e7d32;
+        }
+
         /* ===== GEOKATALOG TREE ===== */
         .geokatalog-header .geokatalog-theme-switch {
             font-size: 14px;
@@ -2054,7 +2146,41 @@
                         <span>Teilen</span>
                     </div>
                     <div class="accordion-content">
-                        Teilen Sie die aktuelle Kartenansicht inkl. Position und Zoom-Stufe per URL-Link mit Kollegen oder externen Partnern.
+                        <div class="share-panel">
+                            <div class="share-icons">
+                                <!-- Email -->
+                                <button class="share-icon-btn" onclick="shareViaEmail()" title="Per E-Mail teilen">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                    </svg>
+                                </button>
+                                <!-- Facebook -->
+                                <button class="share-icon-btn" onclick="shareViaFacebook()" title="Auf Facebook teilen">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+                                    </svg>
+                                </button>
+                                <!-- LinkedIn -->
+                                <button class="share-icon-btn" onclick="shareViaLinkedIn()" title="Auf LinkedIn teilen">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                                    </svg>
+                                </button>
+                                <!-- X (Twitter) -->
+                                <button class="share-icon-btn" onclick="shareViaX()" title="Auf X teilen">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="share-link-section">
+                                <span class="share-link-label">Share link:</span>
+                                <div class="share-link-row">
+                                    <input type="text" id="share-link-input" class="share-link-input" readonly>
+                                    <button class="share-copy-btn" onclick="copyShareLink()">Link kopieren</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -3190,6 +3316,79 @@
             });
         }
 
+        // ===== SHARE FUNCTIONS =====
+        function getShareUrl() {
+            var baseUrl = window.location.origin + window.location.pathname;
+            var params = new URLSearchParams(window.location.search);
+
+            // Add current map position if map exists
+            if (typeof map !== 'undefined' && map) {
+                var center = map.getCenter();
+                var zoom = map.getZoom();
+                params.set('lng', center.lng.toFixed(5));
+                params.set('lat', center.lat.toFixed(5));
+                params.set('zoom', zoom.toFixed(2));
+            }
+
+            return baseUrl + '?' + params.toString();
+        }
+
+        function updateShareLink() {
+            var input = document.getElementById('share-link-input');
+            if (input) {
+                input.value = getShareUrl();
+            }
+        }
+
+        function shareViaEmail() {
+            var url = getShareUrl();
+            var subject = encodeURIComponent('BBL Immobilienportfolio - Kartenansicht');
+            var body = encodeURIComponent('Schauen Sie sich diese Kartenansicht an:\n\n' + url);
+            window.open('mailto:?subject=' + subject + '&body=' + body, '_self');
+        }
+
+        function shareViaFacebook() {
+            var url = encodeURIComponent(getShareUrl());
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank', 'width=600,height=400');
+        }
+
+        function shareViaLinkedIn() {
+            var url = encodeURIComponent(getShareUrl());
+            window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank', 'width=600,height=400');
+        }
+
+        function shareViaX() {
+            var url = encodeURIComponent(getShareUrl());
+            var text = encodeURIComponent('BBL Immobilienportfolio - Kartenansicht');
+            window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + text, '_blank', 'width=600,height=400');
+        }
+
+        function copyShareLink() {
+            var input = document.getElementById('share-link-input');
+            var button = document.querySelector('.share-copy-btn');
+
+            if (input && navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    button.textContent = 'Kopiert!';
+                    button.classList.add('copied');
+                    setTimeout(function() {
+                        button.textContent = 'Link kopieren';
+                        button.classList.remove('copied');
+                    }, 2000);
+                });
+            } else if (input) {
+                // Fallback for older browsers
+                input.select();
+                document.execCommand('copy');
+                button.textContent = 'Kopiert!';
+                button.classList.add('copied');
+                setTimeout(function() {
+                    button.textContent = 'Link kopieren';
+                    button.classList.remove('copied');
+                }, 2000);
+            }
+        }
+
         // Column Toggle Handler
         function handleColumnToggle(checkbox) {
             var columnClass = checkbox.getAttribute('data-column');
@@ -4156,6 +4355,12 @@
                 if (!isActive) {
                     this.classList.add('active');
                     content.classList.add('show');
+
+                    // Update share link when Teilen accordion is opened
+                    var headerText = this.querySelector('span:not(.accordion-arrow)');
+                    if (headerText && headerText.textContent.trim() === 'Teilen') {
+                        updateShareLink();
+                    }
 
                     // Expand Geokatalog to full height
                     if (isGeokatalog) {
