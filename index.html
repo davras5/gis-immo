@@ -13,16 +13,16 @@
     <style>
         /* ===== CSS CUSTOM PROPERTIES ===== */
         :root {
-            /* Grey Scale */
-            --grey-900: #333;
-            --grey-800: #444;
-            --grey-700: #555;
-            --grey-600: #666;
-            --grey-500: #767676; /* WCAG AA compliant on white */
-            --grey-300: #ccc;
-            --grey-200: #e0e0e0;
-            --grey-100: #f5f5f5;
-            --grey-50: #fafafa;
+            /* Grey Scale - Cold blue-grey to match --accent-panel #6C757D */
+            --grey-900: #2D3236;
+            --grey-800: #3D4347;
+            --grey-700: #4E555A;
+            --grey-600: #5E666B;
+            --grey-500: #6C757D; /* WCAG AA compliant on white, matches accent-panel */
+            --grey-300: #C5CCD1;
+            --grey-200: #DDE2E6;
+            --grey-100: #F3F5F7;
+            --grey-50: #F9FAFB;
 
             /* Brand Colors */
             --accent-panel: #6C757D;
@@ -47,9 +47,9 @@
             --status-planning-bg: #e3f2fd;
             --status-planning-text: #0d47a1;
 
-            --status-inactive: #757575;
+            --status-inactive: #6C757D;
             --status-inactive-bg: var(--grey-100);
-            --status-inactive-text: #616161;
+            --status-inactive-text: #5E666B;
 
             /* Legacy semantic colors (mapped to new system) */
             --success-green: var(--status-active);
@@ -3542,7 +3542,7 @@
             'In Betrieb': '#2e7d32',      // --status-active
             'In Renovation': '#ef6c00',   // --status-renovation
             'In Planung': '#1976d2',      // --status-planning
-            'Ausser Betrieb': '#757575'   // --status-inactive
+            'Ausser Betrieb': '#6C757D'   // --status-inactive
         };
         
         // Placeholder images
@@ -4520,7 +4520,7 @@
                     'type': 'fill-extrusion',
                     'minzoom': 15,
                     'paint': {
-                        'fill-extrusion-color': '#aaa',
+                        'fill-extrusion-color': '#A8B0B7',
                         'fill-extrusion-height': [
                             'interpolate', ['linear'], ['zoom'],
                             15, 0,
@@ -4799,7 +4799,7 @@
                         'In Renovation', statusColors['In Renovation'],
                         'In Planung', statusColors['In Planung'],
                         'Ausser Betrieb', statusColors['Ausser Betrieb'],
-                        '#757575'  // fallback
+                        '#6C757D'  // fallback
                     ],
                     'circle-stroke-width': 2,
                     'circle-stroke-color': '#ffffff'
@@ -4913,7 +4913,7 @@
             
             var props = building.properties;
             var flaeche = Number(props.flaeche_ngf).toLocaleString('de-CH');
-            var statusColor = statusColors[props.status] || '#999999';
+            var statusColor = statusColors[props.status] || '#8B949C';
             
             // Update selected ID
             selectedBuildingId = buildingId;
