@@ -3330,6 +3330,13 @@
                 params.set('zoom', zoom.toFixed(2));
             }
 
+            // Add selected building if one is selected
+            if (selectedBuildingId) {
+                params.set('id', selectedBuildingId);
+            } else {
+                params.delete('id');
+            }
+
             return baseUrl + '?' + params.toString();
         }
 
@@ -4073,6 +4080,7 @@
                 if (features.length === 0) {
                     selectedBuildingId = null;
                     updateSelectedBuilding();
+                    updateUrlWithSelection();
                     document.getElementById('info-panel').classList.remove('show');
                 }
             });
@@ -4080,6 +4088,17 @@
             // Apply initial filters to map if any
             if (filteredData && getActiveFilterCount() > 0) {
                 updateMapFilter();
+            }
+
+            // Select building from URL parameter if present
+            var urlBuildingId = urlParams.get('id');
+            if (urlBuildingId) {
+                var building = portfolioData.features.find(function(f) {
+                    return f.properties.id === urlBuildingId;
+                });
+                if (building) {
+                    selectBuilding(urlBuildingId, true);
+                }
             }
         }
 
@@ -4097,6 +4116,7 @@
             // Update selected ID
             selectedBuildingId = buildingId;
             updateSelectedBuilding();
+            updateUrlWithSelection();
             
             // Find building index for placeholder image
             var buildingIndex = portfolioData.features.findIndex(function(f) {
@@ -4141,7 +4161,17 @@
                 map.setFilter('portfolio-selected', ['==', ['get', 'id'], selectedBuildingId || '']);
             }
         }
-        
+
+        function updateUrlWithSelection() {
+            var url = new URL(window.location);
+            if (selectedBuildingId) {
+                url.searchParams.set('id', selectedBuildingId);
+            } else {
+                url.searchParams.delete('id');
+            }
+            window.history.replaceState({}, '', url);
+        }
+
         // ===== SEARCH FUNCTIONALITY =====
         var searchInput = document.getElementById('search-input');
         var searchResults = document.getElementById('search-results');
@@ -4330,8 +4360,9 @@
                 // Clear selected building info panel
                 selectedBuildingId = null;
                 updateSelectedBuilding();
+                updateUrlWithSelection();
                 document.getElementById('info-panel').classList.remove('show');
-                
+
                 searchClearBtn.classList.add('visible');
 
             } else if (type === 'layer') {
