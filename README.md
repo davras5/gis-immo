@@ -2,7 +2,7 @@
 
 A single-page web application for visualizing and managing the Swiss Federal Office of Buildings and Logistics (BBL) real estate portfolio.
 
-**Live Demo:** [davras5.github.io/gis-immo](https://davras5.github.io/gis-immo/)
+- Deployed [davras5.github.io/gis-immo](https://davras5.github.io/gis-immo/)
 
 <p align="center">
   <img src="assets/images/preview3.jpg" width="90%"/>
