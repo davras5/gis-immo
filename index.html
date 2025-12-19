@@ -1751,11 +1751,22 @@
             align-items: flex-end;
             gap: 10px;
             z-index: 500;
+            transition: right 0.3s ease;
         }
 
-        /* Hide floating controls when AI panel is open (controlled via JS) */
-        .floating-controls.hidden {
-            display: none;
+        /* Move floating controls left when filter-pane is open */
+        .main-content:has(#filter-pane.open) .floating-controls {
+            right: 360px; /* 340px filter + 20px margin */
+        }
+
+        /* Move floating controls when AI panel is open */
+        #main:has(#ai-assistant-panel.show) .floating-controls {
+            right: 20px; /* Stay at edge of shrunken .main-content */
+        }
+
+        /* When both panels are open */
+        #main:has(#ai-assistant-panel.show) .main-content:has(#filter-pane.open) .floating-controls {
+            right: 360px;
         }
 
         /* ===== STYLE SWITCHER ===== */
@@ -6070,7 +6081,6 @@
         var aiAssistantBtn = document.getElementById('ai-assistant-btn');
         var aiAssistantPanel = document.getElementById('ai-assistant-panel');
         var aiPanelClose = document.getElementById('ai-panel-close');
-        var floatingControls = document.getElementById('floating-controls');
         var aiPanelOpen = false;
 
         function toggleAiPanel(forceClose) {
@@ -6082,10 +6092,10 @@
 
             if (aiPanelOpen) {
                 aiAssistantPanel.classList.add('show');
-                floatingControls.classList.add('hidden');
+                aiAssistantBtn.classList.add('active');
             } else {
                 aiAssistantPanel.classList.remove('show');
-                floatingControls.classList.remove('hidden');
+                aiAssistantBtn.classList.remove('active');
             }
 
             // Resize map after transition completes
