@@ -466,7 +466,7 @@
             display: none;
             flex-direction: column;
             background: var(--grey-50);
-            overflow: hidden;
+            overflow-y: auto;
             padding: 24px;
         }
 
@@ -637,18 +637,19 @@
 
         /* List Table Container */
         .list-table-container {
-            flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             max-width: 1600px;
             margin: 0 auto;
             width: 100%;
+            background: var(--white);
+            border: 1px solid var(--grey-300);
+            border-radius: 4px;
         }
 
         .list-table-wrapper {
-            flex: 1;
-            overflow: auto;
+            overflow-x: auto;
         }
 
         .list-table {
@@ -3077,80 +3078,80 @@
         </div>
         
         <div id="list-view">
-            <!-- Toolbar -->
-            <div class="toolbar">
-                <div class="toolbar-search list-toolbar-search">
-                    <span class="material-symbols-outlined">search</span>
-                    <input type="text" id="list-search-input" placeholder="Tabelle durchsuchen...">
-                </div>
-                <div class="toolbar-actions">
-                    <!-- Export Dropdown -->
-                    <div class="dropdown-container">
-                        <button class="dropdown-btn" id="export-dropdown-btn">
-                            <span class="material-symbols-outlined">download</span>
-                            Export
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </button>
-                        <div class="dropdown-menu" id="export-dropdown-menu">
-                            <div class="dropdown-menu-header">Exportieren als</div>
-                            <div class="dropdown-menu-item" onclick="handleExport('csv')">
-                                <span class="material-symbols-outlined">table_view</span>
-                                CSV (.csv)
-                            </div>
-                            <div class="dropdown-menu-item" onclick="handleExport('excel')">
-                                <span class="material-symbols-outlined">grid_on</span>
-                                Excel (.xlsx)
-                            </div>
-                            <div class="dropdown-menu-item" onclick="handleExport('geojson')">
-                                <span class="material-symbols-outlined">map</span>
-                                GeoJSON (.geojson)
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Columns Dropdown -->
-                    <div class="dropdown-container">
-                        <button class="dropdown-btn" id="columns-dropdown-btn">
-                            <span class="material-symbols-outlined">view_column</span>
-                            Spalten
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </button>
-                        <div class="dropdown-menu" id="columns-dropdown-menu">
-                            <div class="dropdown-menu-header">Spalten anzeigen</div>
-                            <div class="dropdown-menu-toggle-row">
-                                <button class="dropdown-toggle-btn" onclick="toggleAllColumns(true)">Alle</button>
-                                <button class="dropdown-toggle-btn" onclick="toggleAllColumns(false)">Keine</button>
-                            </div>
-                            <div class="dropdown-menu-divider"></div>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-id"> ID
-                            </label>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-name"> Bezeichnung
-                            </label>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-land"> Land
-                            </label>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-ort"> Ort
-                            </label>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-adresse"> Adresse
-                            </label>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-portfolio"> Teilportfolio
-                            </label>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-flaeche"> Fläche NGF
-                            </label>
-                            <label class="dropdown-menu-item">
-                                <input type="checkbox" checked data-column="col-status"> Status
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Table Container -->
             <div class="list-table-container">
+                <!-- Toolbar -->
+                <div class="toolbar">
+                    <div class="toolbar-search list-toolbar-search">
+                        <span class="material-symbols-outlined">search</span>
+                        <input type="text" id="list-search-input" placeholder="Tabelle durchsuchen...">
+                    </div>
+                    <div class="toolbar-actions">
+                        <!-- Export Dropdown -->
+                        <div class="dropdown-container">
+                            <button class="dropdown-btn" id="export-dropdown-btn">
+                                <span class="material-symbols-outlined">download</span>
+                                Export
+                                <span class="material-symbols-outlined">expand_more</span>
+                            </button>
+                            <div class="dropdown-menu" id="export-dropdown-menu">
+                                <div class="dropdown-menu-header">Exportieren als</div>
+                                <div class="dropdown-menu-item" onclick="handleExport('csv')">
+                                    <span class="material-symbols-outlined">table_view</span>
+                                    CSV (.csv)
+                                </div>
+                                <div class="dropdown-menu-item" onclick="handleExport('excel')">
+                                    <span class="material-symbols-outlined">grid_on</span>
+                                    Excel (.xlsx)
+                                </div>
+                                <div class="dropdown-menu-item" onclick="handleExport('geojson')">
+                                    <span class="material-symbols-outlined">map</span>
+                                    GeoJSON (.geojson)
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Columns Dropdown -->
+                        <div class="dropdown-container">
+                            <button class="dropdown-btn" id="columns-dropdown-btn">
+                                <span class="material-symbols-outlined">view_column</span>
+                                Spalten
+                                <span class="material-symbols-outlined">expand_more</span>
+                            </button>
+                            <div class="dropdown-menu" id="columns-dropdown-menu">
+                                <div class="dropdown-menu-header">Spalten anzeigen</div>
+                                <div class="dropdown-menu-toggle-row">
+                                    <button class="dropdown-toggle-btn" onclick="toggleAllColumns(true)">Alle</button>
+                                    <button class="dropdown-toggle-btn" onclick="toggleAllColumns(false)">Keine</button>
+                                </div>
+                                <div class="dropdown-menu-divider"></div>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-id"> ID
+                                </label>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-name"> Bezeichnung
+                                </label>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-land"> Land
+                                </label>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-ort"> Ort
+                                </label>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-adresse"> Adresse
+                                </label>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-portfolio"> Teilportfolio
+                                </label>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-flaeche"> Fläche NGF
+                                </label>
+                                <label class="dropdown-menu-item">
+                                    <input type="checkbox" checked data-column="col-status"> Status
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="list-table-wrapper">
                     <table class="list-table" id="list-table">
                         <thead>
