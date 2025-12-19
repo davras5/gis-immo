@@ -443,7 +443,14 @@
             display: flex;
             overflow: hidden;
         }
-        
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
         /* ===== MAP VIEW ===== */
         #map-view {
             flex: 1;
@@ -1893,22 +1900,22 @@
 
         /* ===== AI ASSISTANT PANEL ===== */
         #ai-assistant-panel {
-            position: fixed;
-            top: 60px;
-            right: 0;
-            bottom: 0;
-            width: 400px;
+            width: 0;
+            min-width: 0;
+            height: 100%;
             background: var(--white);
-            box-shadow: -4px 0 16px rgba(0,0,0,0.15);
-            z-index: 900;
+            border-left: 1px solid var(--grey-300);
             display: flex;
             flex-direction: column;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
+            overflow: hidden;
+            transition: width 0.3s ease, min-width 0.3s ease;
+            flex-shrink: 0;
         }
 
         #ai-assistant-panel.show {
-            transform: translateX(0);
+            width: 400px;
+            min-width: 400px;
+            box-shadow: -4px 0 16px rgba(0,0,0,0.15);
         }
 
         .ai-panel-header {
@@ -3147,7 +3154,8 @@
     </header>
 
     <main id="main">
-        <div id="map-view" class="active">
+        <div class="main-content">
+            <div id="map-view" class="active">
             <div id="map"></div>
             
             <nav id="accordion-panel">
@@ -4117,14 +4125,7 @@
                 </div>
             </div>
         </aside>
-
-        <!-- AI Assistant Toggle Button -->
-        <div class="ai-assistant-toggle">
-            <button class="ai-assistant-btn" id="ai-assistant-btn" title="Datenassistent">
-                <span class="material-symbols-outlined">smart_toy</span>
-                <span>Datenassistent</span>
-            </button>
-        </div>
+        </div><!-- /.main-content -->
 
         <!-- AI Assistant Panel -->
         <aside id="ai-assistant-panel" role="complementary" aria-label="Datenassistent">
@@ -4179,6 +4180,14 @@
                 </button>
             </div>
         </aside>
+
+        <!-- AI Assistant Toggle Button -->
+        <div class="ai-assistant-toggle">
+            <button class="ai-assistant-btn" id="ai-assistant-btn" title="Datenassistent">
+                <span class="material-symbols-outlined">smart_toy</span>
+                <span>Datenassistent</span>
+            </button>
+        </div>
     </main>
 
     <footer id="footer">
