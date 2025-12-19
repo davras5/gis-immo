@@ -198,6 +198,48 @@
             "betrag": 95000,
             "status": "Aktiv"
           }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-001-A1",
+            "bezeichnung": "Fernwärmeübergabestation",
+            "kategorie": "HVAC",
+            "hersteller": "Siemens AG",
+            "baujahr": 2019,
+            "standort": "Untergeschoss Technikraum"
+          },
+          {
+            "id": "BBL-001-A2",
+            "bezeichnung": "Personenaufzug Haupttreppe",
+            "kategorie": "Aufzüge",
+            "hersteller": "Schindler AG",
+            "baujahr": 2019,
+            "standort": "Treppenhaus Mitte"
+          },
+          {
+            "id": "BBL-001-A3",
+            "bezeichnung": "Brandmeldeanlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Siemens Building Technologies",
+            "baujahr": 2019,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-001-A4",
+            "bezeichnung": "Zutrittskontrollsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "dormakaba AG",
+            "baujahr": 2019,
+            "standort": "Alle Eingänge"
+          },
+          {
+            "id": "BBL-001-A5",
+            "bezeichnung": "Notstromanlage",
+            "kategorie": "Elektro",
+            "hersteller": "ABB Schweiz AG",
+            "baujahr": 2019,
+            "standort": "Untergeschoss Technikraum"
+          }
         ]
       },
       "geometry": {
@@ -377,6 +419,40 @@
             "vertragsende": null,
             "betrag": 78000,
             "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-002-A1",
+            "bezeichnung": "Wärmepumpe Geothermie",
+            "kategorie": "HVAC",
+            "hersteller": "Viessmann",
+            "baujahr": 2000,
+            "standort": "Technikraum EG"
+          },
+          {
+            "id": "BBL-002-A2",
+            "bezeichnung": "Klimaanlage Bürotrakt",
+            "kategorie": "HVAC",
+            "hersteller": "Daikin",
+            "baujahr": 2021,
+            "standort": "Dachgeschoss"
+          },
+          {
+            "id": "BBL-002-A3",
+            "bezeichnung": "Videoüberwachungsanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Bosch Security Systems",
+            "baujahr": 2020,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-002-A4",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "ThyssenKrupp",
+            "baujahr": 2000,
+            "standort": "Haupteingang"
           }
         ]
       },
@@ -604,6 +680,56 @@
             "betrag": 12000,
             "status": "Ausgelaufen"
           }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-003-A1",
+            "bezeichnung": "Gasheizungsanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Viessmann",
+            "baujahr": 2017,
+            "standort": "Heizzentrale UG"
+          },
+          {
+            "id": "BBL-003-A2",
+            "bezeichnung": "Lastenaufzug 3t",
+            "kategorie": "Aufzüge",
+            "hersteller": "KONE",
+            "baujahr": 2017,
+            "standort": "Lagerhalle Ost"
+          },
+          {
+            "id": "BBL-003-A3",
+            "bezeichnung": "Lastenaufzug 5t",
+            "kategorie": "Aufzüge",
+            "hersteller": "KONE",
+            "baujahr": 2017,
+            "standort": "Lagerhalle West"
+          },
+          {
+            "id": "BBL-003-A4",
+            "bezeichnung": "Sprinkleranlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Minimax",
+            "baujahr": 2017,
+            "standort": "Gesamte Lagerhalle"
+          },
+          {
+            "id": "BBL-003-A5",
+            "bezeichnung": "Lüftungsanlage Lagerhalle",
+            "kategorie": "HVAC",
+            "hersteller": "Zehnder",
+            "baujahr": 2017,
+            "standort": "Dach Lagerhalle"
+          },
+          {
+            "id": "BBL-003-A6",
+            "bezeichnung": "Hubarbeitsbühne",
+            "kategorie": "Logistik",
+            "hersteller": "Jungheinrich",
+            "baujahr": 2020,
+            "standort": "Hochregallager"
+          }
         ]
       },
       "geometry": {
@@ -763,6 +889,32 @@
             "vertragsende": "31.12.2025",
             "betrag": 125000,
             "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-004-A1",
+            "bezeichnung": "Klimaanlage VRF-System",
+            "kategorie": "HVAC",
+            "hersteller": "Carrier",
+            "baujahr": 2020,
+            "standort": "Büroetagen 12-14"
+          },
+          {
+            "id": "BBL-004-A2",
+            "bezeichnung": "Zutrittskontrollsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "HID Global",
+            "baujahr": 2020,
+            "standort": "Alle Eingänge"
+          },
+          {
+            "id": "BBL-004-A3",
+            "bezeichnung": "Brandmeldeanlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Honeywell",
+            "baujahr": 2020,
+            "standort": "Gesamte Mietfläche"
           }
         ]
       },
@@ -981,6 +1133,48 @@
             "betrag": 35000,
             "status": "Ausgelaufen"
           }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-005-A1",
+            "bezeichnung": "Ölheizungsanlage (Ersatz geplant)",
+            "kategorie": "HVAC",
+            "hersteller": "Weishaupt",
+            "baujahr": 1965,
+            "standort": "Heizzentrale UG"
+          },
+          {
+            "id": "BBL-005-A2",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "Schindler AG",
+            "baujahr": 2015,
+            "standort": "Treppenhaus Hauptgebäude"
+          },
+          {
+            "id": "BBL-005-A3",
+            "bezeichnung": "Lüftungsanlage Schulungsräume",
+            "kategorie": "HVAC",
+            "hersteller": "Zehnder",
+            "baujahr": 2015,
+            "standort": "Dachgeschoss"
+          },
+          {
+            "id": "BBL-005-A4",
+            "bezeichnung": "Brandmeldeanlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Siemens",
+            "baujahr": 2015,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-005-A5",
+            "bezeichnung": "Beamer Konferenzraum A",
+            "kategorie": "Medientechnik",
+            "hersteller": "Epson",
+            "baujahr": 2022,
+            "standort": "Konferenzraum A, 2. OG"
+          }
         ]
       },
       "geometry": {
@@ -1169,6 +1363,40 @@
             "vertragsende": "31.03.2024",
             "betrag": 18000,
             "status": "Gekündigt"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-006-A1",
+            "bezeichnung": "VRF-Klimaanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Daikin",
+            "baujahr": 2018,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-006-A2",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "Mitsubishi Electric",
+            "baujahr": 1991,
+            "standort": "Hauptgebäude"
+          },
+          {
+            "id": "BBL-006-A3",
+            "bezeichnung": "Erdbeben-Frühwarnsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "Omron",
+            "baujahr": 2018,
+            "standort": "Technikraum EG"
+          },
+          {
+            "id": "BBL-006-A4",
+            "bezeichnung": "Videoüberwachungsanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Panasonic",
+            "baujahr": 2018,
+            "standort": "Gesamtgebäude"
           }
         ]
       },
@@ -1388,6 +1616,40 @@
             "betrag": 28000,
             "status": "Aktiv"
           }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-007-A1",
+            "bezeichnung": "Gasheizungsanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Viessmann",
+            "baujahr": 2015,
+            "standort": "Heizzentrale UG"
+          },
+          {
+            "id": "BBL-007-A2",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "Schindler AG",
+            "baujahr": 2015,
+            "standort": "Treppenhaus"
+          },
+          {
+            "id": "BBL-007-A3",
+            "bezeichnung": "Gegensprechanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Siedle",
+            "baujahr": 2015,
+            "standort": "Alle Wohnungen"
+          },
+          {
+            "id": "BBL-007-A4",
+            "bezeichnung": "Waschmaschinen Gemeinschaftsraum",
+            "kategorie": "Sanitär",
+            "hersteller": "Electrolux",
+            "baujahr": 2020,
+            "standort": "Waschküche UG"
+          }
         ]
       },
       "geometry": {
@@ -1576,6 +1838,40 @@
             "vertragsende": "31.12.2024",
             "betrag": 12000,
             "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-008-A1",
+            "bezeichnung": "Split-Klimaanlage Büro",
+            "kategorie": "HVAC",
+            "hersteller": "Carrier",
+            "baujahr": 2022,
+            "standort": "Bürotrakt"
+          },
+          {
+            "id": "BBL-008-A2",
+            "bezeichnung": "Split-Klimaanlage Residenz",
+            "kategorie": "HVAC",
+            "hersteller": "Carrier",
+            "baujahr": 2022,
+            "standort": "Residenz"
+          },
+          {
+            "id": "BBL-008-A3",
+            "bezeichnung": "Solaranlage Warmwasser",
+            "kategorie": "Solar/Energie",
+            "hersteller": "Soletrol",
+            "baujahr": 2022,
+            "standort": "Dach"
+          },
+          {
+            "id": "BBL-008-A4",
+            "bezeichnung": "Alarmanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Intelbras",
+            "baujahr": 2022,
+            "standort": "Gesamtgebäude"
           }
         ]
       },
@@ -1812,6 +2108,64 @@
             "betrag": 320000,
             "status": "Aktiv"
           }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-009-A1",
+            "bezeichnung": "Präzisionsklimaanlage Serverraum",
+            "kategorie": "HVAC",
+            "hersteller": "Schneider Electric",
+            "baujahr": 2025,
+            "standort": "Serverräume A-D"
+          },
+          {
+            "id": "BBL-009-A2",
+            "bezeichnung": "USV-Anlage 2MW",
+            "kategorie": "Elektro",
+            "hersteller": "ABB",
+            "baujahr": 2025,
+            "standort": "Elektrozentrale"
+          },
+          {
+            "id": "BBL-009-A3",
+            "bezeichnung": "Notstromdiesel 3MW",
+            "kategorie": "Elektro",
+            "hersteller": "Caterpillar",
+            "baujahr": 2025,
+            "standort": "Aussenbereich Nord"
+          },
+          {
+            "id": "BBL-009-A4",
+            "bezeichnung": "Brandlöschanlage Inergen",
+            "kategorie": "Brandschutz",
+            "hersteller": "Minimax",
+            "baujahr": 2025,
+            "standort": "Alle Serverräume"
+          },
+          {
+            "id": "BBL-009-A5",
+            "bezeichnung": "Zutrittskontrollsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "Dormakaba",
+            "baujahr": 2025,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-009-A6",
+            "bezeichnung": "Freikühler (Free Cooling)",
+            "kategorie": "HVAC",
+            "hersteller": "Güntner",
+            "baujahr": 2025,
+            "standort": "Dach"
+          },
+          {
+            "id": "BBL-009-A7",
+            "bezeichnung": "Gebäudeleitsystem",
+            "kategorie": "Gebäudeautomation",
+            "hersteller": "Siemens",
+            "baujahr": 2025,
+            "standort": "Leitwarte"
+          }
         ]
       },
       "geometry": {
@@ -2000,6 +2354,40 @@
             "vertragsende": "31.12.2024",
             "betrag": 15000,
             "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-010-A1",
+            "bezeichnung": "Split-Klimaanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Daikin",
+            "baujahr": 2016,
+            "standort": "Büro- und Residenzbereich"
+          },
+          {
+            "id": "BBL-010-A2",
+            "bezeichnung": "Solaranlage Warmwasser",
+            "kategorie": "Solar/Energie",
+            "hersteller": "Rheem Australia",
+            "baujahr": 2016,
+            "standort": "Dach"
+          },
+          {
+            "id": "BBL-010-A3",
+            "bezeichnung": "Alarmanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Bosch Security",
+            "baujahr": 2016,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-010-A4",
+            "bezeichnung": "Videoüberwachung",
+            "kategorie": "Sicherheit",
+            "hersteller": "Hikvision",
+            "baujahr": 2020,
+            "standort": "Aussenbereich"
           }
         ]
       },

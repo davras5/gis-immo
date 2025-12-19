@@ -2021,6 +2021,29 @@
             color: #757575;
         }
 
+        /* ===== AUSSTATTUNG TABLE: 7 columns = 100% ===== */
+        /* checkbox:4% + id:10% + bezeichnung:24% + kategorie:14% + hersteller:18% + baujahr:10% + standort:auto */
+        #ausstattung-table .col-ausstattung-id          { width: 10%; }
+        #ausstattung-table .col-ausstattung-bezeichnung { width: 24%; }
+        #ausstattung-table .col-ausstattung-kategorie   { width: 14%; }
+        #ausstattung-table .col-ausstattung-hersteller  { width: 18%; }
+        #ausstattung-table .col-ausstattung-baujahr     { width: 10%; text-align: center; }
+        #ausstattung-table .col-ausstattung-standort    { width: auto; }
+
+        #ausstattung-table td.col-ausstattung-baujahr {
+            text-align: center;
+        }
+
+        .kategorie-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            background: rgba(107, 116, 124, 0.1);
+            color: var(--accent-panel);
+        }
+
         /* ===== FILTER PANE ===== */
         #filter-pane {
             width: 0;
@@ -3167,7 +3190,7 @@
                     <div class="detail-tab disabled" data-tab="belegung">Belegung</div>
                     <div class="detail-tab disabled" data-tab="kosten">Kosten</div>
                     <div class="detail-tab" data-tab="vertraege">Verträge</div>
-                    <div class="detail-tab disabled" data-tab="ausstattung">Ausstattung</div>
+                    <div class="detail-tab" data-tab="ausstattung">Ausstattung</div>
                     <div class="detail-tab" data-tab="dokumente">Dokumente</div>
                     <div class="detail-tab" data-tab="kontakte">Kontakte</div>
                 </div>
@@ -3498,6 +3521,79 @@
                                         </tr>
                                     </thead>
                                     <tbody id="vertraege-tbody">
+                                        <!-- Populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Ausstattung -->
+                <div class="tab-content" data-content="ausstattung">
+                    <div class="detail-table-container">
+                        <div class="detail-section">
+                            <div class="detail-section-title">Ausstattung</div>
+
+                            <div class="toolbar">
+                                <div class="toolbar-search">
+                                    <span class="material-symbols-outlined">search</span>
+                                    <input type="text" id="ausstattung-filter" placeholder="Alle Spalten filtern">
+                                </div>
+                                <div class="toolbar-actions detail-table-actions">
+                                    <button class="btn-action ausstattung-action" disabled>
+                                        <span class="material-symbols-outlined">edit</span>
+                                        Bearbeiten
+                                    </button>
+                                    <button class="btn-action ausstattung-action" disabled>
+                                        <span class="material-symbols-outlined">delete</span>
+                                        Löschen
+                                    </button>
+                                    <button class="btn-action ausstattung-action" disabled>
+                                        <span class="material-symbols-outlined">info</span>
+                                        Details
+                                    </button>
+                                    <button class="btn-back" id="btn-add-ausstattung">
+                                        <span class="material-symbols-outlined">add</span>
+                                        Hinzufügen
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="detail-table-wrapper">
+                                <table class="detail-table" id="ausstattung-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-checkbox">
+                                                <input type="checkbox" id="select-all-ausstattung">
+                                            </th>
+                                            <th class="col-ausstattung-id sortable" data-sort="id">
+                                                ID
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-ausstattung-bezeichnung sortable" data-sort="bezeichnung">
+                                                Bezeichnung
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-ausstattung-kategorie sortable" data-sort="kategorie">
+                                                Kategorie
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-ausstattung-hersteller sortable" data-sort="hersteller">
+                                                Hersteller
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-ausstattung-baujahr sortable" data-sort="baujahr">
+                                                Baujahr
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-ausstattung-standort sortable" data-sort="standort">
+                                                Standort
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ausstattung-tbody">
                                         <!-- Populated by JavaScript -->
                                     </tbody>
                                 </table>
@@ -4598,6 +4694,9 @@
             // Load vertraege for this building
             loadVertraegeForBuilding(building);
 
+            // Load ausstattung for this building
+            loadAusstattungForBuilding(building);
+
             // Initialize carousel
             initCarousel();
 
@@ -5604,6 +5703,11 @@
                 if (targetTab === 'vertraege') {
                     renderVertraegeTable();
                 }
+
+                // Render ausstattung table when switching to Ausstattung tab
+                if (targetTab === 'ausstattung') {
+                    renderAusstattungTable();
+                }
             });
         });
 
@@ -6183,6 +6287,97 @@
         if (addVertragBtn) {
             addVertragBtn.addEventListener('click', function() {
                 alert('Vertrag hinzufügen - kommt bald...');
+            });
+        }
+
+        // ===== AUSSTATTUNG TAB =====
+        var ausstattungData = [];
+        var filteredAusstattung = [];
+        var ausstattungSort = { column: 'bezeichnung', direction: 'asc' };
+
+        var ausstattungConfig = {
+            tableId: 'ausstattung-table',
+            checkboxClass: 'ausstattung-checkbox',
+            selectAllId: 'select-all-ausstattung',
+            actionClass: 'ausstattung-action',
+            state: ausstattungSort,
+            onSort: function() {
+                sortTableData(filteredAusstattung, ausstattungSort.column, ausstattungSort.direction);
+                renderAusstattungTable();
+            },
+            onUpdate: function() { updateTableSelection(ausstattungConfig); }
+        };
+
+        function loadAusstattungForBuilding(building) {
+            if (building && building.properties && building.properties.ausstattung) {
+                ausstattungData = building.properties.ausstattung.map(function(a) {
+                    return {
+                        id: a.id,
+                        bezeichnung: a.bezeichnung,
+                        kategorie: a.kategorie,
+                        hersteller: a.hersteller,
+                        baujahr: a.baujahr,
+                        standort: a.standort
+                    };
+                });
+            } else {
+                ausstattungData = [];
+            }
+            filteredAusstattung = ausstattungData.slice();
+        }
+
+        function renderAusstattungTable() {
+            var tbody = document.getElementById('ausstattung-tbody');
+            if (!tbody) return;
+
+            var html = '';
+            filteredAusstattung.forEach(function(a) {
+                html += '<tr data-id="' + a.id + '">' +
+                    '<td class="col-checkbox"><input type="checkbox" class="ausstattung-checkbox"></td>' +
+                    '<td class="col-ausstattung-id">' + a.id + '</td>' +
+                    '<td class="col-ausstattung-bezeichnung">' + a.bezeichnung + '</td>' +
+                    '<td class="col-ausstattung-kategorie"><span class="kategorie-badge">' + a.kategorie + '</span></td>' +
+                    '<td class="col-ausstattung-hersteller">' + a.hersteller + '</td>' +
+                    '<td class="col-ausstattung-baujahr">' + a.baujahr + '</td>' +
+                    '<td class="col-ausstattung-standort">' + a.standort + '</td>' +
+                '</tr>';
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.ausstattung-checkbox').forEach(function(cb) {
+                cb.addEventListener('change', function() { updateTableSelection(ausstattungConfig); });
+            });
+        }
+
+        // Ausstattung filter
+        var ausstattungFilter = document.getElementById('ausstattung-filter');
+        if (ausstattungFilter) {
+            ausstattungFilter.addEventListener('input', function() {
+                var term = this.value.toLowerCase().trim();
+                if (term === '') {
+                    filteredAusstattung = ausstattungData.slice();
+                } else {
+                    filteredAusstattung = ausstattungData.filter(function(a) {
+                        return a.id.toLowerCase().includes(term) ||
+                               a.bezeichnung.toLowerCase().includes(term) ||
+                               a.kategorie.toLowerCase().includes(term) ||
+                               a.hersteller.toLowerCase().includes(term) ||
+                               a.baujahr.toString().includes(term) ||
+                               a.standort.toLowerCase().includes(term);
+                    });
+                }
+                sortTableData(filteredAusstattung, ausstattungSort.column, ausstattungSort.direction);
+                renderAusstattungTable();
+            });
+        }
+
+        initTableSorting(ausstattungConfig);
+        initSelectAll(ausstattungConfig);
+
+        var addAusstattungBtn = document.getElementById('btn-add-ausstattung');
+        if (addAusstattungBtn) {
+            addAusstattungBtn.addEventListener('click', function() {
+                alert('Ausstattung hinzufügen - kommt bald...');
             });
         }
     </script>
