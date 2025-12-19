@@ -1986,6 +1986,20 @@
             text-decoration: underline;
         }
 
+        /* ===== KOSTEN TABLE: 7 columns = 100% ===== */
+        /* checkbox:4% + id:10% + gruppe:12% + art:26% + betrag:16% + einheit:14% + stichtag:auto */
+        #kosten-table .col-kosten-id       { width: 10%; }
+        #kosten-table .col-kosten-gruppe   { width: 12%; }
+        #kosten-table .col-kosten-art      { width: 26%; }
+        #kosten-table .col-kosten-betrag   { width: 16%; text-align: right; }
+        #kosten-table .col-kosten-einheit  { width: 14%; }
+        #kosten-table .col-kosten-stichtag { width: auto; }
+
+        #kosten-table td.col-kosten-betrag {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
         /* ===== VERTRAEGE TABLE: 8 columns = 100% ===== */
         /* checkbox:4% + id:9% + art:17% + partner:26% + beginn:10% + ende:10% + betrag:14% + status:10% = 100% */
         #vertraege-table .col-vertrag-id      { width: 9%; }
@@ -3187,7 +3201,7 @@
                 <div class="detail-tabs-inner">
                     <div class="detail-tab active" data-tab="uebersicht">Übersicht</div>
                     <div class="detail-tab" data-tab="bemessungen">Bemessungen</div>
-                    <div class="detail-tab disabled" data-tab="kosten">Kosten</div>
+                    <div class="detail-tab" data-tab="kosten">Kosten</div>
                     <div class="detail-tab" data-tab="vertraege">Verträge</div>
                     <div class="detail-tab" data-tab="ausstattung">Ausstattung</div>
                     <div class="detail-tab" data-tab="dokumente">Dokumente</div>
@@ -3443,6 +3457,79 @@
                                         </tr>
                                     </thead>
                                     <tbody id="measurements-tbody">
+                                        <!-- Populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Kosten -->
+                <div class="tab-content" data-content="kosten">
+                    <div class="detail-table-container">
+                        <div class="detail-section">
+                            <div class="detail-section-title">Kosten</div>
+
+                            <div class="toolbar">
+                                <div class="toolbar-search">
+                                    <span class="material-symbols-outlined">search</span>
+                                    <input type="text" id="kosten-filter" placeholder="Alle Spalten filtern">
+                                </div>
+                                <div class="toolbar-actions detail-table-actions">
+                                    <button class="btn-action kosten-action" disabled>
+                                        <span class="material-symbols-outlined">edit</span>
+                                        Bearbeiten
+                                    </button>
+                                    <button class="btn-action kosten-action" disabled>
+                                        <span class="material-symbols-outlined">delete</span>
+                                        Löschen
+                                    </button>
+                                    <button class="btn-action kosten-action" disabled>
+                                        <span class="material-symbols-outlined">description</span>
+                                        Details
+                                    </button>
+                                    <button class="btn-back" id="btn-add-kosten">
+                                        <span class="material-symbols-outlined">add</span>
+                                        Hinzufügen
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="detail-table-wrapper">
+                                <table class="detail-table" id="kosten-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-checkbox">
+                                                <input type="checkbox" id="select-all-kosten">
+                                            </th>
+                                            <th class="col-kosten-id sortable" data-sort="id">
+                                                ID
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-kosten-gruppe sortable" data-sort="kostengruppe">
+                                                Kostengruppe
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-kosten-art sortable" data-sort="kostenart">
+                                                Kostenart
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-kosten-betrag sortable" data-sort="betrag">
+                                                Betrag
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-kosten-einheit sortable" data-sort="einheit">
+                                                Einheit
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-kosten-stichtag sortable" data-sort="stichtag">
+                                                Stichtag
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="kosten-tbody">
                                         <!-- Populated by JavaScript -->
                                     </tbody>
                                 </table>
@@ -4690,6 +4777,9 @@
             // Load kontakte for this building
             loadKontakteForBuilding(building);
 
+            // Load kosten for this building
+            loadKostenForBuilding(building);
+
             // Load vertraege for this building
             loadVertraegeForBuilding(building);
 
@@ -5698,6 +5788,11 @@
                     renderKontakteTable();
                 }
 
+                // Render kosten table when switching to Kosten tab
+                if (targetTab === 'kosten') {
+                    renderKostenTable();
+                }
+
                 // Render vertraege table when switching to Verträge tab
                 if (targetTab === 'vertraege') {
                     renderVertraegeTable();
@@ -6172,6 +6267,115 @@
         if (addKontaktBtn) {
             addKontaktBtn.addEventListener('click', function() {
                 alert('Kontakt hinzufügen - kommt bald...');
+            });
+        }
+
+        // ===== KOSTEN TAB =====
+        var kostenData = [];
+        var filteredKosten = [];
+        var kostenSort = { column: 'kostengruppe', direction: 'asc' };
+
+        var kostenConfig = {
+            tableId: 'kosten-table',
+            checkboxClass: 'kosten-checkbox',
+            selectAllId: 'select-all-kosten',
+            actionClass: 'kosten-action',
+            state: kostenSort,
+            onSort: function() {
+                sortTableData(filteredKosten, kostenSort.column, kostenSort.direction);
+                renderKostenTable();
+            },
+            onUpdate: function() { updateTableSelection(kostenConfig); }
+        };
+
+        function loadKostenForBuilding(building) {
+            if (building && building.properties && building.properties.kosten) {
+                kostenData = building.properties.kosten.map(function(k) {
+                    return {
+                        id: k.id,
+                        kostengruppe: k.kostengruppe,
+                        kostenart: k.kostenart,
+                        betrag: k.betrag,
+                        einheit: k.einheit,
+                        stichtag: k.stichtag
+                    };
+                });
+            } else {
+                kostenData = [];
+            }
+            filteredKosten = kostenData.slice();
+        }
+
+        function formatKostenBetrag(amount, einheit) {
+            if (amount == null) return '—';
+            // Extract currency from einheit (e.g., "CHF/Jahr" -> "CHF")
+            var currency = 'CHF';
+            if (einheit) {
+                var parts = einheit.split('/');
+                if (parts.length > 0) {
+                    currency = parts[0].trim();
+                }
+            }
+            return new Intl.NumberFormat('de-CH', {
+                style: 'currency',
+                currency: currency,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function renderKostenTable() {
+            var tbody = document.getElementById('kosten-tbody');
+            if (!tbody) return;
+
+            var html = '';
+            filteredKosten.forEach(function(k) {
+                html += '<tr data-id="' + k.id + '">' +
+                    '<td class="col-checkbox"><input type="checkbox" class="kosten-checkbox"></td>' +
+                    '<td class="col-kosten-id">' + k.id + '</td>' +
+                    '<td class="col-kosten-gruppe">' + k.kostengruppe + '</td>' +
+                    '<td class="col-kosten-art">' + k.kostenart + '</td>' +
+                    '<td class="col-kosten-betrag">' + formatKostenBetrag(k.betrag, k.einheit) + '</td>' +
+                    '<td class="col-kosten-einheit">' + (k.einheit || '—') + '</td>' +
+                    '<td class="col-kosten-stichtag">' + (k.stichtag || '—') + '</td>' +
+                '</tr>';
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.kosten-checkbox').forEach(function(cb) {
+                cb.addEventListener('change', function() { updateTableSelection(kostenConfig); });
+            });
+        }
+
+        // Kosten filter
+        var kostenFilter = document.getElementById('kosten-filter');
+        if (kostenFilter) {
+            kostenFilter.addEventListener('input', function() {
+                var term = this.value.toLowerCase().trim();
+                if (term === '') {
+                    filteredKosten = kostenData.slice();
+                } else {
+                    filteredKosten = kostenData.filter(function(k) {
+                        return k.id.toLowerCase().includes(term) ||
+                               k.kostengruppe.toLowerCase().includes(term) ||
+                               k.kostenart.toLowerCase().includes(term) ||
+                               (k.betrag && k.betrag.toString().includes(term)) ||
+                               (k.einheit && k.einheit.toLowerCase().includes(term)) ||
+                               (k.stichtag && k.stichtag.toLowerCase().includes(term));
+                    });
+                }
+                sortTableData(filteredKosten, kostenSort.column, kostenSort.direction);
+                renderKostenTable();
+            });
+        }
+
+        initTableSorting(kostenConfig);
+        initSelectAll(kostenConfig);
+
+        var addKostenBtn = document.getElementById('btn-add-kosten');
+        if (addKostenBtn) {
+            addKostenBtn.addEventListener('click', function() {
+                alert('Kosten hinzufügen - kommt bald...');
             });
         }
 

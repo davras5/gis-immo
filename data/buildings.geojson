@@ -240,6 +240,64 @@
             "baujahr": 2019,
             "standort": "Untergeschoss Technikraum"
           }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-001-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 185000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K2",
+            "kostengruppe": "312",
+            "kostenart": "Fernwärme",
+            "betrag": 92000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K3",
+            "kostengruppe": "313",
+            "kostenart": "Wasserversorgung",
+            "betrag": 12500,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K4",
+            "kostengruppe": "321",
+            "kostenart": "Abwasserentsorgung",
+            "betrag": 8200,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K5",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung Innenräume",
+            "betrag": 145000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K6",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 95000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K7",
+            "kostengruppe": "410",
+            "kostenart": "Instandhaltung Baukonstruktion",
+            "betrag": 78000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
         ]
       },
       "geometry": {
@@ -453,6 +511,40 @@
             "hersteller": "ThyssenKrupp",
             "baujahr": 2000,
             "standort": "Haupteingang"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-002-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 42000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-002-K2",
+            "kostengruppe": "312",
+            "kostenart": "Gasversorgung",
+            "betrag": 28000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-002-K3",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung",
+            "betrag": 36000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-002-K4",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 78000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
           }
         ]
       },
@@ -730,6 +822,48 @@
             "baujahr": 2020,
             "standort": "Hochregallager"
           }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-003-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 320000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K2",
+            "kostengruppe": "312",
+            "kostenart": "Gasheizung",
+            "betrag": 85000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K3",
+            "kostengruppe": "322",
+            "kostenart": "Abfallentsorgung",
+            "betrag": 42000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K4",
+            "kostengruppe": "340",
+            "kostenart": "Wartung Fördertechnik",
+            "betrag": 125000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K5",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung",
+            "betrag": 58000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
         ]
       },
       "geometry": {
@@ -915,6 +1049,32 @@
             "hersteller": "Honeywell",
             "baujahr": 2020,
             "standort": "Gesamte Mietfläche"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-004-K1",
+            "kostengruppe": "210",
+            "kostenart": "Miete Bürofläche",
+            "betrag": 450000,
+            "einheit": "USD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-004-K2",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 28000,
+            "einheit": "USD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-004-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 125000,
+            "einheit": "USD/Jahr",
+            "stichtag": "01.12.2024"
           }
         ]
       },
@@ -1175,6 +1335,40 @@
             "baujahr": 2022,
             "standort": "Konferenzraum A, 2. OG"
           }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-005-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 52000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-005-K2",
+            "kostengruppe": "312",
+            "kostenart": "Heizöl",
+            "betrag": 68000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-005-K3",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung",
+            "betrag": 45000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-005-K4",
+            "kostengruppe": "420",
+            "kostenart": "Sanierungskosten anteilig",
+            "betrag": 850000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
         ]
       },
       "geometry": {
@@ -1397,6 +1591,40 @@
             "hersteller": "Panasonic",
             "baujahr": 2018,
             "standort": "Gesamtgebäude"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-006-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 4200000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-006-K2",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung und Gartenpflege",
+            "betrag": 3800000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-006-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 8500000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-006-K4",
+            "kostengruppe": "340",
+            "kostenart": "Klimaanlagen-Wartung",
+            "betrag": 2200000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
           }
         ]
       },
@@ -1650,6 +1878,48 @@
             "baujahr": 2020,
             "standort": "Waschküche UG"
           }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-007-K1",
+            "kostengruppe": "311",
+            "kostenart": "Allgemeinstrom",
+            "betrag": 8500,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K2",
+            "kostengruppe": "312",
+            "kostenart": "Gasheizung",
+            "betrag": 42000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K3",
+            "kostengruppe": "313",
+            "kostenart": "Wasserversorgung",
+            "betrag": 12000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K4",
+            "kostengruppe": "330",
+            "kostenart": "Treppenhausreinigung",
+            "betrag": 18000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K5",
+            "kostengruppe": "340",
+            "kostenart": "Hauswartung",
+            "betrag": 42000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
         ]
       },
       "geometry": {
@@ -1872,6 +2142,40 @@
             "hersteller": "Intelbras",
             "baujahr": 2022,
             "standort": "Gesamtgebäude"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-008-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 85000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-008-K2",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung und Gartenpflege",
+            "betrag": 120000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-008-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 280000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-008-K4",
+            "kostengruppe": "340",
+            "kostenart": "Klimaanlagen-Wartung",
+            "betrag": 45000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
           }
         ]
       },
@@ -2166,6 +2470,56 @@
             "baujahr": 2025,
             "standort": "Leitwarte"
           }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-009-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung IT-Betrieb",
+            "betrag": 2800000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K2",
+            "kostengruppe": "340",
+            "kostenart": "Kühlanlagen-Wartung",
+            "betrag": 180000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K3",
+            "kostengruppe": "350",
+            "kostenart": "24/7 Sicherheitsdienst",
+            "betrag": 420000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K4",
+            "kostengruppe": "340",
+            "kostenart": "USV-Wartung",
+            "betrag": 95000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K5",
+            "kostengruppe": "340",
+            "kostenart": "Gebäudeautomation Betrieb",
+            "betrag": 65000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K6",
+            "kostengruppe": "220",
+            "kostenart": "Versicherungen",
+            "betrag": 280000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
         ]
       },
       "geometry": {
@@ -2388,6 +2742,40 @@
             "hersteller": "Hikvision",
             "baujahr": 2020,
             "standort": "Aussenbereich"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-010-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 18000,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-010-K2",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung und Gartenpflege",
+            "betrag": 24000,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-010-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 52000,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-010-K4",
+            "kostengruppe": "340",
+            "kostenart": "Klimaanlagen-Wartung",
+            "betrag": 8500,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
           }
         ]
       },
