@@ -169,6 +169,35 @@
             "telefon": "+41 58 462 10 01",
             "email": "sandra.keller@bbl.admin.ch"
           }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-001-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Siemens Building Technologies AG",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2025",
+            "betrag": 85000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-001-V2",
+            "vertragsart": "Reinigungsvertrag",
+            "vertragspartner": "ISS Facility Services AG",
+            "vertragsbeginn": "01.04.2021",
+            "vertragsende": "31.03.2026",
+            "betrag": 120000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-001-V3",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Securitas AG",
+            "vertragsbeginn": "01.01.2019",
+            "vertragsende": null,
+            "betrag": 95000,
+            "status": "Aktiv"
+          }
         ]
       },
       "geometry": {
@@ -328,6 +357,26 @@
             "organisation": "BBL Objektmanagement",
             "telefon": "+49 30 390 4010",
             "email": "klaus.weber@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-002-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Bosch Building Technologies GmbH",
+            "vertragsbeginn": "01.01.2021",
+            "vertragsende": "31.12.2026",
+            "betrag": 42000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-002-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Kötter Security GmbH",
+            "vertragsbeginn": "01.07.2020",
+            "vertragsende": null,
+            "betrag": 78000,
+            "status": "Aktiv"
           }
         ]
       },
@@ -517,6 +566,44 @@
             "telefon": "+41 58 462 10 01",
             "email": "sandra.keller@bbl.admin.ch"
           }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-003-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Johnson Controls AG",
+            "vertragsbeginn": "01.01.2018",
+            "vertragsende": "31.12.2024",
+            "betrag": 65000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-003-V2",
+            "vertragsart": "Reinigungsvertrag",
+            "vertragspartner": "Vebego AG",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2025",
+            "betrag": 48000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-003-V3",
+            "vertragsart": "Logistikdienstleistung",
+            "vertragspartner": "Planzer Transport AG",
+            "vertragsbeginn": "01.06.2019",
+            "vertragsende": null,
+            "betrag": 180000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-003-V4",
+            "vertragsart": "Heizungswartung",
+            "vertragspartner": "Meier Tobler AG",
+            "vertragsbeginn": "01.01.2017",
+            "vertragsende": "31.12.2022",
+            "betrag": 12000,
+            "status": "Ausgelaufen"
+          }
         ]
       },
       "geometry": {
@@ -656,6 +743,26 @@
             "organisation": "EDA Sicherheit",
             "telefon": "+1 212 599 5710",
             "email": "michael.brown@eda.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-004-V1",
+            "vertragsart": "Mietvertrag",
+            "vertragspartner": "Third Avenue Tower LLC",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2030",
+            "betrag": 450000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-004-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Allied Universal Security",
+            "vertragsbeginn": "01.01.2021",
+            "vertragsende": "31.12.2025",
+            "betrag": 125000,
+            "status": "Aktiv"
           }
         ]
       },
@@ -845,6 +952,35 @@
             "telefon": "+41 58 462 80 20",
             "email": "rene.favre@bbl.admin.ch"
           }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-005-V1",
+            "vertragsart": "Sanierungsvertrag",
+            "vertragspartner": "Implenia Schweiz AG",
+            "vertragsbeginn": "01.01.2024",
+            "vertragsende": "31.12.2025",
+            "betrag": 2500000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-005-V2",
+            "vertragsart": "Architekturleistung",
+            "vertragspartner": "Herzog & de Meuron",
+            "vertragsbeginn": "01.06.2023",
+            "vertragsende": "31.12.2025",
+            "betrag": 350000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-005-V3",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Honeywell Schweiz AG",
+            "vertragsbeginn": "01.01.2018",
+            "vertragsende": "31.12.2023",
+            "betrag": 35000,
+            "status": "Ausgelaufen"
+          }
         ]
       },
       "geometry": {
@@ -1004,6 +1140,35 @@
             "organisation": "BBL Objektmanagement",
             "telefon": "+81 3 5449 8410",
             "email": "yuki.tanaka@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-006-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Daikin Industries Ltd",
+            "vertragsbeginn": "01.04.2019",
+            "vertragsende": "31.03.2025",
+            "betrag": 55000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-006-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "ALSOK Co., Ltd.",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": null,
+            "betrag": 92000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-006-V3",
+            "vertragsart": "Gartenpflege",
+            "vertragspartner": "Tokyo Green Service Co.",
+            "vertragsbeginn": "01.04.2018",
+            "vertragsende": "31.03.2024",
+            "betrag": 18000,
+            "status": "Gekündigt"
           }
         ]
       },
@@ -1194,6 +1359,35 @@
             "telefon": "+41 58 462 55 10",
             "email": "barbara.steiner@bbl.admin.ch"
           }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-007-V1",
+            "vertragsart": "Heizungswartung",
+            "vertragspartner": "IWB Industrielle Werke Basel",
+            "vertragsbeginn": "01.01.2016",
+            "vertragsende": "31.12.2026",
+            "betrag": 8500,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-007-V2",
+            "vertragsart": "Hauswartung",
+            "vertragspartner": "Livit AG",
+            "vertragsbeginn": "01.07.2020",
+            "vertragsende": null,
+            "betrag": 42000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-007-V3",
+            "vertragsart": "Reinigungsvertrag",
+            "vertragspartner": "Clean Expert GmbH",
+            "vertragsbeginn": "01.01.2021",
+            "vertragsende": "31.12.2024",
+            "betrag": 28000,
+            "status": "Aktiv"
+          }
         ]
       },
       "geometry": {
@@ -1353,6 +1547,35 @@
             "organisation": "BBL Objektmanagement",
             "telefon": "+55 61 3443 5510",
             "email": "maria.santos@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-008-V1",
+            "vertragsart": "Klimaanlagenwartung",
+            "vertragspartner": "Carrier do Brasil",
+            "vertragsbeginn": "01.01.2022",
+            "vertragsende": "31.12.2027",
+            "betrag": 38000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-008-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Prosegur Brasil",
+            "vertragsbeginn": "01.06.2020",
+            "vertragsende": null,
+            "betrag": 65000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-008-V3",
+            "vertragsart": "Gartenpflege",
+            "vertragspartner": "Verde Vida Ltda",
+            "vertragsbeginn": "01.01.2022",
+            "vertragsende": "31.12.2024",
+            "betrag": 12000,
+            "status": "Aktiv"
           }
         ]
       },
@@ -1551,6 +1774,44 @@
             "telefon": "+41 58 462 90 30",
             "email": "marco.rossi@bbl.admin.ch"
           }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-009-V1",
+            "vertragsart": "Bauvertrag",
+            "vertragspartner": "Marti AG Bauunternehmung",
+            "vertragsbeginn": "01.07.2023",
+            "vertragsende": "31.12.2025",
+            "betrag": 45000000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-009-V2",
+            "vertragsart": "IT-Infrastruktur",
+            "vertragspartner": "Swisscom (Schweiz) AG",
+            "vertragsbeginn": "01.01.2024",
+            "vertragsende": "31.12.2034",
+            "betrag": 2500000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-009-V3",
+            "vertragsart": "Kühlanlagenwartung",
+            "vertragspartner": "Schneider Electric Schweiz AG",
+            "vertragsbeginn": "01.01.2025",
+            "vertragsende": "31.12.2030",
+            "betrag": 180000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-009-V4",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Protectas SA",
+            "vertragsbeginn": "01.01.2025",
+            "vertragsende": null,
+            "betrag": 320000,
+            "status": "Aktiv"
+          }
         ]
       },
       "geometry": {
@@ -1710,6 +1971,35 @@
             "organisation": "BBL Objektmanagement",
             "telefon": "+61 2 6162 8410",
             "email": "emily.wilson@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-010-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Daikin Australia Pty Ltd",
+            "vertragsbeginn": "01.01.2017",
+            "vertragsende": "31.12.2025",
+            "betrag": 22000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-010-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Wilson Security",
+            "vertragsbeginn": "01.07.2018",
+            "vertragsende": null,
+            "betrag": 48000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-010-V3",
+            "vertragsart": "Gartenpflege",
+            "vertragspartner": "Canberra Landscaping Services",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2024",
+            "betrag": 15000,
+            "status": "Aktiv"
           }
         ]
       },

@@ -1986,6 +1986,41 @@
             text-decoration: underline;
         }
 
+        /* ===== VERTRAEGE TABLE: 8 columns = 100% ===== */
+        /* checkbox:4% + id:10% + art:14% + partner:22% + beginn:10% + ende:10% + betrag:12% + status:auto */
+        #vertraege-table .col-vertrag-id      { width: 10%; }
+        #vertraege-table .col-vertrag-art     { width: 14%; }
+        #vertraege-table .col-vertrag-partner { width: 22%; }
+        #vertraege-table .col-vertrag-beginn  { width: 10%; }
+        #vertraege-table .col-vertrag-ende    { width: 10%; }
+        #vertraege-table .col-vertrag-betrag  { width: 12%; text-align: right; }
+        #vertraege-table .col-vertrag-status  { width: auto; }
+
+        #vertraege-table td.col-vertrag-betrag {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .vertrag-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .vertrag-status.aktiv {
+            background: rgba(46, 125, 50, 0.1);
+            color: #2e7d32;
+        }
+        .vertrag-status.gekuendigt {
+            background: rgba(245, 124, 0, 0.1);
+            color: #f57c00;
+        }
+        .vertrag-status.ausgelaufen {
+            background: rgba(117, 117, 117, 0.1);
+            color: #757575;
+        }
+
         /* ===== FILTER PANE ===== */
         #filter-pane {
             width: 0;
@@ -3131,7 +3166,7 @@
                     <div class="detail-tab" data-tab="bemessungen">Bemessungen</div>
                     <div class="detail-tab disabled" data-tab="belegung">Belegung</div>
                     <div class="detail-tab disabled" data-tab="kosten">Kosten</div>
-                    <div class="detail-tab disabled" data-tab="vertraege">Verträge</div>
+                    <div class="detail-tab" data-tab="vertraege">Verträge</div>
                     <div class="detail-tab disabled" data-tab="ausstattung">Ausstattung</div>
                     <div class="detail-tab" data-tab="dokumente">Dokumente</div>
                     <div class="detail-tab" data-tab="kontakte">Kontakte</div>
@@ -3386,6 +3421,83 @@
                                         </tr>
                                     </thead>
                                     <tbody id="measurements-tbody">
+                                        <!-- Populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Verträge -->
+                <div class="tab-content" data-content="vertraege">
+                    <div class="detail-table-container">
+                        <div class="detail-section">
+                            <div class="detail-section-title">Verträge</div>
+
+                            <div class="toolbar">
+                                <div class="toolbar-search">
+                                    <span class="material-symbols-outlined">search</span>
+                                    <input type="text" id="vertraege-filter" placeholder="Alle Spalten filtern">
+                                </div>
+                                <div class="toolbar-actions detail-table-actions">
+                                    <button class="btn-action vertraege-action" disabled>
+                                        <span class="material-symbols-outlined">edit</span>
+                                        Bearbeiten
+                                    </button>
+                                    <button class="btn-action vertraege-action" disabled>
+                                        <span class="material-symbols-outlined">delete</span>
+                                        Löschen
+                                    </button>
+                                    <button class="btn-action vertraege-action" disabled>
+                                        <span class="material-symbols-outlined">description</span>
+                                        Details
+                                    </button>
+                                    <button class="btn-back" id="btn-add-vertrag">
+                                        <span class="material-symbols-outlined">add</span>
+                                        Hinzufügen
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="detail-table-wrapper">
+                                <table class="detail-table" id="vertraege-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-checkbox">
+                                                <input type="checkbox" id="select-all-vertraege">
+                                            </th>
+                                            <th class="col-vertrag-id sortable" data-sort="id">
+                                                ID
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-vertrag-art sortable" data-sort="vertragsart">
+                                                Vertragsart
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-vertrag-partner sortable" data-sort="vertragspartner">
+                                                Vertragspartner
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-vertrag-beginn sortable" data-sort="vertragsbeginn">
+                                                Beginn
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-vertrag-ende sortable" data-sort="vertragsende">
+                                                Ende
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-vertrag-betrag sortable" data-sort="betrag">
+                                                Betrag/Jahr
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                            <th class="col-vertrag-status sortable" data-sort="status">
+                                                Status
+                                                <span class="material-symbols-outlined sort-icon">unfold_more</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="vertraege-tbody">
                                         <!-- Populated by JavaScript -->
                                     </tbody>
                                 </table>
@@ -4483,6 +4595,9 @@
             // Load kontakte for this building
             loadKontakteForBuilding(building);
 
+            // Load vertraege for this building
+            loadVertraegeForBuilding(building);
+
             // Initialize carousel
             initCarousel();
 
@@ -5484,6 +5599,11 @@
                 if (targetTab === 'kontakte') {
                     renderKontakteTable();
                 }
+
+                // Render vertraege table when switching to Verträge tab
+                if (targetTab === 'vertraege') {
+                    renderVertraegeTable();
+                }
             });
         });
 
@@ -5949,6 +6069,120 @@
         if (addKontaktBtn) {
             addKontaktBtn.addEventListener('click', function() {
                 alert('Kontakt hinzufügen - kommt bald...');
+            });
+        }
+
+        // ===== VERTRAEGE TAB =====
+        var vertraegeData = [];
+        var filteredVertraege = [];
+        var vertraegeSort = { column: 'vertragsart', direction: 'asc' };
+
+        var vertraegeConfig = {
+            tableId: 'vertraege-table',
+            checkboxClass: 'vertrag-checkbox',
+            selectAllId: 'select-all-vertraege',
+            actionClass: 'vertraege-action',
+            state: vertraegeSort,
+            onSort: function() {
+                sortTableData(filteredVertraege, vertraegeSort.column, vertraegeSort.direction);
+                renderVertraegeTable();
+            },
+            onUpdate: function() { updateTableSelection(vertraegeConfig); }
+        };
+
+        function loadVertraegeForBuilding(building) {
+            if (building && building.properties && building.properties.vertraege) {
+                vertraegeData = building.properties.vertraege.map(function(v) {
+                    return {
+                        id: v.id,
+                        vertragsart: v.vertragsart,
+                        vertragspartner: v.vertragspartner,
+                        vertragsbeginn: v.vertragsbeginn,
+                        vertragsende: v.vertragsende,
+                        betrag: v.betrag,
+                        status: v.status
+                    };
+                });
+            } else {
+                vertraegeData = [];
+            }
+            filteredVertraege = vertraegeData.slice();
+        }
+
+        function formatCurrency(amount) {
+            if (amount == null) return '—';
+            return new Intl.NumberFormat('de-CH', {
+                style: 'currency',
+                currency: 'CHF',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function getStatusClass(status) {
+            if (!status) return '';
+            var s = status.toLowerCase();
+            if (s === 'aktiv') return 'aktiv';
+            if (s === 'gekündigt') return 'gekuendigt';
+            if (s === 'ausgelaufen') return 'ausgelaufen';
+            return '';
+        }
+
+        function renderVertraegeTable() {
+            var tbody = document.getElementById('vertraege-tbody');
+            if (!tbody) return;
+
+            var html = '';
+            filteredVertraege.forEach(function(v) {
+                var statusClass = getStatusClass(v.status);
+                html += '<tr data-id="' + v.id + '">' +
+                    '<td class="col-checkbox"><input type="checkbox" class="vertrag-checkbox"></td>' +
+                    '<td class="col-vertrag-id">' + v.id + '</td>' +
+                    '<td class="col-vertrag-art">' + v.vertragsart + '</td>' +
+                    '<td class="col-vertrag-partner">' + v.vertragspartner + '</td>' +
+                    '<td class="col-vertrag-beginn">' + (v.vertragsbeginn || '—') + '</td>' +
+                    '<td class="col-vertrag-ende">' + (v.vertragsende || 'unbefristet') + '</td>' +
+                    '<td class="col-vertrag-betrag">' + formatCurrency(v.betrag) + '</td>' +
+                    '<td class="col-vertrag-status"><span class="vertrag-status ' + statusClass + '">' + v.status + '</span></td>' +
+                '</tr>';
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.vertrag-checkbox').forEach(function(cb) {
+                cb.addEventListener('change', function() { updateTableSelection(vertraegeConfig); });
+            });
+        }
+
+        // Vertraege filter
+        var vertraegeFilter = document.getElementById('vertraege-filter');
+        if (vertraegeFilter) {
+            vertraegeFilter.addEventListener('input', function() {
+                var term = this.value.toLowerCase().trim();
+                if (term === '') {
+                    filteredVertraege = vertraegeData.slice();
+                } else {
+                    filteredVertraege = vertraegeData.filter(function(v) {
+                        return v.id.toLowerCase().includes(term) ||
+                               v.vertragsart.toLowerCase().includes(term) ||
+                               v.vertragspartner.toLowerCase().includes(term) ||
+                               (v.vertragsbeginn && v.vertragsbeginn.toLowerCase().includes(term)) ||
+                               (v.vertragsende && v.vertragsende.toLowerCase().includes(term)) ||
+                               (v.betrag && v.betrag.toString().includes(term)) ||
+                               v.status.toLowerCase().includes(term);
+                    });
+                }
+                sortTableData(filteredVertraege, vertraegeSort.column, vertraegeSort.direction);
+                renderVertraegeTable();
+            });
+        }
+
+        initTableSorting(vertraegeConfig);
+        initSelectAll(vertraegeConfig);
+
+        var addVertragBtn = document.getElementById('btn-add-vertrag');
+        if (addVertragBtn) {
+            addVertragBtn.addEventListener('click', function() {
+                alert('Vertrag hinzufügen - kommt bald...');
             });
         }
     </script>
