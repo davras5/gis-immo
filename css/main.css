@@ -455,20 +455,12 @@
         }
 
         /* ===== VIEW TRANSITION ANIMATIONS ===== */
-        /* Views start visible, then use transitions for smooth switching */
         #map-view,
         #list-view,
         #gallery-view,
         #detail-view {
-            transition: opacity 0.2s ease-out;
-        }
-
-        /* Only non-active views are transparent (handled by display:none primarily) */
-        #map-view:not(.active),
-        #list-view:not(.active),
-        #gallery-view:not(.active),
-        #detail-view:not(.active) {
             opacity: 0;
+            transition: opacity 0.2s ease-out;
         }
 
         #map-view.active,
