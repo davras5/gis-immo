@@ -237,6 +237,72 @@
         // Make loadAllData globally available for retry buttons
         window.loadAllData = null; // Will be set when loadAllData is defined
 
+        // ===== SKELETON LOADING =====
+
+        function showListSkeleton() {
+            var listBody = document.getElementById('list-body');
+            if (!listBody) return;
+
+            var skeletonHtml = '';
+            for (var i = 0; i < 8; i++) {
+                skeletonHtml += '<tr class="skeleton-row-item">' +
+                    '<td><div class="skeleton skeleton-cell small"></div></td>' +
+                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
+                    '<td><div class="skeleton skeleton-cell small"></div></td>' +
+                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
+                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
+                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
+                    '<td><div class="skeleton skeleton-cell small"></div></td>' +
+                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
+                '</tr>';
+            }
+            listBody.innerHTML = skeletonHtml;
+        }
+
+        function showGallerySkeleton() {
+            var galleryGrid = document.getElementById('gallery-grid');
+            if (!galleryGrid) return;
+
+            var skeletonHtml = '';
+            for (var i = 0; i < 6; i++) {
+                skeletonHtml += '<div class="gallery-skeleton-card">' +
+                    '<div class="skeleton gallery-skeleton-image"></div>' +
+                    '<div class="gallery-skeleton-content">' +
+                        '<div class="skeleton skeleton-text medium"></div>' +
+                        '<div class="skeleton skeleton-text short"></div>' +
+                        '<div style="display: flex; gap: 8px; margin-top: 12px;">' +
+                            '<div class="skeleton skeleton-text" style="width: 60px; height: 20px; border-radius: 10px;"></div>' +
+                            '<div class="skeleton skeleton-text" style="width: 80px; height: 20px; border-radius: 10px;"></div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }
+            galleryGrid.innerHTML = skeletonHtml;
+        }
+
+        function showAllSkeletons() {
+            showListSkeleton();
+            showGallerySkeleton();
+        }
+
+        // ===== BUTTON LOADING STATE =====
+
+        function setButtonLoading(button, isLoading) {
+            if (!button) return;
+
+            if (isLoading) {
+                button.classList.add('btn-loading');
+                button.setAttribute('aria-busy', 'true');
+                // Store original text for restoration
+                if (!button.dataset.originalText) {
+                    button.dataset.originalText = button.innerHTML;
+                }
+            } else {
+                button.classList.remove('btn-loading');
+                button.removeAttribute('aria-busy');
+            }
+        }
+
         // ===== FETCH WITH ERROR HANDLING =====
 
         function fetchWithErrorHandling(url, options) {
@@ -873,6 +939,9 @@
         // Daten laden (parallel fetch of all entity files with error handling)
         function loadAllData() {
             showLoadingOverlay('Daten werden geladen...');
+
+            // Show skeleton loaders in list and gallery views
+            showAllSkeletons();
 
             Promise.all([
                 fetchWithErrorHandling('data/buildings.geojson'),
