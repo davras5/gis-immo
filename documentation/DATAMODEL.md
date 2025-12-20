@@ -133,7 +133,7 @@ Related entities (Bemessungen, Dokumente, Kontakte, Verträge) are embedded as a
 
 ---
 
-## Entity: Site
+## Entity: Site (Standort)
 
 A site represents a logical grouping of buildings, such as a campus, property, or land parcel. Buildings belong to exactly one site.
 
