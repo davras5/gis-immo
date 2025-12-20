@@ -1774,7 +1774,7 @@
             right: 20px;
             display: flex;
             align-items: flex-end;
-            gap: var(--space-3);
+            gap: var(--space-4);
             z-index: 500;
             transition: right 0.3s ease;
         }
