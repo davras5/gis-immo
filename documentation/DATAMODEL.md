@@ -20,6 +20,8 @@ This document describes the data model for the BBL Immobilienportfolio applicati
    - 3.2 [Land (Grundstück)](#32-land-grundstück)
    - 3.3 [Building (Gebäude)](#33-building-gebäude)
    - 3.4 [Address (Adresse)](#34-address-adresse)
+   - 3.5 [Floor (Geschoss)](#35-floor-geschoss)
+   - 3.6 [Space (Raum)](#36-space-raum)
 4. [Measurement Entities](#4-measurement-entities)
    - 4.1 [Area Measurement (Bemessung)](#41-area-measurement-bemessung)
    - 4.2 [Operational Measurement (Betriebsmessung) [Preview]](#42-operational-measurement-betriebsmessung-preview)
@@ -104,6 +106,7 @@ erDiagram
     Site ||--o{ Building : contains
     Site ||--o{ Land : contains
     Building ||--o{ Address : "has"
+    Building ||--o{ Floor : "has"
     Building ||--o{ AreaMeasurement : "has"
     Building ||--o{ Document : "has"
     Building ||--o{ Contact : "has"
@@ -112,6 +115,7 @@ erDiagram
     Building ||--o{ Asset : "has"
     Building ||--o{ Cost : "has"
     Building ||--o{ OperationalMeasurement : "has"
+    Floor ||--o{ Space : "has"
 
     Site {
         string siteId PK
@@ -143,6 +147,20 @@ erDiagram
         string postalCode
         string city
         string country
+    }
+
+    Floor {
+        string floorId PK
+        string buildingId FK
+        string name
+        number floorNumber
+    }
+
+    Space {
+        string spaceId PK
+        string floorId FK
+        string name
+        string type
     }
 
     AreaMeasurement {
@@ -205,7 +223,7 @@ Entities are organized into functional groups:
 
 | Layer | Entities | Description |
 |-------|----------|-------------|
-| **Core** | Site, Land, Building, Address | Primary real estate objects and their locations |
+| **Core** | Site, Land, Building, Address, Floor, Space | Primary real estate objects, their locations, and internal structures |
 | **Measurement** | Area Measurement, Operational Measurement | Quantitative data (areas, volumes, consumption) |
 | **Supporting** | Document, Contact, Asset, Contract, Cost | Administrative and operational associations |
 | **Future** | Certificate, Valuation | Planned entities for certifications and appraisals |
@@ -494,6 +512,119 @@ Addresses represent the physical location of a building. A building can have mul
 ```
 
 > **Note:** The demo uses German values (e.g., `"type": "Primär"`). For English implementations, use `"type": "Primary"`.
+
+---
+
+### 3.5 Floor (Geschoss)
+
+A floor represents a level within a building. Spaces belong to exactly one floor.
+
+#### Schema Definition
+
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| **floorId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Floor ID | Geschoss-ID |
+| **buildingId** | FK | string | Reference to the building which the floor belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Building ID | Objekt-ID |
+| **name** | | string | Name of floor (e.g., Erdgeschoss, Untergeschoss 1, 1. Obergeschoss). | **mandatory**, minLength: 1, maxLength: 200 | Floor Name | Geschossbezeichnung |
+| **validFrom** | | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von |
+| **validUntil** | | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid Until | Gültig bis |
+| energyRatingIds | FK | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | Energy Ratings | Energiebewertungen |
+| eventType | | string, enum | Type of the event as domain event. Options: `FloorAdded`, `FloorUpdated`, `FloorDeleted` | | Event Type | Ereignistyp |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten |
+| floorCode | | string | User specific floor code. | minLength: 1, maxLength: 70 | Floor Code | Geschosscode |
+| floorNumber | | string | Number of floor. | | Floor Number | Geschossnummer |
+| workAreaIds | FK | array[string] | Array of work area IDs. | minLength: 1, maxLength: 50 per ID | Work Areas | Arbeitsbereiche |
+
+#### Example: Floor Object
+
+```json
+{
+  "floorId": "BBL-001-FL-EG",
+  "buildingId": "BBL-001",
+  "name": "Erdgeschoss",
+  "floorNumber": "0",
+  "floorCode": "EG",
+  "validFrom": "1902-06-01T00:00:00Z",
+  "validUntil": null
+}
+```
+
+---
+
+### 3.6 Space (Raum)
+
+A space represents a room or area within a floor. Spaces are the smallest spatial units in the building hierarchy and can be used for tracking occupancy, climate control, and area measurements.
+
+#### Schema Definition
+
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| **spaceId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Space ID | Raum-ID |
+| **floorId** | FK | string | Reference to the floor which the space belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Floor ID | Geschoss-ID |
+| **name** | | string | User-specific space name. | **mandatory**, minLength: 1, maxLength: 200 | Space Name | Raumbezeichnung |
+| **type** | | string | Type of space. | **mandatory**, minLength: 1, maxLength: 70 | Space Type | Raumtyp |
+| **validFrom** | | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von |
+| **validUntil** | | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis |
+| climateCooled | | boolean | Is the space climate cooled? | | Climate Cooled | Klimatisiert (Kühlung) |
+| climateHeated | | boolean | Is the space climate heated? | | Climate Heated | Klimatisiert (Heizung) |
+| coUseArea | | boolean | Is the space being used by multiple tenants? | | Co-Use Area | Gemeinschaftsnutzung |
+| effectZonesCooling | | number | Area that is cooled. | minimum: 1, maximum: 9999 | Cooling Zone Area | Kühlzonenbereich |
+| effectZonesHeating | | number | Area that is heated. | minimum: 1, maximum: 9999 | Heating Zone Area | Heizzonenbereich |
+| effectZonesVentilation | | number | Area that is ventilated. | minimum: 1, maximum: 9999 | Ventilation Zone Area | Lüftungszonenbereich |
+| energyRatingIds | FK | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | Energy Ratings | Energiebewertungen |
+| eventType | | string, enum | Type of the event as domain event. Options: `SpaceAdded`, `SpaceUpdated`, `SpaceDeleted` | | Event Type | Ereignistyp |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten |
+| maximumOccupancy | | number | Define maximum occupancy of space. | minimum: 1, maximum: 9000 | Maximum Occupancy | Maximale Belegung |
+| primaryCeilingMaterial | | string | Material of ceiling. | minLength: 1, maxLength: 75 | Ceiling Material | Deckenmaterial |
+| primaryFloorMaterial | | string | Material of floor. | minLength: 1, maxLength: 75 | Floor Material | Bodenmaterial |
+| primaryWallMaterial | | string | Material of wall. | minLength: 1, maxLength: 75 | Wall Material | Wandmaterial |
+| rentability | | boolean | Status of the space; is the space eligible for renting out? | | Rentability | Vermietbarkeit |
+| spaceCode | | string | User specific space code. | minLength: 1, maxLength: 70 | Space Code | Raumcode |
+| spaceHeight | | number | Actual space height (e.g., 3.6 m). | minimum: 2, maximum: 999 | Space Height | Raumhöhe |
+| spaceHeightUsable | | number | Usable height of space. | minimum: 2, maximum: 999 | Usable Height | Nutzbare Höhe |
+| spaceNumber | | number | Number of space. | minimum: 1, maximum: 99999 | Space Number | Raumnummer |
+| spaceVolumeGross | | number | Gross volume of space including surrounding walls. | minimum: 1, maximum: 999999 | Gross Volume | Bruttovolumen |
+| spaceVolumeNet | | number | Net volume of space excluding surrounding walls. | minimum: 1, maximum: 999999 | Net Volume | Nettovolumen |
+| ventilationType | | string, enum | Define the ventilation type. Options: `Exhaust`, `Supply`, `Balanced`, `Heat-recovery` | | Ventilation Type | Lüftungsart |
+| workAreaIds | FK | array[string] | Array of work area IDs. | minLength: 1, maxLength: 50 per ID | Work Areas | Arbeitsbereiche |
+
+#### Ventilation Types
+
+| Value (EN) | Value (DE) | Description |
+|------------|------------|-------------|
+| `Exhaust` | `Abluft` | Exhaust-only ventilation |
+| `Supply` | `Zuluft` | Supply-only ventilation |
+| `Balanced` | `Zu-/Abluft` | Balanced supply and exhaust |
+| `Heat-recovery` | `Wärmerückgewinnung` | Ventilation with heat recovery |
+
+#### Example: Space Object
+
+```json
+{
+  "spaceId": "BBL-001-SP-101",
+  "floorId": "BBL-001-FL-EG",
+  "name": "Konferenzraum A",
+  "type": "Besprechungsraum",
+  "validFrom": "2019-01-01T00:00:00Z",
+  "validUntil": null,
+  "spaceNumber": 101,
+  "spaceCode": "EG-KR-A",
+  "spaceHeight": 3.2,
+  "spaceHeightUsable": 3.0,
+  "spaceVolumeNet": 96,
+  "maximumOccupancy": 12,
+  "climateHeated": true,
+  "climateCooled": true,
+  "ventilationType": "Zu-/Abluft",
+  "rentability": true,
+  "coUseArea": false,
+  "primaryFloorMaterial": "Parkett",
+  "primaryWallMaterial": "Gipskarton",
+  "primaryCeilingMaterial": "Akustikdecke"
+}
+```
+
+> **Note:** The demo uses German values (e.g., `"type": "Besprechungsraum"`, `"ventilationType": "Zu-/Abluft"`). For English implementations, use `"type": "Meeting room"`, `"ventilationType": "Balanced"`.
 
 ---
 
@@ -1581,6 +1712,7 @@ All dates must be converted to ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ`
 | 0.5.0 | 2024-XX-XX | - | Added Area Measurement (Bemessung) entity with SIA type mappings |
 | 0.6.0 | 2024-XX-XX | - | Added Land (Grundstück) entity with Swiss cadastral extensions |
 | 0.7.0 | 2024-XX-XX | - | Restructured document: grouped entities by function, consolidated enumerations to Appendix A, separated transformation rules to Appendix B |
+| 0.8.0 | 2024-XX-XX | - | Added Floor (Geschoss) and Space (Raum) entities with climate, ventilation, and occupancy fields |
 
 ---
 
