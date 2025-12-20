@@ -949,7 +949,7 @@
         body.detail-active #detail-view {
             overflow: visible;
             align-self: flex-start;
-            min-height: calc(100vh - 120px); /* header 90px + footer ~30px */
+            /* No min-height - let content determine height */
         }
 
         /* Fix smart-drawer height in detail view - fully collapse when closed */
@@ -3035,12 +3035,7 @@
                 padding: var(--space-4);
             }
 
-            /* Adjust detail-view min-height for tablet header (70px) */
-            body.detail-active #detail-view {
-                min-height: calc(100vh - 100px); /* header 70px + footer ~30px */
-            }
-
-            /* Match smart-drawer height to detail-view on tablet */
+            /* Smart-drawer sticky height for tablet */
             body.detail-active #smart-drawer.open {
                 height: calc(100vh - 100px); /* fixed height matching viewport */
             }
@@ -3373,11 +3368,6 @@
 
             #footer-links a {
                 margin-left: var(--space-3);
-            }
-
-            /* Adjust detail-view min-height for mobile (header wraps, estimate ~120px) */
-            body.detail-active #detail-view {
-                min-height: calc(100vh - 150px); /* header ~120px + footer ~30px */
             }
         }
 
