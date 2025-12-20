@@ -33,13 +33,12 @@ erDiagram
     Site ||--o{ Building : contains
     Site ||--o{ Land : contains
     Building ||--o{ Address : "has"
-    Building ||--o{ Bemessung : "has"
-    Building ||--o{ Dokument : "has"
-    Building ||--o{ Kontakt : "has"
-    Building ||--o{ Vertrag : "has"
+    Building ||--o{ AreaMeasurement : "has"
+    Building ||--o{ Document : "has"
+    Building ||--o{ Contact : "has"
+    Building ||--o{ Contract : "has"
     Building ||--o{ Certificate : "has"
-    Building ||--o{ EnergyRating : "has"
-    Building ||--o{ Ausstattung : "has"
+    Building ||--o{ Asset : "has"
 
     Site {
         string siteId PK
@@ -73,26 +72,26 @@ erDiagram
         string country
     }
 
-    Bemessung {
+    AreaMeasurement {
         string areaMeasurementId PK
         string type
         number value
         string unit
     }
 
-    Dokument {
+    Document {
         string documentId PK
         string name
         string type
     }
 
-    Kontakt {
+    Contact {
         string contactId PK
         string name
         string role
     }
 
-    Vertrag {
+    Contract {
         string contractId PK
         string type
         date validFrom
@@ -104,13 +103,7 @@ erDiagram
         string level
     }
 
-    EnergyRating {
-        string energyRatingId PK
-        string class
-        date validFrom
-    }
-
-    Ausstattung {
+    Asset {
         string assetId PK
         string name
         string category
@@ -711,14 +704,13 @@ The following entities are related to buildings and will be documented in separa
 |--------|-------------|--------------|
 | ~~**Site**~~ | ~~A logical grouping of buildings~~ | *(documented above)* |
 | ~~**Address**~~ | ~~Physical address of a building~~ | *(documented above)* |
-| ~~**Bemessung (Area Measurement)**~~ | ~~Area and volume measurements~~ | *(documented above)* |
-| ~~**Land (Grundstück)**~~ | ~~Land parcels belonging to a site~~ | *(documented above)* |
-| ~~**Dokument (Document)**~~ | ~~Related documents (plans, certificates)~~ | *(documented above)* |
-| ~~**Kontakt (Contact)**~~ | ~~Contact persons for the building~~ | *(documented above)* |
-| ~~**Ausstattung (Asset)**~~ | ~~Technical equipment and installations~~ | *(documented above)* |
-| **Vertrag (Contract)** | Service and maintenance contracts | 1 Building → n Contracts |
+| ~~**Area Measurement**~~ | ~~Area and volume measurements~~ | *(documented above)* |
+| ~~**Land**~~ | ~~Land parcels~~ | *(documented above)* |
+| ~~**Document**~~ | ~~Related documents (plans, certificates)~~ | *(documented above)* |
+| ~~**Contact**~~ | ~~Contact persons for the building~~ | *(documented above)* |
+| ~~**Asset**~~ | ~~Technical equipment and installations~~ | *(documented above)* |
+| **Contract** | Service and maintenance contracts | 1 Building → n Contracts |
 | **Certificate** | Building certifications (LEED, BREEAM, etc.) | 1 Building → n Certificates |
-| **EnergyRating** | Energy performance ratings | 1 Building → n Ratings |
 | **Valuation** | Property valuations | 1 Building → n Valuations |
 
 ---
