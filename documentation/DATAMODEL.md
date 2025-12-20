@@ -20,9 +20,24 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 - [Entity: Cost (Kosten)](#entity-cost-kosten)
 - [Entity: Operational Measurement (Preview)](#entity-operational-measurement-preview)
 - [Enumerations](#enumerations)
+  - [Site Types](#site-types)
   - [Building Types](#building-types)
+  - [Ownership Types](#ownership-types)
+  - [Address Types](#address-types)
+  - [Tenant Structure](#tenant-structure)
+  - [Fossil Fuel Exposure](#fossil-fuel-exposure)
   - [Energy Types](#energy-types)
   - [Heating Types](#heating-types)
+  - [Area Measurement Units](#area-measurement-units)
+  - [Area Measurement Accuracy](#area-measurement-accuracy)
+  - [Area Measurement Standards](#area-measurement-standards)
+  - [Cost Periods](#cost-periods)
+  - [Operational Measurement Types](#operational-measurement-types)
+  - [Operational Measurement Units](#operational-measurement-units)
+  - [Procurement Types](#procurement-types)
+  - [Purpose Types](#purpose-types)
+  - [Space Types](#space-types)
+  - [Data Source Types](#data-source-types)
 - [Related Entities (Preview)](#related-entities-preview)
 - [Version History](#version-history)
 - [References](#references)
@@ -144,6 +159,8 @@ Related entities (Bemessungen, Dokumente, Kontakte, Verträge) are embedded as a
 ---
 
 ## Entity: Site
+
+> **Note:** This entity is not currently implemented in the demo. It is documented here for future implementation planning.
 
 A site represents a logical grouping of buildings, such as a campus, property, or land parcel. Buildings belong to exactly one site.
 
@@ -838,6 +855,12 @@ Operational measurements track resource consumption (energy, water, waste) and e
 
 ## Enumerations
 
+### Site Types
+
+Options for Site `type` field:
+
+`Education`, `Health Care`, `Hotel`, `Industrial`, `Lodging`, `Leisure & Recreation`, `Mixed Use`, `Office`, `Residential`, `Retail`, `Technology/Science`, `Other`
+
 ### Building Types
 
 Primary and secondary building type options:
@@ -855,6 +878,30 @@ Primary and secondary building type options:
 | Mixed Use | `Mixed Use`, `Mixed Use Office/Retail`, `Mixed Use Office/Residential`, `Mixed Use Office/Industrial`, `Mixed Use Other` |
 | Other | `Other`, `Other Parking (Indoors)`, `Other Self-Storage` |
 
+### Ownership Types
+
+Options for `typeOfOwnership` field (Building, Land):
+
+`Owner`, `Tenant`
+
+### Address Types
+
+Options for Address `type` field:
+
+`Primary`, `Other`
+
+### Tenant Structure
+
+Options for `tenantStructure` field (Building, Land):
+
+`Single-tenant`, `Multi-tenant`
+
+### Fossil Fuel Exposure
+
+Options for Building `fossilFuelExposure` field:
+
+`Extraction`, `Storage`, `Transport`, `Manufacture`, `Other`, `Not exposed`
+
 ### Energy Types
 
 Options for `primaryEnergyType`:
@@ -866,6 +913,101 @@ Options for `primaryEnergyType`:
 Options for `secondaryHeatingType`:
 
 `District heating`, `Natural gas`, `Oil-based fuels`, `Solar thermal`, `Unspecified`, `Heat pump`, `Electricity (radiator)`, `Biomass`, `Micro combined heat and power`
+
+### Area Measurement Units
+
+Options for Area Measurement `unit` field:
+
+| Value | Description |
+|-------|-------------|
+| `sqm` | Square meters (m²) |
+| `sqft` | Square feet (ft²) |
+| `acr` | Acres |
+
+### Area Measurement Accuracy
+
+Options for Area Measurement `accuracy` field:
+
+| Value | Description |
+|-------|-------------|
+| `Estimated` | Estimated or calculated value |
+| `Measured` | Directly measured value |
+| `Aggregated` | Aggregated from multiple sources |
+| `Unknown` | Accuracy not specified |
+
+### Area Measurement Standards
+
+Options for Area Measurement `standard` field:
+
+| Value | Description |
+|-------|-------------|
+| `DIN 277-1` | German standard for floor areas |
+| `MFG` | Mietflächenrichtlinie für gewerblichen Raum |
+| `IPMS` | International Property Measurement Standards |
+| `RICS` | Royal Institution of Chartered Surveyors |
+| `BOMA` | Building Owners and Managers Association |
+| `NA` | Not applicable / Other standard |
+
+### Cost Periods
+
+Options for Cost `period` field:
+
+| Value | Description |
+|-------|-------------|
+| `Annual` | Yearly cost |
+| `Monthly` | Monthly cost |
+| `Quarterly` | Quarterly cost |
+| `OneTime` | One-time cost |
+
+### Operational Measurement Types
+
+Options for Operational Measurement `type` field:
+
+| Value | Description |
+|-------|-------------|
+| `Energy` | Energy consumption (electricity, gas, heating, etc.) |
+| `Water` | Water consumption and discharge |
+| `Waste` | Waste generation and disposal |
+| `Fugitive` | Fugitive emissions (refrigerants, gases) |
+
+### Operational Measurement Units
+
+Options for Operational Measurement `unit` field:
+
+| Value | Description |
+|-------|-------------|
+| `kWh` | Kilowatt-hours (energy) |
+| `cubm` | Cubic meters (m³) - water, gas |
+| `kg` | Kilograms (waste, emissions) |
+
+### Procurement Types
+
+Options for Operational Measurement `procuredBy` field:
+
+`Procured by third party`, `Self-procured`, `Unspecified`
+
+### Purpose Types
+
+Options for Operational Measurement `purpose` field:
+
+`Space heating`, `Water heating`, `Heating (unspecified)`, `Cooling`, `Lighting`, `Elevator`, `Appliances`, `Other`, `Unspecified`, `Heat pump`, `EV charging`
+
+### Space Types
+
+Options for Operational Measurement `spaceType` field:
+
+`Shared services/Common spaces`, `Tenant space`, `Landlord space`, `Whole building`, `Unspecified`, `Shared services`, `Common spaces`, `Outdoor`, `Exterior area`, `Parking`
+
+### Data Source Types
+
+Options for Operational Measurement `customerInfoSource` field:
+
+| Value | Description |
+|-------|-------------|
+| `Export` | Exported from external system |
+| `Survey` | Collected via survey |
+| `Meter` | Read from meter |
+| `Invoice` | Extracted from invoice |
 
 ---
 
