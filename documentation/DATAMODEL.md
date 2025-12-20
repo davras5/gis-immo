@@ -310,7 +310,6 @@ The building is the core entity representing a physical structure in the portfol
 | monumentProtection | boolean | Is the building declared as a protected monument? | | Source: `denkmalschutz`. "Ja" → true, "Nein" → false |
 | netZeroEnergyBuilding | boolean | Is the building a net zero energy building? | | |
 | numberOfEmployees | number | Number of employees. | maximum: 999999 | |
-| numberOfFloors | number | Number of floors/stories in the building. | | Source: `geschosse` |
 | parkingSpaces | number | Number of parking spaces. | maximum: 9999 | Source: `parkplaetze` |
 | percentageOfOwnership | number | Percentage of ownership. | maximum: 100 | |
 | primaryEnergyType | string, enum | Primary type of energy used. See [Energy Types](#energy-types). | | |
@@ -322,6 +321,7 @@ The building is the core entity representing a physical structure in the portfol
 | tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
 | valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
 | yearOfLastRefurbishment | string | Year of last refurbishment. ISO 8601 format. | minLength: 20 | Source: `sanierung`, convert to ISO 8601 |
+| extensionData.numberOfFloors | number | Number of floors/stories in the building | | Source: `geschosse` |
 | extensionData.responsiblePerson | string | Name of responsible person for the building | | Source: `verantwortlich` |
 | extensionData.egid | string | Federal building identifier (country-specific) | | Source: `egid` |
 | extensionData.egrid | string | Federal property identifier (country-specific) | | Source: `egrid` |
@@ -346,13 +346,13 @@ The building is the core entity representing a physical structure in the portfol
   "constructionYear": "1902-01-01T00:00:00Z",
   "buildingPermitDate": "1898-03-15T00:00:00Z",
   "yearOfLastRefurbishment": "2019-01-01T00:00:00Z",
-  "numberOfFloors": 5,
   "parkingSpaces": 45,
   "electricVehicleChargingStations": 8,
   "monumentProtection": true,
   "status": "In Betrieb",
   "energyEfficiencyClass": "C",
   "extensionData": {
+    "numberOfFloors": 5,
     "egid": "301001234",
     "portfolio": "Verwaltungsgebäude",
     "portfolioGroup": "Bundesverwaltung",
