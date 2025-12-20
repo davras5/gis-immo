@@ -971,6 +971,7 @@
         .detail-tab {
             padding: var(--space-4) var(--space-5);
             font-size: var(--text-sm);
+            font-weight: 500;
             color: var(--grey-600);
             cursor: pointer;
             border-bottom: 3px solid transparent;
@@ -985,7 +986,6 @@
         .detail-tab.active {
             color: var(--primary-red);
             border-bottom-color: var(--primary-red);
-            font-weight: 500;
         }
         
         .detail-tab.disabled {
