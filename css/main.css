@@ -144,13 +144,39 @@
             background: var(--white);
             border-bottom: 1px solid var(--grey-300);
             display: flex;
-            align-items: center;
-            padding: 0 var(--space-5);
-            height: 90px;
+            flex-direction: column;
             z-index: 1000;
             box-shadow: var(--shadow-md);
         }
-        
+
+        .header-main {
+            display: flex;
+            align-items: center;
+            padding: 0 var(--space-5);
+            height: 90px;
+        }
+
+        .header-detail {
+            display: none;
+            flex-direction: column;
+            border-top: 1px solid var(--grey-200);
+        }
+
+        body.detail-active .header-detail {
+            display: flex;
+        }
+
+        /* Detail header and tabs now in header */
+        .header-detail .detail-header {
+            background: var(--white);
+            padding: var(--space-4) var(--space-5);
+        }
+
+        .header-detail .detail-tabs {
+            background: var(--white);
+            border-bottom: 1px solid var(--grey-200);
+        }
+
         #logo-area {
             display: flex;
             align-items: flex-start;
@@ -921,19 +947,13 @@
             min-height: calc(100vh - 120px); /* header 90px + footer ~30px */
         }
 
-        /* Fix filter-pane height in detail view - collapse when closed */
-        body.detail-active #filter-pane:not(.open) {
-            height: 0;
-        }
-
-        /* Fix AI panel height in detail view */
-        /* When closed, collapse height to prevent affecting layout */
-        body.detail-active #ai-assistant-panel:not(.show) {
+        /* Fix smart-drawer height in detail view - collapse when closed */
+        body.detail-active #smart-drawer:not(.open) {
             height: 0;
         }
 
         /* When open, stretch to available height */
-        body.detail-active #ai-assistant-panel.show {
+        body.detail-active #smart-drawer.open {
             height: auto;
         }
 
@@ -1817,9 +1837,9 @@
             display: block;
         }
 
-        /* Move style switcher left when filter-pane is open */
-        .main-content:has(#filter-pane.open) .style-switcher {
-            right: 360px; /* 340px filter + 20px margin */
+        /* Move style switcher left when smart-drawer is open */
+        #main:has(#smart-drawer.open) .style-switcher {
+            right: 420px; /* 400px drawer + 20px margin */
         }
 
         .style-switcher-btn {
@@ -2311,6 +2331,124 @@
         }
 
         /* ===== FILTER PANE ===== */
+        /* ===== SMART DRAWER ===== */
+        #smart-drawer {
+            width: 0;
+            min-width: 0;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: width var(--transition-slow), min-width var(--transition-slow);
+            flex-shrink: 0;
+        }
+
+        #smart-drawer.open {
+            width: 400px;
+            min-width: 400px;
+            border-left: 1px solid var(--grey-300);
+        }
+
+        .smart-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--grey-200);
+            background: var(--grey-50);
+            flex-shrink: 0;
+            gap: var(--space-3);
+        }
+
+        .smart-drawer-tabs {
+            display: flex;
+            background: var(--grey-200);
+            border-radius: var(--radius-md);
+            padding: 3px;
+            gap: 2px;
+        }
+
+        .smart-drawer-tab {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            border: none;
+            background: transparent;
+            border-radius: var(--radius-sm);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--grey-600);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            white-space: nowrap;
+        }
+
+        .smart-drawer-tab:hover {
+            color: var(--grey-900);
+        }
+
+        .smart-drawer-tab.active {
+            background: var(--white);
+            color: var(--grey-900);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .smart-drawer-tab .material-symbols-outlined {
+            font-size: var(--icon-sm);
+        }
+
+        .smart-drawer-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .smart-drawer-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--grey-600);
+            border-radius: var(--radius-sm);
+            transition: background var(--transition-normal);
+        }
+
+        .smart-drawer-btn:hover {
+            background: var(--grey-200);
+        }
+
+        .smart-drawer-btn .material-symbols-outlined {
+            font-size: var(--icon-lg);
+        }
+
+        /* Hide reset button when not on filter tab */
+        #smart-drawer[data-active-tab="assistant"] #drawer-reset-btn {
+            display: none;
+        }
+
+        .smart-drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .smart-drawer-content[data-drawer-content="assistant"] {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .smart-drawer-content .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-4);
+        }
+
+        /* Legacy filter-pane styles for backward compatibility */
         #filter-pane {
             width: 0;
             min-width: 0;
@@ -2819,7 +2957,7 @@
 
         /* Tablet breakpoint (768px - 1024px) */
         @media screen and (max-width: 1024px) {
-            #header {
+            .header-main {
                 padding: 0 16px;
                 height: 70px;
             }
@@ -2840,6 +2978,15 @@
             #header-right {
                 min-width: auto;
                 gap: var(--space-4);
+            }
+
+            .header-detail .detail-header {
+                padding: var(--space-3) var(--space-4);
+            }
+
+            #smart-drawer.open {
+                width: 340px;
+                min-width: 340px;
             }
 
             #accordion-panel {
@@ -2877,7 +3024,7 @@
 
         /* Mobile breakpoint (< 768px) */
         @media screen and (max-width: 767px) {
-            #header {
+            .header-main {
                 flex-wrap: wrap;
                 height: auto;
                 padding: var(--space-3) var(--space-4);
@@ -2940,6 +3087,36 @@
 
             .view-toggle-btn .view-label {
                 display: none !important;
+            }
+
+            /* Header detail on mobile */
+            .header-detail .detail-header {
+                padding: var(--space-3) var(--space-4);
+            }
+
+            .header-detail .detail-tabs {
+                overflow-x: auto;
+            }
+
+            /* Smart drawer - full screen on mobile */
+            #smart-drawer {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100% !important;
+                min-width: 100% !important;
+                z-index: 2000;
+                border-left: none;
+            }
+
+            #smart-drawer:not(.open) {
+                display: none;
+            }
+
+            .smart-drawer-tab span:not(.material-symbols-outlined) {
+                display: none;
             }
 
             /* Accordion panel - full width bottom sheet on mobile */

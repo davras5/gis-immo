@@ -510,29 +510,89 @@
             // Map view updates via updateMapFilter()
         }
 
-        function toggleFilterPane(open) {
-            var pane = document.getElementById('filter-pane');
+        // ===== SMART DRAWER =====
+        var smartDrawerActiveTab = 'filter';
+
+        function toggleSmartDrawer(open, tab) {
+            var drawer = document.getElementById('smart-drawer');
             var filterBtn = document.getElementById('filter-btn');
+            var aiBtn = document.getElementById('ai-assistant-btn');
 
             if (open === undefined) {
-                open = !pane.classList.contains('open');
+                open = !drawer.classList.contains('open');
             }
 
             if (open) {
-                pane.classList.add('open');
-                filterBtn.classList.add('panel-open');
-                filterBtn.setAttribute('aria-expanded', 'true');
+                drawer.classList.add('open');
+                if (tab) {
+                    switchDrawerTab(tab);
+                }
+                // Update button states based on which tab is active
+                updateDrawerButtonStates();
             } else {
-                pane.classList.remove('open');
+                drawer.classList.remove('open');
                 filterBtn.classList.remove('panel-open');
                 filterBtn.setAttribute('aria-expanded', 'false');
+                aiBtn.classList.remove('panel-open');
+                aiBtn.setAttribute('aria-expanded', 'false');
             }
 
             // Resize map after transition completes
             if (window.map) {
                 setTimeout(function() {
                     map.resize();
-                }, 350); // Slightly longer than CSS transition (300ms)
+                }, 350);
+            }
+        }
+
+        function switchDrawerTab(tab) {
+            smartDrawerActiveTab = tab;
+            var drawer = document.getElementById('smart-drawer');
+
+            // Update tab buttons
+            document.querySelectorAll('.smart-drawer-tab').forEach(function(tabBtn) {
+                var isActive = tabBtn.dataset.drawerTab === tab;
+                tabBtn.classList.toggle('active', isActive);
+                tabBtn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            // Update content visibility
+            document.querySelectorAll('.smart-drawer-content').forEach(function(content) {
+                content.style.display = content.dataset.drawerContent === tab ? '' : 'none';
+            });
+
+            // Update data attribute for CSS
+            drawer.setAttribute('data-active-tab', tab);
+
+            // Update header button states
+            updateDrawerButtonStates();
+        }
+
+        function updateDrawerButtonStates() {
+            var drawer = document.getElementById('smart-drawer');
+            var filterBtn = document.getElementById('filter-btn');
+            var aiBtn = document.getElementById('ai-assistant-btn');
+            var isOpen = drawer.classList.contains('open');
+
+            if (isOpen && smartDrawerActiveTab === 'filter') {
+                filterBtn.classList.add('panel-open');
+                filterBtn.setAttribute('aria-expanded', 'true');
+                aiBtn.classList.remove('panel-open');
+                aiBtn.setAttribute('aria-expanded', 'false');
+            } else if (isOpen && smartDrawerActiveTab === 'assistant') {
+                aiBtn.classList.add('panel-open');
+                aiBtn.setAttribute('aria-expanded', 'true');
+                filterBtn.classList.remove('panel-open');
+                filterBtn.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        // Legacy function for backward compatibility
+        function toggleFilterPane(open) {
+            if (open === false) {
+                toggleSmartDrawer(false);
+            } else {
+                toggleSmartDrawer(true, 'filter');
             }
         }
 
@@ -603,19 +663,31 @@
         }
 
         function initFilterPane() {
-            // Toggle filter pane
+            // Toggle filter via header button - opens drawer to filter tab
             document.getElementById('filter-btn').addEventListener('click', function() {
-                toggleFilterPane();
+                var drawer = document.getElementById('smart-drawer');
+                if (drawer.classList.contains('open') && smartDrawerActiveTab === 'filter') {
+                    toggleSmartDrawer(false);
+                } else {
+                    toggleSmartDrawer(true, 'filter');
+                }
             });
 
-            // Close filter pane
-            document.getElementById('filter-close-btn').addEventListener('click', function() {
-                toggleFilterPane(false);
+            // Close smart drawer
+            document.getElementById('drawer-close-btn').addEventListener('click', function() {
+                toggleSmartDrawer(false);
             });
 
-            // Reset filters (button inside pane)
-            document.getElementById('filter-reset-btn').addEventListener('click', function() {
+            // Reset filters (button inside drawer)
+            document.getElementById('drawer-reset-btn').addEventListener('click', function() {
                 resetFilters();
+            });
+
+            // Smart drawer tab switching
+            document.querySelectorAll('.smart-drawer-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    switchDrawerTab(this.dataset.drawerTab);
+                });
             });
 
             // Filter section accordion toggle
@@ -629,7 +701,7 @@
             // Close on Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    toggleFilterPane(false);
+                    toggleSmartDrawer(false);
                 }
             });
 
@@ -2114,41 +2186,17 @@
             updateSelectedBuilding();
         });
 
-        // ===== AI ASSISTANT PANEL =====
+        // ===== AI ASSISTANT (now part of Smart Drawer) =====
         var aiAssistantBtn = document.getElementById('ai-assistant-btn');
-        var aiAssistantPanel = document.getElementById('ai-assistant-panel');
-        var aiPanelClose = document.getElementById('ai-panel-close');
-        var aiPanelOpen = false;
 
-        function toggleAiPanel(forceClose) {
-            if (forceClose === true) {
-                aiPanelOpen = false;
-            } else {
-                aiPanelOpen = !aiPanelOpen;
-            }
-
-            if (aiPanelOpen) {
-                aiAssistantPanel.classList.add('show');
-                aiAssistantBtn.classList.add('panel-open');
-            } else {
-                aiAssistantPanel.classList.remove('show');
-                aiAssistantBtn.classList.remove('panel-open');
-            }
-
-            // Resize map after transition completes
-            if (window.map) {
-                setTimeout(function() {
-                    map.resize();
-                }, 350);
-            }
-        }
-
+        // AI button opens smart drawer to assistant tab
         aiAssistantBtn.addEventListener('click', function() {
-            toggleAiPanel();
-        });
-
-        aiPanelClose.addEventListener('click', function() {
-            toggleAiPanel(true);
+            var drawer = document.getElementById('smart-drawer');
+            if (drawer.classList.contains('open') && smartDrawerActiveTab === 'assistant') {
+                toggleSmartDrawer(false);
+            } else {
+                toggleSmartDrawer(true, 'assistant');
+            }
         });
 
         // ===== DETAIL TABS =====
