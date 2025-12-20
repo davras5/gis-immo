@@ -70,6 +70,10 @@
                     Filter
                 </button>
             </div>
+            <button class="header-btn" id="ai-assistant-btn" title="KI Assistent" aria-label="KI Assistent öffnen" aria-expanded="false" aria-controls="ai-assistant-panel">
+                <span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>
+                KI Assistent
+            </button>
             <div id="login-area">
                 <button id="login-btn" title="Anmelden" aria-label="Anmelden">
                     <span class="material-symbols-outlined" aria-hidden="true">person</span>
@@ -189,6 +193,32 @@
                 </div>
                 <div id="info-body"></div>
             </aside>
+
+            <!-- Style Switcher (visible only in map view) -->
+            <div class="style-switcher" id="style-switcher">
+                <div class="style-switcher-panel" id="style-panel">
+                    <button class="style-option active" data-style="light-v11" title="Light">
+                        <img id="thumb-light-v11" src="" alt="Light">
+                        <span>Light</span>
+                    </button>
+                    <button class="style-option" data-style="streets-v12" title="Standard">
+                        <img id="thumb-streets-v12" src="" alt="Standard">
+                        <span>Standard</span>
+                    </button>
+                    <button class="style-option" data-style="satellite-v9" title="Luftbild">
+                        <img id="thumb-satellite-v9" src="" alt="Luftbild">
+                        <span>Luftbild</span>
+                    </button>
+                    <button class="style-option" data-style="satellite-streets-v12" title="Luftbild + Strassen">
+                        <img id="thumb-satellite-streets-v12" src="" alt="Luftbild + Strassen">
+                        <span>Hybrid</span>
+                    </button>
+                </div>
+                <button class="style-switcher-btn" id="style-switcher-btn" title="Hintergrund wechseln">
+                    <img id="current-style-thumb" src="" alt="Aktueller Stil">
+                    <span>Hintergrund</span>
+                </button>
+            </div>
         </div>
 
         <div id="list-view">
@@ -1027,42 +1057,6 @@
                 </div>
             </div>
         </aside>
-
-        <!-- Floating Controls (bottom-right) -->
-        <div class="floating-controls" id="floating-controls">
-            <!-- Style Switcher (visible only in map view) -->
-            <div class="style-switcher" id="style-switcher">
-                <div class="style-switcher-panel" id="style-panel">
-                    <button class="style-option active" data-style="light-v11" title="Light">
-                        <img id="thumb-light-v11" src="" alt="Light">
-                        <span>Light</span>
-                    </button>
-                    <button class="style-option" data-style="streets-v12" title="Standard">
-                        <img id="thumb-streets-v12" src="" alt="Standard">
-                        <span>Standard</span>
-                    </button>
-                    <button class="style-option" data-style="satellite-v9" title="Luftbild">
-                        <img id="thumb-satellite-v9" src="" alt="Luftbild">
-                        <span>Luftbild</span>
-                    </button>
-                    <button class="style-option" data-style="satellite-streets-v12" title="Luftbild + Strassen">
-                        <img id="thumb-satellite-streets-v12" src="" alt="Luftbild + Strassen">
-                        <span>Hybrid</span>
-                    </button>
-                </div>
-                <button class="style-switcher-btn" id="style-switcher-btn" title="Hintergrund wechseln">
-                    <img id="current-style-thumb" src="" alt="Aktueller Stil">
-                    <span>Hintergrund</span>
-                </button>
-            </div>
-            <!-- AI Assistant Toggle -->
-            <button class="ai-assistant-btn" id="ai-assistant-btn" title="KI Assistent">
-                <span class="ai-btn-icon">
-                    <span class="material-symbols-outlined">smart_toy</span>
-                </span>
-                <span>KI Assistent</span>
-            </button>
-        </div>
         </div><!-- /.main-content -->
 
         <!-- AI Assistant Panel -->
