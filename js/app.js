@@ -42,6 +42,11 @@
         var listViewDirty = false;
         var galleryViewDirty = false;
 
+        // List View Pagination State
+        var listCurrentPage = 1;
+        var listRowsPerPage = 50;
+        var listSearchTerm = '';
+
         // ===== UTILITY FUNCTIONS =====
 
         function escapeHtml(text) {
@@ -295,6 +300,9 @@
 
         function applyFilters() {
             if (!portfolioData) return;
+
+            // Reset list pagination to page 1 when filters change
+            listCurrentPage = 1;
 
             // Filter the data
             filteredData = {
@@ -828,13 +836,9 @@
 
         // List Search Handler
         function handleListSearch(query) {
-            var searchTerm = query.toLowerCase().trim();
-            var rows = document.querySelectorAll('#list-body tr');
-
-            rows.forEach(function(row) {
-                var text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
+            listSearchTerm = query.toLowerCase().trim();
+            listCurrentPage = 1; // Reset to first page when searching
+            renderListView();
         }
 
         // Initialize List View Toolbar Event Listeners
@@ -916,6 +920,7 @@
                     renderListView();
                     renderGalleryView();
                     initListToolbar();
+                    initListPagination();
 
                     if (map.loaded()) {
                         addMapLayers();
@@ -1374,6 +1379,27 @@
             var tableWrapper = document.querySelector('#list-view .list-table-wrapper');
             var html = '';
 
+            // Apply list search filter if active
+            if (listSearchTerm) {
+                dataToRender = {
+                    type: dataToRender.type,
+                    features: dataToRender.features.filter(function(feature) {
+                        var props = feature.properties;
+                        var ext = props.extensionData || {};
+                        var searchableText = [
+                            props.buildingId,
+                            props.name,
+                            props.country,
+                            props.city,
+                            props.streetName,
+                            ext.portfolio,
+                            props.status
+                        ].join(' ').toLowerCase();
+                        return searchableText.includes(listSearchTerm);
+                    })
+                };
+            }
+
             // Handle empty state
             if (dataToRender.features.length === 0) {
                 listBody.innerHTML = '';
@@ -1388,6 +1414,7 @@
                     '</div>';
                     tableWrapper.insertAdjacentHTML('afterend', emptyHtml);
                 }
+                updateListPaginationInfo(0, 0, 0);
                 return;
             } else {
                 // Remove empty state if it exists
@@ -1395,7 +1422,25 @@
                 if (existingEmpty) existingEmpty.remove();
             }
 
-            dataToRender.features.forEach(function(feature) {
+            // Pagination calculations
+            var totalItems = dataToRender.features.length;
+            var totalPages = Math.ceil(totalItems / listRowsPerPage);
+
+            // Ensure current page is valid
+            if (listCurrentPage > totalPages) {
+                listCurrentPage = totalPages;
+            }
+            if (listCurrentPage < 1) {
+                listCurrentPage = 1;
+            }
+
+            var startIndex = (listCurrentPage - 1) * listRowsPerPage;
+            var endIndex = Math.min(startIndex + listRowsPerPage, totalItems);
+
+            // Get paginated slice of data
+            var paginatedFeatures = dataToRender.features.slice(startIndex, endIndex);
+
+            paginatedFeatures.forEach(function(feature) {
                 var props = feature.properties;
                 var ext = props.extensionData || {};
                 var statusClass = props.status === 'In Betrieb' ? 'status-active' :
@@ -1417,6 +1462,9 @@
 
             listBody.innerHTML = html;
 
+            // Update pagination info
+            updateListPaginationInfo(listCurrentPage, totalPages, totalItems);
+
             // Add click and keyboard handlers
             document.querySelectorAll('#list-body tr').forEach(function(row) {
                 row.addEventListener('click', function() {
@@ -1431,6 +1479,64 @@
                     }
                 });
             });
+        }
+
+        // Update list pagination UI
+        function updateListPaginationInfo(currentPage, totalPages, totalItems) {
+            var infoEl = document.getElementById('list-pagination-info');
+            var prevBtn = document.getElementById('list-prev-btn');
+            var nextBtn = document.getElementById('list-next-btn');
+
+            if (infoEl) {
+                if (totalItems === 0) {
+                    infoEl.textContent = 'Keine Einträge';
+                } else {
+                    infoEl.textContent = 'Seite ' + currentPage + ' von ' + totalPages;
+                }
+            }
+
+            if (prevBtn) {
+                prevBtn.disabled = currentPage <= 1;
+            }
+
+            if (nextBtn) {
+                nextBtn.disabled = currentPage >= totalPages;
+            }
+        }
+
+        // Initialize list pagination event listeners
+        function initListPagination() {
+            var rowsSelect = document.getElementById('list-rows-per-page');
+            var prevBtn = document.getElementById('list-prev-btn');
+            var nextBtn = document.getElementById('list-next-btn');
+
+            if (rowsSelect) {
+                rowsSelect.addEventListener('change', function() {
+                    listRowsPerPage = parseInt(this.value, 10);
+                    listCurrentPage = 1; // Reset to first page when changing rows per page
+                    renderListView();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    if (listCurrentPage > 1) {
+                        listCurrentPage--;
+                        renderListView();
+                    }
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    var dataToRender = filteredData || portfolioData;
+                    var totalPages = Math.ceil(dataToRender.features.length / listRowsPerPage);
+                    if (listCurrentPage < totalPages) {
+                        listCurrentPage++;
+                        renderListView();
+                    }
+                });
+            }
         }
         
         // ===== RENDER GALLERY VIEW =====
@@ -2412,10 +2518,17 @@
         // Eliminates code duplication across 6 entity tables
 
         function createEntityTable(config) {
+            // Extract table name from tableId (e.g., 'measurements-table' -> 'measurements')
+            var tableName = config.tableId.replace('-table', '');
+
             var table = {
                 data: [],
                 filteredData: [],
                 sort: { column: config.defaultSort || 'id', direction: 'asc' },
+                pagination: {
+                    currentPage: 1,
+                    rowsPerPage: 50
+                },
                 tableConfig: {
                     tableId: config.tableId,
                     checkboxClass: config.checkboxClass,
@@ -2450,9 +2563,11 @@
                     table.data = [];
                 }
                 table.filteredData = table.data.slice();
+                // Reset pagination when loading new data
+                table.pagination.currentPage = 1;
             };
 
-            // Render table rows with empty state support
+            // Render table rows with empty state and pagination support
             table.render = function() {
                 var tbody = document.getElementById(config.tbodyId);
                 if (!tbody) return;
@@ -2470,11 +2585,30 @@
                         '<span class="material-symbols-outlined">' + emptyIcon + '</span>' +
                         '<div class="table-empty-message">' + emptyMessage + '</div>' +
                         '</div></td></tr>';
+                    table.updatePagination(0, 0);
                     return;
                 }
 
+                // Pagination calculations
+                var totalItems = table.filteredData.length;
+                var totalPages = Math.ceil(totalItems / table.pagination.rowsPerPage);
+
+                // Ensure current page is valid
+                if (table.pagination.currentPage > totalPages) {
+                    table.pagination.currentPage = totalPages;
+                }
+                if (table.pagination.currentPage < 1) {
+                    table.pagination.currentPage = 1;
+                }
+
+                var startIndex = (table.pagination.currentPage - 1) * table.pagination.rowsPerPage;
+                var endIndex = Math.min(startIndex + table.pagination.rowsPerPage, totalItems);
+
+                // Get paginated slice of data
+                var paginatedData = table.filteredData.slice(startIndex, endIndex);
+
                 var html = '';
-                table.filteredData.forEach(function(item) {
+                paginatedData.forEach(function(item) {
                     html += '<tr data-id="' + item.id + '">';
                     html += '<td class="col-checkbox"><input type="checkbox" class="' + config.checkboxClass + '"></td>';
                     config.columns.forEach(function(col) {
@@ -2485,11 +2619,40 @@
                 });
                 tbody.innerHTML = html;
 
+                // Update pagination UI
+                table.updatePagination(table.pagination.currentPage, totalPages);
+
                 document.querySelectorAll('.' + config.checkboxClass).forEach(function(cb) {
                     cb.addEventListener('change', function() {
                         updateTableSelection(table.tableConfig);
                     });
                 });
+            };
+
+            // Update pagination UI
+            table.updatePagination = function(currentPage, totalPages) {
+                var paginationFooter = document.getElementById(tableName + '-pagination');
+                if (!paginationFooter) return;
+
+                var infoEl = paginationFooter.querySelector('.pagination-info');
+                var prevBtn = paginationFooter.querySelector('.pagination-prev');
+                var nextBtn = paginationFooter.querySelector('.pagination-next');
+
+                if (infoEl) {
+                    if (totalPages === 0) {
+                        infoEl.textContent = 'Keine Einträge';
+                    } else {
+                        infoEl.textContent = 'Seite ' + currentPage + ' von ' + totalPages;
+                    }
+                }
+
+                if (prevBtn) {
+                    prevBtn.disabled = currentPage <= 1;
+                }
+
+                if (nextBtn) {
+                    nextBtn.disabled = currentPage >= totalPages || totalPages === 0;
+                }
             };
 
             // Filter data based on search term
@@ -2506,6 +2669,8 @@
                         });
                     });
                 }
+                // Reset to first page when filtering
+                table.pagination.currentPage = 1;
                 sortTableData(table.filteredData, table.sort.column, table.sort.direction);
                 table.render();
             };
@@ -2527,6 +2692,41 @@
                     addBtn.addEventListener('click', function() {
                         alert(config.addBtnMessage);
                     });
+                }
+
+                // Initialize pagination event listeners
+                var paginationFooter = document.getElementById(tableName + '-pagination');
+                if (paginationFooter) {
+                    var rowsSelect = paginationFooter.querySelector('.pagination-rows-select');
+                    var prevBtn = paginationFooter.querySelector('.pagination-prev');
+                    var nextBtn = paginationFooter.querySelector('.pagination-next');
+
+                    if (rowsSelect) {
+                        rowsSelect.addEventListener('change', function() {
+                            table.pagination.rowsPerPage = parseInt(this.value, 10);
+                            table.pagination.currentPage = 1;
+                            table.render();
+                        });
+                    }
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function() {
+                            if (table.pagination.currentPage > 1) {
+                                table.pagination.currentPage--;
+                                table.render();
+                            }
+                        });
+                    }
+
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function() {
+                            var totalPages = Math.ceil(table.filteredData.length / table.pagination.rowsPerPage);
+                            if (table.pagination.currentPage < totalPages) {
+                                table.pagination.currentPage++;
+                                table.render();
+                            }
+                        });
+                    }
                 }
             };
 
