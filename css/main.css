@@ -142,11 +142,9 @@
         /* ===== HEADER ===== */
         #header {
             background: var(--white);
-            border-bottom: 1px solid var(--grey-300);
             display: flex;
             flex-direction: column;
             z-index: 1000;
-            box-shadow: var(--shadow-md);
         }
 
         .header-main {
@@ -154,16 +152,24 @@
             align-items: center;
             padding: 0 var(--space-5);
             height: 90px;
+            border-bottom: 1px solid var(--grey-300);
+            box-shadow: var(--shadow-md);
         }
 
         .header-detail {
             display: none;
             flex-direction: column;
-            border-top: 1px solid var(--grey-200);
+            border-bottom: 1px solid var(--grey-200);
+            transition: padding-right var(--transition-slow);
         }
 
         body.detail-active .header-detail {
             display: flex;
+        }
+
+        /* Align header-detail with main-content when drawer is open */
+        body:has(#smart-drawer.open) .header-detail {
+            padding-right: 400px;
         }
 
         /* Detail header and tabs now in header */
@@ -174,7 +180,6 @@
 
         .header-detail .detail-tabs {
             background: var(--white);
-            border-bottom: 1px solid var(--grey-200);
         }
 
         #logo-area {
@@ -2989,6 +2994,11 @@
                 min-width: 340px;
             }
 
+            /* Match header-detail padding to tablet drawer width */
+            body:has(#smart-drawer.open) .header-detail {
+                padding-right: 340px;
+            }
+
             #accordion-panel {
                 width: 320px;
             }
@@ -3096,6 +3106,11 @@
 
             .header-detail .detail-tabs {
                 overflow-x: auto;
+            }
+
+            /* No padding adjustment on mobile - drawer is fullscreen overlay */
+            body:has(#smart-drawer.open) .header-detail {
+                padding-right: 0;
             }
 
             /* Smart drawer - full screen on mobile */
