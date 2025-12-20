@@ -12,7 +12,7 @@
 - Detailansicht mit 7 Tabs: Übersicht, Bemessungen, Dokumente, Kosten, Verträge, Kontakte, Ausstattung
 - Ortssuche via Swisstopo API
 - URL-basierte Navigation mit Deep-Linking
-- Export-Funktionen (CSV, JSON, PDF)
+- Export-Funktionen (CSV, Excel, GeoJSON)
 - Responsive Design mit Accessibility-Features
 
 ## Tech-Stack
@@ -23,7 +23,7 @@
 | Mapbox GL JS | v3.4.0 | Kartenvisualisierung mit WebGL |
 | CSS3 | - | Styling (Flexbox, Grid, CSS Variables) |
 | GeoJSON | - | Datenformat für Geodaten |
-| Swisstopo API | - | Ortssuche (Locations + Layers) |
+| Swisstopo API | v3 | Ortssuche (Locations + Layers) |
 | Geo Admin API | - | Schweizer Geodaten-Katalog |
 | Material Symbols | Google Fonts | Icon-Bibliothek |
 
@@ -33,17 +33,28 @@
 
 ```
 gis-immo/
-├── index.html                    # Komplette App (HTML + CSS + JavaScript, 268 KB)
+├── index.html                    # HTML-Struktur (~1,100 Zeilen)
+├── js/
+│   └── app.js                    # Anwendungslogik (~2,800 Zeilen)
+├── css/
+│   └── main.css                  # Styles & Design-System (~3,400 Zeilen)
 ├── data/
-│   └── buildings.geojson         # Portfolio-Daten (10+ Gebäude, 85 KB)
+│   ├── buildings.geojson         # Portfolio-Daten (10+ Gebäude)
+│   ├── area-measurements.json    # Flächenmessungen nach SIA 416
+│   ├── documents.json            # Pläne, Zertifikate, Genehmigungen
+│   ├── contacts.json             # Personal & Ansprechpartner
+│   ├── contracts.json            # Service- und Wartungsverträge
+│   ├── costs.json                # Betriebskosten
+│   └── assets.json               # Ausstattung & Inventar
 ├── assets/
 │   └── images/
 │       ├── preview1.jpg          # Screenshot Map-View
 │       ├── preview2.jpg          # Screenshot List-View
 │       └── preview3.jpg          # Screenshot Detail-View
 ├── documentation/
-│   ├── DATAMODEL.md              # Detailliertes Datenmodell (82 KB)
-│   └── CLAUDE.md                 # Diese Datei
+│   ├── CLAUDE.md                 # Diese Datei
+│   ├── DATAMODEL.md              # Detailliertes Datenmodell
+│   └── DESIGNGUIDE.md            # Design-System & Komponenten
 ├── README.md                     # Projekt-README
 └── LICENSE                       # MIT-Lizenz
 ```
@@ -71,12 +82,22 @@ Dann http://localhost:8000 öffnen.
 
 ## Wichtige Konfiguration
 
-### Mapbox Token (index.html, ~Zeile 4254)
+### Mapbox Token (js/app.js, Zeile 5)
 ```javascript
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGF2aWRyYXNuZXI1IiwiYSI6...'
 ```
 
-### CSS Design-System (index.html, Zeilen 14-130)
+### Status-Farben (js/app.js, Zeilen 8-13)
+```javascript
+var statusColors = {
+    'In Betrieb': '#2e7d32',        // Grün - aktiv
+    'In Renovation': '#ef6c00',     // Orange - in Renovation
+    'In Planung': '#1976d2',        // Blau - geplant
+    'Ausser Betrieb': '#6C757D'     // Grau - inaktiv
+};
+```
+
+### CSS Design-System (css/main.css, Zeilen 5-99)
 ```css
 :root {
     /* Farben */
@@ -112,7 +133,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGF2aWRyYXNuZXI1IiwiYSI6...'
 }
 ```
 
-### Status-Farben
+### Status-Farben Übersicht
 | Status | Farbe | CSS Variable |
 |--------|-------|--------------|
 | In Betrieb | `#2e7d32` (Grün) | `--status-active` |
@@ -120,79 +141,74 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGF2aWRyYXNuZXI1IiwiYSI6...'
 | In Planung | `#1976d2` (Blau) | `--status-planning` |
 | Ausser Betrieb | `#6C757D` (Grau) | `--status-inactive` |
 
-## Datenmodell (buildings.geojson)
+## Datenmodell
 
 Siehe [DATAMODEL.md](./DATAMODEL.md) für das vollständige Datenmodell.
 
-### Gebäude-Entity (Hauptfelder)
+### Daten-Dateien
+
+| Datei | Beschreibung | Schlüsselfelder |
+|-------|--------------|-----------------|
+| `buildings.geojson` | Hauptdaten der Gebäude | buildingId, name, status, geometry |
+| `area-measurements.json` | Flächenmessungen | areaMeasurementId, type, value, unit |
+| `documents.json` | Dokumente & Pläne | documentId, name, type, fileFormat |
+| `contacts.json` | Ansprechpersonen | contactId, name, role, email |
+| `contracts.json` | Verträge | contractId, type, contractPartner, status |
+| `costs.json` | Betriebskosten | costId, costGroup, amount |
+| `assets.json` | Ausstattung | assetId, name, category, manufacturer |
+
+### Gebäude-Entity (Hauptfelder in buildings.geojson)
 ```javascript
 {
   // Identifikation
-  id: "BBL-001",
+  buildingId: "BBL-001",
+  siteId: "SITE-BBL-001",
   name: "Bundeshaus West",
-  egid: "301001234",              // Eidgenössischer Gebäudeidentifikator
-  egrid: "CH123456789012",        // Eidgenössischer Grundstücksidentifikator
+
+  // Klassifizierung
+  primaryTypeOfBuilding: "Bürogebäude",
+  secondaryTypeOfBuilding: "Parlamentsgebäude",
+  typeOfOwnership: "Eigentümer",
+  status: "In Betrieb",
 
   // Adresse
-  adresse: "Bundesplatz 3, 3003 Bern",
-  hausnummer: "3",
-  plz: "3003",
-  ort: "Bern",
-  region: "Kanton Bern",
-  land: "CH",
+  streetName: "Bundesplatz 3, 3003 Bern",
+  houseNumber: "3",
+  postalCode: "3003",
+  city: "Bern",
+  stateProvincePrefecture: "Kanton Bern",
+  country: "CH",
 
-  // Organisation
-  teilportfolio: "Verwaltungsgebäude",
-  teilportfolio_gruppe: "Bundesverwaltung",
-  verantwortlich: "Anna Müller",
+  // Konstruktion
+  constructionYear: "1902-01-01T00:00:00Z",
+  yearOfLastRefurbishment: "2019-01-01T00:00:00Z",
 
-  // Gebäudedetails
-  baujahr: 1902,
-  geschosse: 5,
-  flaeche_ngf: 12500,             // Nutzfläche m²
-  denkmalschutz: "Ja",
-  parkplaetze: 45,
-  ladestationen: 8,
+  // Technisch
+  energyEfficiencyClass: "C",
+  monumentProtection: true,
+  parkingSpaces: 45,
+  electricVehicleChargingStations: 8,
 
-  // Status & Energie
-  status: "In Betrieb",
-  sanierung: "2019",
-  energieklasse: "C",
-  waermeerzeuger: "Fernwärme",
+  // Schweizer Erweiterungen
+  extensionData: {
+    egid: "301001234",
+    egrid: "CH123456789012",
+    numberOfFloors: 5,
+    responsiblePerson: "Anna Müller",
+    portfolio: "Verwaltungsgebäude",
+    portfolioGroup: "Bundesverwaltung",
+    heatingGenerator: "Fernwärme",
+    heatingSource: "Fernwärmenetz Stadt Bern",
+    netFloorArea: 12500,
+    plotName: "Bundesplatz Parzelle A",
+    plotId: "BE-3003-1001"
+  },
 
-  // Grundstück
-  grundstueck_name: "Bundesplatz Parzelle A",
-  grundstueck_id: "BE-3003-1001",
-  eigentum: "Eigentum Bund",
-
-  // Gültigkeit
-  gueltig_von: "1902-06-01",
-  gueltig_bis: null
-}
-```
-
-### Verschachtelte Entitäten
-
-| Entity | Beschreibung | Felder |
-|--------|--------------|--------|
-| **bemessungen** | Flächenmessungen nach SIA | areaType, value, unit, accuracy, standard, source, validFrom, validUntil |
-| **dokumente** | Dokumente & Pläne | name, type, url, date, size |
-| **kontakte** | Ansprechpersonen | name, rolle, organisation, telefon, email |
-| **vertraege** | Verträge | name, partner, beginn, ende, betrag, status |
-| **ausstattung** | Gebäudeausstattung | kategorie, name, hersteller, baujahr, standort |
-
-### Bemessungen-Array
-```javascript
-{
-  id: "BBL-001-M1",
-  areaType: "Bruttogeschossfläche",  // BGF, NGF, EBF, Volumen, etc.
-  value: 15000,
-  unit: "m²",                         // oder m³, Stk
-  accuracy: "Gemessen",               // Berechnet, Geschätzt, Aggregiert
-  standard: "SIA 416",                // SIA 380/1, DIN 277
-  source: "CAD/BIM",                  // Vermessung, Schätzmodell, Manuell
-  validFrom: "15.03.2019",
-  validUntil: null
+  // Geometrie (GeoJSON Point)
+  geometry: {
+    type: "Point",
+    coordinates: [7.4441, 46.9465]
+  }
 }
 ```
 
@@ -211,7 +227,7 @@ Siehe [DATAMODEL.md](./DATAMODEL.md) für das vollständige Datenmodell.
 1. **Übersicht** - Stammdaten, Bild-Carousel, Mini-Karte
 2. **Bemessungen** - Flächentabelle nach SIA-Standards
 3. **Dokumente** - Grundrisse, Pläne, GEAK-Zertifikate
-4. **Kosten** - Kostentabelle (geplant)
+4. **Kosten** - Betriebskosten nach Kostengruppen
 5. **Verträge** - Wartungs-, Reinigungs-, Sicherheitsverträge
 6. **Kontakte** - Objektverantwortliche, Hauswart, etc.
 7. **Ausstattung** - Gebäudetechnik und Inventar
@@ -238,25 +254,25 @@ Styles: light-v11, standard-v12, satellite-v9
 
 ## Code-Konventionen
 
-### JavaScript
+### JavaScript (js/app.js)
 - **Variablen:** `var` (Legacy-Kompatibilität)
 - **Funktionen:** camelCase (`switchView`, `renderListView`)
 - **DOM-Zugriff:** `document.getElementById()`
 - **Event-Handler:** `addEventListener` Pattern
 - **Globale State:** `portfolioData`, `filteredData`, `selectedBuildingId`
 
-### CSS
+### CSS (css/main.css)
 - **Classes:** kebab-case (`.gallery-card`, `.status-badge`)
 - **IDs:** kebab-case (`#map-view`, `#info-panel`)
 - **Layout:** Flexbox für 1D, CSS Grid für 2D
 - **Variables:** Alle Design-Tokens in `:root`
 
-### HTML
+### HTML (index.html)
 - **Data-Attributes:** `data-view`, `data-id`, `data-sort`, `data-filter`
 - **Semantische Tags:** `<header>`, `<main>`, `<nav>`, `<aside>`, `<section>`
 - **Accessibility:** `role`, `aria-label`, `tabindex`
 
-## Wichtige Funktionen
+## Wichtige Funktionen (js/app.js)
 
 ### View-Management
 ```javascript
@@ -299,8 +315,7 @@ handleSearchClick(type, id)   // Globale Handler für Suchergebnisse
 ### Export
 ```javascript
 exportToCSV()                 // Exportiert gefilterte Daten als CSV
-exportToJSON()                // Exportiert gefilterte Daten als JSON
-exportToPDF()                 // Exportiert gefilterte Daten als PDF
+exportToJSON()                // Exportiert gefilterte Daten als JSON (GeoJSON)
 ```
 
 ## Accessibility-Features
@@ -314,20 +329,19 @@ exportToPDF()                 // Exportiert gefilterte Daten als PDF
 
 ## Hinweise für Entwicklung
 
-1. **Single-File-Architektur:** Alle Änderungen erfolgen in `index.html` (~7000 Zeilen)
+1. **Getrennte Dateien:** HTML in `index.html`, JavaScript in `js/app.js`, CSS in `css/main.css`
 2. **Kein Build:** Änderungen sind sofort sichtbar nach Browser-Reload
 3. **Mapbox-Abhängigkeit:** WebGL erforderlich, Token muss gültig sein
-4. **Daten:** GeoJSON wird bei Seitenladung von `/data/buildings.geojson` geladen
+4. **Daten:** GeoJSON und JSON-Dateien werden bei Seitenladung von `/data/` geladen
 5. **URL-State:** View und Building-ID werden in URL gespeichert
 6. **LocalStorage:** Map-Style wird persistent gespeichert
 
-### Code-Struktur in index.html
-| Zeilen | Inhalt |
-|--------|--------|
-| 1-10 | HTML Head, CDN-Links |
-| 11-2600 | CSS Styles (Design-System) |
-| 2600-4200 | HTML Struktur |
-| 4200-7000 | JavaScript (Logik) |
+### Code-Struktur
+| Datei | Zeilen | Inhalt |
+|-------|--------|--------|
+| `index.html` | ~1,100 | HTML-Struktur, CDN-Links |
+| `js/app.js` | ~2,800 | Anwendungslogik |
+| `css/main.css` | ~3,400 | Design-System, Komponenten-Styles |
 
 ## Schweizer Standards
 
@@ -348,8 +362,8 @@ exportToPDF()                 // Exportiert gefilterte Daten als PDF
 **Alternativ:** Beliebiger Static Host (Netlify, Vercel, Apache, Nginx, CloudFlare).
 
 **Performance:**
-- index.html: 268 KB (komprimiert ~60 KB)
-- buildings.geojson: 85 KB (komprimiert ~20 KB)
+- Total: ~7,300 Zeilen Code (HTML + JS + CSS)
+- Daten: 7 JSON-Dateien mit ~145 KB
 - Schnelle Ladezeiten mit GZIP-Komprimierung
 - Client-seitiges Filtern ohne Netzwerk-Calls
 
@@ -357,9 +371,11 @@ exportToPDF()                 // Exportiert gefilterte Daten als PDF
 
 | Metrik | Wert |
 |--------|------|
-| Dateien | 8 (1 HTML, 1 JSON, 3 Images, 3 Docs) |
-| HTML-Grösse | 268 KB (~7000 Zeilen) |
-| Daten-Grösse | 85 KB (~2800 Zeilen) |
+| Dateien | 14 (1 HTML, 1 JS, 1 CSS, 7 JSON, 3 Images, 1 License) |
+| HTML-Grösse | ~1,100 Zeilen |
+| JavaScript-Grösse | ~2,800 Zeilen (~95 KB) |
+| CSS-Grösse | ~3,400 Zeilen (~95 KB) |
+| Daten-Grösse | ~145 KB (7 JSON-Dateien) |
 | Funktionen | 50+ |
 | Views | 4 (Map, List, Gallery, Detail) |
 | Gebäude | 10+ mit vollständigen Daten |
