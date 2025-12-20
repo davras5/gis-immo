@@ -277,13 +277,13 @@ A site represents a logical grouping of buildings, such as a campus, property, o
 
 #### Swiss Extension Fields (extensionData)
 
-| Field | Type | Description | Alias (EN) | Alias (DE) |
-|-------|------|-------------|------------|------------|
-| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | EGRID | EGRID |
-| extensionData.parzellenNummer | string | Official parcel number | Parcel Number | Parzellennummer |
-| extensionData.grundbuchKreis | string | Land registry district | Land Registry | Grundbuchkreis |
-| extensionData.katasterNummer | string | Cadastral number | Cadastral No. | Katasternummer |
-| extensionData.teilportfolioGruppe | string | Sub-portfolio group (e.g., "Bundesverwaltung") | Portfolio Group | Teilportfolio Gruppe |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| extensionData.egrid | FK | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier). Reference to national Swiss cadastre. | minLength: 14, maxLength: 14 | EGRID | EGRID |
+| extensionData.parzellenNummer | | string | Official parcel number. | | Parcel Number | Parzellennummer |
+| extensionData.grundbuchKreis | | string | Land registry district. | | Land Registry | Grundbuchkreis |
+| extensionData.katasterNummer | | string | Cadastral number. | | Cadastral No. | Katasternummer |
+| extensionData.teilportfolioGruppe | | string | Sub-portfolio group (e.g., "Bundesverwaltung"). | | Portfolio Group | Teilportfolio Gruppe |
 
 #### Example: Site Object
 
@@ -337,9 +337,9 @@ Land represents a parcel of land or plot that belongs to a site. In the current 
 
 #### Swiss Extension Fields (extensionData)
 
-| Field | Type | Description | Alias (EN) | Alias (DE) |
-|-------|------|-------------|------------|------------|
-| extensionData.egrid | string | Federal property identifier (country-specific) | EGRID | EGRID |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| extensionData.egrid | FK | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier). Reference to national Swiss cadastre. | minLength: 14, maxLength: 14 | EGRID | EGRID |
 
 #### Example: Land Object
 
@@ -407,17 +407,17 @@ The building is the core entity representing a physical structure in the portfol
 
 #### Swiss Extension Fields (extensionData)
 
-| Field | Type | Description | Alias (EN) | Alias (DE) |
-|-------|------|-------------|------------|------------|
-| extensionData.numberOfFloors | number | Number of floors/stories in the building | Floors | Anzahl Geschosse |
-| extensionData.responsiblePerson | string | Name of responsible person for the building | Responsible | Verantwortlich |
-| extensionData.egid | string | Federal building identifier (country-specific) | EGID | EGID |
-| extensionData.egrid | string | Federal property identifier (country-specific) | EGRID | EGRID |
-| extensionData.portfolio | string | Sub-portfolio category | Portfolio | Teilportfolio |
-| extensionData.portfolioGroup | string | Portfolio group | Portfolio Group | Teilportfolio Gruppe |
-| extensionData.heatingGenerator | string | Heating generator type | Heating System | Wärmeerzeuger |
-| extensionData.heatingSource | string | Heating source | Heat Source | Wärmequelle |
-| extensionData.hotWater | string | Hot water system description | Hot Water | Warmwasser |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| extensionData.egid | FK | string | Eidgenössischer Gebäudeidentifikator (Federal Building Identifier). Reference to national Swiss building register. | minLength: 1, maxLength: 9 | EGID | EGID |
+| extensionData.egrid | FK | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier). Reference to national Swiss cadastre. | minLength: 14, maxLength: 14 | EGRID | EGRID |
+| extensionData.numberOfFloors | | number | Number of floors/stories in the building. | minimum: 1, maximum: 999 | Floors | Anzahl Geschosse |
+| extensionData.responsiblePerson | | string | Name of responsible person for the building. | | Responsible | Verantwortlich |
+| extensionData.portfolio | | string | Sub-portfolio category. | | Portfolio | Teilportfolio |
+| extensionData.portfolioGroup | | string | Portfolio group. | | Portfolio Group | Teilportfolio Gruppe |
+| extensionData.heatingGenerator | | string | Heating generator type. | | Heating System | Wärmeerzeuger |
+| extensionData.heatingSource | | string | Heating source. | | Heat Source | Wärmequelle |
+| extensionData.hotWater | | string | Hot water system description. | | Hot Water | Warmwasser |
 
 #### Example: Building Object
 
@@ -483,9 +483,9 @@ Addresses represent the physical location of a building. A building can have mul
 
 #### Swiss Extension Fields (extensionData)
 
-| Field | Type | Description | Alias (EN) | Alias (DE) |
-|-------|------|-------------|------------|------------|
-| extensionData.formattedAddress | string | Pre-formatted full address string | Full Address | Vollständige Adresse |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| extensionData.formattedAddress | | string | Pre-formatted full address string. | | Full Address | Vollständige Adresse |
 
 #### Example: Address Object
 
@@ -597,6 +597,12 @@ A space represents a room or area within a floor. Spaces are the smallest spatia
 | `Balanced` | `Zu-/Abluft` | Balanced supply and exhaust |
 | `Heat-recovery` | `Wärmerückgewinnung` | Ventilation with heat recovery |
 
+#### Swiss Extension Fields (extensionData)
+
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| | | | *No Swiss-specific extension fields are currently defined.* | | | |
+
 #### Example: Space Object
 
 ```json
@@ -658,11 +664,11 @@ Area measurements capture floor areas, volumes, and other quantitative measureme
 
 #### Swiss Extension Fields (extensionData)
 
-| Field | Type | Description | Alias (EN) | Alias (DE) |
-|-------|------|-------------|------------|------------|
-| extensionData.source | string | Data source (e.g., "CAD/BIM", "Vermessung", "Schätzmodell", "Manuell") | Source | Quelle |
-| extensionData.originalUnit | string | Original unit before conversion (e.g., "m²", "m³", "Stk") | Original Unit | Urspr. Einheit |
-| extensionData.measurementCategory | string | Category for non-standard measurements (e.g., "volume", "count") | Category | Kategorie |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
+|-------|-------|------|-------------|-------------|------------|------------|
+| extensionData.source | | string | Data source (e.g., "CAD/BIM", "Vermessung", "Schätzmodell", "Manuell"). | | Source | Quelle |
+| extensionData.originalUnit | | string | Original unit before conversion (e.g., "m²", "m³", "Stk"). | | Original Unit | Urspr. Einheit |
+| extensionData.measurementCategory | | string | Category for non-standard measurements (e.g., "volume", "count"). | | Category | Kategorie |
 
 #### Example: Area Measurement Object
 
