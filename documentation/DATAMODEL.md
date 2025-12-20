@@ -6,26 +6,26 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Demo Stage Implementation](#demo-stage-implementation)
-- [Entity: Site](#entity-site)
-- [Entity: Address (Adresse)](#entity-address-adresse)
-- [Entity: Land (Grundstück)](#entity-land-grundstück)
-- [Entity: Building (Gebäude)](#entity-building-gebäude)
-- [Entity: Area Measurement (Bemessung)](#entity-area-measurement-bemessung)
-- [Entity: Document (Dokument)](#entity-document-dokument)
-- [Entity: Contact (Kontakt)](#entity-contact-kontakt)
-- [Entity: Asset (Ausstattung)](#entity-asset-ausstattung)
-- [Entity: Contract (Vertrag)](#entity-contract-vertrag)
-- [Entity: Cost (Kosten)](#entity-cost-kosten)
-- [Entity: Operational Measurement (Preview)](#entity-operational-measurement-preview)
-- [Related Entities (Preview)](#related-entities-preview)
-- [Version History](#version-history)
-- [References](#references)
+1. [Overview](#1-overview)
+2. [Demo Stage Implementation](#2-demo-stage-implementation)
+3. [Entity: Site](#3-entity-site)
+4. [Entity: Address (Adresse)](#4-entity-address-adresse)
+5. [Entity: Land (Grundstück)](#5-entity-land-grundstück)
+6. [Entity: Building (Gebäude)](#6-entity-building-gebäude)
+7. [Entity: Area Measurement (Bemessung)](#7-entity-area-measurement-bemessung)
+8. [Entity: Document (Dokument)](#8-entity-document-dokument)
+9. [Entity: Contact (Kontakt)](#9-entity-contact-kontakt)
+10. [Entity: Asset (Ausstattung)](#10-entity-asset-ausstattung)
+11. [Entity: Contract (Vertrag)](#11-entity-contract-vertrag)
+12. [Entity: Cost (Kosten)](#12-entity-cost-kosten)
+13. [Entity: Operational Measurement (Preview)](#13-entity-operational-measurement-preview)
+14. [Related Entities (Preview)](#14-related-entities-preview)
+15. [Version History](#15-version-history)
+16. [References](#16-references)
 
 ---
 
-## Overview
+## 1. Overview
 
 ```mermaid
 erDiagram
@@ -127,7 +127,7 @@ erDiagram
     }
 ```
 
-## Demo Stage Implementation
+## 2. Demo Stage Implementation
 
 For the demo stage, all entities are stored in a single GeoJSON file:
 
@@ -139,7 +139,7 @@ Related entities (Bemessungen, Dokumente, Kontakte, Verträge) are embedded as a
 
 ---
 
-## Entity: Site
+## 3. Entity: Site
 
 > **Note:** This entity is not currently implemented in the demo. It is documented here for future implementation planning.
 
@@ -195,7 +195,7 @@ Options for Site `type` field:
 
 ---
 
-## Entity: Address (Adresse)
+## 4. Entity: Address (Adresse)
 
 Addresses represent the physical location of a building. A building can have multiple addresses (e.g., corner buildings with entrances on different streets).
 
@@ -254,7 +254,7 @@ Options for Address `type` field:
 
 ---
 
-## Entity: Land (Grundstück)
+## 5. Entity: Land (Grundstück)
 
 Land represents a parcel of land or plot that belongs to a site. In the current demo, land information is partially embedded in building properties (`grundstueck_id`, `grundstueck_name`). In a production system, Land would be a separate entity allowing multiple land parcels per site.
 
@@ -311,7 +311,7 @@ Options for `tenantStructure` field:
 
 ---
 
-## Entity: Building (Gebäude)
+## 6. Entity: Building (Gebäude)
 
 The building is the core entity representing a physical structure in the portfolio.
 
@@ -432,7 +432,7 @@ Options for `secondaryHeatingType` field:
 
 ---
 
-## Entity: Area Measurement (Bemessung)
+## 7. Entity: Area Measurement (Bemessung)
 
 Area measurements capture floor areas, volumes, and other quantitative measurements for buildings, floors, spaces, or sites. In the current demo, measurements are embedded in the `bemessungen` array within each building.
 
@@ -569,7 +569,7 @@ For measurements that don't fit the standard area types (volumes, counts):
 
 ---
 
-## Entity: Document (Dokument)
+## 8. Entity: Document (Dokument)
 
 Documents represent files and records associated with a building, such as floor plans, certificates, permits, and technical documentation.
 
@@ -624,7 +624,7 @@ Common document types for buildings:
 
 ---
 
-## Entity: Contact (Kontakt)
+## 9. Entity: Contact (Kontakt)
 
 Contacts represent persons associated with a building, such as property managers, caretakers, or portfolio managers.
 
@@ -677,7 +677,7 @@ Common contact roles for buildings:
 
 ---
 
-## Entity: Asset (Ausstattung)
+## 10. Entity: Asset (Ausstattung)
 
 Assets represent technical equipment, installations, and building components that require maintenance or tracking.
 
@@ -734,7 +734,7 @@ Common asset categories for buildings:
 
 ---
 
-## Entity: Contract (Vertrag)
+## 11. Entity: Contract (Vertrag)
 
 Contracts represent service agreements, maintenance contracts, and other contractual arrangements associated with a building.
 
@@ -786,7 +786,7 @@ Common contract types for buildings:
 
 ---
 
-## Entity: Cost (Kosten)
+## 12. Entity: Cost (Kosten)
 
 Costs represent operating expenses, utility costs, and other recurring costs associated with a building. Costs are typically categorized using standard cost group codes.
 
@@ -848,7 +848,7 @@ Common cost group codes for building operations:
 
 ---
 
-## Entity: Operational Measurement (Preview)
+## 13. Entity: Operational Measurement (Preview)
 
 > **Note:** This entity is not currently implemented in the demo. It is documented here for future implementation planning.
 
@@ -974,7 +974,7 @@ Options for `spaceType` field:
 
 ---
 
-## Related Entities (Preview)
+## 14. Related Entities (Preview)
 
 The following entities are related to buildings and will be documented in separate sections:
 
@@ -995,7 +995,7 @@ The following entities are related to buildings and will be documented in separa
 
 ---
 
-## Version History
+## 15. Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
@@ -1008,7 +1008,7 @@ The following entities are related to buildings and will be documented in separa
 
 ---
 
-## References
+## 16. References
 
 - [SIA 416](https://www.sia.ch/) - Swiss Standard for areas in building construction
 - [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) - Date and time format
