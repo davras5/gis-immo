@@ -18,6 +18,7 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 - [Entity: Asset (Ausstattung)](#entity-asset-ausstattung)
 - [Entity: Contract (Vertrag)](#entity-contract-vertrag)
 - [Entity: Cost (Kosten)](#entity-cost-kosten)
+- [Entity: Operational Measurement (Preview)](#entity-operational-measurement-preview)
 - [Enumerations](#enumerations)
   - [Building Types](#building-types)
   - [Energy Types](#energy-types)
@@ -42,6 +43,7 @@ erDiagram
     Building ||--o{ Certificate : "has"
     Building ||--o{ Asset : "has"
     Building ||--o{ Cost : "has"
+    Building ||--o{ OperationalMeasurement : "has"
 
     Site {
         string siteId PK
@@ -118,6 +120,14 @@ erDiagram
         string costGroup
         string costType
         number amount
+    }
+
+    OperationalMeasurement {
+        string operationalMeasurementId PK
+        string buildingId FK
+        string type
+        string subType
+        number value
     }
 ```
 
@@ -310,7 +320,6 @@ The building is the core entity representing a physical structure in the portfol
 | monumentProtection | boolean | Is the building declared as a protected monument? | | Source: `denkmalschutz`. "Ja" → true, "Nein" → false |
 | netZeroEnergyBuilding | boolean | Is the building a net zero energy building? | | |
 | numberOfEmployees | number | Number of employees. | maximum: 999999 | |
-| numberOfFloors | number | Number of floors/stories in the building. | | Source: `geschosse` |
 | parkingSpaces | number | Number of parking spaces. | maximum: 9999 | Source: `parkplaetze` |
 | percentageOfOwnership | number | Percentage of ownership. | maximum: 100 | |
 | primaryEnergyType | string, enum | Primary type of energy used. See [Energy Types](#energy-types). | | |
@@ -322,6 +331,7 @@ The building is the core entity representing a physical structure in the portfol
 | tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
 | valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
 | yearOfLastRefurbishment | string | Year of last refurbishment. ISO 8601 format. | minLength: 20 | Source: `sanierung`, convert to ISO 8601 |
+| extensionData.numberOfFloors | number | Number of floors/stories in the building | | Source: `geschosse` |
 | extensionData.responsiblePerson | string | Name of responsible person for the building | | Source: `verantwortlich` |
 | extensionData.egid | string | Federal building identifier (country-specific) | | Source: `egid` |
 | extensionData.egrid | string | Federal property identifier (country-specific) | | Source: `egrid` |
@@ -346,13 +356,13 @@ The building is the core entity representing a physical structure in the portfol
   "constructionYear": "1902-01-01T00:00:00Z",
   "buildingPermitDate": "1898-03-15T00:00:00Z",
   "yearOfLastRefurbishment": "2019-01-01T00:00:00Z",
-  "numberOfFloors": 5,
   "parkingSpaces": 45,
   "electricVehicleChargingStations": 8,
   "monumentProtection": true,
   "status": "In Betrieb",
   "energyEfficiencyClass": "C",
   "extensionData": {
+    "numberOfFloors": 5,
     "egid": "301001234",
     "portfolio": "Verwaltungsgebäude",
     "portfolioGroup": "Bundesverwaltung",
@@ -744,6 +754,88 @@ Common cost group codes for building operations:
 
 ---
 
+## Entity: Operational Measurement (Preview)
+
+> **Note:** This entity is not currently implemented in the demo. It is documented here for future implementation planning.
+
+Operational measurements track resource consumption (energy, water, waste) and emissions data for buildings. This entity enables ESG reporting, carbon footprint calculations, and sustainability monitoring.
+
+### Schema Definition
+
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **operationalMeasurementId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | |
+| **buildingId** | string | Unique identifier of the building this measurement belongs to. | **mandatory**, minLength: 1, maxLength: 50 | |
+| **type** | string, enum | General type of operational measurement. Options: `Energy`, `Water`, `Waste`, `Fugitive` | **mandatory** | |
+| **subType** | string, enum | Specific type of operational measurement. See [Operational Measurement SubTypes](#operational-measurement-subtypes). | **mandatory** | |
+| **value** | number | Value of the measurement. | **mandatory** | |
+| **unit** | string, enum | Unit of measurement. Options: `kWh`, `cubm`, `kg` | **mandatory** | |
+| **validFrom** | string | Date validity starts. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | |
+| **validUntil** | string | Date validity ends. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | |
+| **procuredBy** | string, enum | Operational control information. Options: `Procured by third party`, `Self-procured`, `Unspecified` | **mandatory** | |
+| **purpose** | string, enum | Purpose of resource consumption. Options: `Space heating`, `Water heating`, `Heating (unspecified)`, `Cooling`, `Lighting`, `Elevator`, `Appliances`, `Other`, `Unspecified`, `Heat pump`, `EV charging` | **mandatory** | |
+| **spaceType** | string, enum | Reference to specific space type. Options: `Shared services/Common spaces`, `Tenant space`, `Landlord space`, `Whole building`, `Unspecified`, `Shared services`, `Common spaces`, `Outdoor`, `Exterior area`, `Parking` | **mandatory** | |
+| accuracy | string, enum | Accuracy of measurement. See [Accuracy Options](#accuracy-options). | | |
+| customerInfoSource | string, enum | Source of data. Options: `Export`, `Survey`, `Meter`, `Invoice` | | |
+| dataProvider | string | Name of the data provider. | minLength: 1, maxLength: 50 | |
+| eventType | string, enum | Type of the event as domain event. Options: `OperationalMeasurementAdded`, `OperationalMeasurementUpdated`, `OperationalMeasurementDeleted` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | |
+| isAutoApproved | boolean | Determines whether this value is auto approved or requires approval. | | |
+| lifeCycleAssessment | array[string] | Life cycle assessment stages (ISO 14040). Options: `A1`, `A2`, `A3`, `A4`, `A5`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `C1`, `C2`, `C3`, `C4`, `D` | | |
+| measurementDate | string | Date measurement was taken. ISO 8601 format. | minLength: 20 | |
+| name | string | Any descriptive name. | | |
+| parentId | string | Parent entity ID. | | |
+| postingDate | string | Date measurement was posted. ISO 8601 format. | minLength: 20 | |
+| sensorId | string | ID of meter for this reading. | | |
+| valuationIds | array[string] | Array of valuation IDs. | | |
+
+### Operational Measurement SubTypes
+
+| Category | SubTypes |
+|----------|----------|
+| Electricity | `Electricity from grid (green electricity contract)`, `Electricity from grid (normal contract)`, `Electricity self-generated & exported`, `Electricity self-generated & consumed`, `Electricity (unspecified)`, `REC` |
+| Gas | `Natural gas (standard mix)`, `Green natural gas`, `Natural gas (unspecified)` |
+| Other Energy | `Oil-based fuels`, `Fuel (unspecified)`, `District heating`, `District heating (green contract)`, `District cooling`, `District cooling (green contract)`, `Biomass`, `Solar thermal`, `Geothermal` |
+| Water | `Fresh water (municipal water supply)`, `Ground water (collected on site)`, `Rain water (collected on site)`, `Reclaimed water`, `Water discharge`, `Water consumption (unspecified)`, `Water supply` |
+| Waste (Non-hazardous) | `Recycling: non-hazardous`, `Incineration: non-hazardous`, `Waste to energy: non-hazardous`, `Landfill: non-hazardous`, `Reuse: non-hazardous`, `Other/Unknown: non-hazardous` |
+| Waste (Hazardous) | `Recycling: hazardous`, `Incineration: hazardous`, `Waste to energy: hazardous`, `Landfill: hazardous`, `Reuse: hazardous`, `Other/Unknown: hazardous` |
+| Fugitive Emissions | `Carbon dioxide (CO2)`, `Methane (CH4)`, `Nitrous oxide (N2O)`, `Sulfur hexafluoride (SF6)`, `Nitrogen trifluoride (NF3)`, various refrigerants (R-11, R-12, R-22, R-134a, etc.) |
+
+### Accuracy Options
+
+| Category | Options |
+|----------|---------|
+| Direct | `Missing`, `Estimated`, `Metered`, `Extrapolated`, `Planned`, `Simulated`, `Unspecified`, `Normalised`, `Implausible` |
+| Calculated | `Calculated based on estimated data`, `Calculated based on metered data`, `Calculated based on extrapolated data`, `Calculated based on planned data`, `Calculated based on simulated data`, `Calculated based on data with unspecified accuracy`, `Calculated based on normalised data`, `Calculated based on implausible data` |
+| Projection | `Projection based on estimated data`, `Projection based on metered data`, `Projection based on extrapolated data`, `Projection based on planned data`, `Projection based on simulated data`, `Projection based on data with unspecified accuracy`, `Projection based on normalised data`, `Projection based on implausible data` |
+| Calculated from Projection | `Calculated based on projected estimated data`, `Calculated based on projected metered data`, `Calculated based on projected extrapolated data`, `Calculated based on projected planned data`, `Calculated based on projected simulated data`, `Calculated based on projected data with unspecified accuracy`, `Calculated based on projected normalised data` |
+| Other | `Retrofit scenario` |
+
+### Example: Operational Measurement Object
+
+```json
+{
+  "operationalMeasurementId": "BBL-001-OPM-001",
+  "buildingId": "BBL-001",
+  "type": "Energy",
+  "subType": "District heating",
+  "value": 125000,
+  "unit": "kWh",
+  "validFrom": "2024-01-01T00:00:00Z",
+  "validUntil": "2024-12-31T00:00:00Z",
+  "procuredBy": "Procured by third party",
+  "purpose": "Space heating",
+  "spaceType": "Whole building",
+  "accuracy": "Metered",
+  "customerInfoSource": "Invoice",
+  "dataProvider": "Energie Wasser Bern",
+  "measurementDate": "2024-12-01T00:00:00Z",
+  "lifeCycleAssessment": ["B6"]
+}
+```
+
+---
+
 ## Enumerations
 
 ### Building Types
@@ -792,6 +884,7 @@ The following entities are related to buildings and will be documented in separa
 | ~~**Asset**~~ | ~~Technical equipment and installations~~ | *(documented above)* |
 | ~~**Contract**~~ | ~~Service and maintenance contracts~~ | *(documented above)* |
 | ~~**Cost**~~ | ~~Operating expenses and utility costs~~ | *(documented above)* |
+| ~~**Operational Measurement**~~ | ~~Energy, water, waste consumption data~~ | *(documented above - preview)* |
 | **Certificate** | Building certifications (LEED, BREEAM, etc.) | 1 Building → n Certificates |
 | **Valuation** | Property valuations | 1 Building → n Valuations |
 
