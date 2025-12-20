@@ -857,13 +857,12 @@
         #detail-view {
             flex: 1;
             display: none;
-            flex-direction: column;
             background: var(--grey-50);
             overflow-y: auto;
         }
-        
+
         #detail-view.active {
-            display: flex;
+            display: block;
         }
         
         .detail-header {
