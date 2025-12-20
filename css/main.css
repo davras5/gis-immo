@@ -882,6 +882,11 @@
             align-self: flex-start;
         }
 
+        /* Hide filter-pane in detail view - its height: 100% causes layout issues */
+        body.detail-active #filter-pane {
+            display: none;
+        }
+
         .detail-header {
             background: var(--white);
             border-bottom: 1px solid var(--grey-300);
