@@ -865,7 +865,35 @@
         #detail-view.active {
             display: block;
         }
-        
+
+        /* ===== DETAIL VIEW PAGE SCROLL MODE ===== */
+        /* When detail view is active, enable page scrolling instead of internal scrollbar */
+        body.detail-active {
+            height: auto;
+            overflow: auto;
+        }
+
+        body.detail-active #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        body.detail-active #main {
+            margin-top: 90px;
+            overflow: visible;
+        }
+
+        body.detail-active .main-content {
+            overflow: visible;
+        }
+
+        body.detail-active #detail-view {
+            overflow-y: visible;
+            min-height: auto;
+        }
+
         .detail-header {
             background: var(--white);
             border-bottom: 1px solid var(--grey-300);

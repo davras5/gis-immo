@@ -961,7 +961,10 @@
             document.getElementById('list-view').classList.remove('active');
             document.getElementById('gallery-view').classList.remove('active');
             document.getElementById('detail-view').classList.remove('active');
-            
+
+            // Disable page scrolling mode when leaving detail view
+            document.body.classList.remove('detail-active');
+
             var viewElement = document.getElementById(view + '-view');
             if (viewElement) {
                 viewElement.classList.add('active');
@@ -1026,6 +1029,10 @@
             document.getElementById('list-view').classList.remove('active');
             document.getElementById('gallery-view').classList.remove('active');
             document.getElementById('detail-view').classList.add('active');
+
+            // Enable page scrolling mode for detail view
+            document.body.classList.add('detail-active');
+            window.scrollTo(0, 0);
 
             // Hide style switcher in detail view
             var styleSwitcher = document.getElementById('style-switcher');
