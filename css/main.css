@@ -1999,6 +1999,7 @@
             padding: var(--space-2) 0;
             font-size: var(--text-sm);
             font-weight: var(--font-semibold);
+            line-height: 1;
             color: var(--grey-900);
         }
 
@@ -2383,6 +2384,7 @@
             padding: var(--space-2) 0;
             font-size: var(--text-sm);
             font-weight: var(--font-semibold);
+            line-height: 1;
             color: var(--grey-900);
         }
 
