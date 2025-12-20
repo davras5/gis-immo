@@ -951,7 +951,17 @@
         body.detail-active #detail-view {
             overflow: visible;
             align-self: flex-start;
+            padding-bottom: 30px; /* Space for fixed footer */
             /* No min-height - content determines height, grey background from body fills rest */
+        }
+
+        /* Sticky footer in detail view */
+        body.detail-active #footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
         }
 
         /* Fix smart-drawer height in detail view - fully collapse when closed */
@@ -970,7 +980,7 @@
             position: fixed;
             top: 214px; /* below header-main (90px) + header-detail (124px) */
             right: 0;
-            height: calc(100vh - 214px); /* viewport minus full header */
+            height: calc(100vh - 214px - 30px); /* viewport minus header and footer */
             z-index: 100;
         }
 
@@ -3048,7 +3058,7 @@
             /* Smart-drawer fixed positioning for tablet */
             body.detail-active #smart-drawer.open {
                 top: 170px; /* header-main (70px) + detail-header (~50px) + detail-tabs (~50px) */
-                height: calc(100vh - 170px);
+                height: calc(100vh - 170px - 30px); /* minus footer */
             }
 
             /* Detail content padding for tablet drawer width */
