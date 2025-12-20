@@ -196,113 +196,6 @@
             }
         }
 
-        // ===== ERROR STATE MANAGEMENT =====
-
-        function showErrorState(viewId) {
-            var errorState = document.getElementById(viewId + '-error-state');
-            if (errorState) {
-                errorState.style.display = 'flex';
-            }
-        }
-
-        function hideErrorState(viewId) {
-            var errorState = document.getElementById(viewId + '-error-state');
-            if (errorState) {
-                errorState.style.display = 'none';
-            }
-        }
-
-        function hideAllErrorStates() {
-            hideErrorState('map');
-            hideErrorState('list');
-            hideErrorState('gallery');
-        }
-
-        // Map retry function (called from error state button)
-        function retryMapLoad() {
-            hideErrorState('map');
-            // If map exists, try to reload the style
-            if (window.map) {
-                try {
-                    window.map.setStyle(window.map.getStyle());
-                } catch (e) {
-                    // If that fails, reload the page
-                    window.location.reload();
-                }
-            } else {
-                window.location.reload();
-            }
-        }
-
-        // Make loadAllData globally available for retry buttons
-        window.loadAllData = null; // Will be set when loadAllData is defined
-
-        // ===== SKELETON LOADING =====
-
-        function showListSkeleton() {
-            var listBody = document.getElementById('list-body');
-            if (!listBody) return;
-
-            var skeletonHtml = '';
-            for (var i = 0; i < 8; i++) {
-                skeletonHtml += '<tr class="skeleton-row-item">' +
-                    '<td><div class="skeleton skeleton-cell small"></div></td>' +
-                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
-                    '<td><div class="skeleton skeleton-cell small"></div></td>' +
-                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
-                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
-                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
-                    '<td><div class="skeleton skeleton-cell small"></div></td>' +
-                    '<td><div class="skeleton skeleton-cell medium"></div></td>' +
-                '</tr>';
-            }
-            listBody.innerHTML = skeletonHtml;
-        }
-
-        function showGallerySkeleton() {
-            var galleryGrid = document.getElementById('gallery-grid');
-            if (!galleryGrid) return;
-
-            var skeletonHtml = '';
-            for (var i = 0; i < 6; i++) {
-                skeletonHtml += '<div class="gallery-skeleton-card">' +
-                    '<div class="skeleton gallery-skeleton-image"></div>' +
-                    '<div class="gallery-skeleton-content">' +
-                        '<div class="skeleton skeleton-text medium"></div>' +
-                        '<div class="skeleton skeleton-text short"></div>' +
-                        '<div style="display: flex; gap: 8px; margin-top: 12px;">' +
-                            '<div class="skeleton skeleton-text" style="width: 60px; height: 20px; border-radius: 10px;"></div>' +
-                            '<div class="skeleton skeleton-text" style="width: 80px; height: 20px; border-radius: 10px;"></div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>';
-            }
-            galleryGrid.innerHTML = skeletonHtml;
-        }
-
-        function showAllSkeletons() {
-            showListSkeleton();
-            showGallerySkeleton();
-        }
-
-        // ===== BUTTON LOADING STATE =====
-
-        function setButtonLoading(button, isLoading) {
-            if (!button) return;
-
-            if (isLoading) {
-                button.classList.add('btn-loading');
-                button.setAttribute('aria-busy', 'true');
-                // Store original text for restoration
-                if (!button.dataset.originalText) {
-                    button.dataset.originalText = button.innerHTML;
-                }
-            } else {
-                button.classList.remove('btn-loading');
-                button.removeAttribute('aria-busy');
-            }
-        }
-
         // ===== FETCH WITH ERROR HANDLING =====
 
         function fetchWithErrorHandling(url, options) {
@@ -940,9 +833,6 @@
         function loadAllData() {
             showLoadingOverlay('Daten werden geladen...');
 
-            // Show skeleton loaders in list and gallery views
-            showAllSkeletons();
-
             Promise.all([
                 fetchWithErrorHandling('data/buildings.geojson'),
                 fetchWithErrorHandling('data/area-measurements.json'),
@@ -1011,55 +901,23 @@
                     console.error('Fehler beim Laden der Daten:', error);
                     hideLoadingOverlay();
 
-                    // Show inline error states in list and gallery views
-                    showErrorState('list');
-                    showErrorState('gallery');
-
                     // Show user-friendly error with retry option
                     showError(
                         'Fehler beim Laden der Daten',
                         'Die Portfoliodaten konnten nicht geladen werden. Bitte überprüfen Sie Ihre Internetverbindung.',
                         function() {
-                            hideAllErrorStates();
                             loadAllData(); // Retry
                         }
                     );
                 });
         }
 
-        // Make loadAllData globally available for retry buttons
-        window.loadAllData = loadAllData;
-
         // Start initial data load
         loadAllData();
         
         // ===== VIEW MANAGEMENT =====
         var currentView = 'map';
-
-        // Store scroll positions for each view
-        var viewScrollPositions = {
-            list: 0,
-            gallery: 0,
-            detail: 0
-        };
-
-        function saveScrollPosition(view) {
-            var viewElement = document.getElementById(view + '-view');
-            if (viewElement) {
-                viewScrollPositions[view] = viewElement.scrollTop;
-            }
-        }
-
-        function restoreScrollPosition(view) {
-            var viewElement = document.getElementById(view + '-view');
-            if (viewElement && viewScrollPositions[view] !== undefined) {
-                // Use setTimeout to ensure the view is visible before scrolling
-                setTimeout(function() {
-                    viewElement.scrollTop = viewScrollPositions[view];
-                }, 10);
-            }
-        }
-
+        
         function getViewFromURL() {
             var params = new URLSearchParams(window.location.search);
             return params.get('view') || 'map';
@@ -1082,17 +940,12 @@
         }
         
         function switchView(view) {
-            // Save scroll position of current view before switching
-            if (currentView !== 'map') {
-                saveScrollPosition(currentView);
-            }
-
             if (view !== 'detail') {
                 previousView = currentView !== 'detail' ? currentView : previousView;
             }
             currentView = view;
             setViewInURL(view);
-
+            
             // Update toggle buttons and ARIA attributes
             document.querySelectorAll('.view-toggle-btn').forEach(function(btn) {
                 btn.classList.remove('active');
@@ -1102,13 +955,13 @@
                     btn.setAttribute('aria-selected', 'true');
                 }
             });
-
+            
             // Show/hide views
             document.getElementById('map-view').classList.remove('active');
             document.getElementById('list-view').classList.remove('active');
             document.getElementById('gallery-view').classList.remove('active');
             document.getElementById('detail-view').classList.remove('active');
-
+            
             var viewElement = document.getElementById(view + '-view');
             if (viewElement) {
                 viewElement.classList.add('active');
@@ -1141,11 +994,6 @@
             if (view === 'gallery' && galleryViewDirty) {
                 renderGalleryView();
                 galleryViewDirty = false;
-            }
-
-            // Restore scroll position of new view
-            if (view !== 'map') {
-                restoreScrollPosition(view);
             }
         }
 
@@ -1482,13 +1330,10 @@
                 var existingEmpty = document.querySelector('#list-view .empty-state');
                 if (!existingEmpty) {
                     var emptyHtml = '<div class="empty-state">' +
-                        '<span class="material-symbols-outlined empty-state-icon" aria-hidden="true">search_off</span>' +
-                        '<h3 class="empty-state-title">Keine Objekte gefunden</h3>' +
-                        '<p class="empty-state-message">Die aktuellen Filter ergeben keine Treffer. Passen Sie die Filterkriterien an oder setzen Sie die Filter zurück.</p>' +
-                        '<button class="empty-state-action" onclick="resetAllFilters()">' +
-                            '<span class="material-symbols-outlined" aria-hidden="true">filter_alt_off</span>' +
-                            'Filter zurücksetzen' +
-                        '</button>' +
+                        '<span class="material-symbols-outlined">search_off</span>' +
+                        '<div class="empty-state-title">Keine Objekte gefunden</div>' +
+                        '<div class="empty-state-description">Die aktuellen Filter ergeben keine Treffer. Passen Sie die Filterkriterien an oder setzen Sie die Filter zurück.</div>' +
+                        '<div class="empty-state-action"><button class="btn-secondary" onclick="resetAllFilters()">Filter zurücksetzen</button></div>' +
                     '</div>';
                     tableWrapper.insertAdjacentHTML('afterend', emptyHtml);
                 }
@@ -1548,13 +1393,10 @@
             // Handle empty state
             if (dataToRender.features.length === 0) {
                 galleryGrid.innerHTML = '<div class="empty-state">' +
-                    '<span class="material-symbols-outlined empty-state-icon" aria-hidden="true">search_off</span>' +
-                    '<h3 class="empty-state-title">Keine Objekte gefunden</h3>' +
-                    '<p class="empty-state-message">Die aktuellen Filter ergeben keine Treffer. Passen Sie die Filterkriterien an oder setzen Sie die Filter zurück.</p>' +
-                    '<button class="empty-state-action" onclick="resetAllFilters()">' +
-                        '<span class="material-symbols-outlined" aria-hidden="true">filter_alt_off</span>' +
-                        'Filter zurücksetzen' +
-                    '</button>' +
+                    '<span class="material-symbols-outlined">search_off</span>' +
+                    '<div class="empty-state-title">Keine Objekte gefunden</div>' +
+                    '<div class="empty-state-description">Die aktuellen Filter ergeben keine Treffer. Passen Sie die Filterkriterien an oder setzen Sie die Filter zurück.</div>' +
+                    '<div class="empty-state-action"><button class="btn-secondary" onclick="resetAllFilters()">Filter zurücksetzen</button></div>' +
                 '</div>';
                 return;
             }
@@ -1628,19 +1470,7 @@
             center: startCenter,
             zoom: startZoom
         });
-
-        // Make map globally available for error handling
-        window.map = map;
-
-        // Handle map errors
-        map.on('error', function(e) {
-            console.error('Map error:', e.error);
-            // Show map error state for critical errors
-            if (e.error && (e.error.status === 401 || e.error.status === 403 || e.error.message.includes('style'))) {
-                showErrorState('map');
-            }
-        });
-
+        
         map.addControl(new mapboxgl.NavigationControl(), 'top-right');
         map.addControl(new mapboxgl.ScaleControl({ maxWidth: 200 }), 'bottom-left');
 

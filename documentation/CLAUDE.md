@@ -1,251 +1,65 @@
-# CLAUDE.md - AI Assistant Context
+# CLAUDE.md - BBL GIS Immobilienportfolio
 
-This document provides context for AI assistants working on the BBL Immobilienportfolio GIS application.
+## Projektübersicht
 
-## Project Overview
+**BBL Immobilienportfolio - GIS POC** ist eine Single-Page-Web-Anwendung zur Verwaltung und Visualisierung des Schweizer Immobilienportfolios des Bundesamt für Bauten und Logistik (BBL).
 
-**BBL Immobilienportfolio - GIS POC** is a proof-of-concept single-page web application for visualizing and managing the Swiss Federal Office of Buildings and Logistics (BBL) real estate portfolio. The application provides interactive map, table, and gallery views of federal properties.
+**Live-Demo:** https://davras5.github.io/gis-immo/
 
-- **Repository:** github.com/davras5/gis-immo
-- **Live Demo:** davras5.github.io/gis-immo
-- **Language:** German (de)
-- **License:** MIT
+### Hauptfunktionen
+- Interaktive Kartenvisualisierung mit 3 Kartenstilen (Light, Standard, Satellite)
+- Vier Anzeigemodi: Map, List, Gallery, Detail
+- Detailansicht mit 7 Tabs: Übersicht, Bemessungen, Dokumente, Kosten, Verträge, Kontakte, Ausstattung
+- Ortssuche via Swisstopo API
+- URL-basierte Navigation mit Deep-Linking
+- Export-Funktionen (CSV, Excel, GeoJSON)
+- Responsive Design mit Accessibility-Features
 
-## Technology Stack
+## Tech-Stack
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| Vanilla JavaScript | ES6+ | Application logic |
-| Mapbox GL JS | v3.4.0 | Interactive WebGL maps |
-| CSS3 | Modern | Styling with CSS Variables |
-| GeoJSON | Standard | Geospatial building data |
-| Swisstopo API | v3 | Swiss location search |
-| Material Symbols | Latest | Icon library |
+| Technologie | Version | Verwendung |
+|-------------|---------|------------|
+| Vanilla JavaScript | ES6+ | Anwendungslogik |
+| Mapbox GL JS | v3.4.0 | Kartenvisualisierung mit WebGL |
+| CSS3 | - | Styling (Flexbox, Grid, CSS Variables) |
+| GeoJSON | - | Datenformat für Geodaten |
+| Swisstopo API | v3 | Ortssuche (Locations + Layers) |
+| Geo Admin API | - | Schweizer Geodaten-Katalog |
+| Material Symbols | Google Fonts | Icon-Bibliothek |
 
-**Key Characteristics:**
-- No build tools or bundlers - pure static files
-- No package.json or node_modules
-- No framework dependencies
-- Deployment via static hosting (GitHub Pages)
+**Wichtig:** Keine Build-Tools, keine Frameworks - reine statische Dateien.
 
-## Project Structure
+## Projektstruktur
 
 ```
 gis-immo/
-├── index.html              # Main HTML (1,824 lines) - all markup
+├── index.html                    # HTML-Struktur (~1,100 Zeilen)
 ├── js/
-│   └── app.js              # Application logic (2,804 lines)
+│   └── app.js                    # Anwendungslogik (~2,800 Zeilen)
 ├── css/
-│   └── main.css            # Design system (3,460 lines)
+│   └── main.css                  # Styles & Design-System (~3,400 Zeilen)
 ├── data/
-│   ├── buildings.geojson   # Portfolio buildings (GeoJSON)
-│   ├── area-measurements.json
-│   ├── documents.json
-│   ├── contacts.json
-│   ├── contracts.json
-│   ├── costs.json
-│   └── assets.json
+│   ├── buildings.geojson         # Portfolio-Daten (10+ Gebäude)
+│   ├── area-measurements.json    # Flächenmessungen nach SIA 416
+│   ├── documents.json            # Pläne, Zertifikate, Genehmigungen
+│   ├── contacts.json             # Personal & Ansprechpartner
+│   ├── contracts.json            # Service- und Wartungsverträge
+│   ├── costs.json                # Betriebskosten
+│   └── assets.json               # Ausstattung & Inventar
 ├── assets/
-│   └── images/             # Preview screenshots
+│   └── images/
+│       ├── preview1.jpg          # Screenshot Map-View
+│       ├── preview2.jpg          # Screenshot List-View
+│       └── preview3.jpg          # Screenshot Detail-View
 ├── documentation/
-│   ├── CLAUDE.md           # This file
-│   ├── DESIGNGUIDE.md      # Design system documentation
-│   └── DATAMODEL.md        # Complete entity schemas
-├── README.md
-└── LICENSE
+│   ├── CLAUDE.md                 # Diese Datei
+│   ├── DATAMODEL.md              # Detailliertes Datenmodell
+│   └── DESIGNGUIDE.md            # Design-System & Komponenten
+├── README.md                     # Projekt-README
+└── LICENSE                       # MIT-Lizenz
 ```
 
-## Architecture
-
-### Single-File JavaScript Architecture
-
-The application uses procedural ES6 code organized through semantic comments:
-
-```javascript
-// ===== SECTION NAME =====
-```
-
-Key sections in `js/app.js`:
-1. Global state variables
-2. Data fetching and initialization
-3. Filter system
-4. View rendering (map/list/gallery/detail)
-5. Search functionality
-6. Entity table factory
-7. UI components (toast, loading)
-8. Event listeners
-
-### Data Flow
-
-```
-Page Load → loadAllData() [7 parallel fetches]
-    ↓
-Initialize filters from URL parameters
-    ↓
-applyFilters() → Update filteredData
-    ↓
-Render current view (map/list/gallery)
-    ↓
-Initialize event listeners
-```
-
-### Global State Variables
-
-```javascript
-portfolioData              // GeoJSON FeatureCollection
-filteredData               // Filtered buildings array
-currentDetailBuilding      // Currently viewed building
-activeFilters              // Active filter state object
-allAreaMeasurements        // Area measurements array
-allDocuments               // Documents array
-allContacts                // Contacts array
-allContracts               // Contracts array
-allAssets                  // Assets array
-allCosts                   // Costs array
-currentView                // 'map' | 'list' | 'gallery' | 'detail'
-selectedBuildingId         // Currently selected building ID
-map                        // Mapbox GL instance
-miniMap                    // Detail view map instance
-```
-
-## Key Patterns
-
-### URL State Management
-
-The application persists state in URL parameters for deep linking:
-
-```
-?view=detail&id=BBL-001&lat=46.9465&lng=7.4441&zoom=8
-?filter_status=In+Betrieb,In+Renovation&filter_land=CH
-```
-
-Key functions:
-- `getFiltersFromURL()` - Parse filter state from URL
-- `setFiltersInURL(filters)` - Persist filter state to URL
-- `updateURLParams()` - Update map position in URL
-
-### Filter System
-
-6 filter categories with AND logic between categories, OR logic within:
-- Status (In Betrieb, In Renovation, etc.)
-- Ownership Type (Eigentum, Miete)
-- Portfolio (Zivil, Militär, etc.)
-- Building Type (Bürogebäude, etc.)
-- Country (CH, DE, etc.)
-- Region (Bern, Zürich, etc.)
-
-### Entity Table Factory
-
-Reusable table component for detail view tabs:
-
-```javascript
-const table = createEntityTable({
-    containerId: 'container-id',
-    data: dataArray,
-    columns: [...],
-    searchFields: [...],
-    emptyMessage: 'No data found'
-});
-table.init();
-```
-
-### View Dirty Flags
-
-Optimization pattern to prevent unnecessary re-renders:
-
-```javascript
-listViewDirty = false
-galleryViewDirty = false
-```
-
-## Key Functions Reference
-
-### Data Operations
-
-| Function | Purpose |
-|----------|---------|
-| `fetchWithErrorHandling(url, options)` | Fetch with error handling |
-| `loadAllData()` | Parallel load all data files |
-| `getNestedProperty(obj, path)` | Deep property access |
-
-### View Management
-
-| Function | Purpose |
-|----------|---------|
-| `switchView(view)` | Switch between views |
-| `renderListView()` | Build table rows |
-| `renderGalleryView()` | Build gallery cards |
-| `showDetailView(buildingId)` | Show property detail |
-
-### Filter System
-
-| Function | Purpose |
-|----------|---------|
-| `applyFilters()` | Apply filter logic |
-| `getFiltersFromURL()` | Parse URL filters |
-| `setFiltersInURL(filters)` | Save filters to URL |
-| `updateFilterCounts()` | Update filter badges |
-
-### UI Components
-
-| Function | Purpose |
-|----------|---------|
-| `showToast(options)` | Show notification |
-| `showLoadingOverlay(text)` | Show loading spinner |
-| `hideLoadingOverlay()` | Hide loading spinner |
-| `performSearch(term)` | Execute search (debounced) |
-
-## Data Model
-
-### Core Entities
-
-1. **Building** - Main portfolio unit (GeoJSON Feature)
-2. **Address** - Location information
-3. **Area Measurement** - SIA 416 compliant areas
-4. **Document** - Plans, permits, certificates
-5. **Contact** - Personnel with roles
-6. **Contract** - Service agreements
-7. **Cost** - Operational expenses
-8. **Asset** - Equipment inventory
-
-### Swiss Standards
-
-| Standard | Purpose |
-|----------|---------|
-| SIA 416 | Building area measurements (BGF, NGF, EBF) |
-| SIA 380/1 | Energy reference area |
-| EGID | Federal Building Identifier |
-| EGRID | Federal Property Identifier |
-| SN 506 511 | Building cost classification |
-| LV95 | Swiss coordinate system |
-
-### Relationships
-
-- 1:N from Building to all supporting entities
-- `buildingIds` array in entities enables many-to-many
-- `extensionData` object for Swiss-specific fields
-
-## CSS Architecture
-
-### Design Tokens
-
-All values use CSS custom properties defined in `:root`:
-- Colors (status, grey scale, interactive, brand)
-- Typography (scale, weights, line heights)
-- Spacing (4px base unit scale)
-- Shadows, borders, radii
-
-### Naming Conventions
-
-- BEM-like naming: `.gallery-card`, `.status-badge`
-- State classes: `.active`, `.hidden`, `.visible`
-- View-specific prefixes: `.map-`, `.list-`, `.gallery-`, `.detail-`
-
-## Development
-
-### Local Server Required
-
-Due to CORS restrictions for API calls:
+## Lokale Entwicklung
 
 ```bash
 # Python
@@ -258,119 +72,313 @@ npx http-server
 php -S localhost:8000
 ```
 
-### No Build Process
+Dann http://localhost:8000 öffnen.
 
-- Edit files directly
-- Refresh browser to see changes
-- No compilation or bundling needed
+### Browser-Anforderungen
+- WebGL-Unterstützung (für Mapbox GL JS)
+- ES6+ JavaScript
+- LocalStorage
+- Modernes CSS (Grid, Flexbox, Variables)
 
-## Common Tasks
+## Wichtige Konfiguration
 
-### Adding a New Filter Category
+### Mapbox Token (js/app.js, Zeile 5)
+```javascript
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGF2aWRyYXNuZXI1IiwiYSI6...'
+```
 
-1. Add filter UI in `index.html` within `#filterPanel`
-2. Add filter key to `activeFilters` object in `app.js`
-3. Update `getFiltersFromURL()` and `setFiltersInURL()`
-4. Add filter logic in `applyFilters()`
-5. Update `populateFilterOptions()` if dynamic
+### Status-Farben (js/app.js, Zeilen 8-13)
+```javascript
+var statusColors = {
+    'In Betrieb': '#2e7d32',        // Grün - aktiv
+    'In Renovation': '#ef6c00',     // Orange - in Renovation
+    'In Planung': '#1976d2',        // Blau - geplant
+    'Ausser Betrieb': '#6C757D'     // Grau - inaktiv
+};
+```
 
-### Adding a New Detail Tab
+### CSS Design-System (css/main.css, Zeilen 5-99)
+```css
+:root {
+    /* Farben */
+    --primary-red: #c00;
+    --grey-900: #2D3236;
+    --accent-panel: #6C757D;
 
-1. Add tab button in `index.html` `#detailTabNav`
-2. Add tab content container with matching `data-tab` attribute
-3. Create entity table configuration in `showDetailView()`
-4. Initialize table in tab switch handler
+    /* Status-Farben */
+    --status-active: #2e7d32;      /* Grün - In Betrieb */
+    --status-renovation: #ef6c00;   /* Orange - In Renovation */
+    --status-planning: #1976d2;     /* Blau - In Planung */
+    --status-inactive: #6C757D;     /* Grau - Ausser Betrieb */
 
-### Adding a New Data Field
+    /* Typografie */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
 
-1. Update data file in `/data/`
-2. Add field to entity schema in `DATAMODEL.md`
-3. Update relevant rendering functions
-4. Add to export if needed
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-8: 2rem;
 
-### Modifying Map Styles
+    /* Radien & Touch Targets */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --touch-target-min: 44px;
+}
+```
 
-1. Update `mapStyles` object in `app.js`
-2. Add style button in `index.html` if new style
-3. Update `initializeMap()` for default style
+### Status-Farben Übersicht
+| Status | Farbe | CSS Variable |
+|--------|-------|--------------|
+| In Betrieb | `#2e7d32` (Grün) | `--status-active` |
+| In Renovation | `#ef6c00` (Orange) | `--status-renovation` |
+| In Planung | `#1976d2` (Blau) | `--status-planning` |
+| Ausser Betrieb | `#6C757D` (Grau) | `--status-inactive` |
 
-## Testing
+## Datenmodell
 
-No automated testing framework. Manual testing approach:
-- Test in browser console
-- Verify all views render correctly
-- Check filter combinations
-- Validate URL state persistence
-- Test export functionality
+Siehe [DATAMODEL.md](./DATAMODEL.md) für das vollständige Datenmodell.
 
-## External Dependencies
+### Daten-Dateien
 
-| Resource | URL/Token |
-|----------|-----------|
-| Mapbox GL JS | api.mapbox.com/mapbox-gl-js/v3.4.0/ |
-| Mapbox Token | Embedded in app.js |
-| Material Symbols | Google Fonts API |
-| Swisstopo API | api3.geo.admin.ch |
-| Placeholder Images | Unsplash URLs |
+| Datei | Beschreibung | Schlüsselfelder |
+|-------|--------------|-----------------|
+| `buildings.geojson` | Hauptdaten der Gebäude | buildingId, name, status, geometry |
+| `area-measurements.json` | Flächenmessungen | areaMeasurementId, type, value, unit |
+| `documents.json` | Dokumente & Pläne | documentId, name, type, fileFormat |
+| `contacts.json` | Ansprechpersonen | contactId, name, role, email |
+| `contracts.json` | Verträge | contractId, type, contractPartner, status |
+| `costs.json` | Betriebskosten | costId, costGroup, amount |
+| `assets.json` | Ausstattung | assetId, name, category, manufacturer |
 
-## File Editing Tips
+### Gebäude-Entity (Hauptfelder in buildings.geojson)
+```javascript
+{
+  // Identifikation
+  buildingId: "BBL-001",
+  siteId: "SITE-BBL-001",
+  name: "Bundeshaus West",
 
-### index.html
+  // Klassifizierung
+  primaryTypeOfBuilding: "Bürogebäude",
+  secondaryTypeOfBuilding: "Parlamentsgebäude",
+  typeOfOwnership: "Eigentümer",
+  status: "In Betrieb",
 
-- Structured with clear section comments
-- All views contained in `#mainContent`
-- Detail view has 7 tab containers
-- Filter panel in header
+  // Adresse
+  streetName: "Bundesplatz 3, 3003 Bern",
+  houseNumber: "3",
+  postalCode: "3003",
+  city: "Bern",
+  stateProvincePrefecture: "Kanton Bern",
+  country: "CH",
 
-### js/app.js
+  // Konstruktion
+  constructionYear: "1902-01-01T00:00:00Z",
+  yearOfLastRefurbishment: "2019-01-01T00:00:00Z",
 
-- Navigate by section comments (`===== SECTION =====`)
-- Global variables at top
-- Initialization at bottom (`DOMContentLoaded`)
-- Functions grouped by feature
+  // Technisch
+  energyEfficiencyClass: "C",
+  monumentProtection: true,
+  parkingSpaces: 45,
+  electricVehicleChargingStations: 8,
 
-### css/main.css
+  // Schweizer Erweiterungen
+  extensionData: {
+    egid: "301001234",
+    egrid: "CH123456789012",
+    numberOfFloors: 5,
+    responsiblePerson: "Anna Müller",
+    portfolio: "Verwaltungsgebäude",
+    portfolioGroup: "Bundesverwaltung",
+    heatingGenerator: "Fernwärme",
+    heatingSource: "Fernwärmenetz Stadt Bern",
+    netFloorArea: 12500,
+    plotName: "Bundesplatz Parzelle A",
+    plotId: "BE-3003-1001"
+  },
 
-- CSS variables in `:root` (first ~300 lines)
-- Base/reset styles
-- Component styles grouped by feature
-- Responsive styles at end of sections
+  // Geometrie (GeoJSON Point)
+  geometry: {
+    type: "Point",
+    coordinates: [7.4441, 46.9465]
+  }
+}
+```
 
-## Code Conventions
+## View-System
 
-### JavaScript
-- Procedural ES6 (no classes/modules)
-- Semicolon-terminated
-- camelCase for functions and variables
-- Promise chains for async
-- Comments for section headers
+### Vier Hauptansichten
 
-### HTML
-- Semantic elements with ARIA
-- data-* attributes for JS coupling
-- German labels (Karte, Tabelle, Galerie)
-- Material Symbols for icons
+| View | URL-Parameter | Beschreibung |
+|------|---------------|--------------|
+| **Map** | `?view=map` | Interaktive Karte mit Gebäude-Markern |
+| **List** | `?view=list` | Sortierbare Tabelle mit Export |
+| **Gallery** | `?view=gallery` | Karten-Grid mit Vorschaubildern |
+| **Detail** | `?view=detail&buildingId=BBL-001` | Detailansicht mit Tabs |
 
-### CSS
-- CSS custom properties for all values
-- BEM-like naming
-- No preprocessor
-- Mobile-responsive design
+### Detail-View Tabs
+1. **Übersicht** - Stammdaten, Bild-Carousel, Mini-Karte
+2. **Bemessungen** - Flächentabelle nach SIA-Standards
+3. **Dokumente** - Grundrisse, Pläne, GEAK-Zertifikate
+4. **Kosten** - Betriebskosten nach Kostengruppen
+5. **Verträge** - Wartungs-, Reinigungs-, Sicherheitsverträge
+6. **Kontakte** - Objektverantwortliche, Hauswart, etc.
+7. **Ausstattung** - Gebäudetechnik und Inventar
 
-## Important Notes
+## Externe APIs
 
-1. **Mapbox Token**: The access token is embedded in `app.js`. For production, consider environment-based configuration.
+### Swisstopo Location Search
+```
+GET https://api3.geo.admin.ch/rest/services/ech/SearchServer
+?type=locations&limit=5&sr=4326&searchText=<query>&lang=de
+```
 
-2. **Data Files**: All data is static JSON. For real implementation, these would be API endpoints.
+### Swisstopo Layer Search
+```
+GET https://api3.geo.admin.ch/rest/services/ech/SearchServer
+?type=layers&limit=5&lang=de&searchText=<query>
+```
 
-3. **German Language**: UI is entirely in German. Text strings are hardcoded, not externalized.
+### Mapbox Map Tiles
+```
+https://api.mapbox.com/mapbox-gl-js/v3.4.0/
+Styles: light-v11, standard-v12, satellite-v9
+```
 
-4. **Browser Support**: Modern browsers with ES6 support required.
+## Code-Konventionen
 
-5. **No Error Boundaries**: Errors may cause view failures. Check console for debugging.
+### JavaScript (js/app.js)
+- **Variablen:** `var` (Legacy-Kompatibilität)
+- **Funktionen:** camelCase (`switchView`, `renderListView`)
+- **DOM-Zugriff:** `document.getElementById()`
+- **Event-Handler:** `addEventListener` Pattern
+- **Globale State:** `portfolioData`, `filteredData`, `selectedBuildingId`
 
-## Related Documentation
+### CSS (css/main.css)
+- **Classes:** kebab-case (`.gallery-card`, `.status-badge`)
+- **IDs:** kebab-case (`#map-view`, `#info-panel`)
+- **Layout:** Flexbox für 1D, CSS Grid für 2D
+- **Variables:** Alle Design-Tokens in `:root`
 
-- **DESIGNGUIDE.md** - Complete design system, components, patterns
-- **DATAMODEL.md** - Entity schemas, relationships, Swiss standards
-- **README.md** - Project overview and getting started
+### HTML (index.html)
+- **Data-Attributes:** `data-view`, `data-id`, `data-sort`, `data-filter`
+- **Semantische Tags:** `<header>`, `<main>`, `<nav>`, `<aside>`, `<section>`
+- **Accessibility:** `role`, `aria-label`, `tabindex`
+
+## Wichtige Funktionen (js/app.js)
+
+### View-Management
+```javascript
+switchView(view)              // Wechselt zwischen map/list/gallery/detail
+showDetailView(id)            // Öffnet Detail-Ansicht für Gebäude
+setViewInURL(view)            // Speichert View in URL
+getViewFromURL()              // Liest View aus URL
+getBuildingIdFromURL()        // Liest Building-ID aus URL
+```
+
+### Daten-Rendering
+```javascript
+renderListView()              // Rendert Tabellen-Ansicht
+renderGalleryView()           // Rendert Galerie-Karten
+renderMeasurementsTable()     // Rendert Bemessungen-Tab
+renderDocumentsTable()        // Rendert Dokumente-Tab
+renderContactsTable()         // Rendert Kontakte-Tab
+renderContractsTable()        // Rendert Verträge-Tab
+renderFacilitiesTable()       // Rendert Ausstattung-Tab
+```
+
+### Karte
+```javascript
+addMapLayers()                // Fügt GeoJSON-Layer zur Karte hinzu
+selectBuilding(id)            // Wählt Gebäude auf Karte
+flyToBuilding(id)             // Fliegt zu Gebäude
+initMiniMap()                 // Initialisiert Mini-Karte in Detail-View
+setMapStyle(style)            // Wechselt Kartenstil
+```
+
+### Filter & Suche
+```javascript
+applyFilters()                // Wendet alle aktiven Filter an
+initFilterOptions()           // Initialisiert Filter-Dropdowns
+performSearch(query)          // Führt lokale + API-Suche durch
+renderSearchResults()         // Zeigt Suchergebnisse an
+handleSearchClick(type, id)   // Globale Handler für Suchergebnisse
+```
+
+### Export
+```javascript
+exportToCSV()                 // Exportiert gefilterte Daten als CSV
+exportToJSON()                // Exportiert gefilterte Daten als JSON (GeoJSON)
+```
+
+## Accessibility-Features
+
+- **Skip-Links** für Tastaturnavigation
+- **Focus-Visible Styles** für Tastaturbenutzer
+- **WCAG Farbkontrast** für Lesbarkeit
+- **Semantisches HTML** für Screen Reader
+- **Touch-Target Minimum** 44px für Mobile
+- **ARIA-Labels** für interaktive Elemente
+
+## Hinweise für Entwicklung
+
+1. **Getrennte Dateien:** HTML in `index.html`, JavaScript in `js/app.js`, CSS in `css/main.css`
+2. **Kein Build:** Änderungen sind sofort sichtbar nach Browser-Reload
+3. **Mapbox-Abhängigkeit:** WebGL erforderlich, Token muss gültig sein
+4. **Daten:** GeoJSON und JSON-Dateien werden bei Seitenladung von `/data/` geladen
+5. **URL-State:** View und Building-ID werden in URL gespeichert
+6. **LocalStorage:** Map-Style wird persistent gespeichert
+
+### Code-Struktur
+| Datei | Zeilen | Inhalt |
+|-------|--------|--------|
+| `index.html` | ~1,100 | HTML-Struktur, CDN-Links |
+| `js/app.js` | ~2,800 | Anwendungslogik |
+| `css/main.css` | ~3,400 | Design-System, Komponenten-Styles |
+
+## Schweizer Standards
+
+| Standard | Beschreibung |
+|----------|--------------|
+| **SIA 416** | Schweizer Norm für Flächen und Volumen im Hochbau |
+| **SIA 380/1** | Energiebedarf von Gebäuden |
+| **EGID** | Eidgenössischer Gebäudeidentifikator |
+| **EGRID** | Eidgenössischer Grundstücksidentifikator |
+| **LV95** | Schweizer Koordinatenreferenzsystem |
+| **Swisstopo** | Bundesamt für Landestopografie |
+| **SN 506 511** | Baukostenplan Schweiz |
+
+## Deployment
+
+**GitHub Pages:** Push zu `main` deployt automatisch nach https://davras5.github.io/gis-immo/
+
+**Alternativ:** Beliebiger Static Host (Netlify, Vercel, Apache, Nginx, CloudFlare).
+
+**Performance:**
+- Total: ~7,300 Zeilen Code (HTML + JS + CSS)
+- Daten: 7 JSON-Dateien mit ~145 KB
+- Schnelle Ladezeiten mit GZIP-Komprimierung
+- Client-seitiges Filtern ohne Netzwerk-Calls
+
+## Statistiken
+
+| Metrik | Wert |
+|--------|------|
+| Dateien | 14 (1 HTML, 1 JS, 1 CSS, 7 JSON, 3 Images, 1 License) |
+| HTML-Grösse | ~1,100 Zeilen |
+| JavaScript-Grösse | ~2,800 Zeilen (~95 KB) |
+| CSS-Grösse | ~3,400 Zeilen (~95 KB) |
+| Daten-Grösse | ~145 KB (7 JSON-Dateien) |
+| Funktionen | 50+ |
+| Views | 4 (Map, List, Gallery, Detail) |
+| Gebäude | 10+ mit vollständigen Daten |
+| Externe APIs | 3 (Mapbox, Swisstopo x2) |
+| CSS Variables | 30+ |
+| Event Listeners | 54+ |
