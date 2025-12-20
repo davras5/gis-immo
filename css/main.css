@@ -852,18 +852,18 @@
         .gallery-link .material-symbols-outlined {
             font-size: 16px;
         }
-        
+
         /* ===== DETAIL VIEW ===== */
         #detail-view {
             flex: 1;
-            min-height: 0;
             display: none;
+            flex-direction: column;
             background: var(--grey-50);
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         #detail-view.active {
-            display: block;
+            display: flex;
         }
 
         /* ===== DETAIL VIEW PAGE SCROLL MODE ===== */
@@ -873,9 +873,12 @@
             overflow: auto;
         }
 
-        body.detail-active #detail-view {
-            overflow-y: visible;
+        body.detail-active #main {
             flex: none;
+        }
+
+        body.detail-active #detail-view {
+            overflow: visible;
         }
 
         .detail-header {
