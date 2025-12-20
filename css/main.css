@@ -892,7 +892,13 @@
         }
 
         /* Fix AI panel height in detail view */
-        body.detail-active #ai-assistant-panel {
+        /* When closed, collapse height to prevent affecting layout */
+        body.detail-active #ai-assistant-panel:not(.show) {
+            height: 0;
+        }
+
+        /* When open, size to content */
+        body.detail-active #ai-assistant-panel.show {
             height: auto;
             align-self: flex-start;
         }
