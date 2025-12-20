@@ -941,7 +941,7 @@
 
         body.detail-active #main {
             flex: none;
-            min-height: calc(100vh - 90px); /* #main fills viewport, not detail-view */
+            /* No min-height - body background fills viewport visually */
         }
 
         body.detail-active .main-content {
@@ -3043,11 +3043,6 @@
 
             #gallery-view {
                 padding: var(--space-4);
-            }
-
-            /* #main min-height for tablet */
-            body.detail-active #main {
-                min-height: calc(100vh - 70px);
             }
 
             /* Smart-drawer fixed positioning for tablet */
