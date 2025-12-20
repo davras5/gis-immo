@@ -1,0 +1,556 @@
+{
+  "assets": [
+    {
+      "id": "826ad41f-1f42-4cdf-850d-2c30e9ca98a3",
+      "bezeichnung": "Fernwärmeübergabestation",
+      "kategorie": "HVAC",
+      "hersteller": "Siemens AG",
+      "baujahr": 2019,
+      "standort": "Untergeschoss Technikraum",
+      "legacyId": "BBL-001-A1",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "9c57bf61-95b0-4352-b7b4-4500485f295a",
+      "bezeichnung": "Personenaufzug Haupttreppe",
+      "kategorie": "Aufzüge",
+      "hersteller": "Schindler AG",
+      "baujahr": 2019,
+      "standort": "Treppenhaus Mitte",
+      "legacyId": "BBL-001-A2",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "ed2274f9-c3e4-4de8-aeba-42000cf1dc10",
+      "bezeichnung": "Brandmeldeanlage",
+      "kategorie": "Brandschutz",
+      "hersteller": "Siemens Building Technologies",
+      "baujahr": 2019,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-001-A3",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "a25bfd3a-dc8b-47ca-96e6-9334cc45781b",
+      "bezeichnung": "Zutrittskontrollsystem",
+      "kategorie": "Sicherheit",
+      "hersteller": "dormakaba AG",
+      "baujahr": 2019,
+      "standort": "Alle Eingänge",
+      "legacyId": "BBL-001-A4",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "454ec1ba-2132-4146-8d75-8f75a5455140",
+      "bezeichnung": "Notstromanlage",
+      "kategorie": "Elektro",
+      "hersteller": "ABB Schweiz AG",
+      "baujahr": 2019,
+      "standort": "Untergeschoss Technikraum",
+      "legacyId": "BBL-001-A5",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "0a416f53-49e3-4651-b36f-4322a89b070b",
+      "bezeichnung": "Wärmepumpe Geothermie",
+      "kategorie": "HVAC",
+      "hersteller": "Viessmann",
+      "baujahr": 2000,
+      "standort": "Technikraum EG",
+      "legacyId": "BBL-002-A1",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "4d36aeb1-76e1-4184-b625-5be703ffefac",
+      "bezeichnung": "Klimaanlage Bürotrakt",
+      "kategorie": "HVAC",
+      "hersteller": "Daikin",
+      "baujahr": 2021,
+      "standort": "Dachgeschoss",
+      "legacyId": "BBL-002-A2",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "dc96658c-4878-4701-beb7-04e068c9b97d",
+      "bezeichnung": "Videoüberwachungsanlage",
+      "kategorie": "Sicherheit",
+      "hersteller": "Bosch Security Systems",
+      "baujahr": 2020,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-002-A3",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "d7cd23ad-1e82-47a6-a28f-1564e3d28a15",
+      "bezeichnung": "Personenaufzug",
+      "kategorie": "Aufzüge",
+      "hersteller": "ThyssenKrupp",
+      "baujahr": 2000,
+      "standort": "Haupteingang",
+      "legacyId": "BBL-002-A4",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "4d07906d-1f89-40c6-a27a-4cf526b06e52",
+      "bezeichnung": "Gasheizungsanlage",
+      "kategorie": "HVAC",
+      "hersteller": "Viessmann",
+      "baujahr": 2017,
+      "standort": "Heizzentrale UG",
+      "legacyId": "BBL-003-A1",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "e5cdfd55-ca76-406a-a6bd-f943b05471de",
+      "bezeichnung": "Lastenaufzug 3t",
+      "kategorie": "Aufzüge",
+      "hersteller": "KONE",
+      "baujahr": 2017,
+      "standort": "Lagerhalle Ost",
+      "legacyId": "BBL-003-A2",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "6c37cf15-bc2c-47e6-aab9-d7284e08c601",
+      "bezeichnung": "Lastenaufzug 5t",
+      "kategorie": "Aufzüge",
+      "hersteller": "KONE",
+      "baujahr": 2017,
+      "standort": "Lagerhalle West",
+      "legacyId": "BBL-003-A3",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "c632b3d8-3517-4e65-9950-f537d559144c",
+      "bezeichnung": "Sprinkleranlage",
+      "kategorie": "Brandschutz",
+      "hersteller": "Minimax",
+      "baujahr": 2017,
+      "standort": "Gesamte Lagerhalle",
+      "legacyId": "BBL-003-A4",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "e676b7ad-e531-45ba-8710-97672d4a3e0d",
+      "bezeichnung": "Lüftungsanlage Lagerhalle",
+      "kategorie": "HVAC",
+      "hersteller": "Zehnder",
+      "baujahr": 2017,
+      "standort": "Dach Lagerhalle",
+      "legacyId": "BBL-003-A5",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "7d7a30ad-450a-420e-8aae-f52e83a902ec",
+      "bezeichnung": "Hubarbeitsbühne",
+      "kategorie": "Logistik",
+      "hersteller": "Jungheinrich",
+      "baujahr": 2020,
+      "standort": "Hochregallager",
+      "legacyId": "BBL-003-A6",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "2375dec2-17ee-4562-bdf4-73b5a5f3046a",
+      "bezeichnung": "Klimaanlage VRF-System",
+      "kategorie": "HVAC",
+      "hersteller": "Carrier",
+      "baujahr": 2020,
+      "standort": "Büroetagen 12-14",
+      "legacyId": "BBL-004-A1",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "5bdd2382-1a30-4a8b-b8d7-09f0c8d3ee28",
+      "bezeichnung": "Zutrittskontrollsystem",
+      "kategorie": "Sicherheit",
+      "hersteller": "HID Global",
+      "baujahr": 2020,
+      "standort": "Alle Eingänge",
+      "legacyId": "BBL-004-A2",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "fcee49e3-1e48-4d90-b7f5-2305af209da3",
+      "bezeichnung": "Brandmeldeanlage",
+      "kategorie": "Brandschutz",
+      "hersteller": "Honeywell",
+      "baujahr": 2020,
+      "standort": "Gesamte Mietfläche",
+      "legacyId": "BBL-004-A3",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "fac590e4-4b5c-459e-86af-93f9f04fc48c",
+      "bezeichnung": "Ölheizungsanlage (Ersatz geplant)",
+      "kategorie": "HVAC",
+      "hersteller": "Weishaupt",
+      "baujahr": 1965,
+      "standort": "Heizzentrale UG",
+      "legacyId": "BBL-005-A1",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "9d56aa6b-e445-4c35-b7c4-761223c3135e",
+      "bezeichnung": "Personenaufzug",
+      "kategorie": "Aufzüge",
+      "hersteller": "Schindler AG",
+      "baujahr": 2015,
+      "standort": "Treppenhaus Hauptgebäude",
+      "legacyId": "BBL-005-A2",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "6878a32b-24f4-4378-81fd-6f25737bcc26",
+      "bezeichnung": "Lüftungsanlage Schulungsräume",
+      "kategorie": "HVAC",
+      "hersteller": "Zehnder",
+      "baujahr": 2015,
+      "standort": "Dachgeschoss",
+      "legacyId": "BBL-005-A3",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "d7ea2a57-34f7-410a-b440-0d33e9d76069",
+      "bezeichnung": "Brandmeldeanlage",
+      "kategorie": "Brandschutz",
+      "hersteller": "Siemens",
+      "baujahr": 2015,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-005-A4",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "297c788b-661f-482c-8b1a-2c5dfa7d56c1",
+      "bezeichnung": "Beamer Konferenzraum A",
+      "kategorie": "Medientechnik",
+      "hersteller": "Epson",
+      "baujahr": 2022,
+      "standort": "Konferenzraum A, 2. OG",
+      "legacyId": "BBL-005-A5",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "c3d2a255-cb01-4f55-b56a-ecd75dea651d",
+      "bezeichnung": "VRF-Klimaanlage",
+      "kategorie": "HVAC",
+      "hersteller": "Daikin",
+      "baujahr": 2018,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-006-A1",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "5315fcf3-9a47-4e68-9b81-7dd37539bad0",
+      "bezeichnung": "Personenaufzug",
+      "kategorie": "Aufzüge",
+      "hersteller": "Mitsubishi Electric",
+      "baujahr": 1991,
+      "standort": "Hauptgebäude",
+      "legacyId": "BBL-006-A2",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "a3052840-dc85-4060-acc6-473ae3f4ff61",
+      "bezeichnung": "Erdbeben-Frühwarnsystem",
+      "kategorie": "Sicherheit",
+      "hersteller": "Omron",
+      "baujahr": 2018,
+      "standort": "Technikraum EG",
+      "legacyId": "BBL-006-A3",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "2a07a379-8b6f-4b17-a76d-6d2ebcc7f143",
+      "bezeichnung": "Videoüberwachungsanlage",
+      "kategorie": "Sicherheit",
+      "hersteller": "Panasonic",
+      "baujahr": 2018,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-006-A4",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "6dddadaa-1a25-4885-9d44-3363beb5cc71",
+      "bezeichnung": "Gasheizungsanlage",
+      "kategorie": "HVAC",
+      "hersteller": "Viessmann",
+      "baujahr": 2015,
+      "standort": "Heizzentrale UG",
+      "legacyId": "BBL-007-A1",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "e39900b6-145c-48f6-996a-11210b6e2ddc",
+      "bezeichnung": "Personenaufzug",
+      "kategorie": "Aufzüge",
+      "hersteller": "Schindler AG",
+      "baujahr": 2015,
+      "standort": "Treppenhaus",
+      "legacyId": "BBL-007-A2",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "ded37e4b-f4ef-4840-8cac-69b2fd2def99",
+      "bezeichnung": "Gegensprechanlage",
+      "kategorie": "Sicherheit",
+      "hersteller": "Siedle",
+      "baujahr": 2015,
+      "standort": "Alle Wohnungen",
+      "legacyId": "BBL-007-A3",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "9041fbf2-781d-49f8-935a-67a330af2312",
+      "bezeichnung": "Waschmaschinen Gemeinschaftsraum",
+      "kategorie": "Sanitär",
+      "hersteller": "Electrolux",
+      "baujahr": 2020,
+      "standort": "Waschküche UG",
+      "legacyId": "BBL-007-A4",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "b929b31d-c3b6-41eb-90df-55e598b30dbe",
+      "bezeichnung": "Split-Klimaanlage Büro",
+      "kategorie": "HVAC",
+      "hersteller": "Carrier",
+      "baujahr": 2022,
+      "standort": "Bürotrakt",
+      "legacyId": "BBL-008-A1",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "1836e7b3-a1e6-4582-bcbf-aacb76fe6d59",
+      "bezeichnung": "Split-Klimaanlage Residenz",
+      "kategorie": "HVAC",
+      "hersteller": "Carrier",
+      "baujahr": 2022,
+      "standort": "Residenz",
+      "legacyId": "BBL-008-A2",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "34108685-01a3-49a2-86cf-9214ef996501",
+      "bezeichnung": "Solaranlage Warmwasser",
+      "kategorie": "Solar/Energie",
+      "hersteller": "Soletrol",
+      "baujahr": 2022,
+      "standort": "Dach",
+      "legacyId": "BBL-008-A3",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "26276215-f820-4c0a-8d1c-fe9058fbb74f",
+      "bezeichnung": "Alarmanlage",
+      "kategorie": "Sicherheit",
+      "hersteller": "Intelbras",
+      "baujahr": 2022,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-008-A4",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "e81b050f-2bed-4552-ae72-70a42e0c7985",
+      "bezeichnung": "Präzisionsklimaanlage Serverraum",
+      "kategorie": "HVAC",
+      "hersteller": "Schneider Electric",
+      "baujahr": 2025,
+      "standort": "Serverräume A-D",
+      "legacyId": "BBL-009-A1",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "5081bf5a-8a5b-4c93-b06f-396a9e91dae5",
+      "bezeichnung": "USV-Anlage 2MW",
+      "kategorie": "Elektro",
+      "hersteller": "ABB",
+      "baujahr": 2025,
+      "standort": "Elektrozentrale",
+      "legacyId": "BBL-009-A2",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "c28b6601-db10-4520-8a65-e465de143acc",
+      "bezeichnung": "Notstromdiesel 3MW",
+      "kategorie": "Elektro",
+      "hersteller": "Caterpillar",
+      "baujahr": 2025,
+      "standort": "Aussenbereich Nord",
+      "legacyId": "BBL-009-A3",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "8c2aaa10-7fc2-4a0a-a4ca-af3eec9678d1",
+      "bezeichnung": "Brandlöschanlage Inergen",
+      "kategorie": "Brandschutz",
+      "hersteller": "Minimax",
+      "baujahr": 2025,
+      "standort": "Alle Serverräume",
+      "legacyId": "BBL-009-A4",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "5091003f-231f-462a-8f50-fd74709d0adf",
+      "bezeichnung": "Zutrittskontrollsystem",
+      "kategorie": "Sicherheit",
+      "hersteller": "Dormakaba",
+      "baujahr": 2025,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-009-A5",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "2945751f-8d6b-4ace-aec0-6670b1427d93",
+      "bezeichnung": "Freikühler (Free Cooling)",
+      "kategorie": "HVAC",
+      "hersteller": "Güntner",
+      "baujahr": 2025,
+      "standort": "Dach",
+      "legacyId": "BBL-009-A6",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "34c45c8b-5014-40ff-b58a-6ecc25f75aea",
+      "bezeichnung": "Gebäudeleitsystem",
+      "kategorie": "Gebäudeautomation",
+      "hersteller": "Siemens",
+      "baujahr": 2025,
+      "standort": "Leitwarte",
+      "legacyId": "BBL-009-A7",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "e38161ef-cb37-4ff0-972b-33fe864f83fe",
+      "bezeichnung": "Split-Klimaanlage",
+      "kategorie": "HVAC",
+      "hersteller": "Daikin",
+      "baujahr": 2016,
+      "standort": "Büro- und Residenzbereich",
+      "legacyId": "BBL-010-A1",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "8a5d9171-c1a2-4cee-b2e4-774ecbcaf152",
+      "bezeichnung": "Solaranlage Warmwasser",
+      "kategorie": "Solar/Energie",
+      "hersteller": "Rheem Australia",
+      "baujahr": 2016,
+      "standort": "Dach",
+      "legacyId": "BBL-010-A2",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "daade1b3-7eb2-40ad-8335-b085161c6cfe",
+      "bezeichnung": "Alarmanlage",
+      "kategorie": "Sicherheit",
+      "hersteller": "Bosch Security",
+      "baujahr": 2016,
+      "standort": "Gesamtgebäude",
+      "legacyId": "BBL-010-A3",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "5e8195f2-d45e-4f63-a6de-020aa2380401",
+      "bezeichnung": "Videoüberwachung",
+      "kategorie": "Sicherheit",
+      "hersteller": "Hikvision",
+      "baujahr": 2020,
+      "standort": "Aussenbereich",
+      "legacyId": "BBL-010-A4",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    }
+  ]
+}

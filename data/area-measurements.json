@@ -1,0 +1,949 @@
+{
+  "areaMeasurements": [
+    {
+      "id": "eae1a012-b315-4ac3-bd05-846ad9d838bc",
+      "areaType": "Bruttogeschossfläche",
+      "value": 15000,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "15.03.2019",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-001-M1",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "47dfeb45-2c1f-4a65-bbcd-6283c98e59d2",
+      "areaType": "Nettogeschossfläche",
+      "value": 12500,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "15.03.2019",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-001-M2",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "a944b628-30a4-44ad-8212-1eae099a149e",
+      "areaType": "Energiebezugsfläche",
+      "value": 13200,
+      "unit": "m²",
+      "accuracy": "Berechnet",
+      "standard": "SIA 380/1",
+      "validFrom": "15.03.2019",
+      "validUntil": null,
+      "source": "Schätzmodell",
+      "legacyId": "BBL-001-M3",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "dec5da2b-f429-4bec-a6e4-1602a6c3a64e",
+      "areaType": "Volumen",
+      "value": 52500,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "15.03.2019",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-001-M4",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "07af0960-8515-4be8-980d-3632f8e6389d",
+      "areaType": "Arbeitsplätze",
+      "value": 320,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-001-M5",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "a76f4cb4-0699-4a83-abac-c04aaf912b94",
+      "areaType": "Reinigungsfläche",
+      "value": 11800,
+      "unit": "m²",
+      "accuracy": "Geschätzt",
+      "standard": "n/a",
+      "validFrom": "01.01.2020",
+      "validUntil": null,
+      "source": "Schätzmodell",
+      "legacyId": "BBL-001-M6",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "8f36aedf-2694-4d57-bd6e-d139e9a1275c",
+      "areaType": "Bruttogeschossfläche",
+      "value": 3850,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "DIN 277",
+      "validFrom": "01.09.2000",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-002-M1",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "677b670f-b56b-47a4-943b-0271ab167f73",
+      "areaType": "Nettogeschossfläche",
+      "value": 3200,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "DIN 277",
+      "validFrom": "01.09.2000",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-002-M2",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "e6995735-f237-4844-bc0e-7a68002c9c35",
+      "areaType": "Energiebezugsfläche",
+      "value": 3400,
+      "unit": "m²",
+      "accuracy": "Berechnet",
+      "standard": "EnEV",
+      "validFrom": "15.06.2021",
+      "validUntil": null,
+      "source": "Schätzmodell",
+      "legacyId": "BBL-002-M3",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "92964627-b281-43e1-a626-e9437e256937",
+      "areaType": "Volumen",
+      "value": 13475,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "DIN 277",
+      "validFrom": "01.09.2000",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-002-M4",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "1c209567-df72-4d2b-85ba-4da7bb446710",
+      "areaType": "Arbeitsplätze",
+      "value": 45,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-002-M5",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "91729adf-f45b-49db-92d2-416a1ca2d246",
+      "areaType": "Repräsentationsfläche",
+      "value": 650,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.09.2000",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-002-M6",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "5463cf5b-2c0c-49a5-b277-238e7fbe6044",
+      "areaType": "Bruttogeschossfläche",
+      "value": 10500,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "20.11.1985",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-003-M1",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "3db1b003-5ea9-4600-ae61-9a391600705b",
+      "areaType": "Nettogeschossfläche",
+      "value": 8750,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "20.11.1985",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-003-M2",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "2a273cb0-ebae-4e23-ac9f-74f391925508",
+      "areaType": "Lagerfläche",
+      "value": 6200,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.06.2017",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-003-M3",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "649587cc-273a-4687-ac7a-286162164368",
+      "areaType": "Volumen",
+      "value": 42000,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "20.11.1985",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-003-M4",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "1a28ef22-92a9-4605-8fc2-aa3d72beccfc",
+      "areaType": "Rampen/Andockstellen",
+      "value": 12,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2017",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-003-M5",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "3a481f92-a010-4cdb-bf66-12937c6ab24f",
+      "areaType": "Arbeitsplätze",
+      "value": 65,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-003-M6",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "50c266e4-6dfb-456f-a30f-37e852ffc9c5",
+      "areaType": "Palettenstellplätze",
+      "value": 2400,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2017",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-003-M7",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "cd487a68-a60d-44a7-afc8-7cac0745bb06",
+      "areaType": "Bruttogeschossfläche",
+      "value": 2200,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "BOMA",
+      "validFrom": "01.01.2020",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-004-M1",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "e31669dc-6709-40d5-a31b-c70850bd04eb",
+      "areaType": "Nettogeschossfläche",
+      "value": 1850,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "BOMA",
+      "validFrom": "01.01.2020",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-004-M2",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "dcd4e2cc-1cd0-4cb8-a1de-835f90197eab",
+      "areaType": "Mietfläche",
+      "value": 181,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "BOMA",
+      "validFrom": "01.01.2020",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-004-M3",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "a49caef5-eb47-4ff6-8d5a-b1ea48ed7804",
+      "areaType": "Arbeitsplätze",
+      "value": 28,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-004-M4",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "ce1de6d8-f366-40b9-91ef-c010ac25c712",
+      "areaType": "Schalterbereich",
+      "value": 180,
+      "unit": "m²",
+      "accuracy": "Geschätzt",
+      "standard": "n/a",
+      "validFrom": "01.01.2020",
+      "validUntil": null,
+      "source": "Schätzmodell",
+      "legacyId": "BBL-004-M5",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "c85d95fb-ca2b-478d-b8b6-60b265958960",
+      "areaType": "Bruttogeschossfläche",
+      "value": 5100,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "15.08.1965",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-005-M1",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "9961ffac-62ae-43c3-9eb5-26099a90a829",
+      "areaType": "Nettogeschossfläche",
+      "value": 4200,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "15.08.1965",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-005-M2",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "73f40787-e1ea-431e-ad39-ac61c6efb1a1",
+      "areaType": "Schulungsräume",
+      "value": 1800,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.01.2020",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-005-M3",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "b85ad51c-edea-43ca-8463-49c3e30692f9",
+      "areaType": "Energiebezugsfläche",
+      "value": 4400,
+      "unit": "m²",
+      "accuracy": "Berechnet",
+      "standard": "SIA 380/1",
+      "validFrom": "01.01.2024",
+      "validUntil": null,
+      "source": "Schätzmodell",
+      "legacyId": "BBL-005-M4",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "bba99165-d226-45eb-ab4f-3d77cde9dcb0",
+      "areaType": "Volumen",
+      "value": 17850,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "15.08.1965",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-005-M5",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "5d4ab73c-ea4f-46c1-8cb8-cc19e059ee6d",
+      "areaType": "Schulungsplätze",
+      "value": 120,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-005-M6",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "0b67f071-36cc-4caa-89ba-9f26eaaadac2",
+      "areaType": "Arbeitsplätze",
+      "value": 25,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-005-M7",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "30248bea-8dda-458e-a759-7f3f7a472886",
+      "areaType": "Bruttogeschossfläche",
+      "value": 2520,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "JIS A",
+      "validFrom": "01.03.1991",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-006-M1",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "a9efabe7-3284-4ee3-aeb1-40ef5c01a27f",
+      "areaType": "Nettogeschossfläche",
+      "value": 2100,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "JIS A",
+      "validFrom": "01.03.1991",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-006-M2",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "b416e45d-b657-430b-a9ea-68ceea0615eb",
+      "areaType": "Volumen",
+      "value": 7350,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "JIS A",
+      "validFrom": "01.03.1991",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-006-M3",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "c40ccde6-afad-487a-ba0c-a56ede8a7a46",
+      "areaType": "Arbeitsplätze",
+      "value": 32,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-006-M4",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "9123b680-ba20-4cf4-a634-51e20c4518ba",
+      "areaType": "Repräsentationsfläche",
+      "value": 420,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.03.1991",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-006-M5",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "81664d7b-0c5f-4d72-acc6-f68c744ed0ef",
+      "areaType": "Residenzfläche",
+      "value": 380,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.03.1991",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-006-M6",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "9c456a6b-cc84-47b6-b834-1bf162b8defa",
+      "areaType": "Bruttogeschossfläche",
+      "value": 3360,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "01.06.2015",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-007-M1",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "16dfdf2a-21b4-4cda-bce1-4bf6243a925a",
+      "areaType": "Nettogeschossfläche",
+      "value": 2800,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "01.06.2015",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-007-M2",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "04a1cfeb-7797-41f6-ad46-6edb10a37bae",
+      "areaType": "Wohnfläche",
+      "value": 2450,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "01.06.2015",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-007-M3",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "be639313-38c0-4005-959f-0a6044ffa7b9",
+      "areaType": "Energiebezugsfläche",
+      "value": 2900,
+      "unit": "m²",
+      "accuracy": "Berechnet",
+      "standard": "SIA 380/1",
+      "validFrom": "01.06.2015",
+      "validUntil": null,
+      "source": "Schätzmodell",
+      "legacyId": "BBL-007-M4",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "6afbba35-1ecf-43f8-a33b-3d5e11b19f87",
+      "areaType": "Volumen",
+      "value": 9800,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "SIA 416",
+      "validFrom": "01.06.2015",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-007-M5",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "2e942f10-a2cf-4804-b35c-e031b9b7e61b",
+      "areaType": "Wohneinheiten",
+      "value": 18,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2015",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-007-M6",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "86df0d70-2e9c-4005-9176-fd20193ef236",
+      "areaType": "Kellerabteile",
+      "value": 18,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2015",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-007-M7",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "7bd1ebcf-cbdc-44e0-aedb-dc9530e445d0",
+      "areaType": "Bruttogeschossfläche",
+      "value": 1980,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "ABNT NBR",
+      "validFrom": "15.06.1972",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-008-M1",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "d396c56e-895c-45d8-950d-de20bd5d7551",
+      "areaType": "Nettogeschossfläche",
+      "value": 1650,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "ABNT NBR",
+      "validFrom": "15.06.1972",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-008-M2",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "3d119c16-8585-444c-8b36-cc3a88a1f921",
+      "areaType": "Volumen",
+      "value": 5775,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "ABNT NBR",
+      "validFrom": "15.06.1972",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-008-M3",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "b67c3e6b-59ed-4507-be50-ae407b635cc6",
+      "areaType": "Arbeitsplätze",
+      "value": 22,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-008-M4",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "e5cc69a5-fdfb-4087-8efa-fd7d0f4ed686",
+      "areaType": "Grundstücksfläche",
+      "value": 4500,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "15.06.1972",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-008-M5",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "dfdd8821-8c9c-405e-96fc-67732de29470",
+      "areaType": "Gartenfläche",
+      "value": 2800,
+      "unit": "m²",
+      "accuracy": "Geschätzt",
+      "standard": "n/a",
+      "validFrom": "01.01.2022",
+      "validUntil": null,
+      "source": "Schätzmodell",
+      "legacyId": "BBL-008-M6",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "f9d6ca35-5041-442f-89c2-5356ea9b39a3",
+      "areaType": "Bruttogeschossfläche",
+      "value": 6500,
+      "unit": "m²",
+      "accuracy": "Projektiert",
+      "standard": "SIA 416",
+      "validFrom": "01.06.2023",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-009-M1",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "82205e86-eb8d-44d6-b294-2dcd82cafbe6",
+      "areaType": "Nettogeschossfläche",
+      "value": 5400,
+      "unit": "m²",
+      "accuracy": "Projektiert",
+      "standard": "SIA 416",
+      "validFrom": "01.06.2023",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-009-M2",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "95337b11-6bcf-4ead-b2ee-46962311b2d1",
+      "areaType": "Serverraumfläche",
+      "value": 3200,
+      "unit": "m²",
+      "accuracy": "Projektiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2023",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-009-M3",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "b8b4beee-e626-4959-8bdb-49c2c1bd5b0e",
+      "areaType": "IT-Leistung",
+      "value": 8,
+      "unit": "MW",
+      "accuracy": "Projektiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2023",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-009-M4",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "4ce817b5-7254-4094-af8e-64dcc86c3788",
+      "areaType": "Rack-Stellplätze",
+      "value": 480,
+      "unit": "Stk",
+      "accuracy": "Projektiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2023",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-009-M5",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "cd207e4a-1d15-423b-977d-eec75f9586a2",
+      "areaType": "Arbeitsplätze",
+      "value": 35,
+      "unit": "Stk",
+      "accuracy": "Projektiert",
+      "standard": "n/a",
+      "validFrom": "01.06.2023",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-009-M6",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "e0b240be-43fa-4eda-b724-23b2dff472c3",
+      "areaType": "Grundstücksfläche",
+      "value": 12000,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.06.2023",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-009-M7",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "f154ee44-5ceb-46ce-b7c8-8d7cc210827f",
+      "areaType": "Bruttogeschossfläche",
+      "value": 1440,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "AS/NZS",
+      "validFrom": "01.09.1968",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-010-M1",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "1339b096-dc7a-4939-96cb-eed67c83fd51",
+      "areaType": "Nettogeschossfläche",
+      "value": 1200,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "AS/NZS",
+      "validFrom": "01.09.1968",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-010-M2",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "ae23b985-b313-4ce5-956b-1d840d770226",
+      "areaType": "Volumen",
+      "value": 4200,
+      "unit": "m³",
+      "accuracy": "Gemessen",
+      "standard": "AS/NZS",
+      "validFrom": "01.09.1968",
+      "validUntil": null,
+      "source": "CAD/BIM",
+      "legacyId": "BBL-010-M3",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "e8b3e4d4-1967-4ccd-bb42-ea9c7b1b03a5",
+      "areaType": "Arbeitsplätze",
+      "value": 18,
+      "unit": "Stk",
+      "accuracy": "Aggregiert",
+      "standard": "n/a",
+      "validFrom": "01.01.2023",
+      "validUntil": null,
+      "source": "Manuell",
+      "legacyId": "BBL-010-M4",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "58a28093-b036-432a-83ce-4bcc274c0047",
+      "areaType": "Grundstücksfläche",
+      "value": 3200,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.09.1968",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-010-M5",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "845cb731-2206-4324-93c4-e9e7530fcf16",
+      "areaType": "Residenzfläche",
+      "value": 280,
+      "unit": "m²",
+      "accuracy": "Gemessen",
+      "standard": "n/a",
+      "validFrom": "01.01.2016",
+      "validUntil": null,
+      "source": "Vermessung",
+      "legacyId": "BBL-010-M6",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    }
+  ]
+}

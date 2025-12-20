@@ -4273,6 +4273,14 @@
         var portfolioData = null;
         var filteredData = null;
         var currentDetailBuilding = null;
+
+        // Entity data stores (loaded from separate JSON files)
+        var allAreaMeasurements = [];
+        var allDocuments = [];
+        var allContacts = [];
+        var allContracts = [];
+        var allAssets = [];
+        var allCosts = [];
         var currentCarouselIndex = 0;
         var miniMap = null;
         var previousView = 'gallery';
@@ -4892,13 +4900,25 @@
             }
         }
 
-        // Daten laden
-        fetch('data/buildings.geojson')
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                portfolioData = data;
+        // Daten laden (parallel fetch of all entity files)
+        Promise.all([
+            fetch('data/buildings.geojson').then(function(r) { return r.json(); }),
+            fetch('data/area-measurements.json').then(function(r) { return r.json(); }),
+            fetch('data/documents.json').then(function(r) { return r.json(); }),
+            fetch('data/contacts.json').then(function(r) { return r.json(); }),
+            fetch('data/contracts.json').then(function(r) { return r.json(); }),
+            fetch('data/assets.json').then(function(r) { return r.json(); }),
+            fetch('data/costs.json').then(function(r) { return r.json(); })
+        ])
+            .then(function(results) {
+                // Destructure results
+                portfolioData = results[0];
+                allAreaMeasurements = results[1].areaMeasurements;
+                allDocuments = results[2].documents;
+                allContacts = results[3].contacts;
+                allContracts = results[4].contracts;
+                allAssets = results[5].assets;
+                allCosts = results[6].costs;
 
                 // Initialize filters from URL
                 activeFilters = getFiltersFromURL();
@@ -6408,14 +6428,20 @@
         };
 
         function loadMeasurementsForBuilding(building) {
-            if (building && building.properties && building.properties.bemessungen) {
-                measurementsData = building.properties.bemessungen.map(function(m) {
-                    return {
-                        id: m.id, areaType: m.areaType, value: m.value, unit: m.unit,
-                        source: m.source || 'Manuell', accuracy: m.accuracy,
-                        standard: m.standard, validFrom: m.validFrom, validUntil: m.validUntil || '—'
-                    };
-                });
+            if (building && building.properties) {
+                var buildingId = building.properties.id;
+                // Filter from global allAreaMeasurements array
+                measurementsData = allAreaMeasurements
+                    .filter(function(m) {
+                        return m.buildingIds && m.buildingIds.includes(buildingId);
+                    })
+                    .map(function(m) {
+                        return {
+                            id: m.id, areaType: m.areaType, value: m.value, unit: m.unit,
+                            source: m.source || 'Manuell', accuracy: m.accuracy,
+                            standard: m.standard, validFrom: m.validFrom, validUntil: m.validUntil || '—'
+                        };
+                    });
             } else {
                 measurementsData = [];
             }
@@ -6499,14 +6525,20 @@
         };
 
         function loadDocumentsForBuilding(building) {
-            if (building && building.properties && building.properties.dokumente) {
-                documentsData = building.properties.dokumente.map(function(d) {
-                    return {
-                        id: d.id, titel: d.titel, dokumentTyp: d.dokumentTyp,
-                        dateiformat: d.dateiformat, datum: d.datum,
-                        dateigroesse: d.dateigroesse, url: d.url || '#'
-                    };
-                });
+            if (building && building.properties) {
+                var buildingId = building.properties.id;
+                // Filter from global allDocuments array
+                documentsData = allDocuments
+                    .filter(function(d) {
+                        return d.buildingIds && d.buildingIds.includes(buildingId);
+                    })
+                    .map(function(d) {
+                        return {
+                            id: d.id, titel: d.titel, dokumentTyp: d.dokumentTyp,
+                            dateiformat: d.dateiformat, datum: d.datum,
+                            dateigroesse: d.dateigroesse, url: d.url || '#'
+                        };
+                    });
             } else {
                 documentsData = [];
             }
@@ -6587,17 +6619,23 @@
         };
 
         function loadKontakteForBuilding(building) {
-            if (building && building.properties && building.properties.kontakte) {
-                kontakteData = building.properties.kontakte.map(function(k) {
-                    return {
-                        id: k.id,
-                        name: k.name,
-                        rolle: k.rolle,
-                        organisation: k.organisation,
-                        telefon: k.telefon,
-                        email: k.email
-                    };
-                });
+            if (building && building.properties) {
+                var buildingId = building.properties.id;
+                // Filter from global allContacts array
+                kontakteData = allContacts
+                    .filter(function(k) {
+                        return k.buildingIds && k.buildingIds.includes(buildingId);
+                    })
+                    .map(function(k) {
+                        return {
+                            id: k.id,
+                            name: k.name,
+                            rolle: k.rolle,
+                            organisation: k.organisation,
+                            telefon: k.telefon,
+                            email: k.email
+                        };
+                    });
             } else {
                 kontakteData = [];
             }
@@ -6678,17 +6716,23 @@
         };
 
         function loadKostenForBuilding(building) {
-            if (building && building.properties && building.properties.kosten) {
-                kostenData = building.properties.kosten.map(function(k) {
-                    return {
-                        id: k.id,
-                        kostengruppe: k.kostengruppe,
-                        kostenart: k.kostenart,
-                        betrag: k.betrag,
-                        einheit: k.einheit,
-                        stichtag: k.stichtag
-                    };
-                });
+            if (building && building.properties) {
+                var buildingId = building.properties.id;
+                // Filter from global allCosts array
+                kostenData = allCosts
+                    .filter(function(k) {
+                        return k.buildingIds && k.buildingIds.includes(buildingId);
+                    })
+                    .map(function(k) {
+                        return {
+                            id: k.id,
+                            kostengruppe: k.kostengruppe,
+                            kostenart: k.kostenart,
+                            betrag: k.betrag,
+                            einheit: k.einheit,
+                            stichtag: k.stichtag
+                        };
+                    });
             } else {
                 kostenData = [];
             }
@@ -6787,18 +6831,24 @@
         };
 
         function loadVertraegeForBuilding(building) {
-            if (building && building.properties && building.properties.vertraege) {
-                vertraegeData = building.properties.vertraege.map(function(v) {
-                    return {
-                        id: v.id,
-                        vertragsart: v.vertragsart,
-                        vertragspartner: v.vertragspartner,
-                        vertragsbeginn: v.vertragsbeginn,
-                        vertragsende: v.vertragsende,
-                        betrag: v.betrag,
-                        status: v.status
-                    };
-                });
+            if (building && building.properties) {
+                var buildingId = building.properties.id;
+                // Filter from global allContracts array
+                vertraegeData = allContracts
+                    .filter(function(v) {
+                        return v.buildingIds && v.buildingIds.includes(buildingId);
+                    })
+                    .map(function(v) {
+                        return {
+                            id: v.id,
+                            vertragsart: v.vertragsart,
+                            vertragspartner: v.vertragspartner,
+                            vertragsbeginn: v.vertragsbeginn,
+                            vertragsende: v.vertragsende,
+                            betrag: v.betrag,
+                            status: v.status
+                        };
+                    });
             } else {
                 vertraegeData = [];
             }
@@ -6901,17 +6951,23 @@
         };
 
         function loadAusstattungForBuilding(building) {
-            if (building && building.properties && building.properties.ausstattung) {
-                ausstattungData = building.properties.ausstattung.map(function(a) {
-                    return {
-                        id: a.id,
-                        bezeichnung: a.bezeichnung,
-                        kategorie: a.kategorie,
-                        hersteller: a.hersteller,
-                        baujahr: a.baujahr,
-                        standort: a.standort
-                    };
-                });
+            if (building && building.properties) {
+                var buildingId = building.properties.id;
+                // Filter from global allAssets array
+                ausstattungData = allAssets
+                    .filter(function(a) {
+                        return a.buildingIds && a.buildingIds.includes(buildingId);
+                    })
+                    .map(function(a) {
+                        return {
+                            id: a.id,
+                            bezeichnung: a.bezeichnung,
+                            kategorie: a.kategorie,
+                            hersteller: a.hersteller,
+                            baujahr: a.baujahr,
+                            standort: a.standort
+                        };
+                    });
             } else {
                 ausstattungData = [];
             }

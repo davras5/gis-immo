@@ -1,0 +1,394 @@
+{
+  "contracts": [
+    {
+      "id": "2c3724a0-965e-4196-b8c5-6c35a1d72081",
+      "vertragsart": "Wartungsvertrag",
+      "vertragspartner": "Siemens Building Technologies AG",
+      "vertragsbeginn": "01.01.2020",
+      "vertragsende": "31.12.2025",
+      "betrag": 85000,
+      "status": "Aktiv",
+      "legacyId": "BBL-001-V1",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "946462f4-369b-476e-aadd-46cd53eb6d08",
+      "vertragsart": "Reinigungsvertrag",
+      "vertragspartner": "ISS Facility Services AG",
+      "vertragsbeginn": "01.04.2021",
+      "vertragsende": "31.03.2026",
+      "betrag": 120000,
+      "status": "Aktiv",
+      "legacyId": "BBL-001-V2",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "c069b5c0-00b3-48cc-8ca6-f31941e5ce96",
+      "vertragsart": "Sicherheitsdienst",
+      "vertragspartner": "Securitas AG",
+      "vertragsbeginn": "01.01.2019",
+      "vertragsende": null,
+      "betrag": 95000,
+      "status": "Aktiv",
+      "legacyId": "BBL-001-V3",
+      "buildingIds": [
+        "BBL-001"
+      ]
+    },
+    {
+      "id": "497d4757-5cac-4452-beef-78b784488739",
+      "vertragsart": "Wartungsvertrag",
+      "vertragspartner": "Bosch Building Technologies GmbH",
+      "vertragsbeginn": "01.01.2021",
+      "vertragsende": "31.12.2026",
+      "betrag": 42000,
+      "status": "Aktiv",
+      "legacyId": "BBL-002-V1",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "1797de18-fd53-4787-8518-279d6b042aff",
+      "vertragsart": "Sicherheitsdienst",
+      "vertragspartner": "Kötter Security GmbH",
+      "vertragsbeginn": "01.07.2020",
+      "vertragsende": null,
+      "betrag": 78000,
+      "status": "Aktiv",
+      "legacyId": "BBL-002-V2",
+      "buildingIds": [
+        "BBL-002"
+      ]
+    },
+    {
+      "id": "11755871-a907-4a8d-bb8b-a8fc45d94a92",
+      "vertragsart": "Wartungsvertrag",
+      "vertragspartner": "Johnson Controls AG",
+      "vertragsbeginn": "01.01.2018",
+      "vertragsende": "31.12.2024",
+      "betrag": 65000,
+      "status": "Aktiv",
+      "legacyId": "BBL-003-V1",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "7a88cc8c-ee5e-48c0-9c40-1cee270bd4ee",
+      "vertragsart": "Reinigungsvertrag",
+      "vertragspartner": "Vebego AG",
+      "vertragsbeginn": "01.01.2020",
+      "vertragsende": "31.12.2025",
+      "betrag": 48000,
+      "status": "Aktiv",
+      "legacyId": "BBL-003-V2",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "d0371e4d-1784-4797-9c91-be79cd5dabac",
+      "vertragsart": "Logistikdienstleistung",
+      "vertragspartner": "Planzer Transport AG",
+      "vertragsbeginn": "01.06.2019",
+      "vertragsende": null,
+      "betrag": 180000,
+      "status": "Aktiv",
+      "legacyId": "BBL-003-V3",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "1dee0d78-c8c0-4ac3-81b4-e1d0bc000cd9",
+      "vertragsart": "Heizungswartung",
+      "vertragspartner": "Meier Tobler AG",
+      "vertragsbeginn": "01.01.2017",
+      "vertragsende": "31.12.2022",
+      "betrag": 12000,
+      "status": "Ausgelaufen",
+      "legacyId": "BBL-003-V4",
+      "buildingIds": [
+        "BBL-003"
+      ]
+    },
+    {
+      "id": "62ca4d05-34a3-4535-be1f-df9866b80d41",
+      "vertragsart": "Mietvertrag",
+      "vertragspartner": "Third Avenue Tower LLC",
+      "vertragsbeginn": "01.01.2020",
+      "vertragsende": "31.12.2030",
+      "betrag": 450000,
+      "status": "Aktiv",
+      "legacyId": "BBL-004-V1",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "17940db8-6fe9-4b3f-8cb8-21fce4f5c56a",
+      "vertragsart": "Sicherheitsdienst",
+      "vertragspartner": "Allied Universal Security",
+      "vertragsbeginn": "01.01.2021",
+      "vertragsende": "31.12.2025",
+      "betrag": 125000,
+      "status": "Aktiv",
+      "legacyId": "BBL-004-V2",
+      "buildingIds": [
+        "BBL-004"
+      ]
+    },
+    {
+      "id": "2c2de31f-4fac-4edf-a57c-8423ad46f3a0",
+      "vertragsart": "Sanierungsvertrag",
+      "vertragspartner": "Implenia Schweiz AG",
+      "vertragsbeginn": "01.01.2024",
+      "vertragsende": "31.12.2025",
+      "betrag": 2500000,
+      "status": "Aktiv",
+      "legacyId": "BBL-005-V1",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "0fd36974-2a11-419b-842e-59aeabad8a88",
+      "vertragsart": "Architekturleistung",
+      "vertragspartner": "Herzog & de Meuron",
+      "vertragsbeginn": "01.06.2023",
+      "vertragsende": "31.12.2025",
+      "betrag": 350000,
+      "status": "Aktiv",
+      "legacyId": "BBL-005-V2",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "83413af2-2001-459c-b868-51fd74134058",
+      "vertragsart": "Wartungsvertrag",
+      "vertragspartner": "Honeywell Schweiz AG",
+      "vertragsbeginn": "01.01.2018",
+      "vertragsende": "31.12.2023",
+      "betrag": 35000,
+      "status": "Ausgelaufen",
+      "legacyId": "BBL-005-V3",
+      "buildingIds": [
+        "BBL-005"
+      ]
+    },
+    {
+      "id": "0d0b6405-ce68-4e72-85be-0aa5c10730ad",
+      "vertragsart": "Wartungsvertrag",
+      "vertragspartner": "Daikin Industries Ltd",
+      "vertragsbeginn": "01.04.2019",
+      "vertragsende": "31.03.2025",
+      "betrag": 55000,
+      "status": "Aktiv",
+      "legacyId": "BBL-006-V1",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "de9a5587-fd69-4123-87ee-254aed430501",
+      "vertragsart": "Sicherheitsdienst",
+      "vertragspartner": "ALSOK Co., Ltd.",
+      "vertragsbeginn": "01.01.2020",
+      "vertragsende": null,
+      "betrag": 92000,
+      "status": "Aktiv",
+      "legacyId": "BBL-006-V2",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "438cf75f-3b15-49b5-954b-17147d56b365",
+      "vertragsart": "Gartenpflege",
+      "vertragspartner": "Tokyo Green Service Co.",
+      "vertragsbeginn": "01.04.2018",
+      "vertragsende": "31.03.2024",
+      "betrag": 18000,
+      "status": "Gekündigt",
+      "legacyId": "BBL-006-V3",
+      "buildingIds": [
+        "BBL-006"
+      ]
+    },
+    {
+      "id": "05c7885e-38a7-4b53-9f6b-a8a192721b06",
+      "vertragsart": "Heizungswartung",
+      "vertragspartner": "IWB Industrielle Werke Basel",
+      "vertragsbeginn": "01.01.2016",
+      "vertragsende": "31.12.2026",
+      "betrag": 8500,
+      "status": "Aktiv",
+      "legacyId": "BBL-007-V1",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "efb1035d-8faa-4242-a3dd-b83fe4830994",
+      "vertragsart": "Hauswartung",
+      "vertragspartner": "Livit AG",
+      "vertragsbeginn": "01.07.2020",
+      "vertragsende": null,
+      "betrag": 42000,
+      "status": "Aktiv",
+      "legacyId": "BBL-007-V2",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "75dddc19-2aa8-4eef-af10-ca0963c6a2e3",
+      "vertragsart": "Reinigungsvertrag",
+      "vertragspartner": "Clean Expert GmbH",
+      "vertragsbeginn": "01.01.2021",
+      "vertragsende": "31.12.2024",
+      "betrag": 28000,
+      "status": "Aktiv",
+      "legacyId": "BBL-007-V3",
+      "buildingIds": [
+        "BBL-007"
+      ]
+    },
+    {
+      "id": "369cbed3-8ee1-4fe8-851c-9e125dbd2d0a",
+      "vertragsart": "Klimaanlagenwartung",
+      "vertragspartner": "Carrier do Brasil",
+      "vertragsbeginn": "01.01.2022",
+      "vertragsende": "31.12.2027",
+      "betrag": 38000,
+      "status": "Aktiv",
+      "legacyId": "BBL-008-V1",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "ecd42fbe-932f-45fa-99af-3d74d104fdee",
+      "vertragsart": "Sicherheitsdienst",
+      "vertragspartner": "Prosegur Brasil",
+      "vertragsbeginn": "01.06.2020",
+      "vertragsende": null,
+      "betrag": 65000,
+      "status": "Aktiv",
+      "legacyId": "BBL-008-V2",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "9cf5fd37-adfb-45b3-ab98-b6b199d9ff93",
+      "vertragsart": "Gartenpflege",
+      "vertragspartner": "Verde Vida Ltda",
+      "vertragsbeginn": "01.01.2022",
+      "vertragsende": "31.12.2024",
+      "betrag": 12000,
+      "status": "Aktiv",
+      "legacyId": "BBL-008-V3",
+      "buildingIds": [
+        "BBL-008"
+      ]
+    },
+    {
+      "id": "57ef8b5e-74ae-42ce-8954-4463d2f6a53d",
+      "vertragsart": "Bauvertrag",
+      "vertragspartner": "Marti AG Bauunternehmung",
+      "vertragsbeginn": "01.07.2023",
+      "vertragsende": "31.12.2025",
+      "betrag": 45000000,
+      "status": "Aktiv",
+      "legacyId": "BBL-009-V1",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "d7f184b8-6f49-432e-92d3-08401230c65c",
+      "vertragsart": "IT-Infrastruktur",
+      "vertragspartner": "Swisscom (Schweiz) AG",
+      "vertragsbeginn": "01.01.2024",
+      "vertragsende": "31.12.2034",
+      "betrag": 2500000,
+      "status": "Aktiv",
+      "legacyId": "BBL-009-V2",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "bb825f19-6648-4453-9621-1291a18a146c",
+      "vertragsart": "Kühlanlagenwartung",
+      "vertragspartner": "Schneider Electric Schweiz AG",
+      "vertragsbeginn": "01.01.2025",
+      "vertragsende": "31.12.2030",
+      "betrag": 180000,
+      "status": "Aktiv",
+      "legacyId": "BBL-009-V3",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "fd272e6b-16c9-4f73-946e-1ba4c2de09ef",
+      "vertragsart": "Sicherheitsdienst",
+      "vertragspartner": "Protectas SA",
+      "vertragsbeginn": "01.01.2025",
+      "vertragsende": null,
+      "betrag": 320000,
+      "status": "Aktiv",
+      "legacyId": "BBL-009-V4",
+      "buildingIds": [
+        "BBL-009"
+      ]
+    },
+    {
+      "id": "1c3d71f0-0b1a-4177-902d-2d7d20727f7d",
+      "vertragsart": "Wartungsvertrag",
+      "vertragspartner": "Daikin Australia Pty Ltd",
+      "vertragsbeginn": "01.01.2017",
+      "vertragsende": "31.12.2025",
+      "betrag": 22000,
+      "status": "Aktiv",
+      "legacyId": "BBL-010-V1",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "6e9b4cf9-a720-44d2-bae0-866db08fa5a6",
+      "vertragsart": "Sicherheitsdienst",
+      "vertragspartner": "Wilson Security",
+      "vertragsbeginn": "01.07.2018",
+      "vertragsende": null,
+      "betrag": 48000,
+      "status": "Aktiv",
+      "legacyId": "BBL-010-V2",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    },
+    {
+      "id": "eb525f04-3822-49bd-9163-c68777cdc806",
+      "vertragsart": "Gartenpflege",
+      "vertragspartner": "Canberra Landscaping Services",
+      "vertragsbeginn": "01.01.2020",
+      "vertragsende": "31.12.2024",
+      "betrag": 15000,
+      "status": "Aktiv",
+      "legacyId": "BBL-010-V3",
+      "buildingIds": [
+        "BBL-010"
+      ]
+    }
+  ]
+}
