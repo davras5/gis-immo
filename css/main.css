@@ -424,7 +424,17 @@
         .header-btn:hover {
             background: var(--grey-100);
         }
-        
+
+        .header-btn.panel-open {
+            background: var(--accent-panel);
+            border-color: var(--accent-panel);
+            color: var(--white);
+        }
+
+        .header-btn.panel-open .material-symbols-outlined {
+            color: var(--white);
+        }
+
         .header-btn .material-symbols-outlined {
             font-size: var(--icon-md);
         }
@@ -1915,16 +1925,6 @@
             font-weight: var(--font-semibold);
         }
 
-        /* ===== AI ASSISTANT BUTTON (in header) ===== */
-        #ai-assistant-btn.active {
-            background: var(--grey-100);
-            border-color: var(--primary-red);
-        }
-
-        #ai-assistant-btn.active .material-symbols-outlined {
-            color: var(--primary-red);
-        }
-
         /* ===== AI ASSISTANT PANEL ===== */
         #ai-assistant-panel {
             width: 0;
@@ -2488,23 +2488,12 @@
             font-size: var(--icon-sm);
         }
 
-        /* Filter button - pane open state */
-        #filter-btn.pane-open {
-            background: var(--accent-panel);
-            border-color: var(--accent-panel);
-            color: var(--white);
-        }
-
-        #filter-btn.pane-open .material-symbols-outlined {
-            color: var(--white);
-        }
-
         /* Filter button - active filters state */
         #filter-btn.has-active-filters {
             background: rgba(204, 0, 0, 0.1); /* --primary-red at 10% opacity */
         }
 
-        #filter-btn.has-active-filters.pane-open {
+        #filter-btn.has-active-filters.panel-open {
             background: var(--accent-panel);
         }
 
