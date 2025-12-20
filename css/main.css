@@ -802,7 +802,77 @@
             background: var(--status-inactive-bg);
             color: var(--status-inactive-text);
         }
-        
+
+        /* ===== PAGINATION ===== */
+        .pagination-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3) var(--space-5);
+            border-top: 1px solid var(--grey-100);
+            background: var(--grey-50);
+            font-size: var(--text-sm);
+            color: var(--grey-600);
+        }
+
+        .pagination-rows {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .pagination-rows select {
+            padding: var(--space-1) var(--space-2);
+            border: 1px solid var(--grey-300);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            font-size: var(--text-sm);
+            color: var(--grey-700);
+            cursor: pointer;
+        }
+
+        .pagination-rows select:hover {
+            border-color: var(--grey-500);
+        }
+
+        .pagination-info {
+            font-weight: var(--font-medium);
+        }
+
+        .pagination-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .pagination-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--grey-300);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            color: var(--grey-700);
+            cursor: pointer;
+            transition: background var(--transition-fast), border-color var(--transition-fast);
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: var(--grey-100);
+            border-color: var(--grey-500);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination-btn .material-symbols-outlined {
+            font-size: var(--icon-md);
+        }
+
         /* ===== GALLERY VIEW ===== */
         #gallery-view {
             flex: 1;

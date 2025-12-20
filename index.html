@@ -348,9 +348,30 @@
                         <tbody id="list-body"></tbody>
                     </table>
                 </div>
+                <div class="pagination-footer" id="list-pagination">
+                    <div class="pagination-rows">
+                        <span>Zeilen pro Seite:</span>
+                        <select id="list-rows-per-page">
+                            <option value="25">25</option>
+                            <option value="50" selected>50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="pagination-info" id="list-pagination-info">
+                        Seite 1 von 1
+                    </div>
+                    <div class="pagination-nav">
+                        <button class="pagination-btn" id="list-prev-btn" disabled>
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <button class="pagination-btn" id="list-next-btn" disabled>
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        
+
         <div id="gallery-view">
             <div class="gallery-grid" id="gallery-grid"></div>
         </div>
@@ -608,6 +629,25 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="pagination-footer" id="measurements-pagination">
+                                <div class="pagination-rows">
+                                    <span>Zeilen pro Seite:</span>
+                                    <select class="pagination-rows-select" data-table="measurements">
+                                        <option value="25">25</option>
+                                        <option value="50" selected>50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="pagination-info">Seite 1 von 1</div>
+                                <div class="pagination-nav">
+                                    <button class="pagination-btn pagination-prev" data-table="measurements" disabled>
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="pagination-btn pagination-next" data-table="measurements" disabled>
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -680,6 +720,25 @@
                                         <!-- Populated by JavaScript -->
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="pagination-footer" id="costs-pagination">
+                                <div class="pagination-rows">
+                                    <span>Zeilen pro Seite:</span>
+                                    <select class="pagination-rows-select" data-table="costs">
+                                        <option value="25">25</option>
+                                        <option value="50" selected>50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="pagination-info">Seite 1 von 1</div>
+                                <div class="pagination-nav">
+                                    <button class="pagination-btn pagination-prev" data-table="costs" disabled>
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="pagination-btn pagination-next" data-table="costs" disabled>
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -758,6 +817,25 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="pagination-footer" id="contracts-pagination">
+                                <div class="pagination-rows">
+                                    <span>Zeilen pro Seite:</span>
+                                    <select class="pagination-rows-select" data-table="contracts">
+                                        <option value="25">25</option>
+                                        <option value="50" selected>50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="pagination-info">Seite 1 von 1</div>
+                                <div class="pagination-nav">
+                                    <button class="pagination-btn pagination-prev" data-table="contracts" disabled>
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="pagination-btn pagination-next" data-table="contracts" disabled>
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -831,6 +909,25 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="pagination-footer" id="assets-pagination">
+                                <div class="pagination-rows">
+                                    <span>Zeilen pro Seite:</span>
+                                    <select class="pagination-rows-select" data-table="assets">
+                                        <option value="25">25</option>
+                                        <option value="50" selected>50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="pagination-info">Seite 1 von 1</div>
+                                <div class="pagination-nav">
+                                    <button class="pagination-btn pagination-prev" data-table="assets" disabled>
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="pagination-btn pagination-next" data-table="assets" disabled>
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -898,6 +995,25 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="pagination-footer" id="documents-pagination">
+                                <div class="pagination-rows">
+                                    <span>Zeilen pro Seite:</span>
+                                    <select class="pagination-rows-select" data-table="documents">
+                                        <option value="25">25</option>
+                                        <option value="50" selected>50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="pagination-info">Seite 1 von 1</div>
+                                <div class="pagination-nav">
+                                    <button class="pagination-btn pagination-prev" data-table="documents" disabled>
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="pagination-btn pagination-next" data-table="documents" disabled>
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -964,6 +1080,25 @@
                                         <!-- Populated by JavaScript -->
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="pagination-footer" id="contacts-pagination">
+                                <div class="pagination-rows">
+                                    <span>Zeilen pro Seite:</span>
+                                    <select class="pagination-rows-select" data-table="contacts">
+                                        <option value="25">25</option>
+                                        <option value="50" selected>50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                                <div class="pagination-info">Seite 1 von 1</div>
+                                <div class="pagination-nav">
+                                    <button class="pagination-btn pagination-prev" data-table="contacts" disabled>
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="pagination-btn pagination-next" data-table="contacts" disabled>
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
