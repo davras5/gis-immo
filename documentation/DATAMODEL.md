@@ -2,34 +2,109 @@
 
 This document describes the data model for the BBL Immobilienportfolio application. While the current demo implementation uses a single GeoJSON file (`data/buildings.geojson`), the underlying data model consists of multiple related entities.
 
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Demo Stage Implementation](#demo-stage-implementation)
+- [Entity: Site](#entity-site)
+- [Entity: Building (Gebäude)](#entity-building-gebäude)
+- [Entity: Address (Adresse)](#entity-address-adresse)
+- [Entity: Area Measurement (Bemessung)](#entity-area-measurement-bemessung)
+- [Entity: Land (Grundstück)](#entity-land-grundstück)
+- [Enumerations](#enumerations)
+  - [Building Types](#building-types)
+  - [Energy Types](#energy-types)
+  - [Heating Types](#heating-types)
+- [Related Entities (Preview)](#related-entities-preview)
+- [Version History](#version-history)
+- [References](#references)
+
+---
+
 ## Overview
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              DATA MODEL OVERVIEW                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   ┌─────────────┐         ┌─────────────┐         ┌─────────────┐          │
-│   │    Site     │ 1    n  │  Building   │ 1    n  │   Address   │          │
-│   │             │────────▶│             │────────▶│             │          │
-│   └──────┬──────┘         └──────┬──────┘         └─────────────┘          │
-│          │                       │                                          │
-│          │ 1    n                │                                          │
-│          ▼                       │                                          │
-│   ┌─────────────┐  ┌─────────────┼─────────────┐                           │
-│   │    Land     │  │             │             │                           │
-│   │(Grundstück) │  ▼             ▼             ▼                           │
-│   └─────────────┘  ┌───────────┐ ┌───────────┐ ┌───────────┐               │
-│                    │ Bemessung │ │ Dokument  │ │  Kontakt  │               │
-│                    │  (Area)   │ │(Document) │ │ (Contact) │               │
-│                    └───────────┘ └───────────┘ └───────────┘               │
-│                                                                              │
-│                    ┌───────────┐ ┌───────────┐ ┌───────────┐               │
-│                    │  Vertrag  │ │Certificate│ │  Energy   │               │
-│                    │(Contract) │ │           │ │  Rating   │               │
-│                    └───────────┘ └───────────┘ └───────────┘               │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+erDiagram
+    Site ||--o{ Building : contains
+    Site ||--o{ Land : contains
+    Building ||--o{ Address : "has"
+    Building ||--o{ Bemessung : "has"
+    Building ||--o{ Dokument : "has"
+    Building ||--o{ Kontakt : "has"
+    Building ||--o{ Vertrag : "has"
+    Building ||--o{ Certificate : "has"
+    Building ||--o{ EnergyRating : "has"
+
+    Site {
+        string siteId PK
+        string name
+        string type
+        string status
+    }
+
+    Building {
+        string buildingId PK
+        string siteId FK
+        string name
+        string primaryTypeOfBuilding
+        string typeOfOwnership
+        string status
+    }
+
+    Land {
+        string landId PK
+        string siteId FK
+        string name
+        string typeOfOwnership
+    }
+
+    Address {
+        string addressId PK
+        string streetName
+        string houseNumber
+        string postalCode
+        string city
+        string country
+    }
+
+    Bemessung {
+        string areaMeasurementId PK
+        string type
+        number value
+        string unit
+    }
+
+    Dokument {
+        string documentId PK
+        string name
+        string type
+    }
+
+    Kontakt {
+        string contactId PK
+        string name
+        string role
+    }
+
+    Vertrag {
+        string contractId PK
+        string type
+        date validFrom
+    }
+
+    Certificate {
+        string certificateId PK
+        string type
+        string level
+    }
+
+    EnergyRating {
+        string energyRatingId PK
+        string class
+        date validFrom
+    }
 ```
 
 ## Demo Stage Implementation
