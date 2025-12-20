@@ -859,7 +859,7 @@
             display: none;
             flex-direction: column;
             background: var(--grey-50);
-            overflow: hidden;
+            overflow: visible;
         }
         
         #detail-view.active {
@@ -1000,7 +1000,7 @@
         
         .detail-content {
             flex: 1;
-            overflow-y: auto;
+            overflow: visible;
             padding: var(--space-6);
         }
         
