@@ -9,10 +9,10 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 - [Overview](#overview)
 - [Demo Stage Implementation](#demo-stage-implementation)
 - [Entity: Site](#entity-site)
-- [Entity: Building (Gebäude)](#entity-building-gebäude)
 - [Entity: Address (Adresse)](#entity-address-adresse)
-- [Entity: Area Measurement (Bemessung)](#entity-area-measurement-bemessung)
 - [Entity: Land (Grundstück)](#entity-land-grundstück)
+- [Entity: Building (Gebäude)](#entity-building-gebäude)
+- [Entity: Area Measurement (Bemessung)](#entity-area-measurement-bemessung)
 - [Enumerations](#enumerations)
   - [Building Types](#building-types)
   - [Energy Types](#energy-types)
@@ -167,6 +167,133 @@ A site represents a logical grouping of buildings, such as a campus, property, o
 
 ---
 
+## Entity: Address (Adresse)
+
+Addresses represent the physical location of a building. A building can have multiple addresses (e.g., corner buildings with entrances on different streets).
+
+### Schema Definition
+
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **addressId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Generated: buildingId + "-ADDR-1" |
+| **city** | string | Any official settlement including cities, towns, villages, hamlets, localities, etc. | **mandatory**, minLength: 1, maxLength: 100 | Source: `ort` |
+| **country** | string, enum | Sovereign nations with ISO-3166 code. Common: `CH`, `DE`, `FR`, `IT`, `AT`, `BE`, `US` | **mandatory** | Source: `land` (already ISO-3166) |
+| **type** | string, enum | Type of address. Options: `Primary`, `Other` | **mandatory** | Default: "Primary" for main address |
+| **geoCoordinates.geoCoordinateId** | string | Unique identifier for the coordinate set. | **mandatory**, minLength: 1, maxLength: 50 | Generated: buildingId + "-GEO-1" |
+| geoCoordinates.coordinateReferenceSystem | string | Specific coordinate reference system used (e.g., "WGS84", "LV95"). | minLength: 1, maxLength: 50 | Default: "WGS84" for GeoJSON |
+| geoCoordinates.latitude | number | Latitude coordinate (WGS84: -90 to 90). | | Source: `geometry.coordinates[1]` |
+| geoCoordinates.longitude | number | Longitude coordinate (WGS84: -180 to 180). | | Source: `geometry.coordinates[0]` |
+| additionalInformation | string | Additional information (building name, door number, etc.). | minLength: 1, maxLength: 500 | |
+| apartmentOrUnit | string | Unit or apartment number. | minLength: 1, maxLength: 50 | |
+| district | string | Borough or district within a city. | minLength: 1, maxLength: 50 | |
+| eventType | string, enum | Type of the event as domain event. Options: `AddressAdded`, `AddressUpdated` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| houseNumber | string | House number of the street. | minLength: 1, maxLength: 50 | Source: `hausnummer` |
+| postalCode | string | Postal code for mail sorting. | minLength: 1, maxLength: 15 | Source: `plz` |
+| stateProvincePrefecture | string | First-level administrative division (canton, state, province). | minLength: 1, maxLength: 50 | Source: `region` |
+| streetName | string | Name of the street. | minLength: 1, maxLength: 150 | Extracted from `adresse` |
+| extensionData.formattedAddress | string | Pre-formatted full address string (e.g., "Bundesplatz 3, 3003 Bern") | | Swiss extension. Source: `adresse` |
+| extensionData.canton | string | Swiss canton code (e.g., "BE", "ZH", "GE") | | Swiss extension. Extracted from `region` |
+| extensionData.gemeinde | string | Municipality name | | Swiss extension |
+| extensionData.gemeindeNummer | string | Official municipality number (BFS-Nr.) | | Swiss extension |
+| extensionData.lv95East | number | Swiss LV95 East coordinate (E) | | Swiss extension |
+| extensionData.lv95North | number | Swiss LV95 North coordinate (N) | | Swiss extension |
+
+### Example: Address Object
+
+```json
+{
+  "addressId": "BBL-001-ADDR-1",
+  "type": "Primary",
+  "streetName": "Bundesplatz",
+  "houseNumber": "3",
+  "postalCode": "3003",
+  "city": "Bern",
+  "stateProvincePrefecture": "Kanton Bern",
+  "country": "CH",
+  "geoCoordinates": {
+    "geoCoordinateId": "BBL-001-GEO-1",
+    "coordinateReferenceSystem": "WGS84",
+    "latitude": 46.9466,
+    "longitude": 7.4448
+  },
+  "extensionData": {
+    "formattedAddress": "Bundesplatz 3, 3003 Bern",
+    "canton": "BE",
+    "lv95East": 2600000,
+    "lv95North": 1200000
+  }
+}
+```
+
+---
+
+## Entity: Land (Grundstück)
+
+Land represents a parcel of land or plot that belongs to a site. In the current demo, land information is partially embedded in building properties (`grundstueck_id`, `grundstueck_name`). In a production system, Land would be a separate entity allowing multiple land parcels per site.
+
+### Schema Definition
+
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **landId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` or generated |
+| **name** | string | Name of land (e.g., park, garden, parking). | **mandatory**, minLength: 1, maxLength: 200 | Source: `grundstueck_name` |
+| **siteId** | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Derived from site relationship |
+| **typeOfOwnership** | string, enum | Is the land owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Source: `eigentum`. "Eigentum Bund" → Owner |
+| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
+| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Source: `gueltig_bis`, convert to ISO 8601 |
+| addressIds | array[string] | Array of address IDs linked to this land. | minLength: 1, maxLength: 50 per ID | |
+| eventType | string, enum | Type of the event as domain event. Options: `LandAdded`, `LandUpdated`, `LandDeleted` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| landCode | string | User specific land code. | minLength: 1, maxLength: 70 | |
+| landCoverage | string | Development level of land (e.g., "bebaut", "unbebaut", "teilweise bebaut"). | minLength: 1, maxLength: 50 | |
+| landParcelNr | string | District/zoning number registered for the plot of land. | minLength: 1, maxLength: 50 | |
+| selfUse | boolean | Is the land self-used? | | |
+| status | string | Status of land. | minLength: 1, maxLength: 50 | |
+| tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
+| valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
+| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | Swiss extension. Source: `egrid` |
+| extensionData.parzellenNummer | string | Official Swiss parcel number | | Swiss extension |
+| extensionData.grundbuchKreis | string | Land registry district | | Swiss extension |
+| extensionData.grundbuchBlatt | string | Land registry folio number | | Swiss extension |
+| extensionData.katasterNummer | string | Cadastral number | | Swiss extension |
+| extensionData.gemeinde | string | Municipality name | | Swiss extension |
+| extensionData.kanton | string | Canton code (e.g., "BE", "ZH") | | Swiss extension |
+| extensionData.flaeche | number | Total land area in m² | | Swiss extension |
+| extensionData.nutzungszone | string | Zoning designation | | Swiss extension |
+| extensionData.bauzone | boolean | Is land in a building zone? | | Swiss extension |
+
+### Example: Land Object
+
+```json
+{
+  "landId": "BE-3003-1001",
+  "name": "Bundesplatz Parzelle A",
+  "siteId": "SITE-BE-3003",
+  "typeOfOwnership": "Owner",
+  "validFrom": "1900-01-01T00:00:00Z",
+  "validUntil": null,
+  "addressIds": ["BBL-001-ADDR-1"],
+  "landCode": "BPL-A",
+  "landCoverage": "bebaut",
+  "landParcelNr": "1001",
+  "selfUse": true,
+  "status": "Aktiv",
+  "extensionData": {
+    "egrid": "CH123456789012",
+    "parzellenNummer": "1001",
+    "grundbuchKreis": "Bern",
+    "gemeinde": "Bern",
+    "kanton": "BE",
+    "flaeche": 5200,
+    "nutzungszone": "Kernzone",
+    "bauzone": true
+  }
+}
+```
+
+---
+
 ## Entity: Building (Gebäude)
 
 The building is the core entity representing a physical structure in the portfolio.
@@ -252,67 +379,6 @@ The building is the core entity representing a physical structure in the portfol
     "heatingGenerator": "Fernwärme",
     "heatingSource": "Fernwärmenetz Stadt Bern",
     "hotWater": "Zentral (Fernwärme)"
-  }
-}
-```
-
----
-
-## Entity: Address (Adresse)
-
-Addresses represent the physical location of a building. A building can have multiple addresses (e.g., corner buildings with entrances on different streets).
-
-### Schema Definition
-
-| Field | Type | Description | Constraints | Comment |
-|-------|------|-------------|-------------|---------|
-| **addressId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Generated: buildingId + "-ADDR-1" |
-| **city** | string | Any official settlement including cities, towns, villages, hamlets, localities, etc. | **mandatory**, minLength: 1, maxLength: 100 | Source: `ort` |
-| **country** | string, enum | Sovereign nations with ISO-3166 code. Common: `CH`, `DE`, `FR`, `IT`, `AT`, `BE`, `US` | **mandatory** | Source: `land` (already ISO-3166) |
-| **type** | string, enum | Type of address. Options: `Primary`, `Other` | **mandatory** | Default: "Primary" for main address |
-| **geoCoordinates.geoCoordinateId** | string | Unique identifier for the coordinate set. | **mandatory**, minLength: 1, maxLength: 50 | Generated: buildingId + "-GEO-1" |
-| geoCoordinates.coordinateReferenceSystem | string | Specific coordinate reference system used (e.g., "WGS84", "LV95"). | minLength: 1, maxLength: 50 | Default: "WGS84" for GeoJSON |
-| geoCoordinates.latitude | number | Latitude coordinate (WGS84: -90 to 90). | | Source: `geometry.coordinates[1]` |
-| geoCoordinates.longitude | number | Longitude coordinate (WGS84: -180 to 180). | | Source: `geometry.coordinates[0]` |
-| additionalInformation | string | Additional information (building name, door number, etc.). | minLength: 1, maxLength: 500 | |
-| apartmentOrUnit | string | Unit or apartment number. | minLength: 1, maxLength: 50 | |
-| district | string | Borough or district within a city. | minLength: 1, maxLength: 50 | |
-| eventType | string, enum | Type of the event as domain event. Options: `AddressAdded`, `AddressUpdated` | | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
-| houseNumber | string | House number of the street. | minLength: 1, maxLength: 50 | Source: `hausnummer` |
-| postalCode | string | Postal code for mail sorting. | minLength: 1, maxLength: 15 | Source: `plz` |
-| stateProvincePrefecture | string | First-level administrative division (canton, state, province). | minLength: 1, maxLength: 50 | Source: `region` |
-| streetName | string | Name of the street. | minLength: 1, maxLength: 150 | Extracted from `adresse` |
-| extensionData.formattedAddress | string | Pre-formatted full address string (e.g., "Bundesplatz 3, 3003 Bern") | | Swiss extension. Source: `adresse` |
-| extensionData.canton | string | Swiss canton code (e.g., "BE", "ZH", "GE") | | Swiss extension. Extracted from `region` |
-| extensionData.gemeinde | string | Municipality name | | Swiss extension |
-| extensionData.gemeindeNummer | string | Official municipality number (BFS-Nr.) | | Swiss extension |
-| extensionData.lv95East | number | Swiss LV95 East coordinate (E) | | Swiss extension |
-| extensionData.lv95North | number | Swiss LV95 North coordinate (N) | | Swiss extension |
-
-### Example: Address Object
-
-```json
-{
-  "addressId": "BBL-001-ADDR-1",
-  "type": "Primary",
-  "streetName": "Bundesplatz",
-  "houseNumber": "3",
-  "postalCode": "3003",
-  "city": "Bern",
-  "stateProvincePrefecture": "Kanton Bern",
-  "country": "CH",
-  "geoCoordinates": {
-    "geoCoordinateId": "BBL-001-GEO-1",
-    "coordinateReferenceSystem": "WGS84",
-    "latitude": 46.9466,
-    "longitude": 7.4448
-  },
-  "extensionData": {
-    "formattedAddress": "Bundesplatz 3, 3003 Bern",
-    "canton": "BE",
-    "lv95East": 2600000,
-    "lv95North": 1200000
   }
 }
 ```
@@ -422,72 +488,6 @@ For measurements that don't fit the standard area types (volumes, counts):
     "originalUnit": "m³",
     "originalType": "Volumen",
     "measurementCategory": "volume"
-  }
-}
-```
-
----
-
-## Entity: Land (Grundstück)
-
-Land represents a parcel of land or plot that belongs to a site. In the current demo, land information is partially embedded in building properties (`grundstueck_id`, `grundstueck_name`). In a production system, Land would be a separate entity allowing multiple land parcels per site.
-
-### Schema Definition
-
-| Field | Type | Description | Constraints | Comment |
-|-------|------|-------------|-------------|---------|
-| **landId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` or generated |
-| **name** | string | Name of land (e.g., park, garden, parking). | **mandatory**, minLength: 1, maxLength: 200 | Source: `grundstueck_name` |
-| **siteId** | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Derived from site relationship |
-| **typeOfOwnership** | string, enum | Is the land owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Source: `eigentum`. "Eigentum Bund" → Owner |
-| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
-| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Source: `gueltig_bis`, convert to ISO 8601 |
-| addressIds | array[string] | Array of address IDs linked to this land. | minLength: 1, maxLength: 50 per ID | |
-| eventType | string, enum | Type of the event as domain event. Options: `LandAdded`, `LandUpdated`, `LandDeleted` | | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
-| landCode | string | User specific land code. | minLength: 1, maxLength: 70 | |
-| landCoverage | string | Development level of land (e.g., "bebaut", "unbebaut", "teilweise bebaut"). | minLength: 1, maxLength: 50 | |
-| landParcelNr | string | District/zoning number registered for the plot of land. | minLength: 1, maxLength: 50 | |
-| selfUse | boolean | Is the land self-used? | | |
-| status | string | Status of land. | minLength: 1, maxLength: 50 | |
-| tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
-| valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
-| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | Swiss extension. Source: `egrid` |
-| extensionData.parzellenNummer | string | Official Swiss parcel number | | Swiss extension |
-| extensionData.grundbuchKreis | string | Land registry district | | Swiss extension |
-| extensionData.grundbuchBlatt | string | Land registry folio number | | Swiss extension |
-| extensionData.katasterNummer | string | Cadastral number | | Swiss extension |
-| extensionData.gemeinde | string | Municipality name | | Swiss extension |
-| extensionData.kanton | string | Canton code (e.g., "BE", "ZH") | | Swiss extension |
-| extensionData.flaeche | number | Total land area in m² | | Swiss extension |
-| extensionData.nutzungszone | string | Zoning designation | | Swiss extension |
-| extensionData.bauzone | boolean | Is land in a building zone? | | Swiss extension |
-
-### Example: Land Object
-
-```json
-{
-  "landId": "BE-3003-1001",
-  "name": "Bundesplatz Parzelle A",
-  "siteId": "SITE-BE-3003",
-  "typeOfOwnership": "Owner",
-  "validFrom": "1900-01-01T00:00:00Z",
-  "validUntil": null,
-  "addressIds": ["BBL-001-ADDR-1"],
-  "landCode": "BPL-A",
-  "landCoverage": "bebaut",
-  "landParcelNr": "1001",
-  "selfUse": true,
-  "status": "Aktiv",
-  "extensionData": {
-    "egrid": "CH123456789012",
-    "parzellenNummer": "1001",
-    "grundbuchKreis": "Bern",
-    "gemeinde": "Bern",
-    "kanton": "BE",
-    "flaeche": 5200,
-    "nutzungszone": "Kernzone",
-    "bauzone": true
   }
 }
 ```
