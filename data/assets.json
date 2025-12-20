@@ -1,7 +1,7 @@
 {
   "assets": [
     {
-      "assetId": "892a34b2-3e09-48e3-8371-5ea20fd2761c",
+      "assetId": "442ce5ec-48ae-4b56-9b61-036e781bf5f2",
       "name": "Fernwärmeübergabestation",
       "category": "HVAC",
       "buildingIds": [
@@ -13,8 +13,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-001-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-12-01T00:00:00Z",
-      "nextMaintenanceDate": "2025-12-01T00:00:00Z",
+      "lastMaintenanceDate": "2024-08-15T00:00:00Z",
+      "nextMaintenanceDate": "2025-08-15T00:00:00Z",
       "legacyId": "BBL-001-A1",
       "extensionData": {
         "warrantyUntil": null,
@@ -22,7 +22,7 @@
       }
     },
     {
-      "assetId": "5b23cd3b-5c0c-4767-8bbb-cded5f73c729",
+      "assetId": "873b3c7e-cd04-41c9-9f54-a7543957e3c9",
       "name": "Personenaufzug Haupttreppe",
       "category": "Aufzüge",
       "buildingIds": [
@@ -34,8 +34,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-001-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-09-10T00:00:00Z",
-      "nextMaintenanceDate": "2025-09-10T00:00:00Z",
+      "lastMaintenanceDate": "2024-05-02T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-02T00:00:00Z",
       "legacyId": "BBL-001-A2",
       "extensionData": {
         "warrantyUntil": null,
@@ -43,7 +43,7 @@
       }
     },
     {
-      "assetId": "5f7742c5-7cbb-4675-9dfc-a350ee01cca8",
+      "assetId": "29b9f197-16e4-4b2b-ba2c-7550c3dfbdd0",
       "name": "Brandmeldeanlage",
       "category": "Brandschutz",
       "buildingIds": [
@@ -55,8 +55,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-001-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-04-14T00:00:00Z",
-      "nextMaintenanceDate": "2025-04-14T00:00:00Z",
+      "lastMaintenanceDate": "2024-11-06T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-06T00:00:00Z",
       "legacyId": "BBL-001-A3",
       "extensionData": {
         "warrantyUntil": null,
@@ -64,7 +64,7 @@
       }
     },
     {
-      "assetId": "779f4dfe-ee43-4688-b03c-dd1bc1ecf5e3",
+      "assetId": "f5405434-4e7d-4bcd-bf29-f286689517a9",
       "name": "Zutrittskontrollsystem",
       "category": "Sicherheit",
       "buildingIds": [
@@ -76,8 +76,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-001-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-01-20T00:00:00Z",
-      "nextMaintenanceDate": "2025-01-20T00:00:00Z",
+      "lastMaintenanceDate": "2024-11-22T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-22T00:00:00Z",
       "legacyId": "BBL-001-A4",
       "extensionData": {
         "warrantyUntil": null,
@@ -85,7 +85,7 @@
       }
     },
     {
-      "assetId": "21d90f84-ada4-4be4-b0f3-1780846c577d",
+      "assetId": "33fbd493-aa30-4e9c-985b-dc044ddc5a65",
       "name": "Notstromanlage",
       "category": "Elektro",
       "buildingIds": [
@@ -97,8 +97,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-001-005",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-01-06T00:00:00Z",
-      "nextMaintenanceDate": "2025-01-06T00:00:00Z",
+      "lastMaintenanceDate": "2024-12-10T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-10T00:00:00Z",
       "legacyId": "BBL-001-A5",
       "extensionData": {
         "warrantyUntil": null,
@@ -106,7 +106,7 @@
       }
     },
     {
-      "assetId": "e8829a4b-93c2-4aa1-9cf8-25b8c6cacd00",
+      "assetId": "b295ac1f-a703-471a-92c1-ad9623905c76",
       "name": "Wärmepumpe Geothermie",
       "category": "HVAC",
       "buildingIds": [
@@ -118,8 +118,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-002-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-02-03T00:00:00Z",
-      "nextMaintenanceDate": "2025-02-03T00:00:00Z",
+      "lastMaintenanceDate": "2024-06-24T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-24T00:00:00Z",
       "legacyId": "BBL-002-A1",
       "extensionData": {
         "warrantyUntil": null,
@@ -127,7 +127,7 @@
       }
     },
     {
-      "assetId": "e7cf03ed-6b9f-4aa7-af80-1bec6871bb84",
+      "assetId": "03318cae-8620-4044-9ffa-bf372764d4d4",
       "name": "Klimaanlage Bürotrakt",
       "category": "HVAC",
       "buildingIds": [
@@ -139,8 +139,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-002-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-06-27T00:00:00Z",
-      "nextMaintenanceDate": "2025-06-27T00:00:00Z",
+      "lastMaintenanceDate": "2024-08-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-08-05T00:00:00Z",
       "legacyId": "BBL-002-A2",
       "extensionData": {
         "warrantyUntil": "2026-12-31T00:00:00Z",
@@ -148,7 +148,7 @@
       }
     },
     {
-      "assetId": "e6e624cf-9c4a-4180-aef6-67e0adad5216",
+      "assetId": "30ae95ad-4671-4ef3-8fb4-74aa99bf244b",
       "name": "Videoüberwachungsanlage",
       "category": "Sicherheit",
       "buildingIds": [
@@ -160,8 +160,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-002-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-09-20T00:00:00Z",
-      "nextMaintenanceDate": "2025-09-20T00:00:00Z",
+      "lastMaintenanceDate": "2024-06-18T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-18T00:00:00Z",
       "legacyId": "BBL-002-A3",
       "extensionData": {
         "warrantyUntil": "2025-12-31T00:00:00Z",
@@ -169,7 +169,7 @@
       }
     },
     {
-      "assetId": "bf9fed94-85e2-40f8-8c5e-c15f159fa1ca",
+      "assetId": "a0c7518f-5f64-402e-bb59-1a04134b8a4e",
       "name": "Personenaufzug",
       "category": "Aufzüge",
       "buildingIds": [
@@ -181,8 +181,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-002-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-11-24T00:00:00Z",
-      "nextMaintenanceDate": "2025-11-24T00:00:00Z",
+      "lastMaintenanceDate": "2024-08-19T00:00:00Z",
+      "nextMaintenanceDate": "2025-08-19T00:00:00Z",
       "legacyId": "BBL-002-A4",
       "extensionData": {
         "warrantyUntil": null,
@@ -190,7 +190,7 @@
       }
     },
     {
-      "assetId": "62571ebf-430d-443c-a6e6-c0eeb4780941",
+      "assetId": "6acc29e4-e541-4cc8-ba90-ee9cdbd79a96",
       "name": "Gasheizungsanlage",
       "category": "HVAC",
       "buildingIds": [
@@ -202,8 +202,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-003-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-10-04T00:00:00Z",
-      "nextMaintenanceDate": "2025-10-04T00:00:00Z",
+      "lastMaintenanceDate": "2024-11-24T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-24T00:00:00Z",
       "legacyId": "BBL-003-A1",
       "extensionData": {
         "warrantyUntil": null,
@@ -211,7 +211,7 @@
       }
     },
     {
-      "assetId": "6cce99dd-f21e-406e-8a87-989ef8fa43dc",
+      "assetId": "ce449e98-2d80-46ee-b8e3-3bb20bd28a08",
       "name": "Lastenaufzug 3t",
       "category": "Aufzüge",
       "buildingIds": [
@@ -223,8 +223,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-003-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-04-07T00:00:00Z",
-      "nextMaintenanceDate": "2025-04-07T00:00:00Z",
+      "lastMaintenanceDate": "2024-05-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-05T00:00:00Z",
       "legacyId": "BBL-003-A2",
       "extensionData": {
         "warrantyUntil": null,
@@ -232,7 +232,7 @@
       }
     },
     {
-      "assetId": "a8997056-edbf-4f80-ae01-6535cdff2b2b",
+      "assetId": "8db1f7ed-4af2-45a0-bd6b-7da7930b5482",
       "name": "Lastenaufzug 5t",
       "category": "Aufzüge",
       "buildingIds": [
@@ -244,8 +244,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-003-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-09-22T00:00:00Z",
-      "nextMaintenanceDate": "2025-09-22T00:00:00Z",
+      "lastMaintenanceDate": "2024-12-11T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-11T00:00:00Z",
       "legacyId": "BBL-003-A3",
       "extensionData": {
         "warrantyUntil": null,
@@ -253,7 +253,7 @@
       }
     },
     {
-      "assetId": "40357597-d5d8-4f2c-9972-e0c62d0d06d4",
+      "assetId": "a320dbcc-f0df-4064-bbea-cf061d53c06c",
       "name": "Sprinkleranlage",
       "category": "Brandschutz",
       "buildingIds": [
@@ -265,8 +265,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-003-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-09-09T00:00:00Z",
-      "nextMaintenanceDate": "2025-09-09T00:00:00Z",
+      "lastMaintenanceDate": "2024-03-22T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-22T00:00:00Z",
       "legacyId": "BBL-003-A4",
       "extensionData": {
         "warrantyUntil": null,
@@ -274,7 +274,7 @@
       }
     },
     {
-      "assetId": "db185331-2ebb-41d7-b117-df0019b14580",
+      "assetId": "d1bc229f-5b9c-4d2b-a42f-48aa3f8f4ab0",
       "name": "Lüftungsanlage Lagerhalle",
       "category": "HVAC",
       "buildingIds": [
@@ -286,8 +286,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-003-005",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-04-24T00:00:00Z",
-      "nextMaintenanceDate": "2025-04-24T00:00:00Z",
+      "lastMaintenanceDate": "2024-05-09T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-09T00:00:00Z",
       "legacyId": "BBL-003-A5",
       "extensionData": {
         "warrantyUntil": null,
@@ -295,7 +295,7 @@
       }
     },
     {
-      "assetId": "5fadbebd-3bfd-4035-b59c-375b9dc3e00f",
+      "assetId": "8bf7bc10-197f-4d7e-920e-4be4a0321ded",
       "name": "Hubarbeitsbühne",
       "category": "Logistik",
       "buildingIds": [
@@ -307,8 +307,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-003-006",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-11-18T00:00:00Z",
-      "nextMaintenanceDate": "2025-11-18T00:00:00Z",
+      "lastMaintenanceDate": "2024-03-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-05T00:00:00Z",
       "legacyId": "BBL-003-A6",
       "extensionData": {
         "warrantyUntil": "2025-12-31T00:00:00Z",
@@ -316,7 +316,7 @@
       }
     },
     {
-      "assetId": "579be8e7-64da-4943-a8dd-b2ab630205be",
+      "assetId": "6b217865-20c0-44ba-b444-336cd9d09258",
       "name": "Klimaanlage VRF-System",
       "category": "HVAC",
       "buildingIds": [
@@ -328,8 +328,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-004-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-01-26T00:00:00Z",
-      "nextMaintenanceDate": "2025-01-26T00:00:00Z",
+      "lastMaintenanceDate": "2024-10-19T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-19T00:00:00Z",
       "legacyId": "BBL-004-A1",
       "extensionData": {
         "warrantyUntil": "2025-12-31T00:00:00Z",
@@ -337,7 +337,7 @@
       }
     },
     {
-      "assetId": "e7185798-6e89-48a4-8884-4391a152b957",
+      "assetId": "37ddd41d-b09b-4a13-a696-7f02e21304db",
       "name": "Zutrittskontrollsystem",
       "category": "Sicherheit",
       "buildingIds": [
@@ -349,8 +349,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-004-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-04-19T00:00:00Z",
-      "nextMaintenanceDate": "2025-04-19T00:00:00Z",
+      "lastMaintenanceDate": "2024-05-25T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-25T00:00:00Z",
       "legacyId": "BBL-004-A2",
       "extensionData": {
         "warrantyUntil": "2025-12-31T00:00:00Z",
@@ -358,7 +358,7 @@
       }
     },
     {
-      "assetId": "923f22ab-3c59-4c86-bf13-27ad0b5b8501",
+      "assetId": "4912495c-e883-49c6-8fb7-15d4449882e8",
       "name": "Brandmeldeanlage",
       "category": "Brandschutz",
       "buildingIds": [
@@ -370,8 +370,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-004-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-02-08T00:00:00Z",
-      "nextMaintenanceDate": "2025-02-08T00:00:00Z",
+      "lastMaintenanceDate": "2024-03-03T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-03T00:00:00Z",
       "legacyId": "BBL-004-A3",
       "extensionData": {
         "warrantyUntil": "2025-12-31T00:00:00Z",
@@ -379,7 +379,7 @@
       }
     },
     {
-      "assetId": "91f5518a-a85c-433d-ad17-91b2c29030b3",
+      "assetId": "59c96a3a-ec95-4b03-8583-29c6931c4b79",
       "name": "Ölheizungsanlage (Ersatz geplant)",
       "category": "HVAC",
       "buildingIds": [
@@ -391,8 +391,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-005-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-04-23T00:00:00Z",
-      "nextMaintenanceDate": "2025-04-23T00:00:00Z",
+      "lastMaintenanceDate": "2024-08-07T00:00:00Z",
+      "nextMaintenanceDate": "2025-08-07T00:00:00Z",
       "legacyId": "BBL-005-A1",
       "extensionData": {
         "warrantyUntil": null,
@@ -400,7 +400,7 @@
       }
     },
     {
-      "assetId": "4b6c9e0d-22bb-4fcf-b807-650fbd8f947b",
+      "assetId": "349683d7-fe89-4dc7-ac9b-e4674c98ce1e",
       "name": "Personenaufzug",
       "category": "Aufzüge",
       "buildingIds": [
@@ -412,8 +412,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-005-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-02-23T00:00:00Z",
-      "nextMaintenanceDate": "2025-02-23T00:00:00Z",
+      "lastMaintenanceDate": "2024-10-28T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-28T00:00:00Z",
       "legacyId": "BBL-005-A2",
       "extensionData": {
         "warrantyUntil": null,
@@ -421,7 +421,7 @@
       }
     },
     {
-      "assetId": "0f0ef047-0fce-4200-ab88-8e03ddc48d5c",
+      "assetId": "f703cdee-f125-4223-ad11-b66546b6c2d8",
       "name": "Lüftungsanlage Schulungsräume",
       "category": "HVAC",
       "buildingIds": [
@@ -433,8 +433,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-005-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-01-19T00:00:00Z",
-      "nextMaintenanceDate": "2025-01-19T00:00:00Z",
+      "lastMaintenanceDate": "2024-03-12T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-12T00:00:00Z",
       "legacyId": "BBL-005-A3",
       "extensionData": {
         "warrantyUntil": null,
@@ -442,7 +442,7 @@
       }
     },
     {
-      "assetId": "82a1751e-5108-4b62-94ac-ab1c41d0fab1",
+      "assetId": "98f3bf64-3730-4beb-b223-afc8345e372d",
       "name": "Brandmeldeanlage",
       "category": "Brandschutz",
       "buildingIds": [
@@ -454,8 +454,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-005-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-01-03T00:00:00Z",
-      "nextMaintenanceDate": "2025-01-03T00:00:00Z",
+      "lastMaintenanceDate": "2024-12-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-05T00:00:00Z",
       "legacyId": "BBL-005-A4",
       "extensionData": {
         "warrantyUntil": null,
@@ -463,7 +463,7 @@
       }
     },
     {
-      "assetId": "966faefe-25f8-4e44-bbe2-12712fe8f67c",
+      "assetId": "22b9b709-d9b9-49e2-a30b-448cc10a847f",
       "name": "Beamer Konferenzraum A",
       "category": "Medientechnik",
       "buildingIds": [
@@ -475,8 +475,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-005-005",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-12-27T00:00:00Z",
-      "nextMaintenanceDate": "2025-12-27T00:00:00Z",
+      "lastMaintenanceDate": "2024-02-28T00:00:00Z",
+      "nextMaintenanceDate": "2025-02-28T00:00:00Z",
       "legacyId": "BBL-005-A5",
       "extensionData": {
         "warrantyUntil": "2027-12-31T00:00:00Z",
@@ -484,7 +484,7 @@
       }
     },
     {
-      "assetId": "6d29f306-1a7e-4822-8e20-8f4e282fe7be",
+      "assetId": "b1851ab6-fbb6-4cf8-8e89-682f2fab727e",
       "name": "VRF-Klimaanlage",
       "category": "HVAC",
       "buildingIds": [
@@ -496,8 +496,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-006-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-10-15T00:00:00Z",
-      "nextMaintenanceDate": "2025-10-15T00:00:00Z",
+      "lastMaintenanceDate": "2024-04-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-05T00:00:00Z",
       "legacyId": "BBL-006-A1",
       "extensionData": {
         "warrantyUntil": null,
@@ -505,7 +505,7 @@
       }
     },
     {
-      "assetId": "155fae4a-7da3-4c92-ac07-ba8cd290ec32",
+      "assetId": "d147565d-10f5-4ebe-8829-f71c8df7daec",
       "name": "Personenaufzug",
       "category": "Aufzüge",
       "buildingIds": [
@@ -517,8 +517,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-006-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-03-12T00:00:00Z",
-      "nextMaintenanceDate": "2025-03-12T00:00:00Z",
+      "lastMaintenanceDate": "2024-09-12T00:00:00Z",
+      "nextMaintenanceDate": "2025-09-12T00:00:00Z",
       "legacyId": "BBL-006-A2",
       "extensionData": {
         "warrantyUntil": null,
@@ -526,7 +526,7 @@
       }
     },
     {
-      "assetId": "0056dd82-ab56-450d-9733-bc5290ee357a",
+      "assetId": "80524fc4-3421-4835-9e70-3b2342bfa914",
       "name": "Erdbeben-Frühwarnsystem",
       "category": "Sicherheit",
       "buildingIds": [
@@ -538,8 +538,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-006-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-10-19T00:00:00Z",
-      "nextMaintenanceDate": "2025-10-19T00:00:00Z",
+      "lastMaintenanceDate": "2024-10-04T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-04T00:00:00Z",
       "legacyId": "BBL-006-A3",
       "extensionData": {
         "warrantyUntil": null,
@@ -547,7 +547,7 @@
       }
     },
     {
-      "assetId": "dabbab0a-a3dd-4aa8-97e5-af281f3fbd92",
+      "assetId": "e82fe6f0-53a1-48bd-a538-b71a7d7c2729",
       "name": "Videoüberwachungsanlage",
       "category": "Sicherheit",
       "buildingIds": [
@@ -559,8 +559,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-006-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-05-06T00:00:00Z",
-      "nextMaintenanceDate": "2025-05-06T00:00:00Z",
+      "lastMaintenanceDate": "2024-04-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-05T00:00:00Z",
       "legacyId": "BBL-006-A4",
       "extensionData": {
         "warrantyUntil": null,
@@ -568,7 +568,7 @@
       }
     },
     {
-      "assetId": "c1631463-000f-4649-b00e-ea82aa4e0386",
+      "assetId": "03cce24e-3336-41d8-9e8d-059aa3ac51c5",
       "name": "Gasheizungsanlage",
       "category": "HVAC",
       "buildingIds": [
@@ -580,8 +580,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-007-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-06-15T00:00:00Z",
-      "nextMaintenanceDate": "2025-06-15T00:00:00Z",
+      "lastMaintenanceDate": "2024-06-25T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-25T00:00:00Z",
       "legacyId": "BBL-007-A1",
       "extensionData": {
         "warrantyUntil": null,
@@ -589,7 +589,7 @@
       }
     },
     {
-      "assetId": "f46e0e08-7602-41bd-9d07-4e7c4d8d4449",
+      "assetId": "022d3f9b-fcca-4824-b8d0-4d1689502a87",
       "name": "Personenaufzug",
       "category": "Aufzüge",
       "buildingIds": [
@@ -601,8 +601,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-007-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-09-17T00:00:00Z",
-      "nextMaintenanceDate": "2025-09-17T00:00:00Z",
+      "lastMaintenanceDate": "2024-09-09T00:00:00Z",
+      "nextMaintenanceDate": "2025-09-09T00:00:00Z",
       "legacyId": "BBL-007-A2",
       "extensionData": {
         "warrantyUntil": null,
@@ -610,7 +610,7 @@
       }
     },
     {
-      "assetId": "69b59e36-59b0-4679-a207-4241122767f0",
+      "assetId": "69c627d5-5bad-411a-ab4e-d5b2b7cbfde7",
       "name": "Gegensprechanlage",
       "category": "Sicherheit",
       "buildingIds": [
@@ -622,8 +622,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-007-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-07-12T00:00:00Z",
-      "nextMaintenanceDate": "2025-07-12T00:00:00Z",
+      "lastMaintenanceDate": "2024-10-22T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-22T00:00:00Z",
       "legacyId": "BBL-007-A3",
       "extensionData": {
         "warrantyUntil": null,
@@ -631,7 +631,7 @@
       }
     },
     {
-      "assetId": "c0f80eee-5437-43df-a0d6-942a6c1e5466",
+      "assetId": "9bd155ad-c384-4687-9ea9-b04f617324f8",
       "name": "Waschmaschinen Gemeinschaftsraum",
       "category": "Sanitär",
       "buildingIds": [
@@ -643,8 +643,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-007-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-12-07T00:00:00Z",
-      "nextMaintenanceDate": "2025-12-07T00:00:00Z",
+      "lastMaintenanceDate": "2024-11-13T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-13T00:00:00Z",
       "legacyId": "BBL-007-A4",
       "extensionData": {
         "warrantyUntil": "2025-12-31T00:00:00Z",
@@ -652,7 +652,7 @@
       }
     },
     {
-      "assetId": "30215f46-baf5-462a-8ec3-a879bc937ced",
+      "assetId": "2560b9e9-9557-4bbd-8ec3-b3b02052049f",
       "name": "Split-Klimaanlage Büro",
       "category": "HVAC",
       "buildingIds": [
@@ -664,8 +664,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-008-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-11-23T00:00:00Z",
-      "nextMaintenanceDate": "2025-11-23T00:00:00Z",
+      "lastMaintenanceDate": "2024-10-07T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-07T00:00:00Z",
       "legacyId": "BBL-008-A1",
       "extensionData": {
         "warrantyUntil": "2027-12-31T00:00:00Z",
@@ -673,7 +673,7 @@
       }
     },
     {
-      "assetId": "605f6aa3-e6d0-4022-afe2-b11a3e71812b",
+      "assetId": "58848701-49b3-4a37-a82b-87e5a22715ce",
       "name": "Split-Klimaanlage Residenz",
       "category": "HVAC",
       "buildingIds": [
@@ -685,8 +685,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-008-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-05-22T00:00:00Z",
-      "nextMaintenanceDate": "2025-05-22T00:00:00Z",
+      "lastMaintenanceDate": "2024-10-02T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-02T00:00:00Z",
       "legacyId": "BBL-008-A2",
       "extensionData": {
         "warrantyUntil": "2027-12-31T00:00:00Z",
@@ -694,7 +694,7 @@
       }
     },
     {
-      "assetId": "a89d51ab-1e63-4e08-a937-3d1f01a0b21e",
+      "assetId": "29c8bc98-2bfb-4a56-86aa-ebad256a90d2",
       "name": "Solaranlage Warmwasser",
       "category": "Solar/Energie",
       "buildingIds": [
@@ -706,8 +706,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-008-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-06-04T00:00:00Z",
-      "nextMaintenanceDate": "2025-06-04T00:00:00Z",
+      "lastMaintenanceDate": "2024-12-18T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-18T00:00:00Z",
       "legacyId": "BBL-008-A3",
       "extensionData": {
         "warrantyUntil": "2027-12-31T00:00:00Z",
@@ -715,7 +715,7 @@
       }
     },
     {
-      "assetId": "55eec0bc-3a41-4915-a8c7-ad2efb07b397",
+      "assetId": "3a25ae06-d703-4110-8b94-21b13354a3fc",
       "name": "Alarmanlage",
       "category": "Sicherheit",
       "buildingIds": [
@@ -727,8 +727,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-008-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-07-07T00:00:00Z",
-      "nextMaintenanceDate": "2025-07-07T00:00:00Z",
+      "lastMaintenanceDate": "2024-01-27T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-27T00:00:00Z",
       "legacyId": "BBL-008-A4",
       "extensionData": {
         "warrantyUntil": "2027-12-31T00:00:00Z",
@@ -736,7 +736,7 @@
       }
     },
     {
-      "assetId": "359593a9-a0ed-4255-9f29-0215920e0459",
+      "assetId": "a2ce7a9c-772e-4b2e-af1d-146674b89bef",
       "name": "Präzisionsklimaanlage Serverraum",
       "category": "HVAC",
       "buildingIds": [
@@ -748,8 +748,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-009-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-05-14T00:00:00Z",
-      "nextMaintenanceDate": "2025-05-14T00:00:00Z",
+      "lastMaintenanceDate": "2024-01-06T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-06T00:00:00Z",
       "legacyId": "BBL-009-A1",
       "extensionData": {
         "warrantyUntil": "2030-12-31T00:00:00Z",
@@ -757,7 +757,7 @@
       }
     },
     {
-      "assetId": "8745de32-5f9c-44a9-8f30-0850cee6cbd7",
+      "assetId": "0da880b2-91e7-471c-b9f1-3c6138928ad8",
       "name": "USV-Anlage 2MW",
       "category": "Elektro",
       "buildingIds": [
@@ -769,8 +769,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-009-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-01-06T00:00:00Z",
-      "nextMaintenanceDate": "2025-01-06T00:00:00Z",
+      "lastMaintenanceDate": "2024-06-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-05T00:00:00Z",
       "legacyId": "BBL-009-A2",
       "extensionData": {
         "warrantyUntil": "2030-12-31T00:00:00Z",
@@ -778,7 +778,7 @@
       }
     },
     {
-      "assetId": "e30d916b-c9ec-4901-93a2-cecaf0cdd62f",
+      "assetId": "87fede68-713a-4c15-a6db-63ab0180eaed",
       "name": "Notstromdiesel 3MW",
       "category": "Elektro",
       "buildingIds": [
@@ -790,8 +790,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-009-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-05-19T00:00:00Z",
-      "nextMaintenanceDate": "2025-05-19T00:00:00Z",
+      "lastMaintenanceDate": "2024-01-20T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-20T00:00:00Z",
       "legacyId": "BBL-009-A3",
       "extensionData": {
         "warrantyUntil": "2030-12-31T00:00:00Z",
@@ -799,7 +799,7 @@
       }
     },
     {
-      "assetId": "9d36229f-33f9-40b3-9510-ec6a0a0c52fb",
+      "assetId": "b511900b-96ba-4393-bb4b-aa88141e4219",
       "name": "Brandlöschanlage Inergen",
       "category": "Brandschutz",
       "buildingIds": [
@@ -811,8 +811,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-009-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-02-06T00:00:00Z",
-      "nextMaintenanceDate": "2025-02-06T00:00:00Z",
+      "lastMaintenanceDate": "2024-11-03T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-03T00:00:00Z",
       "legacyId": "BBL-009-A4",
       "extensionData": {
         "warrantyUntil": "2030-12-31T00:00:00Z",
@@ -820,7 +820,7 @@
       }
     },
     {
-      "assetId": "17ec78d3-8cb4-4f6b-85c0-d4b71b38630d",
+      "assetId": "2f08fafb-99fe-4273-be02-1005c7178e32",
       "name": "Zutrittskontrollsystem",
       "category": "Sicherheit",
       "buildingIds": [
@@ -832,8 +832,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-009-005",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-03-08T00:00:00Z",
-      "nextMaintenanceDate": "2025-03-08T00:00:00Z",
+      "lastMaintenanceDate": "2024-12-26T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-26T00:00:00Z",
       "legacyId": "BBL-009-A5",
       "extensionData": {
         "warrantyUntil": "2030-12-31T00:00:00Z",
@@ -841,7 +841,7 @@
       }
     },
     {
-      "assetId": "5d59329e-7aff-4de1-9878-a24c16db3cb4",
+      "assetId": "2ad6e82f-8357-40f9-8e98-e9d6e0bf4ade",
       "name": "Freikühler (Free Cooling)",
       "category": "HVAC",
       "buildingIds": [
@@ -853,8 +853,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-009-006",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-07-16T00:00:00Z",
-      "nextMaintenanceDate": "2025-07-16T00:00:00Z",
+      "lastMaintenanceDate": "2024-04-09T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-09T00:00:00Z",
       "legacyId": "BBL-009-A6",
       "extensionData": {
         "warrantyUntil": "2030-12-31T00:00:00Z",
@@ -862,7 +862,7 @@
       }
     },
     {
-      "assetId": "d9d92d97-5eaa-46c2-b0d3-01cd42cbff35",
+      "assetId": "2e15c688-80a1-4c25-865c-6eea349f3a29",
       "name": "Gebäudeleitsystem",
       "category": "Gebäudeautomation",
       "buildingIds": [
@@ -874,8 +874,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-009-007",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-08-21T00:00:00Z",
-      "nextMaintenanceDate": "2025-08-21T00:00:00Z",
+      "lastMaintenanceDate": "2024-08-13T00:00:00Z",
+      "nextMaintenanceDate": "2025-08-13T00:00:00Z",
       "legacyId": "BBL-009-A7",
       "extensionData": {
         "warrantyUntil": "2030-12-31T00:00:00Z",
@@ -883,7 +883,7 @@
       }
     },
     {
-      "assetId": "2d5ceccc-4b31-4ae0-8596-c61c27437924",
+      "assetId": "38b192df-f0f1-4a27-9b46-c65f99f6594e",
       "name": "Split-Klimaanlage",
       "category": "HVAC",
       "buildingIds": [
@@ -895,8 +895,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-010-001",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-06-22T00:00:00Z",
-      "nextMaintenanceDate": "2025-06-22T00:00:00Z",
+      "lastMaintenanceDate": "2024-06-14T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-14T00:00:00Z",
       "legacyId": "BBL-010-A1",
       "extensionData": {
         "warrantyUntil": null,
@@ -904,7 +904,7 @@
       }
     },
     {
-      "assetId": "2ce7bb1e-1193-46be-8395-d25c3d67163e",
+      "assetId": "61582a3a-e1d1-4cd7-a552-e365296ef5d5",
       "name": "Solaranlage Warmwasser",
       "category": "Solar/Energie",
       "buildingIds": [
@@ -916,8 +916,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-010-002",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-12-05T00:00:00Z",
-      "nextMaintenanceDate": "2025-12-05T00:00:00Z",
+      "lastMaintenanceDate": "2024-01-25T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-25T00:00:00Z",
       "legacyId": "BBL-010-A2",
       "extensionData": {
         "warrantyUntil": null,
@@ -925,7 +925,7 @@
       }
     },
     {
-      "assetId": "7f78f613-a478-4f7d-b831-eea0cd0902a3",
+      "assetId": "14b6d216-ee55-4c19-bfa7-37bac8cf397a",
       "name": "Alarmanlage",
       "category": "Sicherheit",
       "buildingIds": [
@@ -937,8 +937,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-010-003",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-03-14T00:00:00Z",
-      "nextMaintenanceDate": "2025-03-14T00:00:00Z",
+      "lastMaintenanceDate": "2024-03-12T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-12T00:00:00Z",
       "legacyId": "BBL-010-A3",
       "extensionData": {
         "warrantyUntil": null,
@@ -946,7 +946,7 @@
       }
     },
     {
-      "assetId": "196dc9fa-1a7f-4c9b-b18f-60c7c171c9f2",
+      "assetId": "905b3e16-632d-4942-9156-5f0e467f09ad",
       "name": "Videoüberwachung",
       "category": "Sicherheit",
       "buildingIds": [
@@ -958,8 +958,8 @@
       "status": "In Betrieb",
       "serialNumber": "SN-BBL-010-004",
       "maintenanceInterval": "Jährlich",
-      "lastMaintenanceDate": "2024-10-23T00:00:00Z",
-      "nextMaintenanceDate": "2025-10-23T00:00:00Z",
+      "lastMaintenanceDate": "2024-06-15T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-15T00:00:00Z",
       "legacyId": "BBL-010-A4",
       "extensionData": {
         "warrantyUntil": "2025-12-31T00:00:00Z",

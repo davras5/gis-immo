@@ -228,6 +228,81 @@ function transformCost(item, buildingId, index) {
 }
 
 /**
+ * Convert ownership type to DATAMODEL.md enum
+ */
+function convertOwnershipType(value) {
+  if (!value) return null;
+  if (value === 'Eigentum Bund' || value.includes('Eigentum')) return 'Eigentümer';
+  if (value === 'Miete') return 'Mieter';
+  return value;
+}
+
+/**
+ * Convert year (number or string) to ISO 8601 date
+ */
+function convertYearToISO8601(year) {
+  if (!year) return null;
+  const yearNum = typeof year === 'string' ? parseInt(year, 10) : year;
+  if (isNaN(yearNum)) return null;
+  return `${yearNum}-01-01T00:00:00Z`;
+}
+
+/**
+ * Transform Building properties to DATAMODEL.md schema
+ */
+function transformBuilding(props) {
+  // Generate a placeholder siteId based on buildingId
+  const siteId = `SITE-${props.id}`;
+
+  return {
+    // Core fields
+    buildingId: props.id,
+    siteId: siteId,
+    name: props.name,
+    primaryTypeOfBuilding: props.objektart1,
+    secondaryTypeOfBuilding: props.objektart2 || null,
+    typeOfOwnership: convertOwnershipType(props.eigentum),
+    validFrom: convertToISO8601(props.gueltig_von),
+    validUntil: props.gueltig_bis ? convertToISO8601(props.gueltig_bis) : null,
+    constructionYear: convertYearToISO8601(props.baujahr),
+    buildingPermitDate: convertToISO8601(props.baubewilligung),
+    yearOfLastRefurbishment: convertYearToISO8601(props.sanierung),
+    parkingSpaces: props.parkplaetze || 0,
+    electricVehicleChargingStations: props.ladestationen || 0,
+    monumentProtection: props.denkmalschutz === 'Ja',
+    status: props.status,
+    energyEfficiencyClass: props.energieklasse || null,
+
+    // Address (embedded, not extracted)
+    streetName: props.adresse,
+    houseNumber: props.hausnummer,
+    postalCode: props.plz,
+    city: props.ort,
+    stateProvincePrefecture: props.region,
+    country: props.land,
+
+    // Swiss-specific extensions
+    extensionData: {
+      numberOfFloors: props.geschosse,
+      responsiblePerson: props.verantwortlich,
+      egid: props.egid,
+      egrid: props.egrid,
+      portfolio: props.teilportfolio,
+      portfolioGroup: props.teilportfolio_gruppe,
+      heatingGenerator: props.waermeerzeuger,
+      heatingSource: props.waermequelle,
+      hotWater: props.warmwasser,
+      plotName: props.grundstueck_name,
+      plotId: props.grundstueck_id,
+      netFloorArea: props.flaeche_ngf
+    },
+
+    // Legacy reference
+    legacyId: props.id
+  };
+}
+
+/**
  * Main migration function
  */
 function migrate() {
@@ -270,18 +345,12 @@ function migrate() {
     const buildingId = feature.properties.id;
     console.log(`  Processing: ${buildingId} - ${feature.properties.name}`);
 
-    // Create slimmed building (without embedded arrays)
-    const slimmedProperties = { ...feature.properties };
-    delete slimmedProperties.bemessungen;
-    delete slimmedProperties.dokumente;
-    delete slimmedProperties.kontakte;
-    delete slimmedProperties.vertraege;
-    delete slimmedProperties.ausstattung;
-    delete slimmedProperties.kosten;
+    // Transform building properties to DATAMODEL.md schema
+    const transformedProperties = transformBuilding(feature.properties);
 
     slimmedFeatures.push({
       type: 'Feature',
-      properties: slimmedProperties,
+      properties: transformedProperties,
       geometry: feature.geometry
     });
 
@@ -375,12 +444,17 @@ function migrate() {
   // Summary
   console.log('\n=== Migration Complete (DATAMODEL.md Schema) ===\n');
   console.log('Schema changes applied:');
-  console.log('  - Renamed ID fields (id → areaMeasurementId, documentId, etc.)');
-  console.log('  - Renamed German fields to English (titel → name, rolle → role, etc.)');
-  console.log('  - Converted dates to ISO 8601 format');
-  console.log('  - Added mandatory fields (bmEstimation, currency, etc.)');
-  console.log('  - Moved source data to extensionData objects');
-  console.log('  - Added plausible test data for optional fields');
+  console.log('  Buildings:');
+  console.log('    - id → buildingId, objektart1 → primaryTypeOfBuilding');
+  console.log('    - eigentum → typeOfOwnership (with value mapping)');
+  console.log('    - denkmalschutz → monumentProtection (Ja/Nein → true/false)');
+  console.log('    - Swiss fields moved to extensionData (egid, egrid, etc.)');
+  console.log('  Entities:');
+  console.log('    - Renamed ID fields (id → areaMeasurementId, documentId, etc.)');
+  console.log('    - Renamed German fields to English (titel → name, rolle → role, etc.)');
+  console.log('    - Converted dates to ISO 8601 format');
+  console.log('    - Added mandatory fields (bmEstimation, currency, etc.)');
+  console.log('    - Moved source data to extensionData objects');
   console.log('\nFiles created:');
   for (const { file } of outputFiles) {
     console.log(`  - data/${file}`);

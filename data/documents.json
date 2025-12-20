@@ -1,7 +1,7 @@
 {
   "documents": [
     {
-      "documentId": "1c834f0a-5729-45f1-a5df-837ae9dd309d",
+      "documentId": "1317ad70-17d4-4f5b-a236-3fa5e1c576b6",
       "name": "Grundriss Erdgeschoss",
       "type": "Grundriss",
       "buildingIds": [
@@ -18,7 +18,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "bd95f321-6260-460c-80d5-4f5a3cd28fc8",
+      "documentId": "26bdfbf6-0681-4518-b15e-84f08e0c551a",
       "name": "Fassadenplan West",
       "type": "Bauplan",
       "buildingIds": [
@@ -35,7 +35,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "bc5288f0-fbb7-40a6-8fa9-91f012c43b3b",
+      "documentId": "c700f547-d80e-43dd-8581-4748cc6bea18",
       "name": "GEAK Zertifikat 2019",
       "type": "Energieausweis",
       "buildingIds": [
@@ -52,7 +52,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "59f6c488-7842-465e-8ab3-8224d9c9490f",
+      "documentId": "a61cd343-20e3-49a2-9943-ae7ea2bba2ab",
       "name": "Denkmalschutz-Verfügung",
       "type": "Baubewilligung",
       "buildingIds": [
@@ -69,7 +69,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "433ebf37-4e4e-4c7f-b22a-497d1d4193aa",
+      "documentId": "a58edb3e-cbf6-46f0-9f59-a77136493c7a",
       "name": "Architekturpläne Gesamtobjekt",
       "type": "Bauplan",
       "buildingIds": [
@@ -86,7 +86,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "a1202881-345a-4139-8425-e031a344fc52",
+      "documentId": "3ecb8d18-7d9a-4c20-adcc-0ff259ecf7d0",
       "name": "Energiepass EnEV",
       "type": "Energieausweis",
       "buildingIds": [
@@ -103,7 +103,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "2dde8411-1463-40f2-ab2e-5b52a2791c59",
+      "documentId": "fc3a561a-6d1c-49ad-9b8e-4ae207c19965",
       "name": "Sicherheitskonzept",
       "type": "Betriebsanleitung",
       "buildingIds": [
@@ -120,7 +120,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "fc9a040c-e973-4be5-9299-a2fe98e3f7e6",
+      "documentId": "6363c302-d67a-41ec-bb25-879ffade5eaa",
       "name": "Hallenlayout Lagerbereich",
       "type": "Grundriss",
       "buildingIds": [
@@ -137,7 +137,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "975ba9d3-0af1-4426-b7ea-a54fb16644ff",
+      "documentId": "8e403b4e-001e-4464-a9cd-0cd4be9b26d5",
       "name": "Brandschutzkonzept",
       "type": "Brandschutzkonzept",
       "buildingIds": [
@@ -154,7 +154,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "ac715eb3-0202-488a-8d0c-3caeecfcd1b9",
+      "documentId": "1391c97b-63d2-4b07-8425-d467f664b9b5",
       "name": "Wartungsprotokoll Heizung 2023",
       "type": "Wartungsprotokoll",
       "buildingIds": [
@@ -171,7 +171,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "df008050-d046-4f89-8f58-31f79a83923e",
+      "documentId": "2bd3574c-5b7d-445c-9e48-1d151e21a25b",
       "name": "Gebäudefoto Aussenansicht",
       "type": "Foto",
       "buildingIds": [
@@ -188,7 +188,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "f8635d54-6488-4e65-b22b-2bea05674772",
+      "documentId": "5a9130a5-f988-4764-b35a-01d88f310c91",
       "name": "Mietvertrag Third Avenue",
       "type": "Mietvertrag",
       "buildingIds": [
@@ -205,7 +205,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "144c1e21-51a4-4203-9b88-39a42b300968",
+      "documentId": "4ec5afb6-735c-4e12-956e-2cfb2967d6c4",
       "name": "Grundriss Büroflächen",
       "type": "Grundriss",
       "buildingIds": [
@@ -222,7 +222,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "6ee36870-97fb-4f9f-b159-5792b1390e06",
+      "documentId": "ed357140-cca8-46a8-a642-2b60d9d34baa",
       "name": "Sanierungsprojekt 2024",
       "type": "Bauplan",
       "buildingIds": [
@@ -239,7 +239,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "20d81e2c-2d54-4cdb-a96b-8c0cc32b62f7",
+      "documentId": "0938e3b3-f773-46ae-accb-3baf995c5dd6",
       "name": "GEAK Plus Bericht",
       "type": "Energieausweis",
       "buildingIds": [
@@ -256,7 +256,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "af4db2fa-a507-4bf1-84c7-ceabc177ef47",
+      "documentId": "f0d6016f-4714-4aa4-8480-9efdcf4975b3",
       "name": "Denkmalschutz Teilbereich",
       "type": "Baubewilligung",
       "buildingIds": [
@@ -273,7 +273,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "dde8204d-64f3-4f1c-843c-b7a168237dc8",
+      "documentId": "b2988d09-feba-4675-8a1c-136e9729ce06",
       "name": "Raumkonzept Schulungsräume",
       "type": "Grundriss",
       "buildingIds": [
@@ -290,7 +290,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "4d9fc86d-7e4a-43fd-a55b-32ad14f73ebc",
+      "documentId": "a6eaac32-4eb0-4159-9e61-75f39666434e",
       "name": "Architekturpläne Original",
       "type": "Bauplan",
       "buildingIds": [
@@ -307,7 +307,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "55c6bbdd-b24c-49a4-8d88-9e854955ec35",
+      "documentId": "b09490ab-c184-4565-b4e9-c57db42dc88a",
       "name": "Erdbebensicherheit Gutachten",
       "type": "Betriebsanleitung",
       "buildingIds": [
@@ -324,7 +324,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "3c6a4fe8-d1dd-4e82-80fe-f48abaac211a",
+      "documentId": "6b396647-b0b6-4f62-b9d8-e3e68a11174e",
       "name": "Residenz Grundriss",
       "type": "Grundriss",
       "buildingIds": [
@@ -341,7 +341,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "3ef4d658-9418-4538-bc40-3e3b3afbb98a",
+      "documentId": "5cc512d5-905f-45a1-a30b-c49b8b29332f",
       "name": "Wohnungsspiegel",
       "type": "Grundriss",
       "buildingIds": [
@@ -358,7 +358,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "f11f3e4e-c6ec-43f0-b707-f055d1d4b778",
+      "documentId": "9d5677cb-7c0f-4938-8983-b5744eabac26",
       "name": "GEAK Zertifikat",
       "type": "Energieausweis",
       "buildingIds": [
@@ -375,7 +375,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "972f15c5-cb23-4696-a510-7ce97d7c4b1f",
+      "documentId": "0bb2f6a3-ed07-49c0-80e2-002f61b25981",
       "name": "Denkmalschutz Inventar",
       "type": "Baubewilligung",
       "buildingIds": [
@@ -392,7 +392,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "574d681c-2d96-4b22-a79c-0f74b27cb17c",
+      "documentId": "a0a01a1b-bf8a-4cce-b482-4f715567ea7c",
       "name": "Sanierungsbericht 2015",
       "type": "Bauplan",
       "buildingIds": [
@@ -409,7 +409,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "5df2b587-7c6e-442d-b36d-275c35e1b15c",
+      "documentId": "70e0d1d9-dd15-4b63-9d1f-106ac9d9c654",
       "name": "Fassadenfoto nach Sanierung",
       "type": "Foto",
       "buildingIds": [
@@ -426,7 +426,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "4e28034a-6dde-4f84-bb46-03601fdd4e54",
+      "documentId": "ecf50bcb-791f-4a96-805a-a96114ada6c5",
       "name": "Sanierungspläne 2022",
       "type": "Bauplan",
       "buildingIds": [
@@ -443,7 +443,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "5c6993d9-964d-4cd7-9d27-3af0a93b34a5",
+      "documentId": "6df03105-af3d-40fc-9189-d5ce00ed7cf2",
       "name": "Klimaanlagen-Dokumentation",
       "type": "Betriebsanleitung",
       "buildingIds": [
@@ -460,7 +460,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "e2b66b0a-b22f-44c2-b319-ef8fed494924",
+      "documentId": "75fc2b4a-25fd-4097-b1ff-5f123e27a47e",
       "name": "Gartenpflege-Konzept",
       "type": "Betriebsanleitung",
       "buildingIds": [
@@ -477,7 +477,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "cf5cdbc1-d0f9-4f72-b6a6-620fe268bb3b",
+      "documentId": "f9e1d306-1602-4ebd-9196-39640edc1150",
       "name": "Bauprojekt Datacenter",
       "type": "Bauplan",
       "buildingIds": [
@@ -494,7 +494,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "6d41bb42-a141-487c-b5b4-38de8977572b",
+      "documentId": "8ceb0e1a-413b-44a9-ad6d-7ba72a8f01be",
       "name": "BIM Modell Hauptgebäude",
       "type": "Bauplan",
       "buildingIds": [
@@ -511,7 +511,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "7a6adf88-1007-4ef9-b2db-108be2ef0bfc",
+      "documentId": "27191a2b-22a8-4c10-93a3-087b2eb22813",
       "name": "Baubewilligung Kanton TI",
       "type": "Baubewilligung",
       "buildingIds": [
@@ -528,7 +528,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "a61c6baf-ea73-4029-8c69-a2d14337f75d",
+      "documentId": "44385f5d-b291-489f-81f1-e9aee48330f4",
       "name": "Energiekonzept Tier IV",
       "type": "Energieausweis",
       "buildingIds": [
@@ -545,7 +545,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "f312fb18-2414-4beb-b92d-be5410df55ee",
+      "documentId": "78a59370-f16e-4499-953a-a5093aa84f5f",
       "name": "Sicherheitskonzept IT",
       "type": "Betriebsanleitung",
       "buildingIds": [
@@ -562,7 +562,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "1c5be061-d136-4b5b-adc7-bb5f99cfe10d",
+      "documentId": "fe89a051-5b40-4c42-a72b-a8f37814671a",
       "name": "Originalbaupläne 1968",
       "type": "Bauplan",
       "buildingIds": [
@@ -579,7 +579,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "8c24c082-703d-4e5c-b67f-1dc779c16bad",
+      "documentId": "7f418ec7-ace5-40a5-9a37-9e062277eb8e",
       "name": "Sanierungsdokumentation 2016",
       "type": "Bauplan",
       "buildingIds": [
@@ -596,7 +596,7 @@
       "extensionData": {}
     },
     {
-      "documentId": "761c729d-e9f3-4aaf-ae50-35a5d0b616d2",
+      "documentId": "29efa86a-40f3-4523-9a77-2e644b94013e",
       "name": "Solar-Warmwasser Anlage",
       "type": "Betriebsanleitung",
       "buildingIds": [

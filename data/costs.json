@@ -1,7 +1,7 @@
 {
   "costs": [
     {
-      "costId": "eb8526ad-56aa-493b-85d6-f9b35dd343d3",
+      "costId": "e01dd594-1419-4b6c-92f2-52061109d8d4",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -19,7 +19,7 @@
       }
     },
     {
-      "costId": "e45edd8e-666c-4c0c-9c7e-168bcb82c883",
+      "costId": "05c07cd9-645c-4e25-a14b-edc064e14d8e",
       "costGroup": "312",
       "costType": "Fernwärme",
       "buildingIds": [
@@ -37,7 +37,7 @@
       }
     },
     {
-      "costId": "45bacacf-83da-4afe-9231-1d500decfbd5",
+      "costId": "754eb2ce-744b-4777-8e20-243be1bf4f35",
       "costGroup": "313",
       "costType": "Wasserversorgung",
       "buildingIds": [
@@ -55,7 +55,7 @@
       }
     },
     {
-      "costId": "7df53a11-70e1-4547-b122-31af201957a4",
+      "costId": "5cee9acb-4592-420e-b8f1-198aeb752c98",
       "costGroup": "321",
       "costType": "Abwasserentsorgung",
       "buildingIds": [
@@ -73,7 +73,7 @@
       }
     },
     {
-      "costId": "9faee741-2b31-41ff-82ec-1b62a477633a",
+      "costId": "655719c7-4f67-4169-8170-24dba413c35c",
       "costGroup": "330",
       "costType": "Reinigung Innenräume",
       "buildingIds": [
@@ -91,7 +91,7 @@
       }
     },
     {
-      "costId": "872335de-91cb-4ee2-b99c-57de0eeed7b9",
+      "costId": "0fc84dc4-9bde-4af3-bf80-f00ec8173026",
       "costGroup": "350",
       "costType": "Sicherheitsdienst",
       "buildingIds": [
@@ -109,7 +109,7 @@
       }
     },
     {
-      "costId": "0b3b627a-9e91-4be4-b4e8-1ee68901f18c",
+      "costId": "eb33668b-e869-435b-b5af-d659951f6b1f",
       "costGroup": "410",
       "costType": "Instandhaltung Baukonstruktion",
       "buildingIds": [
@@ -127,7 +127,7 @@
       }
     },
     {
-      "costId": "3377dd6c-41c8-439b-873a-19ff003a0b4e",
+      "costId": "ddedeb2f-5810-47dc-9120-73e491db70a0",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -145,7 +145,7 @@
       }
     },
     {
-      "costId": "21c2cfef-ba24-47e9-b2e5-1425851523cb",
+      "costId": "5d913ea8-f9e8-425e-ad5e-d9246df746e0",
       "costGroup": "312",
       "costType": "Gasversorgung",
       "buildingIds": [
@@ -163,7 +163,7 @@
       }
     },
     {
-      "costId": "68ac8c15-bb27-4bfa-9b30-59c4f2c68e86",
+      "costId": "9501620e-ae17-4daa-9420-1869ec83f6f4",
       "costGroup": "330",
       "costType": "Reinigung",
       "buildingIds": [
@@ -181,7 +181,7 @@
       }
     },
     {
-      "costId": "6cb7d301-b788-4036-934a-17f5f356ec26",
+      "costId": "600433bf-0618-4322-8041-7f47a5b14e6a",
       "costGroup": "350",
       "costType": "Sicherheitsdienst",
       "buildingIds": [
@@ -199,7 +199,7 @@
       }
     },
     {
-      "costId": "ea01c97e-9d94-4b6b-a342-513aaa981284",
+      "costId": "32ac57fc-565c-4025-864b-349912dcaa59",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -217,7 +217,7 @@
       }
     },
     {
-      "costId": "e2456e9e-a48b-4886-a502-82d31d7a73e3",
+      "costId": "cb4ad779-83e5-463b-8761-418211eef780",
       "costGroup": "312",
       "costType": "Gasheizung",
       "buildingIds": [
@@ -235,7 +235,7 @@
       }
     },
     {
-      "costId": "d38e8a1e-eb87-45c5-8247-980270dcb463",
+      "costId": "baa18ea0-086f-4a6c-b5f5-abf93c7ff3c9",
       "costGroup": "322",
       "costType": "Abfallentsorgung",
       "buildingIds": [
@@ -253,7 +253,7 @@
       }
     },
     {
-      "costId": "9d584654-a0bc-43a4-b262-920ea70f50e5",
+      "costId": "7cf3602d-ddeb-4b69-96ac-d2159640974b",
       "costGroup": "340",
       "costType": "Wartung Fördertechnik",
       "buildingIds": [
@@ -271,7 +271,7 @@
       }
     },
     {
-      "costId": "0bcc3f8b-f935-4610-92f8-1eba0d3a21af",
+      "costId": "999c1173-8a3c-41f3-83c6-d59edad7169c",
       "costGroup": "330",
       "costType": "Reinigung",
       "buildingIds": [
@@ -289,7 +289,7 @@
       }
     },
     {
-      "costId": "7cf597f4-83db-46ff-9c06-3c9e1fd985ed",
+      "costId": "9c3fb046-d303-4677-88c4-3acad05d0b5c",
       "costGroup": "210",
       "costType": "Miete Bürofläche",
       "buildingIds": [
@@ -307,7 +307,7 @@
       }
     },
     {
-      "costId": "26277810-c6b2-474d-852e-90e579331158",
+      "costId": "a7f0c0c5-5ac7-4a30-b6b4-a2200e24a3f5",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -325,7 +325,7 @@
       }
     },
     {
-      "costId": "ad8fbf69-76a6-4ad6-bb8a-39b423346d2d",
+      "costId": "5d49ecd1-55ed-4bbc-a3d1-310477de9f25",
       "costGroup": "350",
       "costType": "Sicherheitsdienst",
       "buildingIds": [
@@ -343,7 +343,7 @@
       }
     },
     {
-      "costId": "04cef435-84fa-48b8-9450-ae5e8783d494",
+      "costId": "515d5329-3865-4bd6-8433-ebe4ac007d53",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -361,7 +361,7 @@
       }
     },
     {
-      "costId": "2d214adc-5caa-44b9-92e2-4becc6de5df0",
+      "costId": "61a68c5c-8026-4c54-9cfd-f14742ab7602",
       "costGroup": "312",
       "costType": "Heizöl",
       "buildingIds": [
@@ -379,7 +379,7 @@
       }
     },
     {
-      "costId": "17d5c4da-5c8c-41a0-b9f9-44c947179ce8",
+      "costId": "cd0f8ed8-ee8b-4ce4-86b4-3e5ee88838fa",
       "costGroup": "330",
       "costType": "Reinigung",
       "buildingIds": [
@@ -397,7 +397,7 @@
       }
     },
     {
-      "costId": "25c656da-d887-4de2-a4e0-b4c8928a34a6",
+      "costId": "dfd985ed-ad3a-492d-b472-17a708be2de7",
       "costGroup": "420",
       "costType": "Sanierungskosten anteilig",
       "buildingIds": [
@@ -415,7 +415,7 @@
       }
     },
     {
-      "costId": "c3ef7bef-cda9-4df4-99ee-43757b0b951f",
+      "costId": "f691c517-432c-4c24-a53e-68e598af401b",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -433,7 +433,7 @@
       }
     },
     {
-      "costId": "b518c579-b098-486e-a665-2e84c4b3e595",
+      "costId": "687f224c-7c38-46b5-b545-36950c05ef01",
       "costGroup": "330",
       "costType": "Reinigung und Gartenpflege",
       "buildingIds": [
@@ -451,7 +451,7 @@
       }
     },
     {
-      "costId": "c21af085-bcb8-49b7-bcd7-de8b396d3c59",
+      "costId": "03b8519b-9849-49bf-b5dc-aae70122204f",
       "costGroup": "350",
       "costType": "Sicherheitsdienst",
       "buildingIds": [
@@ -469,7 +469,7 @@
       }
     },
     {
-      "costId": "91c27990-6c02-4796-b723-93f83bc6b736",
+      "costId": "1c142123-2d77-45c7-9ffe-8a793e2fde6e",
       "costGroup": "340",
       "costType": "Klimaanlagen-Wartung",
       "buildingIds": [
@@ -487,7 +487,7 @@
       }
     },
     {
-      "costId": "cc5518f7-2397-4bc7-824a-390f3694cbc6",
+      "costId": "44ccf9dc-7804-483f-bd96-172b038d729f",
       "costGroup": "311",
       "costType": "Allgemeinstrom",
       "buildingIds": [
@@ -505,7 +505,7 @@
       }
     },
     {
-      "costId": "8dcb558d-7980-404d-a986-3f79965155cc",
+      "costId": "ab0e7a5d-5a54-4efa-be4f-d7ee860926ed",
       "costGroup": "312",
       "costType": "Gasheizung",
       "buildingIds": [
@@ -523,7 +523,7 @@
       }
     },
     {
-      "costId": "e03c3eb7-a9bd-400c-b693-4639252c162e",
+      "costId": "7d5f2dd6-fc7d-407f-b119-17d4892f1e0a",
       "costGroup": "313",
       "costType": "Wasserversorgung",
       "buildingIds": [
@@ -541,7 +541,7 @@
       }
     },
     {
-      "costId": "1d83b153-96f7-4e0d-a2d2-116904e8947b",
+      "costId": "36532aca-69a8-4763-973a-83a5deb65356",
       "costGroup": "330",
       "costType": "Treppenhausreinigung",
       "buildingIds": [
@@ -559,7 +559,7 @@
       }
     },
     {
-      "costId": "be85056c-a4a8-4681-8852-792fa8ae3837",
+      "costId": "85cf1a4b-a371-47bd-b29d-ef1626ee0af5",
       "costGroup": "340",
       "costType": "Hauswartung",
       "buildingIds": [
@@ -577,7 +577,7 @@
       }
     },
     {
-      "costId": "c1cc7d11-8b38-408b-a86c-0145493cc250",
+      "costId": "30d05ce7-fb93-406d-8956-811d493b36f7",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -595,7 +595,7 @@
       }
     },
     {
-      "costId": "fa69b812-f3a8-4709-b11a-b9d2e9a7dc97",
+      "costId": "f766a798-e7fd-460b-aa3f-24631b6a09c4",
       "costGroup": "330",
       "costType": "Reinigung und Gartenpflege",
       "buildingIds": [
@@ -613,7 +613,7 @@
       }
     },
     {
-      "costId": "11bf8a88-3204-4698-af8f-53cee524a69d",
+      "costId": "29d7b02e-428d-4455-90e3-eea95fe7f60b",
       "costGroup": "350",
       "costType": "Sicherheitsdienst",
       "buildingIds": [
@@ -631,7 +631,7 @@
       }
     },
     {
-      "costId": "84e6b004-57a7-43fb-8e8c-080702b01ef6",
+      "costId": "50e8d3de-284c-42fc-badf-35a05751ef86",
       "costGroup": "340",
       "costType": "Klimaanlagen-Wartung",
       "buildingIds": [
@@ -649,7 +649,7 @@
       }
     },
     {
-      "costId": "2f22a79f-5843-46f1-9134-b4e1db22e918",
+      "costId": "3183f288-9531-4c5e-865b-08121118781b",
       "costGroup": "311",
       "costType": "Stromversorgung IT-Betrieb",
       "buildingIds": [
@@ -667,7 +667,7 @@
       }
     },
     {
-      "costId": "6efe51ef-a257-4507-b1a9-00a24a53cdd8",
+      "costId": "e6f47247-1307-410f-b65c-62e0f9db9f0c",
       "costGroup": "340",
       "costType": "Kühlanlagen-Wartung",
       "buildingIds": [
@@ -685,7 +685,7 @@
       }
     },
     {
-      "costId": "3b016f77-f487-4a7e-912b-dc4715cd2ff2",
+      "costId": "a7dc86a5-6ee1-4c9e-bcbf-7dba9486f20f",
       "costGroup": "350",
       "costType": "24/7 Sicherheitsdienst",
       "buildingIds": [
@@ -703,7 +703,7 @@
       }
     },
     {
-      "costId": "ded70d49-8cd5-407a-8bbb-36c1105795d4",
+      "costId": "98d0776a-37f5-4f1b-b14c-34aded887439",
       "costGroup": "340",
       "costType": "USV-Wartung",
       "buildingIds": [
@@ -721,7 +721,7 @@
       }
     },
     {
-      "costId": "0bb6b8cb-876c-4df1-bd43-bdd130665c73",
+      "costId": "6f7705ec-5c14-4cc1-b6c1-1ef0d6e96fb1",
       "costGroup": "340",
       "costType": "Gebäudeautomation Betrieb",
       "buildingIds": [
@@ -739,7 +739,7 @@
       }
     },
     {
-      "costId": "49601626-48cd-49bc-b897-824690d9d5b1",
+      "costId": "125686aa-5d38-4661-9454-3b31652f310b",
       "costGroup": "220",
       "costType": "Versicherungen",
       "buildingIds": [
@@ -757,7 +757,7 @@
       }
     },
     {
-      "costId": "511432d1-8f24-49be-ba01-bab80a9bd29b",
+      "costId": "b6c5501d-5aeb-479f-b24f-eb5f69bf07d4",
       "costGroup": "311",
       "costType": "Stromversorgung",
       "buildingIds": [
@@ -775,7 +775,7 @@
       }
     },
     {
-      "costId": "889d50ae-b22c-4f4b-ad8d-8c623bc7e04b",
+      "costId": "673d8f6a-016f-47c0-8373-ff213045073e",
       "costGroup": "330",
       "costType": "Reinigung und Gartenpflege",
       "buildingIds": [
@@ -793,7 +793,7 @@
       }
     },
     {
-      "costId": "882f3b9f-d1fb-4a3b-b33f-65981570a789",
+      "costId": "5e36536c-c1dc-4fa4-849e-e8f0f32738cc",
       "costGroup": "350",
       "costType": "Sicherheitsdienst",
       "buildingIds": [
@@ -811,7 +811,7 @@
       }
     },
     {
-      "costId": "2506357e-0513-4be0-9021-eade8ebfa808",
+      "costId": "745d70b1-9dc8-4fd1-8227-0217f979f50d",
       "costGroup": "340",
       "costType": "Klimaanlagen-Wartung",
       "buildingIds": [

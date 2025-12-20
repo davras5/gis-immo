@@ -4304,11 +4304,11 @@
         // Filter configuration - maps filter keys to data properties
         var filterConfig = {
             status: { property: 'status', label: 'Status' },
-            eigentum: { property: 'eigentum', label: 'Art Eigentum' },
-            teilportfolio: { property: 'teilportfolio', label: 'Teilportfolio' },
-            gebaeudeart: { property: 'objektart1', label: 'Gebäudeart' },
-            land: { property: 'land', label: 'Land' },
-            region: { property: 'region', label: 'Region' }
+            eigentum: { property: 'typeOfOwnership', label: 'Art Eigentum' },
+            teilportfolio: { property: 'extensionData.portfolio', label: 'Teilportfolio' },
+            gebaeudeart: { property: 'primaryTypeOfBuilding', label: 'Gebäudeart' },
+            land: { property: 'country', label: 'Land' },
+            region: { property: 'stateProvincePrefecture', label: 'Region' }
         };
 
         // ===== FILTER FUNCTIONS =====
@@ -4365,6 +4365,17 @@
             return count;
         }
 
+        // Helper: Get nested property value (e.g., "extensionData.portfolio")
+        function getNestedProperty(obj, path) {
+            var parts = path.split('.');
+            var current = obj;
+            for (var i = 0; i < parts.length; i++) {
+                if (current == null) return undefined;
+                current = current[parts[i]];
+            }
+            return current;
+        }
+
         function applyFilters() {
             if (!portfolioData) return;
 
@@ -4381,7 +4392,7 @@
                         if (filterValues.length === 0) continue;
 
                         var propKey = filterConfig[filterKey].property;
-                        var propValue = props[propKey];
+                        var propValue = getNestedProperty(props, propKey);
 
                         // OR within category - at least one must match
                         var matches = filterValues.some(function(filterValue) {
@@ -4426,15 +4437,15 @@
             }
 
             var filteredIds = filteredData.features.map(function(f) {
-                return f.properties.id;
+                return f.properties.buildingId;
             });
 
             // Apply filter to show only filtered buildings
-            map.setFilter('portfolio-points', ['in', ['get', 'id'], ['literal', filteredIds]]);
+            map.setFilter('portfolio-points', ['in', ['get', 'buildingId'], ['literal', filteredIds]]);
 
             // Also filter labels layer if it exists
             if (map.getLayer('portfolio-labels')) {
-                map.setFilter('portfolio-labels', ['in', ['get', 'id'], ['literal', filteredIds]]);
+                map.setFilter('portfolio-labels', ['in', ['get', 'buildingId'], ['literal', filteredIds]]);
             }
 
             // Zoom to fit filtered points
@@ -4623,12 +4634,13 @@
 
             portfolioData.features.forEach(function(feature) {
                 var props = feature.properties;
+                var ext = props.extensionData || {};
                 if (props.status) uniqueValues.status.add(props.status);
-                if (props.eigentum) uniqueValues.eigentum.add(props.eigentum);
-                if (props.teilportfolio) uniqueValues.teilportfolio.add(props.teilportfolio);
-                if (props.objektart1) uniqueValues.gebaeudeart.add(props.objektart1);
-                if (props.land) uniqueValues.land.add(props.land);
-                if (props.region) uniqueValues.region.add(props.region);
+                if (props.typeOfOwnership) uniqueValues.eigentum.add(props.typeOfOwnership);
+                if (ext.portfolio) uniqueValues.teilportfolio.add(ext.portfolio);
+                if (props.primaryTypeOfBuilding) uniqueValues.gebaeudeart.add(props.primaryTypeOfBuilding);
+                if (props.country) uniqueValues.land.add(props.country);
+                if (props.stateProvincePrefecture) uniqueValues.region.add(props.stateProvincePrefecture);
             });
 
             // Render options for each filter
@@ -5046,7 +5058,7 @@
             
             // Find building by ID
             var building = portfolioData.features.find(function(f) {
-                return f.properties.id === buildingId;
+                return f.properties.buildingId === buildingId;
             });
             
             if (!building) {
@@ -5090,55 +5102,58 @@
             var props = building.properties;
             var coords = building.geometry.coordinates;
             
+            // Helper to access extensionData safely
+            var ext = props.extensionData || {};
+
             // Breadcrumb
             document.getElementById('breadcrumb-name').textContent = props.name;
-            document.getElementById('breadcrumb-country').textContent = props.land || '—';
-            document.getElementById('breadcrumb-region').textContent = props.region || '—';
-            
+            document.getElementById('breadcrumb-country').textContent = props.country || '—';
+            document.getElementById('breadcrumb-region').textContent = props.stateProvincePrefecture || '—';
+
             // Objekt Stammdaten
             document.getElementById('detail-name').textContent = props.name;
-            document.getElementById('detail-id').textContent = props.id;
-            document.getElementById('detail-teilportfolio').textContent = props.teilportfolio;
-            document.getElementById('detail-baujahr').textContent = props.baujahr;
-            
+            document.getElementById('detail-id').textContent = props.buildingId;
+            document.getElementById('detail-teilportfolio').textContent = ext.portfolio || '—';
+            document.getElementById('detail-baujahr').textContent = extractYear(props.constructionYear) || '—';
+
             // Address
-            document.getElementById('detail-country').textContent = props.land;
-            document.getElementById('detail-region').textContent = props.region || '—';
-            document.getElementById('detail-city').textContent = props.ort;
+            document.getElementById('detail-country').textContent = props.country;
+            document.getElementById('detail-region').textContent = props.stateProvincePrefecture || '—';
+            document.getElementById('detail-city').textContent = props.city;
 
             // Read address parts directly from properties, parse street from address
-            var addressParts = parseAddress(props.adresse);
-            document.getElementById('detail-plz').textContent = props.plz || '—';
+            var addressParts = parseAddress(props.streetName);
+            document.getElementById('detail-plz').textContent = props.postalCode || '—';
             document.getElementById('detail-street').textContent = addressParts.street || '—';
-            document.getElementById('detail-housenumber').textContent = props.hausnummer || '—';
-            
+            document.getElementById('detail-housenumber').textContent = props.houseNumber || '—';
+
             // Gebäudedaten
-            document.getElementById('detail-sanierung').textContent = props.sanierung || '—';
-            document.getElementById('detail-ladestationen').textContent = props.ladestationen !== undefined ? props.ladestationen : '—';
-            document.getElementById('detail-denkmalschutz').textContent = props.denkmalschutz || '—';
-            document.getElementById('detail-parkplaetze').textContent = props.parkplaetze !== undefined ? props.parkplaetze : '—';
-            document.getElementById('detail-geschosse').textContent = props.geschosse !== undefined ? props.geschosse : '—';
-            document.getElementById('detail-baubewilligung').textContent = props.baubewilligung || '—';
+            document.getElementById('detail-sanierung').textContent = extractYear(props.yearOfLastRefurbishment) || '—';
+            document.getElementById('detail-ladestationen').textContent = props.electricVehicleChargingStations !== undefined ? props.electricVehicleChargingStations : '—';
+            document.getElementById('detail-denkmalschutz').textContent = formatBoolean(props.monumentProtection);
+            document.getElementById('detail-parkplaetze').textContent = props.parkingSpaces !== undefined ? props.parkingSpaces : '—';
+            document.getElementById('detail-geschosse').textContent = ext.numberOfFloors !== undefined ? ext.numberOfFloors : '—';
+            document.getElementById('detail-baubewilligung').textContent = formatDate(props.buildingPermitDate) || '—';
 
             // Energie
-            document.getElementById('detail-energieklasse').textContent = props.energieklasse || '—';
-            document.getElementById('detail-waermeerzeuger').textContent = props.waermeerzeuger || '—';
-            document.getElementById('detail-waermequelle').textContent = props.waermequelle || '—';
-            document.getElementById('detail-warmwasser').textContent = props.warmwasser || '—';
+            document.getElementById('detail-energieklasse').textContent = props.energyEfficiencyClass || '—';
+            document.getElementById('detail-waermeerzeuger').textContent = ext.heatingGenerator || '—';
+            document.getElementById('detail-waermequelle').textContent = ext.heatingSource || '—';
+            document.getElementById('detail-warmwasser').textContent = ext.hotWater || '—';
 
             // Grundstück
-            document.getElementById('detail-grundstueck-name').textContent = props.grundstueck_name || '—';
-            document.getElementById('detail-grundstueck-id').textContent = props.grundstueck_id || '—';
-            document.getElementById('detail-egid').textContent = props.egid || '—';
-            document.getElementById('detail-egrid').textContent = props.egrid || '—';
-            document.getElementById('detail-gueltig-von').textContent = props.gueltig_von || '—';
-            document.getElementById('detail-gueltig-bis').textContent = props.gueltig_bis || 'Keine Angabe';
+            document.getElementById('detail-grundstueck-name').textContent = ext.plotName || '—';
+            document.getElementById('detail-grundstueck-id').textContent = ext.plotId || '—';
+            document.getElementById('detail-egid').textContent = ext.egid || '—';
+            document.getElementById('detail-egrid').textContent = ext.egrid || '—';
+            document.getElementById('detail-gueltig-von').textContent = formatDate(props.validFrom) || '—';
+            document.getElementById('detail-gueltig-bis').textContent = formatDate(props.validUntil) || 'Keine Angabe';
 
             // Klassifizierung
-            document.getElementById('detail-objektart1').textContent = props.objektart1 || '—';
-            document.getElementById('detail-teilportfolio-gruppe').textContent = props.teilportfolio_gruppe || '—';
-            document.getElementById('detail-objektart2').textContent = props.objektart2 || '—';
-            document.getElementById('detail-eigentum').textContent = props.eigentum || '—';
+            document.getElementById('detail-objektart1').textContent = props.primaryTypeOfBuilding || '—';
+            document.getElementById('detail-teilportfolio-gruppe').textContent = ext.portfolioGroup || '—';
+            document.getElementById('detail-objektart2').textContent = props.secondaryTypeOfBuilding || '—';
+            document.getElementById('detail-eigentum').textContent = props.typeOfOwnership || '—';
 
             // Load measurements for this building
             loadMeasurementsForBuilding(building);
@@ -5165,6 +5180,27 @@
             initMiniMap(coords);
         }
         
+        // Helper: Extract year from ISO 8601 date string (e.g., "1902-01-01T00:00:00Z" → "1902")
+        function extractYear(isoDate) {
+            if (!isoDate) return null;
+            var match = isoDate.match(/^(\d{4})/);
+            return match ? match[1] : null;
+        }
+
+        // Helper: Format ISO 8601 date to DD.MM.YYYY
+        function formatDate(isoDate) {
+            if (!isoDate) return null;
+            var match = isoDate.match(/^(\d{4})-(\d{2})-(\d{2})/);
+            return match ? match[3] + '.' + match[2] + '.' + match[1] : null;
+        }
+
+        // Helper: Format boolean for display (true → "Ja", false → "Nein")
+        function formatBoolean(value) {
+            if (value === true) return 'Ja';
+            if (value === false) return 'Nein';
+            return '—';
+        }
+
         function parseAddress(address) {
             // Parse address into street, house number, and PLZ
             // Expected formats: "Strasse Nr, PLZ Stadt" or "Nr Strasse, Stadt, State PLZ"
@@ -5366,18 +5402,19 @@
 
             dataToRender.features.forEach(function(feature) {
                 var props = feature.properties;
+                var ext = props.extensionData || {};
                 var statusClass = props.status === 'In Betrieb' ? 'in-betrieb' :
                                   props.status === 'In Renovation' ? 'in-renovation' :
                                   props.status === 'In Planung' ? 'in-planung' : 'ausser-betrieb';
-                var flaeche = Number(props.flaeche_ngf).toLocaleString('de-CH');
+                var flaeche = Number(ext.netFloorArea || 0).toLocaleString('de-CH');
 
-                html += '<tr data-id="' + props.id + '" tabindex="0" role="row">' +
-                    '<td class="col-id">' + props.id + '</td>' +
+                html += '<tr data-id="' + props.buildingId + '" tabindex="0" role="row">' +
+                    '<td class="col-id">' + props.buildingId + '</td>' +
                     '<td class="col-name">' + props.name + '</td>' +
-                    '<td class="col-land">' + props.land + '</td>' +
-                    '<td class="col-ort">' + props.ort + '</td>' +
-                    '<td class="col-adresse">' + props.adresse + '</td>' +
-                    '<td class="col-portfolio">' + props.teilportfolio + '</td>' +
+                    '<td class="col-land">' + props.country + '</td>' +
+                    '<td class="col-ort">' + props.city + '</td>' +
+                    '<td class="col-adresse">' + props.streetName + '</td>' +
+                    '<td class="col-portfolio">' + (ext.portfolio || '—') + '</td>' +
                     '<td class="col-flaeche">' + flaeche + ' m²</td>' +
                     '<td class="col-status"><span class="status-badge ' + statusClass + '"><span class="status-icon" aria-hidden="true"></span>' + props.status + '</span></td>' +
                 '</tr>';
@@ -5422,23 +5459,25 @@
 
             dataToRender.features.forEach(function(feature, index) {
                 var props = feature.properties;
-                var flaeche = Number(props.flaeche_ngf).toLocaleString('de-CH');
+                var ext = props.extensionData || {};
+                var flaeche = Number(ext.netFloorArea || 0).toLocaleString('de-CH');
+                var baujahr = extractYear(props.constructionYear) || '—';
                 // Use placeholder images
                 var imageUrl = placeholderImages[index % placeholderImages.length];
 
-                html += '<div class="gallery-card" data-id="' + props.id + '" tabindex="0" role="article" aria-label="' + props.name + '">' +
+                html += '<div class="gallery-card" data-id="' + props.buildingId + '" tabindex="0" role="article" aria-label="' + props.name + '">' +
                     '<div class="gallery-image" style="background-image: url(' + imageUrl + ')" role="img" aria-label="Bild von ' + props.name + '">' +
-                        '<div class="gallery-image-label">' + props.land + '</div>' +
+                        '<div class="gallery-image-label">' + props.country + '</div>' +
                     '</div>' +
                     '<div class="gallery-content">' +
                         '<div class="gallery-title">' + props.name + '</div>' +
-                        '<div class="gallery-subtitle">' + props.adresse + '</div>' +
+                        '<div class="gallery-subtitle">' + props.streetName + '</div>' +
                         '<div class="gallery-meta">' +
-                            '<span class="gallery-tag">' + props.teilportfolio + '</span>' +
+                            '<span class="gallery-tag">' + (ext.portfolio || '—') + '</span>' +
                             '<span class="gallery-tag">' + flaeche + ' m²</span>' +
                         '</div>' +
                         '<div class="gallery-footer">' +
-                            '<span>Baujahr ' + props.baujahr + '</span>' +
+                            '<span>Baujahr ' + baujahr + '</span>' +
                             '<a href="#" class="gallery-link" onclick="event.stopPropagation();" aria-label="Details zu ' + props.name + ' anzeigen">Details <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>' +
                         '</div>' +
                     '</div>' +
@@ -5577,7 +5616,7 @@
                 id: 'portfolio-selected',
                 type: 'circle',
                 source: 'portfolio',
-                filter: ['==', ['get', 'id'], ''],
+                filter: ['==', ['get', 'buildingId'], ''],
                 paint: {
                     'circle-radius': 18,
                     'circle-color': 'transparent',
@@ -5592,7 +5631,7 @@
                 id: 'portfolio-selected-pulse',
                 type: 'circle',
                 source: 'portfolio',
-                filter: ['==', ['get', 'id'], ''],
+                filter: ['==', ['get', 'buildingId'], ''],
                 paint: {
                     'circle-radius': 24,
                     'circle-color': 'transparent',
@@ -5662,7 +5701,7 @@
             var urlBuildingId = urlParams.get('id');
             if (urlBuildingId) {
                 var building = portfolioData.features.find(function(f) {
-                    return f.properties.id === urlBuildingId;
+                    return f.properties.buildingId === urlBuildingId;
                 });
                 if (building) {
                     selectBuilding(urlBuildingId, true);
@@ -5674,39 +5713,41 @@
         // UPDATED: Added flyToBuilding parameter (default false)
         function selectBuilding(buildingId, flyToBuilding = false) {
             // Find feature props
-            var building = portfolioData.features.find(function(f) { return f.properties.id === buildingId; });
+            var building = portfolioData.features.find(function(f) { return f.properties.buildingId === buildingId; });
             if (!building) return;
             
             var props = building.properties;
-            var flaeche = Number(props.flaeche_ngf).toLocaleString('de-CH');
+            var ext = props.extensionData || {};
+            var flaeche = Number(ext.netFloorArea || 0).toLocaleString('de-CH');
+            var baujahr = extractYear(props.constructionYear) || '—';
             var statusColor = statusColors[props.status] || '#8B949C';
-            
+
             // Update selected ID
             selectedBuildingId = buildingId;
             updateSelectedBuilding();
             updateUrlWithSelection();
-            
+
             // Find building index for placeholder image
             var buildingIndex = portfolioData.features.findIndex(function(f) {
-                return f.properties.id === buildingId;
+                return f.properties.buildingId === buildingId;
             });
             var imageUrl = placeholderImages[buildingIndex % placeholderImages.length];
-            
+
             // Set preview image
             document.getElementById('info-preview-image').style.backgroundImage = 'url(' + imageUrl + ')';
-            
-            var infoHtml = 
-                '<div class="info-section-title">' + props.teilportfolio + '</div>' +
-                '<div class="info-location">' + props.ort + ', ' + props.land + '</div>' +
-                '<div class="info-row"><span class="info-label">Objekt-ID</span><span class="info-value">' + props.id + '</span></div>' +
+
+            var infoHtml =
+                '<div class="info-section-title">' + (ext.portfolio || '—') + '</div>' +
+                '<div class="info-location">' + props.city + ', ' + props.country + '</div>' +
+                '<div class="info-row"><span class="info-label">Objekt-ID</span><span class="info-value">' + props.buildingId + '</span></div>' +
                 '<div class="info-row"><span class="info-label">Name</span><span class="info-value">' + props.name + '</span></div>' +
-                '<div class="info-row"><span class="info-label">Adresse</span><span class="info-value">' + props.adresse + '</span></div>' +
+                '<div class="info-row"><span class="info-label">Adresse</span><span class="info-value">' + props.streetName + '</span></div>' +
                 '<div class="info-row"><span class="info-label">Fläche NGF</span><span class="info-value">' + flaeche + ' m²</span></div>' +
-                '<div class="info-row"><span class="info-label">Baujahr</span><span class="info-value">' + props.baujahr + '</span></div>' +
-                '<div class="info-row"><span class="info-label">Verantwortlich</span><span class="info-value">' + props.verantwortlich + '</span></div>' +
+                '<div class="info-row"><span class="info-label">Baujahr</span><span class="info-value">' + baujahr + '</span></div>' +
+                '<div class="info-row"><span class="info-label">Verantwortlich</span><span class="info-value">' + (ext.responsiblePerson || '—') + '</span></div>' +
                 '<div class="info-row"><span class="info-label">Status</span><span class="info-value" style="color:' + statusColor + '; font-weight: 600;">' + props.status + '</span></div>' +
                 '<div class="info-footer">' +
-                    '<button class="info-detail-link" onclick="showDetailView(\'' + props.id + '\')">' +
+                    '<button class="info-detail-link" onclick="showDetailView(\'' + props.buildingId + '\')">' +
                         '<span class="material-symbols-outlined">open_in_new</span>' +
                         'Details anzeigen' +
                     '</button>' +
@@ -5726,10 +5767,10 @@
         
         function updateSelectedBuilding() {
             if (map && map.getLayer('portfolio-selected')) {
-                map.setFilter('portfolio-selected', ['==', ['get', 'id'], selectedBuildingId || '']);
+                map.setFilter('portfolio-selected', ['==', ['get', 'buildingId'], selectedBuildingId || '']);
             }
             if (map && map.getLayer('portfolio-selected-pulse')) {
-                map.setFilter('portfolio-selected-pulse', ['==', ['get', 'id'], selectedBuildingId || '']);
+                map.setFilter('portfolio-selected-pulse', ['==', ['get', 'buildingId'], selectedBuildingId || '']);
             }
         }
 
@@ -5849,9 +5890,9 @@
             if (localResults.length > 0) {
                 html += '<div class="search-section-header">Objekte</div>';
                 localResults.forEach(function(f) {
-                    html += '<div class="search-item" onclick="handleSearchClick(\'local\', \'' + f.properties.id + '\')">' +
+                    html += '<div class="search-item" onclick="handleSearchClick(\'local\', \'' + f.properties.buildingId + '\')">' +
                             '<div class="search-item-title">' + f.properties.name + '</div>' +
-                            '<div class="search-item-subtitle">' + f.properties.adresse + ', ' + f.properties.ort + '</div>' +
+                            '<div class="search-item-subtitle">' + f.properties.streetName + ', ' + f.properties.city + '</div>' +
                             '</div>';
                 });
             }
@@ -5905,7 +5946,7 @@
                     searchMarker = null;
                 }
 
-                var b = portfolioData.features.find(f => f.properties.id === id);
+                var b = portfolioData.features.find(f => f.properties.buildingId === id);
                 if(b) {
                     searchInput.value = b.properties.name;
                     searchClearBtn.classList.add('visible');
@@ -6429,7 +6470,7 @@
 
         function loadMeasurementsForBuilding(building) {
             if (building && building.properties) {
-                var buildingId = building.properties.id;
+                var buildingId = building.properties.buildingId;
                 // Filter from global allAreaMeasurements array (DATAMODEL.md schema)
                 measurementsData = allAreaMeasurements
                     .filter(function(m) {
@@ -6527,7 +6568,7 @@
 
         function loadDocumentsForBuilding(building) {
             if (building && building.properties) {
-                var buildingId = building.properties.id;
+                var buildingId = building.properties.buildingId;
                 // Filter from global allDocuments array (DATAMODEL.md schema)
                 documentsData = allDocuments
                     .filter(function(d) {
@@ -6621,7 +6662,7 @@
 
         function loadKontakteForBuilding(building) {
             if (building && building.properties) {
-                var buildingId = building.properties.id;
+                var buildingId = building.properties.buildingId;
                 // Filter from global allContacts array (DATAMODEL.md schema)
                 kontakteData = allContacts
                     .filter(function(k) {
@@ -6718,7 +6759,7 @@
 
         function loadKostenForBuilding(building) {
             if (building && building.properties) {
-                var buildingId = building.properties.id;
+                var buildingId = building.properties.buildingId;
                 // Filter from global allCosts array (DATAMODEL.md schema)
                 kostenData = allCosts
                     .filter(function(k) {
@@ -6833,7 +6874,7 @@
 
         function loadVertraegeForBuilding(building) {
             if (building && building.properties) {
-                var buildingId = building.properties.id;
+                var buildingId = building.properties.buildingId;
                 // Filter from global allContracts array (DATAMODEL.md schema)
                 vertraegeData = allContracts
                     .filter(function(v) {
@@ -6953,7 +6994,7 @@
 
         function loadAusstattungForBuilding(building) {
             if (building && building.properties) {
-                var buildingId = building.properties.id;
+                var buildingId = building.properties.buildingId;
                 // Filter from global allAssets array (DATAMODEL.md schema)
                 ausstattungData = allAssets
                     .filter(function(a) {

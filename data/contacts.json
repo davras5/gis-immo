@@ -1,7 +1,7 @@
 {
   "contacts": [
     {
-      "contactId": "d181a370-03ba-4dde-b59d-fbe6c8d27c9e",
+      "contactId": "78d4ef76-b4fa-4629-a843-ce40fbec9bc9",
       "name": "Anna Müller",
       "role": "Objektverantwortliche",
       "buildingIds": [
@@ -17,7 +17,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "12b7a0ca-9baf-4b76-bb7a-f8fa85979201",
+      "contactId": "d0165fef-964b-4944-a455-a9e3482b6a13",
       "name": "Peter Gerber",
       "role": "Hauswart",
       "buildingIds": [
@@ -33,7 +33,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "c0a3f8ac-2097-4d8b-8a82-332f6e704fa3",
+      "contactId": "479e83c5-6f2b-4a57-8a54-923ee24cc30b",
       "name": "Sandra Keller",
       "role": "Portfolioverantwortliche",
       "buildingIds": [
@@ -49,7 +49,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "3a9378d3-868f-4e87-99e2-ee7d4974b23a",
+      "contactId": "b3bca808-87db-463c-90b3-fb92e4c79218",
       "name": "Peter Schmidt",
       "role": "Objektverantwortlicher",
       "buildingIds": [
@@ -65,7 +65,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "6e7008fa-0a50-4f7f-a003-527660d1d27b",
+      "contactId": "4f7d7dd4-b508-4344-9203-74b2db2a5314",
       "name": "Klaus Weber",
       "role": "Facility Manager",
       "buildingIds": [
@@ -81,7 +81,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "65f53165-c61a-4541-bf75-d4eb53552368",
+      "contactId": "6f01d424-ef11-435c-a969-df75517127e0",
       "name": "Marco Bernasconi",
       "role": "Objektverantwortlicher",
       "buildingIds": [
@@ -97,7 +97,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "fa2458e6-95be-411c-ab54-f0d44530eefa",
+      "contactId": "4a915168-20d4-4b1a-b040-87c7d8e20b33",
       "name": "Thomas Huber",
       "role": "Technischer Dienst",
       "buildingIds": [
@@ -113,7 +113,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "4fd4ba23-ea6e-4014-a919-17d832f58c84",
+      "contactId": "109debeb-02d2-49b5-b116-5258b5414926",
       "name": "Sandra Keller",
       "role": "Portfolioverantwortliche",
       "buildingIds": [
@@ -129,7 +129,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "e7d52045-fde1-422e-8a25-3f0318e466a3",
+      "contactId": "1aa9c772-d1b1-458b-9164-183a8659ae51",
       "name": "Sarah Johnson",
       "role": "Objektverantwortliche",
       "buildingIds": [
@@ -145,7 +145,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "49a11676-1197-4561-9b8d-ad701210f483",
+      "contactId": "f10d52a9-45a0-4a0a-855e-58582b10b0d5",
       "name": "Michael Brown",
       "role": "Sicherheitsbeauftragter",
       "buildingIds": [
@@ -161,7 +161,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "60fe92f0-d9a8-48c8-8b4c-1db05be36533",
+      "contactId": "f57958aa-1518-4819-ad6d-065a540531ce",
       "name": "Claire Dubois",
       "role": "Objektverantwortliche",
       "buildingIds": [
@@ -177,7 +177,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "d2d8c922-cb85-4650-aa4a-3b89f96b8bf5",
+      "contactId": "2f8779b0-326e-4e5e-9793-c40bf33a23ca",
       "name": "François Martin",
       "role": "Facility Manager",
       "buildingIds": [
@@ -193,7 +193,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "aaaf895c-2ad9-4089-8629-100aa3349314",
+      "contactId": "10d1a4ab-7d78-495d-8b83-fb6ff8dca6f7",
       "name": "René Favre",
       "role": "Hauswart",
       "buildingIds": [
@@ -209,7 +209,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "99c4b587-7662-46f1-a82c-d0d41708aaa3",
+      "contactId": "72193b97-1883-4d56-9e3a-829b1eb626e2",
       "name": "Kenji Yamamoto",
       "role": "Objektverantwortlicher",
       "buildingIds": [
@@ -225,7 +225,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "334bea26-bbd4-406c-ace2-0f0f68cd6ba8",
+      "contactId": "19015087-575c-45cc-be54-4e6e7a27d802",
       "name": "Yuki Tanaka",
       "role": "Facility Manager",
       "buildingIds": [
@@ -241,7 +241,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "c1499842-c82f-4c29-b395-576e18a4d089",
+      "contactId": "63192cd7-b711-4414-b596-859aee1d97e6",
       "name": "Thomas Weber",
       "role": "Objektverantwortlicher",
       "buildingIds": [
@@ -257,7 +257,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "e3ca3591-caed-4210-9ac3-db2b46600b5c",
+      "contactId": "4dff26dd-68d5-43cc-9ee6-77051699b4fb",
       "name": "Barbara Steiner",
       "role": "Hauswart",
       "buildingIds": [
@@ -273,7 +273,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "0c3643d5-b3de-4eb8-9c89-dbae6c61c457",
+      "contactId": "f42f1d39-0e93-49a2-90fe-0718cd234668",
       "name": "Carlos Silva",
       "role": "Objektverantwortlicher",
       "buildingIds": [
@@ -289,7 +289,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "f3f999a5-68ae-47ea-94c6-e2a0455dfdd9",
+      "contactId": "1cea0bb1-379b-4aa0-80af-2983448bf9a9",
       "name": "Maria Santos",
       "role": "Facility Manager",
       "buildingIds": [
@@ -305,7 +305,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "d055b58e-cc06-4919-8cfa-1e257d6413a0",
+      "contactId": "2f09d074-a810-4471-8aca-0aa6f4d83acc",
       "name": "Elena Bentivoglio",
       "role": "Objektverantwortliche",
       "buildingIds": [
@@ -321,7 +321,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "d7888a39-a5c6-4b19-a6b7-f2fc2c86f5a9",
+      "contactId": "33fca67e-7c69-4697-805c-8c5717f8b3b8",
       "name": "Luca Ferretti",
       "role": "Technischer Dienst",
       "buildingIds": [
@@ -337,7 +337,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "4cae4c73-5fab-4fea-b4c9-12bce7add5f8",
+      "contactId": "a3c09f01-579f-47b1-aae1-12ab241fe127",
       "name": "Marco Rossi",
       "role": "Sicherheitsbeauftragter",
       "buildingIds": [
@@ -353,7 +353,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "b6f716d0-bf36-41f5-bccf-f585fa3e0853",
+      "contactId": "889f361b-654b-4f34-9f14-654faa87a88e",
       "name": "Michael Thompson",
       "role": "Objektverantwortlicher",
       "buildingIds": [
@@ -369,7 +369,7 @@
       "extensionData": {}
     },
     {
-      "contactId": "20169a2a-f64f-42d6-b90b-f6203c7c37ed",
+      "contactId": "7a058981-1d02-4285-a2a7-a5d6b0a68dd2",
       "name": "Emily Wilson",
       "role": "Facility Manager",
       "buildingIds": [

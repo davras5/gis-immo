@@ -1,7 +1,7 @@
 {
   "contracts": [
     {
-      "contractId": "c41cb656-b660-4cfa-a4f3-ad6f1c0c7d28",
+      "contractId": "a577c15f-a616-41b1-bb66-85f2bbf5ca29",
       "type": "Wartungsvertrag",
       "buildingIds": [
         "BBL-001"
@@ -19,7 +19,7 @@
       }
     },
     {
-      "contractId": "96479c76-a19f-4037-9052-016945c8b09c",
+      "contractId": "0118b3bf-b58d-44a3-b150-82bcaf42a480",
       "type": "Reinigungsvertrag",
       "buildingIds": [
         "BBL-001"
@@ -37,7 +37,7 @@
       }
     },
     {
-      "contractId": "8d7161ae-657e-40a4-829d-6fa4ec923c31",
+      "contractId": "1830a432-da31-4283-8578-3ac557596f14",
       "type": "Sicherheitsdienst",
       "buildingIds": [
         "BBL-001"
@@ -55,7 +55,7 @@
       }
     },
     {
-      "contractId": "4f48b432-deec-4b45-87e0-58bd180c88f6",
+      "contractId": "55576a74-59f8-4837-bf1c-8e60c5b6de39",
       "type": "Wartungsvertrag",
       "buildingIds": [
         "BBL-002"
@@ -73,7 +73,7 @@
       }
     },
     {
-      "contractId": "bfb12abd-136b-48f9-ba3b-fcf7f567c5c2",
+      "contractId": "c5aebc6a-13b8-4f7f-999a-2e1aedf148ff",
       "type": "Sicherheitsdienst",
       "buildingIds": [
         "BBL-002"
@@ -91,7 +91,7 @@
       }
     },
     {
-      "contractId": "67c7d689-a1ab-49e6-b4e3-a1744e097c07",
+      "contractId": "8e854c5b-c5dc-4a52-a67a-a493a236c1a2",
       "type": "Wartungsvertrag",
       "buildingIds": [
         "BBL-003"
@@ -109,7 +109,7 @@
       }
     },
     {
-      "contractId": "3e24a1a6-a90e-4241-ad25-37b6c69cf334",
+      "contractId": "2c4ef3a9-5140-4087-ac27-e0da3cb76790",
       "type": "Reinigungsvertrag",
       "buildingIds": [
         "BBL-003"
@@ -127,7 +127,7 @@
       }
     },
     {
-      "contractId": "6dc95a5b-56ec-4109-beaf-4b12dfc3b396",
+      "contractId": "389860aa-9907-4f90-8094-a022b7e9d8c0",
       "type": "Logistikdienstleistung",
       "buildingIds": [
         "BBL-003"
@@ -145,7 +145,7 @@
       }
     },
     {
-      "contractId": "b7917a7b-77e4-4912-bbf9-b4ca9e8e51ad",
+      "contractId": "40b4bd32-81a2-46f2-ba01-e0df9f38baf8",
       "type": "Heizungswartung",
       "buildingIds": [
         "BBL-003"
@@ -163,7 +163,7 @@
       }
     },
     {
-      "contractId": "2e541839-967e-42ca-8865-07ab639464a9",
+      "contractId": "36755f2b-3220-4587-bb91-5fc7ed80e159",
       "type": "Mietvertrag",
       "buildingIds": [
         "BBL-004"
@@ -181,7 +181,7 @@
       }
     },
     {
-      "contractId": "eca39eff-18fd-4b65-b45f-a75dce67ca02",
+      "contractId": "27f65319-18d6-4bc0-bc64-e552d74fe506",
       "type": "Sicherheitsdienst",
       "buildingIds": [
         "BBL-004"
@@ -199,7 +199,7 @@
       }
     },
     {
-      "contractId": "6c430b08-fd91-4d9e-a6de-7165f14b33b1",
+      "contractId": "ae85fdbe-eaf8-4e14-82b6-99f9a6f9c90d",
       "type": "Sanierungsvertrag",
       "buildingIds": [
         "BBL-005"
@@ -217,7 +217,7 @@
       }
     },
     {
-      "contractId": "6478d286-b80f-422e-9d3f-6489c31d39a0",
+      "contractId": "89eb0e80-7a1e-43f6-b3b0-73bf14385ddd",
       "type": "Architekturleistung",
       "buildingIds": [
         "BBL-005"
@@ -235,7 +235,7 @@
       }
     },
     {
-      "contractId": "e8fdecc7-ac83-4150-8b0b-cce698227fdb",
+      "contractId": "8247e3f0-0570-40d3-b359-faa6d14b33ad",
       "type": "Wartungsvertrag",
       "buildingIds": [
         "BBL-005"
@@ -253,7 +253,7 @@
       }
     },
     {
-      "contractId": "46d26664-f96f-4e15-a3d4-524f4d23f59c",
+      "contractId": "27b650cf-300d-4c1c-b2f6-9dc2cf3434f2",
       "type": "Wartungsvertrag",
       "buildingIds": [
         "BBL-006"
@@ -271,7 +271,7 @@
       }
     },
     {
-      "contractId": "c5729901-990a-4e1f-ab71-1c6f955c7085",
+      "contractId": "cb65ae93-ae44-4627-b16f-3e0d4ce19057",
       "type": "Sicherheitsdienst",
       "buildingIds": [
         "BBL-006"
@@ -289,7 +289,7 @@
       }
     },
     {
-      "contractId": "92e7a405-29dd-4808-b570-01ddc8b3af13",
+      "contractId": "b5748b11-0c63-4305-9c94-a24432ad9e0f",
       "type": "Gartenpflege",
       "buildingIds": [
         "BBL-006"
@@ -307,7 +307,7 @@
       }
     },
     {
-      "contractId": "b25b966f-5660-461c-af0a-ade269fc47d7",
+      "contractId": "57885867-3bc9-475c-8ac3-469e7f259951",
       "type": "Heizungswartung",
       "buildingIds": [
         "BBL-007"
@@ -325,7 +325,7 @@
       }
     },
     {
-      "contractId": "c81de775-cf51-43a4-8a42-d88914515d2f",
+      "contractId": "cbe3b0b8-e0b3-47ce-b4b6-e3e225f19c94",
       "type": "Hauswartung",
       "buildingIds": [
         "BBL-007"
@@ -343,7 +343,7 @@
       }
     },
     {
-      "contractId": "20b8e0d5-3508-4a28-a400-7e204a8f9abd",
+      "contractId": "283532cd-850f-4924-9ca2-dd50d6fbbf14",
       "type": "Reinigungsvertrag",
       "buildingIds": [
         "BBL-007"
@@ -361,7 +361,7 @@
       }
     },
     {
-      "contractId": "f7da1e70-83c9-4147-a3df-31c0a88e92bf",
+      "contractId": "f99b9640-f398-47bc-8db5-70dca411a093",
       "type": "Klimaanlagenwartung",
       "buildingIds": [
         "BBL-008"
@@ -379,7 +379,7 @@
       }
     },
     {
-      "contractId": "545c4321-aff0-4065-a587-630a868028b5",
+      "contractId": "65544b87-9be1-4411-acba-300ae0a227bf",
       "type": "Sicherheitsdienst",
       "buildingIds": [
         "BBL-008"
@@ -397,7 +397,7 @@
       }
     },
     {
-      "contractId": "0a76e6ff-1523-42f1-b587-08fad8763359",
+      "contractId": "91f339c6-6f47-458d-a061-29a44cf37529",
       "type": "Gartenpflege",
       "buildingIds": [
         "BBL-008"
@@ -415,7 +415,7 @@
       }
     },
     {
-      "contractId": "aff3781b-ae21-4889-9dc7-c8745d491366",
+      "contractId": "f32c2cf9-453b-4f1c-9faf-3c07df4c9f0a",
       "type": "Bauvertrag",
       "buildingIds": [
         "BBL-009"
@@ -433,7 +433,7 @@
       }
     },
     {
-      "contractId": "3a351fa5-842b-45ad-951c-59a5099cd4e3",
+      "contractId": "bb7563e3-29e5-488c-b180-b4c92e8d2fb2",
       "type": "IT-Infrastruktur",
       "buildingIds": [
         "BBL-009"
@@ -451,7 +451,7 @@
       }
     },
     {
-      "contractId": "67f5fd22-f35c-4b18-ac04-ac0c3cfcc983",
+      "contractId": "08d7aebe-f014-4b0d-b114-0ee7aa7118f3",
       "type": "Kühlanlagenwartung",
       "buildingIds": [
         "BBL-009"
@@ -469,7 +469,7 @@
       }
     },
     {
-      "contractId": "0a3c7b85-1e66-4760-b4d0-2eb6141816ba",
+      "contractId": "27788036-7f4a-4210-8d7e-e97c1a9ac280",
       "type": "Sicherheitsdienst",
       "buildingIds": [
         "BBL-009"
@@ -487,7 +487,7 @@
       }
     },
     {
-      "contractId": "6eb6e11e-9900-498a-bb0c-324126b83125",
+      "contractId": "b530445b-80f6-4e4d-95e6-c05aee495b0a",
       "type": "Wartungsvertrag",
       "buildingIds": [
         "BBL-010"
@@ -505,7 +505,7 @@
       }
     },
     {
-      "contractId": "839eafb1-2344-4e9e-a98c-63df1039acbc",
+      "contractId": "4d3dc347-5d26-4159-8d1e-a0e9a111ae13",
       "type": "Sicherheitsdienst",
       "buildingIds": [
         "BBL-010"
@@ -523,7 +523,7 @@
       }
     },
     {
-      "contractId": "62734189-cd76-4589-896c-f5f226a5f6f8",
+      "contractId": "ba592b80-b923-481f-b27e-7661a8cb6166",
       "type": "Gartenpflege",
       "buildingIds": [
         "BBL-010"
