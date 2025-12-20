@@ -465,25 +465,27 @@
         }
 
         function updateFilterButtonState() {
-            var filterBtn = document.getElementById('filter-btn');
+            var drawerBtn = document.getElementById('smart-drawer-btn');
+            if (!drawerBtn) return;
+
             var count = getActiveFilterCount();
 
             if (count > 0) {
                 // Add active filters highlight
-                filterBtn.classList.add('has-active-filters');
+                drawerBtn.classList.add('has-active-filters');
                 // Add or update count badge
-                var badge = filterBtn.querySelector('.filter-count');
+                var badge = drawerBtn.querySelector('.filter-count');
                 if (!badge) {
                     badge = document.createElement('span');
                     badge.className = 'filter-count';
-                    filterBtn.appendChild(badge);
+                    drawerBtn.appendChild(badge);
                 }
                 badge.textContent = count;
             } else {
                 // Remove active filters highlight
-                filterBtn.classList.remove('has-active-filters');
+                drawerBtn.classList.remove('has-active-filters');
                 // Remove count badge
-                var badge = filterBtn.querySelector('.filter-count');
+                var badge = drawerBtn.querySelector('.filter-count');
                 if (badge) {
                     badge.remove();
                 }
