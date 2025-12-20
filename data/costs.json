@@ -1,556 +1,832 @@
 {
   "costs": [
     {
-      "id": "45d2351f-e253-407b-83e2-72afd91d5366",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 185000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "eb8526ad-56aa-493b-85d6-f9b35dd343d3",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "amount": 185000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-001-K1",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-001"
+      }
     },
     {
-      "id": "9717f053-bf95-4bf6-8c37-022d732c5ff9",
-      "kostengruppe": "312",
-      "kostenart": "Fernwärme",
-      "betrag": 92000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "e45edd8e-666c-4c0c-9c7e-168bcb82c883",
+      "costGroup": "312",
+      "costType": "Fernwärme",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "amount": 92000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-001-K2",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-001"
+      }
     },
     {
-      "id": "863670e8-c50a-47ef-81d7-87d935fa0a17",
-      "kostengruppe": "313",
-      "kostenart": "Wasserversorgung",
-      "betrag": 12500,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "45bacacf-83da-4afe-9231-1d500decfbd5",
+      "costGroup": "313",
+      "costType": "Wasserversorgung",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "amount": 12500,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-001-K3",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-001"
+      }
     },
     {
-      "id": "2c64ecd7-fc3d-4d11-aecf-aa03efb3f18e",
-      "kostengruppe": "321",
-      "kostenart": "Abwasserentsorgung",
-      "betrag": 8200,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "7df53a11-70e1-4547-b122-31af201957a4",
+      "costGroup": "321",
+      "costType": "Abwasserentsorgung",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "amount": 8200,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-001-K4",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-001"
+      }
     },
     {
-      "id": "6602bea2-8f60-4e46-baef-1d60e984bb65",
-      "kostengruppe": "330",
-      "kostenart": "Reinigung Innenräume",
-      "betrag": 145000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "9faee741-2b31-41ff-82ec-1b62a477633a",
+      "costGroup": "330",
+      "costType": "Reinigung Innenräume",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "amount": 145000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-001-K5",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-001"
+      }
     },
     {
-      "id": "867da7ed-cff7-421f-9544-9b81c0182291",
-      "kostengruppe": "350",
-      "kostenart": "Sicherheitsdienst",
-      "betrag": 95000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "872335de-91cb-4ee2-b99c-57de0eeed7b9",
+      "costGroup": "350",
+      "costType": "Sicherheitsdienst",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "amount": 95000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-001-K6",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-001"
+      }
     },
     {
-      "id": "658a65c2-80fc-4c5b-b9b9-5b5dcb1cc061",
-      "kostengruppe": "410",
-      "kostenart": "Instandhaltung Baukonstruktion",
-      "betrag": 78000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "0b3b627a-9e91-4be4-b4e8-1ee68901f18c",
+      "costGroup": "410",
+      "costType": "Instandhaltung Baukonstruktion",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "amount": 78000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-001-K7",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-001"
+      }
     },
     {
-      "id": "7c077cee-4564-4e30-81da-7c352bacbcaa",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 42000,
-      "einheit": "EUR/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "3377dd6c-41c8-439b-873a-19ff003a0b4e",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "amount": 42000,
+      "unit": "EUR/Jahr",
+      "currency": "EUR",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-002-K1",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-002"
+      }
     },
     {
-      "id": "946ddcef-5589-4336-b5e9-e2a800dadff8",
-      "kostengruppe": "312",
-      "kostenart": "Gasversorgung",
-      "betrag": 28000,
-      "einheit": "EUR/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "21c2cfef-ba24-47e9-b2e5-1425851523cb",
+      "costGroup": "312",
+      "costType": "Gasversorgung",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "amount": 28000,
+      "unit": "EUR/Jahr",
+      "currency": "EUR",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-002-K2",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-002"
+      }
     },
     {
-      "id": "02e36a2b-8de0-47cf-9282-247ba7a800f8",
-      "kostengruppe": "330",
-      "kostenart": "Reinigung",
-      "betrag": 36000,
-      "einheit": "EUR/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "68ac8c15-bb27-4bfa-9b30-59c4f2c68e86",
+      "costGroup": "330",
+      "costType": "Reinigung",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "amount": 36000,
+      "unit": "EUR/Jahr",
+      "currency": "EUR",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-002-K3",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-002"
+      }
     },
     {
-      "id": "6235540d-b5df-4758-ac31-130cbfcd328b",
-      "kostengruppe": "350",
-      "kostenart": "Sicherheitsdienst",
-      "betrag": 78000,
-      "einheit": "EUR/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "6cb7d301-b788-4036-934a-17f5f356ec26",
+      "costGroup": "350",
+      "costType": "Sicherheitsdienst",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "amount": 78000,
+      "unit": "EUR/Jahr",
+      "currency": "EUR",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-002-K4",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-002"
+      }
     },
     {
-      "id": "2c4f21c4-2a59-4efc-b40a-59f6ce2d9796",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 320000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "ea01c97e-9d94-4b6b-a342-513aaa981284",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "amount": 320000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-003-K1",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-003"
+      }
     },
     {
-      "id": "e22e7ee1-a8ae-42d7-b261-0d863ce15c03",
-      "kostengruppe": "312",
-      "kostenart": "Gasheizung",
-      "betrag": 85000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "e2456e9e-a48b-4886-a502-82d31d7a73e3",
+      "costGroup": "312",
+      "costType": "Gasheizung",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "amount": 85000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-003-K2",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-003"
+      }
     },
     {
-      "id": "0b9fc455-7c8c-4976-bdcf-f8dd92d898ea",
-      "kostengruppe": "322",
-      "kostenart": "Abfallentsorgung",
-      "betrag": 42000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "d38e8a1e-eb87-45c5-8247-980270dcb463",
+      "costGroup": "322",
+      "costType": "Abfallentsorgung",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "amount": 42000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-003-K3",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-003"
+      }
     },
     {
-      "id": "d5b52a14-2f29-4514-9324-53f39e32adeb",
-      "kostengruppe": "340",
-      "kostenart": "Wartung Fördertechnik",
-      "betrag": 125000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "9d584654-a0bc-43a4-b262-920ea70f50e5",
+      "costGroup": "340",
+      "costType": "Wartung Fördertechnik",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "amount": 125000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-003-K4",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-003"
+      }
     },
     {
-      "id": "cdd1d8e6-3cb1-4d2f-ae5b-808c4b592ba5",
-      "kostengruppe": "330",
-      "kostenart": "Reinigung",
-      "betrag": 58000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "0bcc3f8b-f935-4610-92f8-1eba0d3a21af",
+      "costGroup": "330",
+      "costType": "Reinigung",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "amount": 58000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-003-K5",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-003"
+      }
     },
     {
-      "id": "89a278d7-6b69-4998-940a-4f486464c099",
-      "kostengruppe": "210",
-      "kostenart": "Miete Bürofläche",
-      "betrag": 450000,
-      "einheit": "USD/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "7cf597f4-83db-46ff-9c06-3c9e1fd985ed",
+      "costGroup": "210",
+      "costType": "Miete Bürofläche",
+      "buildingIds": [
+        "BBL-004"
+      ],
+      "amount": 450000,
+      "unit": "USD/Jahr",
+      "currency": "USD",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-004-K1",
-      "buildingIds": [
-        "BBL-004"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-004"
+      }
     },
     {
-      "id": "fe4a42ed-9946-40f5-9d83-d4f1ae7857fc",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 28000,
-      "einheit": "USD/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "26277810-c6b2-474d-852e-90e579331158",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-004"
+      ],
+      "amount": 28000,
+      "unit": "USD/Jahr",
+      "currency": "USD",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-004-K2",
-      "buildingIds": [
-        "BBL-004"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-004"
+      }
     },
     {
-      "id": "1c50f1a9-d7f6-4206-900d-efbe152702ad",
-      "kostengruppe": "350",
-      "kostenart": "Sicherheitsdienst",
-      "betrag": 125000,
-      "einheit": "USD/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "ad8fbf69-76a6-4ad6-bb8a-39b423346d2d",
+      "costGroup": "350",
+      "costType": "Sicherheitsdienst",
+      "buildingIds": [
+        "BBL-004"
+      ],
+      "amount": 125000,
+      "unit": "USD/Jahr",
+      "currency": "USD",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-004-K3",
-      "buildingIds": [
-        "BBL-004"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-004"
+      }
     },
     {
-      "id": "b90d288b-6056-43ad-a245-aa5ccb703d77",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 52000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "04cef435-84fa-48b8-9450-ae5e8783d494",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "amount": 52000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-005-K1",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-005"
+      }
     },
     {
-      "id": "7f25cbf3-ac5f-4379-ba8e-23236bf42de2",
-      "kostengruppe": "312",
-      "kostenart": "Heizöl",
-      "betrag": 68000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "2d214adc-5caa-44b9-92e2-4becc6de5df0",
+      "costGroup": "312",
+      "costType": "Heizöl",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "amount": 68000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-005-K2",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-005"
+      }
     },
     {
-      "id": "72794ffa-1ad4-4a96-8781-c82566663063",
-      "kostengruppe": "330",
-      "kostenart": "Reinigung",
-      "betrag": 45000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "17d5c4da-5c8c-41a0-b9f9-44c947179ce8",
+      "costGroup": "330",
+      "costType": "Reinigung",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "amount": 45000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-005-K3",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-005"
+      }
     },
     {
-      "id": "685cc97d-39ec-4036-b90f-425f74d66fad",
-      "kostengruppe": "420",
-      "kostenart": "Sanierungskosten anteilig",
-      "betrag": 850000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "25c656da-d887-4de2-a4e0-b4c8928a34a6",
+      "costGroup": "420",
+      "costType": "Sanierungskosten anteilig",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "amount": 850000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-005-K4",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-005"
+      }
     },
     {
-      "id": "6f63633b-9a7d-450b-b126-af62fc5f4e48",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 4200000,
-      "einheit": "JPY/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "c3ef7bef-cda9-4df4-99ee-43757b0b951f",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "amount": 4200000,
+      "unit": "JPY/Jahr",
+      "currency": "JPY",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-006-K1",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-006"
+      }
     },
     {
-      "id": "203766f7-761b-4959-b090-e61cfa125d80",
-      "kostengruppe": "330",
-      "kostenart": "Reinigung und Gartenpflege",
-      "betrag": 3800000,
-      "einheit": "JPY/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "b518c579-b098-486e-a665-2e84c4b3e595",
+      "costGroup": "330",
+      "costType": "Reinigung und Gartenpflege",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "amount": 3800000,
+      "unit": "JPY/Jahr",
+      "currency": "JPY",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-006-K2",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-006"
+      }
     },
     {
-      "id": "06dcdce4-cd91-4e95-aaf9-2f6c6ef81afb",
-      "kostengruppe": "350",
-      "kostenart": "Sicherheitsdienst",
-      "betrag": 8500000,
-      "einheit": "JPY/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "c21af085-bcb8-49b7-bcd7-de8b396d3c59",
+      "costGroup": "350",
+      "costType": "Sicherheitsdienst",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "amount": 8500000,
+      "unit": "JPY/Jahr",
+      "currency": "JPY",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-006-K3",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-006"
+      }
     },
     {
-      "id": "010d306e-ad03-4751-886d-4a2585bf7329",
-      "kostengruppe": "340",
-      "kostenart": "Klimaanlagen-Wartung",
-      "betrag": 2200000,
-      "einheit": "JPY/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "91c27990-6c02-4796-b723-93f83bc6b736",
+      "costGroup": "340",
+      "costType": "Klimaanlagen-Wartung",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "amount": 2200000,
+      "unit": "JPY/Jahr",
+      "currency": "JPY",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-006-K4",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-006"
+      }
     },
     {
-      "id": "d667769b-fc3f-46fa-86f8-a4a28347b15a",
-      "kostengruppe": "311",
-      "kostenart": "Allgemeinstrom",
-      "betrag": 8500,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "cc5518f7-2397-4bc7-824a-390f3694cbc6",
+      "costGroup": "311",
+      "costType": "Allgemeinstrom",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "amount": 8500,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-007-K1",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-007"
+      }
     },
     {
-      "id": "c740fe10-c9cc-4f0a-90eb-f16cc94c6389",
-      "kostengruppe": "312",
-      "kostenart": "Gasheizung",
-      "betrag": 42000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "8dcb558d-7980-404d-a986-3f79965155cc",
+      "costGroup": "312",
+      "costType": "Gasheizung",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "amount": 42000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-007-K2",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-007"
+      }
     },
     {
-      "id": "fe27f7fe-8e44-4794-b39f-614a8570328e",
-      "kostengruppe": "313",
-      "kostenart": "Wasserversorgung",
-      "betrag": 12000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "e03c3eb7-a9bd-400c-b693-4639252c162e",
+      "costGroup": "313",
+      "costType": "Wasserversorgung",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "amount": 12000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-007-K3",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-007"
+      }
     },
     {
-      "id": "98eca0c2-a6d5-441f-b657-857868295a55",
-      "kostengruppe": "330",
-      "kostenart": "Treppenhausreinigung",
-      "betrag": 18000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "1d83b153-96f7-4e0d-a2d2-116904e8947b",
+      "costGroup": "330",
+      "costType": "Treppenhausreinigung",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "amount": 18000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-007-K4",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-007"
+      }
     },
     {
-      "id": "a0ea1908-dba3-4e74-8408-7aad363cbaa4",
-      "kostengruppe": "340",
-      "kostenart": "Hauswartung",
-      "betrag": 42000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "be85056c-a4a8-4681-8852-792fa8ae3837",
+      "costGroup": "340",
+      "costType": "Hauswartung",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "amount": 42000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-007-K5",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-007"
+      }
     },
     {
-      "id": "4d6613d8-ecdc-4e1e-a7c4-438db090f247",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 85000,
-      "einheit": "BRL/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "c1cc7d11-8b38-408b-a86c-0145493cc250",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "amount": 85000,
+      "unit": "BRL/Jahr",
+      "currency": "BRL",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-008-K1",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-008"
+      }
     },
     {
-      "id": "f377ad8c-fcfb-4dee-a097-c62285bc7d88",
-      "kostengruppe": "330",
-      "kostenart": "Reinigung und Gartenpflege",
-      "betrag": 120000,
-      "einheit": "BRL/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "fa69b812-f3a8-4709-b11a-b9d2e9a7dc97",
+      "costGroup": "330",
+      "costType": "Reinigung und Gartenpflege",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "amount": 120000,
+      "unit": "BRL/Jahr",
+      "currency": "BRL",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-008-K2",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-008"
+      }
     },
     {
-      "id": "5fc1dba9-49a6-4224-9a8f-02e3c5929c4e",
-      "kostengruppe": "350",
-      "kostenart": "Sicherheitsdienst",
-      "betrag": 280000,
-      "einheit": "BRL/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "11bf8a88-3204-4698-af8f-53cee524a69d",
+      "costGroup": "350",
+      "costType": "Sicherheitsdienst",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "amount": 280000,
+      "unit": "BRL/Jahr",
+      "currency": "BRL",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-008-K3",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-008"
+      }
     },
     {
-      "id": "6457c5d1-7880-4405-8e14-9f807fd07e54",
-      "kostengruppe": "340",
-      "kostenart": "Klimaanlagen-Wartung",
-      "betrag": 45000,
-      "einheit": "BRL/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "84e6b004-57a7-43fb-8e8c-080702b01ef6",
+      "costGroup": "340",
+      "costType": "Klimaanlagen-Wartung",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "amount": 45000,
+      "unit": "BRL/Jahr",
+      "currency": "BRL",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-008-K4",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-008"
+      }
     },
     {
-      "id": "69ec41e9-b9e8-46ba-afcc-7d094a24d961",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung IT-Betrieb",
-      "betrag": 2800000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "2f22a79f-5843-46f1-9134-b4e1db22e918",
+      "costGroup": "311",
+      "costType": "Stromversorgung IT-Betrieb",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "amount": 2800000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-009-K1",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-009"
+      }
     },
     {
-      "id": "0e7c1711-a927-404e-beb0-8cb37ade3241",
-      "kostengruppe": "340",
-      "kostenart": "Kühlanlagen-Wartung",
-      "betrag": 180000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "6efe51ef-a257-4507-b1a9-00a24a53cdd8",
+      "costGroup": "340",
+      "costType": "Kühlanlagen-Wartung",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "amount": 180000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-009-K2",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-009"
+      }
     },
     {
-      "id": "1b53cb2f-cf87-4f8a-a2f7-2ef872219ba9",
-      "kostengruppe": "350",
-      "kostenart": "24/7 Sicherheitsdienst",
-      "betrag": 420000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "3b016f77-f487-4a7e-912b-dc4715cd2ff2",
+      "costGroup": "350",
+      "costType": "24/7 Sicherheitsdienst",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "amount": 420000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-009-K3",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-009"
+      }
     },
     {
-      "id": "29dd4365-208c-476a-802e-55fa64638db6",
-      "kostengruppe": "340",
-      "kostenart": "USV-Wartung",
-      "betrag": 95000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "ded70d49-8cd5-407a-8bbb-36c1105795d4",
+      "costGroup": "340",
+      "costType": "USV-Wartung",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "amount": 95000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-009-K4",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-009"
+      }
     },
     {
-      "id": "265dd11a-9911-448d-98da-413d246c71ab",
-      "kostengruppe": "340",
-      "kostenart": "Gebäudeautomation Betrieb",
-      "betrag": 65000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "0bb6b8cb-876c-4df1-bd43-bdd130665c73",
+      "costGroup": "340",
+      "costType": "Gebäudeautomation Betrieb",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "amount": 65000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-009-K5",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-009"
+      }
     },
     {
-      "id": "a702fded-f8b6-407e-afc5-aa0a4550103d",
-      "kostengruppe": "220",
-      "kostenart": "Versicherungen",
-      "betrag": 280000,
-      "einheit": "CHF/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "49601626-48cd-49bc-b897-824690d9d5b1",
+      "costGroup": "220",
+      "costType": "Versicherungen",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "amount": 280000,
+      "unit": "CHF/Jahr",
+      "currency": "CHF",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-009-K6",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-009"
+      }
     },
     {
-      "id": "32e5a3dd-c6db-4809-bc41-9f6ca024073e",
-      "kostengruppe": "311",
-      "kostenart": "Stromversorgung",
-      "betrag": 18000,
-      "einheit": "AUD/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "511432d1-8f24-49be-ba01-bab80a9bd29b",
+      "costGroup": "311",
+      "costType": "Stromversorgung",
+      "buildingIds": [
+        "BBL-010"
+      ],
+      "amount": 18000,
+      "unit": "AUD/Jahr",
+      "currency": "AUD",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-010-K1",
-      "buildingIds": [
-        "BBL-010"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-010"
+      }
     },
     {
-      "id": "519e53c8-1ad1-4263-b801-7eb5a7be7b4f",
-      "kostengruppe": "330",
-      "kostenart": "Reinigung und Gartenpflege",
-      "betrag": 24000,
-      "einheit": "AUD/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "889d50ae-b22c-4f4b-ad8d-8c623bc7e04b",
+      "costGroup": "330",
+      "costType": "Reinigung und Gartenpflege",
+      "buildingIds": [
+        "BBL-010"
+      ],
+      "amount": 24000,
+      "unit": "AUD/Jahr",
+      "currency": "AUD",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-010-K2",
-      "buildingIds": [
-        "BBL-010"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-010"
+      }
     },
     {
-      "id": "234f8e0b-f049-4248-982e-27628a39c05f",
-      "kostengruppe": "350",
-      "kostenart": "Sicherheitsdienst",
-      "betrag": 52000,
-      "einheit": "AUD/Jahr",
-      "stichtag": "01.12.2024",
+      "costId": "882f3b9f-d1fb-4a3b-b33f-65981570a789",
+      "costGroup": "350",
+      "costType": "Sicherheitsdienst",
+      "buildingIds": [
+        "BBL-010"
+      ],
+      "amount": 52000,
+      "unit": "AUD/Jahr",
+      "currency": "AUD",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
       "legacyId": "BBL-010-K3",
-      "buildingIds": [
-        "BBL-010"
-      ]
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-010"
+      }
     },
     {
-      "id": "dad802b6-2c24-4666-b204-b5c7ef6a8499",
-      "kostengruppe": "340",
-      "kostenart": "Klimaanlagen-Wartung",
-      "betrag": 8500,
-      "einheit": "AUD/Jahr",
-      "stichtag": "01.12.2024",
-      "legacyId": "BBL-010-K4",
+      "costId": "2506357e-0513-4be0-9021-eade8ebfa808",
+      "costGroup": "340",
+      "costType": "Klimaanlagen-Wartung",
       "buildingIds": [
         "BBL-010"
-      ]
+      ],
+      "amount": 8500,
+      "unit": "AUD/Jahr",
+      "currency": "AUD",
+      "period": "Jährlich",
+      "referenceDate": "2024-12-01T00:00:00Z",
+      "legacyId": "BBL-010-K4",
+      "extensionData": {
+        "budgetYear": 2024,
+        "costCenter": "CC-BBL-010"
+      }
     }
   ]
 }

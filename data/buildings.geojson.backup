@@ -1,0 +1,2791 @@
+{
+  "type": "FeatureCollection",
+  "name": "BBL_Immobilienportfolio",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-001",
+        "name": "Bundeshaus West",
+        "adresse": "Bundesplatz 3, 3003 Bern",
+        "hausnummer": "3",
+        "plz": "3003",
+        "ort": "Bern",
+        "region": "Kanton Bern",
+        "land": "CH",
+        "teilportfolio": "Verwaltungsgebäude",
+        "verantwortlich": "Anna Müller",
+        "flaeche_ngf": 12500,
+        "baujahr": 1902,
+        "status": "In Betrieb",
+        "sanierung": "2019",
+        "ladestationen": 8,
+        "denkmalschutz": "Ja",
+        "parkplaetze": 45,
+        "geschosse": 5,
+        "baubewilligung": "1898-03-15",
+        "energieklasse": "C",
+        "waermeerzeuger": "Fernwärme",
+        "waermequelle": "Fernwärmenetz Stadt Bern",
+        "warmwasser": "Zentral (Fernwärme)",
+        "grundstueck_name": "Bundesplatz Parzelle A",
+        "grundstueck_id": "BE-3003-1001",
+        "egid": "301001234",
+        "egrid": "CH123456789012",
+        "gueltig_von": "1902-06-01",
+        "gueltig_bis": null,
+        "objektart1": "Bürogebäude",
+        "teilportfolio_gruppe": "Bundesverwaltung",
+        "objektart2": "Parlamentsgebäude",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-001-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 15000,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "15.03.2019",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-001-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 12500,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "15.03.2019",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-001-M3",
+            "areaType": "Energiebezugsfläche",
+            "value": 13200,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "standard": "SIA 380/1",
+            "validFrom": "15.03.2019",
+            "validUntil": null,
+            "source": "Schätzmodell"
+          },
+          {
+            "id": "BBL-001-M4",
+            "areaType": "Volumen",
+            "value": 52500,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "15.03.2019",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-001-M5",
+            "areaType": "Arbeitsplätze",
+            "value": 320,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-001-M6",
+            "areaType": "Reinigungsfläche",
+            "value": 11800,
+            "unit": "m²",
+            "accuracy": "Geschätzt",
+            "standard": "n/a",
+            "validFrom": "01.01.2020",
+            "validUntil": null,
+            "source": "Schätzmodell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-001-D1",
+            "titel": "Grundriss Erdgeschoss",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "15.03.2019",
+            "dateigroesse": "2.4 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-001-D2",
+            "titel": "Fassadenplan West",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "DWG",
+            "datum": "15.03.2019",
+            "dateigroesse": "8.1 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-001-D3",
+            "titel": "GEAK Zertifikat 2019",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "20.06.2019",
+            "dateigroesse": "1.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-001-D4",
+            "titel": "Denkmalschutz-Verfügung",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "01.01.1950",
+            "dateigroesse": "450 KB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-001-K1",
+            "name": "Anna Müller",
+            "rolle": "Objektverantwortliche",
+            "organisation": "BBL Immobilienmanagement",
+            "telefon": "+41 58 462 12 34",
+            "email": "anna.mueller@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-001-K2",
+            "name": "Peter Gerber",
+            "rolle": "Hauswart",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+41 58 462 12 50",
+            "email": "peter.gerber@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-001-K3",
+            "name": "Sandra Keller",
+            "rolle": "Portfolioverantwortliche",
+            "organisation": "BBL Portfoliomanagement",
+            "telefon": "+41 58 462 10 01",
+            "email": "sandra.keller@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-001-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Siemens Building Technologies AG",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2025",
+            "betrag": 85000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-001-V2",
+            "vertragsart": "Reinigungsvertrag",
+            "vertragspartner": "ISS Facility Services AG",
+            "vertragsbeginn": "01.04.2021",
+            "vertragsende": "31.03.2026",
+            "betrag": 120000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-001-V3",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Securitas AG",
+            "vertragsbeginn": "01.01.2019",
+            "vertragsende": null,
+            "betrag": 95000,
+            "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-001-A1",
+            "bezeichnung": "Fernwärmeübergabestation",
+            "kategorie": "HVAC",
+            "hersteller": "Siemens AG",
+            "baujahr": 2019,
+            "standort": "Untergeschoss Technikraum"
+          },
+          {
+            "id": "BBL-001-A2",
+            "bezeichnung": "Personenaufzug Haupttreppe",
+            "kategorie": "Aufzüge",
+            "hersteller": "Schindler AG",
+            "baujahr": 2019,
+            "standort": "Treppenhaus Mitte"
+          },
+          {
+            "id": "BBL-001-A3",
+            "bezeichnung": "Brandmeldeanlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Siemens Building Technologies",
+            "baujahr": 2019,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-001-A4",
+            "bezeichnung": "Zutrittskontrollsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "dormakaba AG",
+            "baujahr": 2019,
+            "standort": "Alle Eingänge"
+          },
+          {
+            "id": "BBL-001-A5",
+            "bezeichnung": "Notstromanlage",
+            "kategorie": "Elektro",
+            "hersteller": "ABB Schweiz AG",
+            "baujahr": 2019,
+            "standort": "Untergeschoss Technikraum"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-001-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 185000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K2",
+            "kostengruppe": "312",
+            "kostenart": "Fernwärme",
+            "betrag": 92000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K3",
+            "kostengruppe": "313",
+            "kostenart": "Wasserversorgung",
+            "betrag": 12500,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K4",
+            "kostengruppe": "321",
+            "kostenart": "Abwasserentsorgung",
+            "betrag": 8200,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K5",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung Innenräume",
+            "betrag": 145000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K6",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 95000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-001-K7",
+            "kostengruppe": "410",
+            "kostenart": "Instandhaltung Baukonstruktion",
+            "betrag": 78000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.4441,
+          46.9465
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-002",
+        "name": "Schweizer Botschaft Berlin",
+        "adresse": "Otto-von-Bismarck-Allee 4A, 10557 Berlin",
+        "hausnummer": "4A",
+        "plz": "10557",
+        "ort": "Berlin",
+        "region": "Berlin",
+        "land": "DE",
+        "teilportfolio": "Diplomatische Vertretung",
+        "verantwortlich": "Peter Schmidt",
+        "flaeche_ngf": 3200,
+        "baujahr": 2000,
+        "status": "In Betrieb",
+        "sanierung": "2021",
+        "ladestationen": 4,
+        "denkmalschutz": "Nein",
+        "parkplaetze": 25,
+        "geschosse": 4,
+        "baubewilligung": "1997-08-22",
+        "energieklasse": "B",
+        "waermeerzeuger": "Wärmepumpe",
+        "waermequelle": "Erdreich (Geothermie)",
+        "warmwasser": "Zentral (Wärmepumpe)",
+        "grundstueck_name": "Diplomatenviertel Lot 41",
+        "grundstueck_id": "DE-BER-10557-041",
+        "egid": "DE-BER-2000-4A",
+        "egrid": "DE987654321098",
+        "gueltig_von": "2000-09-15",
+        "gueltig_bis": null,
+        "objektart1": "Bürogebäude",
+        "teilportfolio_gruppe": "EDA Auslandsvertretungen",
+        "objektart2": "Botschaftsgebäude",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-002-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 3850,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "DIN 277",
+            "validFrom": "01.09.2000",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-002-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 3200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "DIN 277",
+            "validFrom": "01.09.2000",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-002-M3",
+            "areaType": "Energiebezugsfläche",
+            "value": 3400,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "standard": "EnEV",
+            "validFrom": "15.06.2021",
+            "validUntil": null,
+            "source": "Schätzmodell"
+          },
+          {
+            "id": "BBL-002-M4",
+            "areaType": "Volumen",
+            "value": 13475,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "DIN 277",
+            "validFrom": "01.09.2000",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-002-M5",
+            "areaType": "Arbeitsplätze",
+            "value": 45,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-002-M6",
+            "areaType": "Repräsentationsfläche",
+            "value": 650,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.09.2000",
+            "validUntil": null,
+            "source": "Vermessung"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-002-D1",
+            "titel": "Architekturpläne Gesamtobjekt",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.09.2000",
+            "dateigroesse": "15.3 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-002-D2",
+            "titel": "Energiepass EnEV",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "15.06.2021",
+            "dateigroesse": "890 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-002-D3",
+            "titel": "Sicherheitskonzept",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "10.01.2022",
+            "dateigroesse": "3.2 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-002-K1",
+            "name": "Peter Schmidt",
+            "rolle": "Objektverantwortlicher",
+            "organisation": "EDA Auslandsvertretungen",
+            "telefon": "+49 30 390 4000",
+            "email": "peter.schmidt@eda.admin.ch"
+          },
+          {
+            "id": "BBL-002-K2",
+            "name": "Klaus Weber",
+            "rolle": "Facility Manager",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+49 30 390 4010",
+            "email": "klaus.weber@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-002-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Bosch Building Technologies GmbH",
+            "vertragsbeginn": "01.01.2021",
+            "vertragsende": "31.12.2026",
+            "betrag": 42000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-002-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Kötter Security GmbH",
+            "vertragsbeginn": "01.07.2020",
+            "vertragsende": null,
+            "betrag": 78000,
+            "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-002-A1",
+            "bezeichnung": "Wärmepumpe Geothermie",
+            "kategorie": "HVAC",
+            "hersteller": "Viessmann",
+            "baujahr": 2000,
+            "standort": "Technikraum EG"
+          },
+          {
+            "id": "BBL-002-A2",
+            "bezeichnung": "Klimaanlage Bürotrakt",
+            "kategorie": "HVAC",
+            "hersteller": "Daikin",
+            "baujahr": 2021,
+            "standort": "Dachgeschoss"
+          },
+          {
+            "id": "BBL-002-A3",
+            "bezeichnung": "Videoüberwachungsanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Bosch Security Systems",
+            "baujahr": 2020,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-002-A4",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "ThyssenKrupp",
+            "baujahr": 2000,
+            "standort": "Haupteingang"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-002-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 42000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-002-K2",
+            "kostengruppe": "312",
+            "kostenart": "Gasversorgung",
+            "betrag": 28000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-002-K3",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung",
+            "betrag": 36000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-002-K4",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 78000,
+            "einheit": "EUR/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.3695,
+          52.52
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-003",
+        "name": "Logistikzentrum Zürich",
+        "adresse": "Lagerstrasse 45, 8004 Zürich",
+        "hausnummer": "45",
+        "plz": "8004",
+        "ort": "Zürich",
+        "region": "Kanton Zürich",
+        "land": "CH",
+        "teilportfolio": "Logistikzentrum",
+        "verantwortlich": "Marco Bernasconi",
+        "flaeche_ngf": 8750,
+        "baujahr": 1985,
+        "status": "In Betrieb",
+        "sanierung": "2017",
+        "ladestationen": 12,
+        "denkmalschutz": "Nein",
+        "parkplaetze": 85,
+        "geschosse": 3,
+        "baubewilligung": "1983-02-10",
+        "energieklasse": "D",
+        "waermeerzeuger": "Gasheizung",
+        "waermequelle": "Erdgas",
+        "warmwasser": "Dezentral (Durchlauferhitzer)",
+        "grundstueck_name": "Industriegebiet Lagerstrasse",
+        "grundstueck_id": "ZH-8004-2045",
+        "egid": "104002045",
+        "egrid": "CH234567890123",
+        "gueltig_von": "1985-11-20",
+        "gueltig_bis": null,
+        "objektart1": "Lager-/Logistikgebäude",
+        "teilportfolio_gruppe": "Logistik & Infrastruktur",
+        "objektart2": "Zentrallager",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-003-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 10500,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "20.11.1985",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-003-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 8750,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "20.11.1985",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-003-M3",
+            "areaType": "Lagerfläche",
+            "value": 6200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.06.2017",
+            "validUntil": null,
+            "source": "Vermessung"
+          },
+          {
+            "id": "BBL-003-M4",
+            "areaType": "Volumen",
+            "value": 42000,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "20.11.1985",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-003-M5",
+            "areaType": "Rampen/Andockstellen",
+            "value": 12,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2017",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-003-M6",
+            "areaType": "Arbeitsplätze",
+            "value": 65,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-003-M7",
+            "areaType": "Palettenstellplätze",
+            "value": 2400,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2017",
+            "validUntil": null,
+            "source": "Manuell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-003-D1",
+            "titel": "Hallenlayout Lagerbereich",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "DWG",
+            "datum": "01.06.2017",
+            "dateigroesse": "12.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-003-D2",
+            "titel": "Brandschutzkonzept",
+            "dokumentTyp": "Brandschutzkonzept",
+            "dateiformat": "PDF",
+            "datum": "15.08.2017",
+            "dateigroesse": "4.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-003-D3",
+            "titel": "Wartungsprotokoll Heizung 2023",
+            "dokumentTyp": "Wartungsprotokoll",
+            "dateiformat": "PDF",
+            "datum": "12.11.2023",
+            "dateigroesse": "320 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-003-D4",
+            "titel": "Gebäudefoto Aussenansicht",
+            "dokumentTyp": "Foto",
+            "dateiformat": "JPG",
+            "datum": "20.03.2020",
+            "dateigroesse": "5.2 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-003-K1",
+            "name": "Marco Bernasconi",
+            "rolle": "Objektverantwortlicher",
+            "organisation": "BBL Logistik",
+            "telefon": "+41 58 462 45 00",
+            "email": "marco.bernasconi@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-003-K2",
+            "name": "Thomas Huber",
+            "rolle": "Technischer Dienst",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+41 58 462 45 20",
+            "email": "thomas.huber@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-003-K3",
+            "name": "Sandra Keller",
+            "rolle": "Portfolioverantwortliche",
+            "organisation": "BBL Portfoliomanagement",
+            "telefon": "+41 58 462 10 01",
+            "email": "sandra.keller@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-003-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Johnson Controls AG",
+            "vertragsbeginn": "01.01.2018",
+            "vertragsende": "31.12.2024",
+            "betrag": 65000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-003-V2",
+            "vertragsart": "Reinigungsvertrag",
+            "vertragspartner": "Vebego AG",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2025",
+            "betrag": 48000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-003-V3",
+            "vertragsart": "Logistikdienstleistung",
+            "vertragspartner": "Planzer Transport AG",
+            "vertragsbeginn": "01.06.2019",
+            "vertragsende": null,
+            "betrag": 180000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-003-V4",
+            "vertragsart": "Heizungswartung",
+            "vertragspartner": "Meier Tobler AG",
+            "vertragsbeginn": "01.01.2017",
+            "vertragsende": "31.12.2022",
+            "betrag": 12000,
+            "status": "Ausgelaufen"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-003-A1",
+            "bezeichnung": "Gasheizungsanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Viessmann",
+            "baujahr": 2017,
+            "standort": "Heizzentrale UG"
+          },
+          {
+            "id": "BBL-003-A2",
+            "bezeichnung": "Lastenaufzug 3t",
+            "kategorie": "Aufzüge",
+            "hersteller": "KONE",
+            "baujahr": 2017,
+            "standort": "Lagerhalle Ost"
+          },
+          {
+            "id": "BBL-003-A3",
+            "bezeichnung": "Lastenaufzug 5t",
+            "kategorie": "Aufzüge",
+            "hersteller": "KONE",
+            "baujahr": 2017,
+            "standort": "Lagerhalle West"
+          },
+          {
+            "id": "BBL-003-A4",
+            "bezeichnung": "Sprinkleranlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Minimax",
+            "baujahr": 2017,
+            "standort": "Gesamte Lagerhalle"
+          },
+          {
+            "id": "BBL-003-A5",
+            "bezeichnung": "Lüftungsanlage Lagerhalle",
+            "kategorie": "HVAC",
+            "hersteller": "Zehnder",
+            "baujahr": 2017,
+            "standort": "Dach Lagerhalle"
+          },
+          {
+            "id": "BBL-003-A6",
+            "bezeichnung": "Hubarbeitsbühne",
+            "kategorie": "Logistik",
+            "hersteller": "Jungheinrich",
+            "baujahr": 2020,
+            "standort": "Hochregallager"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-003-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 320000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K2",
+            "kostengruppe": "312",
+            "kostenart": "Gasheizung",
+            "betrag": 85000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K3",
+            "kostengruppe": "322",
+            "kostenart": "Abfallentsorgung",
+            "betrag": 42000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K4",
+            "kostengruppe": "340",
+            "kostenart": "Wartung Fördertechnik",
+            "betrag": 125000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-003-K5",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung",
+            "betrag": 58000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.532,
+          47.3769
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-004",
+        "name": "Schweizer Generalkonsulat New York",
+        "adresse": "633 Third Avenue, New York, NY 10017",
+        "hausnummer": "633",
+        "plz": "10017",
+        "ort": "New York",
+        "region": "New York",
+        "land": "US",
+        "teilportfolio": "Diplomatische Vertretung",
+        "verantwortlich": "Sarah Johnson",
+        "flaeche_ngf": 1850,
+        "baujahr": 1978,
+        "status": "In Betrieb",
+        "sanierung": "2020",
+        "ladestationen": 2,
+        "denkmalschutz": "Nein",
+        "parkplaetze": 0,
+        "geschosse": 2,
+        "baubewilligung": "1976-05-18",
+        "energieklasse": "C",
+        "waermeerzeuger": "Fernwärme",
+        "waermequelle": "Con Edison Steam",
+        "warmwasser": "Zentral (Fernwärme)",
+        "grundstueck_name": "Third Avenue Tower Unit 12-14",
+        "grundstueck_id": "US-NY-10017-633",
+        "egid": "US-NYC-1978-633",
+        "egrid": "US111222333444",
+        "gueltig_von": "1978-01-01",
+        "gueltig_bis": null,
+        "objektart1": "Bürogebäude",
+        "teilportfolio_gruppe": "EDA Auslandsvertretungen",
+        "objektart2": "Konsulat",
+        "eigentum": "Miete (langfristig)",
+        "bemessungen": [
+          {
+            "id": "BBL-004-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 2200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "BOMA",
+            "validFrom": "01.01.2020",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-004-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 1850,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "BOMA",
+            "validFrom": "01.01.2020",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-004-M3",
+            "areaType": "Mietfläche",
+            "value": 181,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "BOMA",
+            "validFrom": "01.01.2020",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-004-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 28,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-004-M5",
+            "areaType": "Schalterbereich",
+            "value": 180,
+            "unit": "m²",
+            "accuracy": "Geschätzt",
+            "standard": "n/a",
+            "validFrom": "01.01.2020",
+            "validUntil": null,
+            "source": "Schätzmodell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-004-D1",
+            "titel": "Mietvertrag Third Avenue",
+            "dokumentTyp": "Mietvertrag",
+            "dateiformat": "PDF",
+            "datum": "01.01.2020",
+            "dateigroesse": "1.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-004-D2",
+            "titel": "Grundriss Büroflächen",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "01.01.2020",
+            "dateigroesse": "3.4 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-004-K1",
+            "name": "Sarah Johnson",
+            "rolle": "Objektverantwortliche",
+            "organisation": "EDA Auslandsvertretungen",
+            "telefon": "+1 212 599 5700",
+            "email": "sarah.johnson@eda.admin.ch"
+          },
+          {
+            "id": "BBL-004-K2",
+            "name": "Michael Brown",
+            "rolle": "Sicherheitsbeauftragter",
+            "organisation": "EDA Sicherheit",
+            "telefon": "+1 212 599 5710",
+            "email": "michael.brown@eda.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-004-V1",
+            "vertragsart": "Mietvertrag",
+            "vertragspartner": "Third Avenue Tower LLC",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2030",
+            "betrag": 450000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-004-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Allied Universal Security",
+            "vertragsbeginn": "01.01.2021",
+            "vertragsende": "31.12.2025",
+            "betrag": 125000,
+            "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-004-A1",
+            "bezeichnung": "Klimaanlage VRF-System",
+            "kategorie": "HVAC",
+            "hersteller": "Carrier",
+            "baujahr": 2020,
+            "standort": "Büroetagen 12-14"
+          },
+          {
+            "id": "BBL-004-A2",
+            "bezeichnung": "Zutrittskontrollsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "HID Global",
+            "baujahr": 2020,
+            "standort": "Alle Eingänge"
+          },
+          {
+            "id": "BBL-004-A3",
+            "bezeichnung": "Brandmeldeanlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Honeywell",
+            "baujahr": 2020,
+            "standort": "Gesamte Mietfläche"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-004-K1",
+            "kostengruppe": "210",
+            "kostenart": "Miete Bürofläche",
+            "betrag": 450000,
+            "einheit": "USD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-004-K2",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 28000,
+            "einheit": "USD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-004-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 125000,
+            "einheit": "USD/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9712,
+          40.7528
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-005",
+        "name": "Ausbildungszentrum Genf",
+        "adresse": "Rue de Lausanne 120, 1202 Genève",
+        "hausnummer": "120",
+        "plz": "1202",
+        "ort": "Genf",
+        "region": "Kanton Genf",
+        "land": "CH",
+        "teilportfolio": "Bildungseinrichtung",
+        "verantwortlich": "Claire Dubois",
+        "flaeche_ngf": 4200,
+        "baujahr": 1965,
+        "status": "In Renovation",
+        "sanierung": "2024 (laufend)",
+        "ladestationen": 6,
+        "denkmalschutz": "Teilweise",
+        "parkplaetze": 35,
+        "geschosse": 4,
+        "baubewilligung": "1962-09-30",
+        "energieklasse": "E",
+        "waermeerzeuger": "Ölheizung (Ersatz geplant)",
+        "waermequelle": "Heizöl",
+        "warmwasser": "Zentral (Ölheizung)",
+        "grundstueck_name": "Parcelle Lausanne-Nord",
+        "grundstueck_id": "GE-1202-0120",
+        "egid": "250120001",
+        "egrid": "CH345678901234",
+        "gueltig_von": "1965-08-15",
+        "gueltig_bis": null,
+        "objektart1": "Bildungsgebäude",
+        "teilportfolio_gruppe": "Ausbildung & Schulung",
+        "objektart2": "Schulungsgebäude",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-005-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 5100,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "15.08.1965",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-005-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 4200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "15.08.1965",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-005-M3",
+            "areaType": "Schulungsräume",
+            "value": 1800,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.01.2020",
+            "validUntil": null,
+            "source": "Vermessung"
+          },
+          {
+            "id": "BBL-005-M4",
+            "areaType": "Energiebezugsfläche",
+            "value": 4400,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "standard": "SIA 380/1",
+            "validFrom": "01.01.2024",
+            "validUntil": null,
+            "source": "Schätzmodell"
+          },
+          {
+            "id": "BBL-005-M5",
+            "areaType": "Volumen",
+            "value": 17850,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "15.08.1965",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-005-M6",
+            "areaType": "Schulungsplätze",
+            "value": 120,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-005-M7",
+            "areaType": "Arbeitsplätze",
+            "value": 25,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-005-D1",
+            "titel": "Sanierungsprojekt 2024",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.01.2024",
+            "dateigroesse": "28.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-005-D2",
+            "titel": "GEAK Plus Bericht",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "15.12.2023",
+            "dateigroesse": "2.1 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-005-D3",
+            "titel": "Denkmalschutz Teilbereich",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "10.05.1980",
+            "dateigroesse": "650 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-005-D4",
+            "titel": "Raumkonzept Schulungsräume",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "DWG",
+            "datum": "01.01.2024",
+            "dateigroesse": "9.8 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-005-K1",
+            "name": "Claire Dubois",
+            "rolle": "Objektverantwortliche",
+            "organisation": "BBL Immobilienmanagement",
+            "telefon": "+41 58 462 80 00",
+            "email": "claire.dubois@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-005-K2",
+            "name": "François Martin",
+            "rolle": "Facility Manager",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+41 58 462 80 15",
+            "email": "francois.martin@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-005-K3",
+            "name": "René Favre",
+            "rolle": "Hauswart",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+41 58 462 80 20",
+            "email": "rene.favre@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-005-V1",
+            "vertragsart": "Sanierungsvertrag",
+            "vertragspartner": "Implenia Schweiz AG",
+            "vertragsbeginn": "01.01.2024",
+            "vertragsende": "31.12.2025",
+            "betrag": 2500000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-005-V2",
+            "vertragsart": "Architekturleistung",
+            "vertragspartner": "Herzog & de Meuron",
+            "vertragsbeginn": "01.06.2023",
+            "vertragsende": "31.12.2025",
+            "betrag": 350000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-005-V3",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Honeywell Schweiz AG",
+            "vertragsbeginn": "01.01.2018",
+            "vertragsende": "31.12.2023",
+            "betrag": 35000,
+            "status": "Ausgelaufen"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-005-A1",
+            "bezeichnung": "Ölheizungsanlage (Ersatz geplant)",
+            "kategorie": "HVAC",
+            "hersteller": "Weishaupt",
+            "baujahr": 1965,
+            "standort": "Heizzentrale UG"
+          },
+          {
+            "id": "BBL-005-A2",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "Schindler AG",
+            "baujahr": 2015,
+            "standort": "Treppenhaus Hauptgebäude"
+          },
+          {
+            "id": "BBL-005-A3",
+            "bezeichnung": "Lüftungsanlage Schulungsräume",
+            "kategorie": "HVAC",
+            "hersteller": "Zehnder",
+            "baujahr": 2015,
+            "standort": "Dachgeschoss"
+          },
+          {
+            "id": "BBL-005-A4",
+            "bezeichnung": "Brandmeldeanlage",
+            "kategorie": "Brandschutz",
+            "hersteller": "Siemens",
+            "baujahr": 2015,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-005-A5",
+            "bezeichnung": "Beamer Konferenzraum A",
+            "kategorie": "Medientechnik",
+            "hersteller": "Epson",
+            "baujahr": 2022,
+            "standort": "Konferenzraum A, 2. OG"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-005-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 52000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-005-K2",
+            "kostengruppe": "312",
+            "kostenart": "Heizöl",
+            "betrag": 68000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-005-K3",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung",
+            "betrag": 45000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-005-K4",
+            "kostengruppe": "420",
+            "kostenart": "Sanierungskosten anteilig",
+            "betrag": 850000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1432,
+          46.2044
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-006",
+        "name": "Schweizer Botschaft Tokyo",
+        "adresse": "5-9-12 Minami-Azabu, Minato-ku, Tokyo",
+        "hausnummer": "5-9-12",
+        "plz": "106-0047",
+        "ort": "Tokyo",
+        "region": "Tokyo",
+        "land": "JP",
+        "teilportfolio": "Diplomatische Vertretung",
+        "verantwortlich": "Kenji Yamamoto",
+        "flaeche_ngf": 2100,
+        "baujahr": 1991,
+        "status": "In Betrieb",
+        "sanierung": "2018",
+        "ladestationen": 3,
+        "denkmalschutz": "Nein",
+        "parkplaetze": 15,
+        "geschosse": 3,
+        "baubewilligung": "1989-04-12",
+        "energieklasse": "B",
+        "waermeerzeuger": "Wärmepumpe",
+        "waermequelle": "Luft (Klimaanlage)",
+        "warmwasser": "Dezentral (Elektroboiler)",
+        "grundstueck_name": "Minami-Azabu Block 5",
+        "grundstueck_id": "JP-TKY-MNTK-5912",
+        "egid": "JP-TKY-1991-512",
+        "egrid": "JP555666777888",
+        "gueltig_von": "1991-03-01",
+        "gueltig_bis": null,
+        "objektart1": "Bürogebäude",
+        "teilportfolio_gruppe": "EDA Auslandsvertretungen",
+        "objektart2": "Botschaftsgebäude",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-006-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 2520,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "JIS A",
+            "validFrom": "01.03.1991",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-006-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 2100,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "JIS A",
+            "validFrom": "01.03.1991",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-006-M3",
+            "areaType": "Volumen",
+            "value": 7350,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "JIS A",
+            "validFrom": "01.03.1991",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-006-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 32,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-006-M5",
+            "areaType": "Repräsentationsfläche",
+            "value": 420,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.03.1991",
+            "validUntil": null,
+            "source": "Vermessung"
+          },
+          {
+            "id": "BBL-006-M6",
+            "areaType": "Residenzfläche",
+            "value": 380,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.03.1991",
+            "validUntil": null,
+            "source": "Vermessung"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-006-D1",
+            "titel": "Architekturpläne Original",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.03.1991",
+            "dateigroesse": "18.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-006-D2",
+            "titel": "Erdbebensicherheit Gutachten",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "20.09.2018",
+            "dateigroesse": "4.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-006-D3",
+            "titel": "Residenz Grundriss",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "01.03.1991",
+            "dateigroesse": "2.8 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-006-K1",
+            "name": "Kenji Yamamoto",
+            "rolle": "Objektverantwortlicher",
+            "organisation": "EDA Auslandsvertretungen",
+            "telefon": "+81 3 5449 8400",
+            "email": "kenji.yamamoto@eda.admin.ch"
+          },
+          {
+            "id": "BBL-006-K2",
+            "name": "Yuki Tanaka",
+            "rolle": "Facility Manager",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+81 3 5449 8410",
+            "email": "yuki.tanaka@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-006-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Daikin Industries Ltd",
+            "vertragsbeginn": "01.04.2019",
+            "vertragsende": "31.03.2025",
+            "betrag": 55000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-006-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "ALSOK Co., Ltd.",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": null,
+            "betrag": 92000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-006-V3",
+            "vertragsart": "Gartenpflege",
+            "vertragspartner": "Tokyo Green Service Co.",
+            "vertragsbeginn": "01.04.2018",
+            "vertragsende": "31.03.2024",
+            "betrag": 18000,
+            "status": "Gekündigt"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-006-A1",
+            "bezeichnung": "VRF-Klimaanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Daikin",
+            "baujahr": 2018,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-006-A2",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "Mitsubishi Electric",
+            "baujahr": 1991,
+            "standort": "Hauptgebäude"
+          },
+          {
+            "id": "BBL-006-A3",
+            "bezeichnung": "Erdbeben-Frühwarnsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "Omron",
+            "baujahr": 2018,
+            "standort": "Technikraum EG"
+          },
+          {
+            "id": "BBL-006-A4",
+            "bezeichnung": "Videoüberwachungsanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Panasonic",
+            "baujahr": 2018,
+            "standort": "Gesamtgebäude"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-006-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 4200000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-006-K2",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung und Gartenpflege",
+            "betrag": 3800000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-006-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 8500000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-006-K4",
+            "kostengruppe": "340",
+            "kostenart": "Klimaanlagen-Wartung",
+            "betrag": 2200000,
+            "einheit": "JPY/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.735,
+          35.652
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-007",
+        "name": "Wohnliegenschaft Basel",
+        "adresse": "Steinenvorstadt 22, 4051 Basel",
+        "hausnummer": "22",
+        "plz": "4051",
+        "ort": "Basel",
+        "region": "Kanton Basel-Stadt",
+        "land": "CH",
+        "teilportfolio": "Wohnliegenschaft",
+        "verantwortlich": "Thomas Weber",
+        "flaeche_ngf": 2800,
+        "baujahr": 1920,
+        "status": "In Betrieb",
+        "sanierung": "2015",
+        "ladestationen": 4,
+        "denkmalschutz": "Ja",
+        "parkplaetze": 12,
+        "geschosse": 6,
+        "baubewilligung": "1918-07-20",
+        "energieklasse": "D",
+        "waermeerzeuger": "Gasheizung",
+        "waermequelle": "Erdgas IWB",
+        "warmwasser": "Zentral (Gasheizung)",
+        "grundstueck_name": "Steinenvorstadt Eckparzelle",
+        "grundstueck_id": "BS-4051-0022",
+        "egid": "120220001",
+        "egrid": "CH456789012345",
+        "gueltig_von": "1920-12-01",
+        "gueltig_bis": null,
+        "objektart1": "Wohngebäude",
+        "teilportfolio_gruppe": "Wohnliegenschaften",
+        "objektart2": "Mehrfamilienhaus",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-007-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 3360,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-007-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 2800,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-007-M3",
+            "areaType": "Wohnfläche",
+            "value": 2450,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-007-M4",
+            "areaType": "Energiebezugsfläche",
+            "value": 2900,
+            "unit": "m²",
+            "accuracy": "Berechnet",
+            "standard": "SIA 380/1",
+            "validFrom": "01.06.2015",
+            "validUntil": null,
+            "source": "Schätzmodell"
+          },
+          {
+            "id": "BBL-007-M5",
+            "areaType": "Volumen",
+            "value": 9800,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "SIA 416",
+            "validFrom": "01.06.2015",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-007-M6",
+            "areaType": "Wohneinheiten",
+            "value": 18,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2015",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-007-M7",
+            "areaType": "Kellerabteile",
+            "value": 18,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2015",
+            "validUntil": null,
+            "source": "Manuell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-007-D1",
+            "titel": "Wohnungsspiegel",
+            "dokumentTyp": "Grundriss",
+            "dateiformat": "PDF",
+            "datum": "01.06.2015",
+            "dateigroesse": "5.6 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D2",
+            "titel": "GEAK Zertifikat",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "01.06.2015",
+            "dateigroesse": "980 KB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D3",
+            "titel": "Denkmalschutz Inventar",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "15.03.1985",
+            "dateigroesse": "1.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D4",
+            "titel": "Sanierungsbericht 2015",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.06.2015",
+            "dateigroesse": "12.3 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-007-D5",
+            "titel": "Fassadenfoto nach Sanierung",
+            "dokumentTyp": "Foto",
+            "dateiformat": "JPG",
+            "datum": "15.07.2015",
+            "dateigroesse": "4.8 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-007-K1",
+            "name": "Thomas Weber",
+            "rolle": "Objektverantwortlicher",
+            "organisation": "BBL Immobilienmanagement",
+            "telefon": "+41 58 462 55 00",
+            "email": "thomas.weber@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-007-K2",
+            "name": "Barbara Steiner",
+            "rolle": "Hauswart",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+41 58 462 55 10",
+            "email": "barbara.steiner@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-007-V1",
+            "vertragsart": "Heizungswartung",
+            "vertragspartner": "IWB Industrielle Werke Basel",
+            "vertragsbeginn": "01.01.2016",
+            "vertragsende": "31.12.2026",
+            "betrag": 8500,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-007-V2",
+            "vertragsart": "Hauswartung",
+            "vertragspartner": "Livit AG",
+            "vertragsbeginn": "01.07.2020",
+            "vertragsende": null,
+            "betrag": 42000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-007-V3",
+            "vertragsart": "Reinigungsvertrag",
+            "vertragspartner": "Clean Expert GmbH",
+            "vertragsbeginn": "01.01.2021",
+            "vertragsende": "31.12.2024",
+            "betrag": 28000,
+            "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-007-A1",
+            "bezeichnung": "Gasheizungsanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Viessmann",
+            "baujahr": 2015,
+            "standort": "Heizzentrale UG"
+          },
+          {
+            "id": "BBL-007-A2",
+            "bezeichnung": "Personenaufzug",
+            "kategorie": "Aufzüge",
+            "hersteller": "Schindler AG",
+            "baujahr": 2015,
+            "standort": "Treppenhaus"
+          },
+          {
+            "id": "BBL-007-A3",
+            "bezeichnung": "Gegensprechanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Siedle",
+            "baujahr": 2015,
+            "standort": "Alle Wohnungen"
+          },
+          {
+            "id": "BBL-007-A4",
+            "bezeichnung": "Waschmaschinen Gemeinschaftsraum",
+            "kategorie": "Sanitär",
+            "hersteller": "Electrolux",
+            "baujahr": 2020,
+            "standort": "Waschküche UG"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-007-K1",
+            "kostengruppe": "311",
+            "kostenart": "Allgemeinstrom",
+            "betrag": 8500,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K2",
+            "kostengruppe": "312",
+            "kostenart": "Gasheizung",
+            "betrag": 42000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K3",
+            "kostengruppe": "313",
+            "kostenart": "Wasserversorgung",
+            "betrag": 12000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K4",
+            "kostengruppe": "330",
+            "kostenart": "Treppenhausreinigung",
+            "betrag": 18000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-007-K5",
+            "kostengruppe": "340",
+            "kostenart": "Hauswartung",
+            "betrag": 42000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.5886,
+          47.5596
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-008",
+        "name": "Schweizer Botschaft Brasília",
+        "adresse": "SES Av. das Nações, Lote 41, Brasília",
+        "hausnummer": "Lote 41",
+        "plz": "70200-001",
+        "ort": "Brasília",
+        "region": "Distrito Federal",
+        "land": "BR",
+        "teilportfolio": "Diplomatische Vertretung",
+        "verantwortlich": "Carlos Silva",
+        "flaeche_ngf": 1650,
+        "baujahr": 1972,
+        "status": "In Betrieb",
+        "sanierung": "2022",
+        "ladestationen": 2,
+        "denkmalschutz": "Nein",
+        "parkplaetze": 20,
+        "geschosse": 2,
+        "baubewilligung": "1970-11-08",
+        "energieklasse": "C",
+        "waermeerzeuger": "Klimaanlage (nur Kühlung)",
+        "waermequelle": "Luft",
+        "warmwasser": "Dezentral (Solar + Elektro)",
+        "grundstueck_name": "Setor de Embaixadas Sul Lote 41",
+        "grundstueck_id": "BR-BSB-SES-041",
+        "egid": "BR-BSB-1972-041",
+        "egrid": "BR777888999000",
+        "gueltig_von": "1972-06-15",
+        "gueltig_bis": null,
+        "objektart1": "Bürogebäude",
+        "teilportfolio_gruppe": "EDA Auslandsvertretungen",
+        "objektart2": "Botschaftsgebäude",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-008-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 1980,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "ABNT NBR",
+            "validFrom": "15.06.1972",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-008-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 1650,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "ABNT NBR",
+            "validFrom": "15.06.1972",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-008-M3",
+            "areaType": "Volumen",
+            "value": 5775,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "ABNT NBR",
+            "validFrom": "15.06.1972",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-008-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 22,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-008-M5",
+            "areaType": "Grundstücksfläche",
+            "value": 4500,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "15.06.1972",
+            "validUntil": null,
+            "source": "Vermessung"
+          },
+          {
+            "id": "BBL-008-M6",
+            "areaType": "Gartenfläche",
+            "value": 2800,
+            "unit": "m²",
+            "accuracy": "Geschätzt",
+            "standard": "n/a",
+            "validFrom": "01.01.2022",
+            "validUntil": null,
+            "source": "Schätzmodell"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-008-D1",
+            "titel": "Sanierungspläne 2022",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.03.2022",
+            "dateigroesse": "22.4 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-008-D2",
+            "titel": "Klimaanlagen-Dokumentation",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "15.05.2022",
+            "dateigroesse": "3.1 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-008-D3",
+            "titel": "Gartenpflege-Konzept",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "01.01.2022",
+            "dateigroesse": "1.5 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-008-K1",
+            "name": "Carlos Silva",
+            "rolle": "Objektverantwortlicher",
+            "organisation": "EDA Auslandsvertretungen",
+            "telefon": "+55 61 3443 5500",
+            "email": "carlos.silva@eda.admin.ch"
+          },
+          {
+            "id": "BBL-008-K2",
+            "name": "Maria Santos",
+            "rolle": "Facility Manager",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+55 61 3443 5510",
+            "email": "maria.santos@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-008-V1",
+            "vertragsart": "Klimaanlagenwartung",
+            "vertragspartner": "Carrier do Brasil",
+            "vertragsbeginn": "01.01.2022",
+            "vertragsende": "31.12.2027",
+            "betrag": 38000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-008-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Prosegur Brasil",
+            "vertragsbeginn": "01.06.2020",
+            "vertragsende": null,
+            "betrag": 65000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-008-V3",
+            "vertragsart": "Gartenpflege",
+            "vertragspartner": "Verde Vida Ltda",
+            "vertragsbeginn": "01.01.2022",
+            "vertragsende": "31.12.2024",
+            "betrag": 12000,
+            "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-008-A1",
+            "bezeichnung": "Split-Klimaanlage Büro",
+            "kategorie": "HVAC",
+            "hersteller": "Carrier",
+            "baujahr": 2022,
+            "standort": "Bürotrakt"
+          },
+          {
+            "id": "BBL-008-A2",
+            "bezeichnung": "Split-Klimaanlage Residenz",
+            "kategorie": "HVAC",
+            "hersteller": "Carrier",
+            "baujahr": 2022,
+            "standort": "Residenz"
+          },
+          {
+            "id": "BBL-008-A3",
+            "bezeichnung": "Solaranlage Warmwasser",
+            "kategorie": "Solar/Energie",
+            "hersteller": "Soletrol",
+            "baujahr": 2022,
+            "standort": "Dach"
+          },
+          {
+            "id": "BBL-008-A4",
+            "bezeichnung": "Alarmanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Intelbras",
+            "baujahr": 2022,
+            "standort": "Gesamtgebäude"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-008-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 85000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-008-K2",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung und Gartenpflege",
+            "betrag": 120000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-008-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 280000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-008-K4",
+            "kostengruppe": "340",
+            "kostenart": "Klimaanlagen-Wartung",
+            "betrag": 45000,
+            "einheit": "BRL/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.8825,
+          -15.7942
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-009",
+        "name": "Datacenter Lugano",
+        "adresse": "Via Industria 15, 6934 Bioggio",
+        "hausnummer": "15",
+        "plz": "6934",
+        "ort": "Lugano",
+        "region": "Kanton Tessin",
+        "land": "CH",
+        "teilportfolio": "Technische Infrastruktur",
+        "verantwortlich": "Elena Bentivoglio",
+        "flaeche_ngf": 5400,
+        "baujahr": 2015,
+        "status": "In Planung",
+        "sanierung": "Neubau",
+        "ladestationen": 20,
+        "denkmalschutz": "Nein",
+        "parkplaetze": 40,
+        "geschosse": 2,
+        "baubewilligung": "2023-06-01",
+        "energieklasse": "A",
+        "waermeerzeuger": "Wärmepumpe + Abwärmenutzung",
+        "waermequelle": "Serverabwärme + Grundwasser",
+        "warmwasser": "Zentral (Wärmepumpe)",
+        "grundstueck_name": "Zona Industriale Bioggio",
+        "grundstueck_id": "TI-6934-0015",
+        "egid": "500150001",
+        "egrid": "CH567890123456",
+        "gueltig_von": "2025-01-01",
+        "gueltig_bis": null,
+        "objektart1": "Technisches Gebäude",
+        "teilportfolio_gruppe": "IT Infrastruktur",
+        "objektart2": "Rechenzentrum",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-009-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 6500,
+            "unit": "m²",
+            "accuracy": "Projektiert",
+            "standard": "SIA 416",
+            "validFrom": "01.06.2023",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-009-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 5400,
+            "unit": "m²",
+            "accuracy": "Projektiert",
+            "standard": "SIA 416",
+            "validFrom": "01.06.2023",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-009-M3",
+            "areaType": "Serverraumfläche",
+            "value": 3200,
+            "unit": "m²",
+            "accuracy": "Projektiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-009-M4",
+            "areaType": "IT-Leistung",
+            "value": 8,
+            "unit": "MW",
+            "accuracy": "Projektiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-009-M5",
+            "areaType": "Rack-Stellplätze",
+            "value": 480,
+            "unit": "Stk",
+            "accuracy": "Projektiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-009-M6",
+            "areaType": "Arbeitsplätze",
+            "value": 35,
+            "unit": "Stk",
+            "accuracy": "Projektiert",
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-009-M7",
+            "areaType": "Grundstücksfläche",
+            "value": 12000,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.06.2023",
+            "validUntil": null,
+            "source": "Vermessung"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-009-D1",
+            "titel": "Bauprojekt Datacenter",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.06.2023",
+            "dateigroesse": "85.2 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D2",
+            "titel": "BIM Modell Hauptgebäude",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "IFC",
+            "datum": "01.06.2023",
+            "dateigroesse": "156.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D3",
+            "titel": "Baubewilligung Kanton TI",
+            "dokumentTyp": "Baubewilligung",
+            "dateiformat": "PDF",
+            "datum": "01.06.2023",
+            "dateigroesse": "2.3 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D4",
+            "titel": "Energiekonzept Tier IV",
+            "dokumentTyp": "Energieausweis",
+            "dateiformat": "PDF",
+            "datum": "15.04.2023",
+            "dateigroesse": "8.7 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-009-D5",
+            "titel": "Sicherheitskonzept IT",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "01.06.2023",
+            "dateigroesse": "5.4 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-009-K1",
+            "name": "Elena Bentivoglio",
+            "rolle": "Objektverantwortliche",
+            "organisation": "BBL IT Infrastruktur",
+            "telefon": "+41 58 462 90 00",
+            "email": "elena.bentivoglio@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-009-K2",
+            "name": "Luca Ferretti",
+            "rolle": "Technischer Dienst",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+41 58 462 90 20",
+            "email": "luca.ferretti@bbl.admin.ch"
+          },
+          {
+            "id": "BBL-009-K3",
+            "name": "Marco Rossi",
+            "rolle": "Sicherheitsbeauftragter",
+            "organisation": "BBL IT Sicherheit",
+            "telefon": "+41 58 462 90 30",
+            "email": "marco.rossi@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-009-V1",
+            "vertragsart": "Bauvertrag",
+            "vertragspartner": "Marti AG Bauunternehmung",
+            "vertragsbeginn": "01.07.2023",
+            "vertragsende": "31.12.2025",
+            "betrag": 45000000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-009-V2",
+            "vertragsart": "IT-Infrastruktur",
+            "vertragspartner": "Swisscom (Schweiz) AG",
+            "vertragsbeginn": "01.01.2024",
+            "vertragsende": "31.12.2034",
+            "betrag": 2500000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-009-V3",
+            "vertragsart": "Kühlanlagenwartung",
+            "vertragspartner": "Schneider Electric Schweiz AG",
+            "vertragsbeginn": "01.01.2025",
+            "vertragsende": "31.12.2030",
+            "betrag": 180000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-009-V4",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Protectas SA",
+            "vertragsbeginn": "01.01.2025",
+            "vertragsende": null,
+            "betrag": 320000,
+            "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-009-A1",
+            "bezeichnung": "Präzisionsklimaanlage Serverraum",
+            "kategorie": "HVAC",
+            "hersteller": "Schneider Electric",
+            "baujahr": 2025,
+            "standort": "Serverräume A-D"
+          },
+          {
+            "id": "BBL-009-A2",
+            "bezeichnung": "USV-Anlage 2MW",
+            "kategorie": "Elektro",
+            "hersteller": "ABB",
+            "baujahr": 2025,
+            "standort": "Elektrozentrale"
+          },
+          {
+            "id": "BBL-009-A3",
+            "bezeichnung": "Notstromdiesel 3MW",
+            "kategorie": "Elektro",
+            "hersteller": "Caterpillar",
+            "baujahr": 2025,
+            "standort": "Aussenbereich Nord"
+          },
+          {
+            "id": "BBL-009-A4",
+            "bezeichnung": "Brandlöschanlage Inergen",
+            "kategorie": "Brandschutz",
+            "hersteller": "Minimax",
+            "baujahr": 2025,
+            "standort": "Alle Serverräume"
+          },
+          {
+            "id": "BBL-009-A5",
+            "bezeichnung": "Zutrittskontrollsystem",
+            "kategorie": "Sicherheit",
+            "hersteller": "Dormakaba",
+            "baujahr": 2025,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-009-A6",
+            "bezeichnung": "Freikühler (Free Cooling)",
+            "kategorie": "HVAC",
+            "hersteller": "Güntner",
+            "baujahr": 2025,
+            "standort": "Dach"
+          },
+          {
+            "id": "BBL-009-A7",
+            "bezeichnung": "Gebäudeleitsystem",
+            "kategorie": "Gebäudeautomation",
+            "hersteller": "Siemens",
+            "baujahr": 2025,
+            "standort": "Leitwarte"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-009-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung IT-Betrieb",
+            "betrag": 2800000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K2",
+            "kostengruppe": "340",
+            "kostenart": "Kühlanlagen-Wartung",
+            "betrag": 180000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K3",
+            "kostengruppe": "350",
+            "kostenart": "24/7 Sicherheitsdienst",
+            "betrag": 420000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K4",
+            "kostengruppe": "340",
+            "kostenart": "USV-Wartung",
+            "betrag": 95000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K5",
+            "kostengruppe": "340",
+            "kostenart": "Gebäudeautomation Betrieb",
+            "betrag": 65000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-009-K6",
+            "kostengruppe": "220",
+            "kostenart": "Versicherungen",
+            "betrag": 280000,
+            "einheit": "CHF/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.9512,
+          46.0037
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "BBL-010",
+        "name": "Schweizer Botschaft Canberra",
+        "adresse": "7 Melbourne Avenue, Forrest ACT 2603",
+        "hausnummer": "7",
+        "plz": "2603",
+        "ort": "Canberra",
+        "region": "Australian Capital Territory",
+        "land": "AU",
+        "teilportfolio": "Diplomatische Vertretung",
+        "verantwortlich": "Michael Thompson",
+        "flaeche_ngf": 1200,
+        "baujahr": 1968,
+        "status": "In Betrieb",
+        "sanierung": "2016",
+        "ladestationen": 2,
+        "denkmalschutz": "Nein",
+        "parkplaetze": 18,
+        "geschosse": 2,
+        "baubewilligung": "1966-02-28",
+        "energieklasse": "D",
+        "waermeerzeuger": "Wärmepumpe",
+        "waermequelle": "Luft (Split-Klimaanlage)",
+        "warmwasser": "Dezentral (Solar + Elektro)",
+        "grundstueck_name": "Forrest Diplomatic Precinct",
+        "grundstueck_id": "AU-ACT-FOR-007",
+        "egid": "AU-CAN-1968-007",
+        "egrid": "AU333444555666",
+        "gueltig_von": "1968-09-01",
+        "gueltig_bis": null,
+        "objektart1": "Bürogebäude",
+        "teilportfolio_gruppe": "EDA Auslandsvertretungen",
+        "objektart2": "Botschaftsgebäude",
+        "eigentum": "Eigentum Bund",
+        "bemessungen": [
+          {
+            "id": "BBL-010-M1",
+            "areaType": "Bruttogeschossfläche",
+            "value": 1440,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "AS/NZS",
+            "validFrom": "01.09.1968",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-010-M2",
+            "areaType": "Nettogeschossfläche",
+            "value": 1200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "AS/NZS",
+            "validFrom": "01.09.1968",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-010-M3",
+            "areaType": "Volumen",
+            "value": 4200,
+            "unit": "m³",
+            "accuracy": "Gemessen",
+            "standard": "AS/NZS",
+            "validFrom": "01.09.1968",
+            "validUntil": null,
+            "source": "CAD/BIM"
+          },
+          {
+            "id": "BBL-010-M4",
+            "areaType": "Arbeitsplätze",
+            "value": 18,
+            "unit": "Stk",
+            "accuracy": "Aggregiert",
+            "standard": "n/a",
+            "validFrom": "01.01.2023",
+            "validUntil": null,
+            "source": "Manuell"
+          },
+          {
+            "id": "BBL-010-M5",
+            "areaType": "Grundstücksfläche",
+            "value": 3200,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.09.1968",
+            "validUntil": null,
+            "source": "Vermessung"
+          },
+          {
+            "id": "BBL-010-M6",
+            "areaType": "Residenzfläche",
+            "value": 280,
+            "unit": "m²",
+            "accuracy": "Gemessen",
+            "standard": "n/a",
+            "validFrom": "01.01.2016",
+            "validUntil": null,
+            "source": "Vermessung"
+          }
+        ],
+        "dokumente": [
+          {
+            "id": "BBL-010-D1",
+            "titel": "Originalbaupläne 1968",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.09.1968",
+            "dateigroesse": "6.8 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-010-D2",
+            "titel": "Sanierungsdokumentation 2016",
+            "dokumentTyp": "Bauplan",
+            "dateiformat": "PDF",
+            "datum": "01.01.2016",
+            "dateigroesse": "14.5 MB",
+            "url": "#"
+          },
+          {
+            "id": "BBL-010-D3",
+            "titel": "Solar-Warmwasser Anlage",
+            "dokumentTyp": "Betriebsanleitung",
+            "dateiformat": "PDF",
+            "datum": "15.03.2016",
+            "dateigroesse": "2.1 MB",
+            "url": "#"
+          }
+        ],
+        "kontakte": [
+          {
+            "id": "BBL-010-K1",
+            "name": "Michael Thompson",
+            "rolle": "Objektverantwortlicher",
+            "organisation": "EDA Auslandsvertretungen",
+            "telefon": "+61 2 6162 8400",
+            "email": "michael.thompson@eda.admin.ch"
+          },
+          {
+            "id": "BBL-010-K2",
+            "name": "Emily Wilson",
+            "rolle": "Facility Manager",
+            "organisation": "BBL Objektmanagement",
+            "telefon": "+61 2 6162 8410",
+            "email": "emily.wilson@bbl.admin.ch"
+          }
+        ],
+        "vertraege": [
+          {
+            "id": "BBL-010-V1",
+            "vertragsart": "Wartungsvertrag",
+            "vertragspartner": "Daikin Australia Pty Ltd",
+            "vertragsbeginn": "01.01.2017",
+            "vertragsende": "31.12.2025",
+            "betrag": 22000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-010-V2",
+            "vertragsart": "Sicherheitsdienst",
+            "vertragspartner": "Wilson Security",
+            "vertragsbeginn": "01.07.2018",
+            "vertragsende": null,
+            "betrag": 48000,
+            "status": "Aktiv"
+          },
+          {
+            "id": "BBL-010-V3",
+            "vertragsart": "Gartenpflege",
+            "vertragspartner": "Canberra Landscaping Services",
+            "vertragsbeginn": "01.01.2020",
+            "vertragsende": "31.12.2024",
+            "betrag": 15000,
+            "status": "Aktiv"
+          }
+        ],
+        "ausstattung": [
+          {
+            "id": "BBL-010-A1",
+            "bezeichnung": "Split-Klimaanlage",
+            "kategorie": "HVAC",
+            "hersteller": "Daikin",
+            "baujahr": 2016,
+            "standort": "Büro- und Residenzbereich"
+          },
+          {
+            "id": "BBL-010-A2",
+            "bezeichnung": "Solaranlage Warmwasser",
+            "kategorie": "Solar/Energie",
+            "hersteller": "Rheem Australia",
+            "baujahr": 2016,
+            "standort": "Dach"
+          },
+          {
+            "id": "BBL-010-A3",
+            "bezeichnung": "Alarmanlage",
+            "kategorie": "Sicherheit",
+            "hersteller": "Bosch Security",
+            "baujahr": 2016,
+            "standort": "Gesamtgebäude"
+          },
+          {
+            "id": "BBL-010-A4",
+            "bezeichnung": "Videoüberwachung",
+            "kategorie": "Sicherheit",
+            "hersteller": "Hikvision",
+            "baujahr": 2020,
+            "standort": "Aussenbereich"
+          }
+        ],
+        "kosten": [
+          {
+            "id": "BBL-010-K1",
+            "kostengruppe": "311",
+            "kostenart": "Stromversorgung",
+            "betrag": 18000,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-010-K2",
+            "kostengruppe": "330",
+            "kostenart": "Reinigung und Gartenpflege",
+            "betrag": 24000,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-010-K3",
+            "kostengruppe": "350",
+            "kostenart": "Sicherheitsdienst",
+            "betrag": 52000,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
+          },
+          {
+            "id": "BBL-010-K4",
+            "kostengruppe": "340",
+            "kostenart": "Klimaanlagen-Wartung",
+            "betrag": 8500,
+            "einheit": "AUD/Jahr",
+            "stichtag": "01.12.2024"
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          149.1245,
+          -35.312
+        ]
+      }
+    }
+  ]
+}

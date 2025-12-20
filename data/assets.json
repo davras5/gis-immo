@@ -1,556 +1,970 @@
 {
   "assets": [
     {
-      "id": "826ad41f-1f42-4cdf-850d-2c30e9ca98a3",
-      "bezeichnung": "Fernwärmeübergabestation",
-      "kategorie": "HVAC",
-      "hersteller": "Siemens AG",
-      "baujahr": 2019,
-      "standort": "Untergeschoss Technikraum",
+      "assetId": "892a34b2-3e09-48e3-8371-5ea20fd2761c",
+      "name": "Fernwärmeübergabestation",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "manufacturer": "Siemens AG",
+      "installationYear": 2019,
+      "location": "Untergeschoss Technikraum",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-001-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-12-01T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-01T00:00:00Z",
       "legacyId": "BBL-001-A1",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "9c57bf61-95b0-4352-b7b4-4500485f295a",
-      "bezeichnung": "Personenaufzug Haupttreppe",
-      "kategorie": "Aufzüge",
-      "hersteller": "Schindler AG",
-      "baujahr": 2019,
-      "standort": "Treppenhaus Mitte",
+      "assetId": "5b23cd3b-5c0c-4767-8bbb-cded5f73c729",
+      "name": "Personenaufzug Haupttreppe",
+      "category": "Aufzüge",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "manufacturer": "Schindler AG",
+      "installationYear": 2019,
+      "location": "Treppenhaus Mitte",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-001-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-09-10T00:00:00Z",
+      "nextMaintenanceDate": "2025-09-10T00:00:00Z",
       "legacyId": "BBL-001-A2",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "ed2274f9-c3e4-4de8-aeba-42000cf1dc10",
-      "bezeichnung": "Brandmeldeanlage",
-      "kategorie": "Brandschutz",
-      "hersteller": "Siemens Building Technologies",
-      "baujahr": 2019,
-      "standort": "Gesamtgebäude",
+      "assetId": "5f7742c5-7cbb-4675-9dfc-a350ee01cca8",
+      "name": "Brandmeldeanlage",
+      "category": "Brandschutz",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "manufacturer": "Siemens Building Technologies",
+      "installationYear": 2019,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-001-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-04-14T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-14T00:00:00Z",
       "legacyId": "BBL-001-A3",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "a25bfd3a-dc8b-47ca-96e6-9334cc45781b",
-      "bezeichnung": "Zutrittskontrollsystem",
-      "kategorie": "Sicherheit",
-      "hersteller": "dormakaba AG",
-      "baujahr": 2019,
-      "standort": "Alle Eingänge",
+      "assetId": "779f4dfe-ee43-4688-b03c-dd1bc1ecf5e3",
+      "name": "Zutrittskontrollsystem",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "manufacturer": "dormakaba AG",
+      "installationYear": 2019,
+      "location": "Alle Eingänge",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-001-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-01-20T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-20T00:00:00Z",
       "legacyId": "BBL-001-A4",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "454ec1ba-2132-4146-8d75-8f75a5455140",
-      "bezeichnung": "Notstromanlage",
-      "kategorie": "Elektro",
-      "hersteller": "ABB Schweiz AG",
-      "baujahr": 2019,
-      "standort": "Untergeschoss Technikraum",
+      "assetId": "21d90f84-ada4-4be4-b0f3-1780846c577d",
+      "name": "Notstromanlage",
+      "category": "Elektro",
+      "buildingIds": [
+        "BBL-001"
+      ],
+      "manufacturer": "ABB Schweiz AG",
+      "installationYear": 2019,
+      "location": "Untergeschoss Technikraum",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-001-005",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-01-06T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-06T00:00:00Z",
       "legacyId": "BBL-001-A5",
-      "buildingIds": [
-        "BBL-001"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "0a416f53-49e3-4651-b36f-4322a89b070b",
-      "bezeichnung": "Wärmepumpe Geothermie",
-      "kategorie": "HVAC",
-      "hersteller": "Viessmann",
-      "baujahr": 2000,
-      "standort": "Technikraum EG",
+      "assetId": "e8829a4b-93c2-4aa1-9cf8-25b8c6cacd00",
+      "name": "Wärmepumpe Geothermie",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "manufacturer": "Viessmann",
+      "installationYear": 2000,
+      "location": "Technikraum EG",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-002-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-02-03T00:00:00Z",
+      "nextMaintenanceDate": "2025-02-03T00:00:00Z",
       "legacyId": "BBL-002-A1",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "4d36aeb1-76e1-4184-b625-5be703ffefac",
-      "bezeichnung": "Klimaanlage Bürotrakt",
-      "kategorie": "HVAC",
-      "hersteller": "Daikin",
-      "baujahr": 2021,
-      "standort": "Dachgeschoss",
+      "assetId": "e7cf03ed-6b9f-4aa7-af80-1bec6871bb84",
+      "name": "Klimaanlage Bürotrakt",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "manufacturer": "Daikin",
+      "installationYear": 2021,
+      "location": "Dachgeschoss",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-002-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-06-27T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-27T00:00:00Z",
       "legacyId": "BBL-002-A2",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2026-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "dc96658c-4878-4701-beb7-04e068c9b97d",
-      "bezeichnung": "Videoüberwachungsanlage",
-      "kategorie": "Sicherheit",
-      "hersteller": "Bosch Security Systems",
-      "baujahr": 2020,
-      "standort": "Gesamtgebäude",
+      "assetId": "e6e624cf-9c4a-4180-aef6-67e0adad5216",
+      "name": "Videoüberwachungsanlage",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "manufacturer": "Bosch Security Systems",
+      "installationYear": 2020,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-002-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-09-20T00:00:00Z",
+      "nextMaintenanceDate": "2025-09-20T00:00:00Z",
       "legacyId": "BBL-002-A3",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2025-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "d7cd23ad-1e82-47a6-a28f-1564e3d28a15",
-      "bezeichnung": "Personenaufzug",
-      "kategorie": "Aufzüge",
-      "hersteller": "ThyssenKrupp",
-      "baujahr": 2000,
-      "standort": "Haupteingang",
+      "assetId": "bf9fed94-85e2-40f8-8c5e-c15f159fa1ca",
+      "name": "Personenaufzug",
+      "category": "Aufzüge",
+      "buildingIds": [
+        "BBL-002"
+      ],
+      "manufacturer": "ThyssenKrupp",
+      "installationYear": 2000,
+      "location": "Haupteingang",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-002-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-11-24T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-24T00:00:00Z",
       "legacyId": "BBL-002-A4",
-      "buildingIds": [
-        "BBL-002"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "4d07906d-1f89-40c6-a27a-4cf526b06e52",
-      "bezeichnung": "Gasheizungsanlage",
-      "kategorie": "HVAC",
-      "hersteller": "Viessmann",
-      "baujahr": 2017,
-      "standort": "Heizzentrale UG",
+      "assetId": "62571ebf-430d-443c-a6e6-c0eeb4780941",
+      "name": "Gasheizungsanlage",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "manufacturer": "Viessmann",
+      "installationYear": 2017,
+      "location": "Heizzentrale UG",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-003-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-10-04T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-04T00:00:00Z",
       "legacyId": "BBL-003-A1",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "e5cdfd55-ca76-406a-a6bd-f943b05471de",
-      "bezeichnung": "Lastenaufzug 3t",
-      "kategorie": "Aufzüge",
-      "hersteller": "KONE",
-      "baujahr": 2017,
-      "standort": "Lagerhalle Ost",
+      "assetId": "6cce99dd-f21e-406e-8a87-989ef8fa43dc",
+      "name": "Lastenaufzug 3t",
+      "category": "Aufzüge",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "manufacturer": "KONE",
+      "installationYear": 2017,
+      "location": "Lagerhalle Ost",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-003-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-04-07T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-07T00:00:00Z",
       "legacyId": "BBL-003-A2",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "6c37cf15-bc2c-47e6-aab9-d7284e08c601",
-      "bezeichnung": "Lastenaufzug 5t",
-      "kategorie": "Aufzüge",
-      "hersteller": "KONE",
-      "baujahr": 2017,
-      "standort": "Lagerhalle West",
+      "assetId": "a8997056-edbf-4f80-ae01-6535cdff2b2b",
+      "name": "Lastenaufzug 5t",
+      "category": "Aufzüge",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "manufacturer": "KONE",
+      "installationYear": 2017,
+      "location": "Lagerhalle West",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-003-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-09-22T00:00:00Z",
+      "nextMaintenanceDate": "2025-09-22T00:00:00Z",
       "legacyId": "BBL-003-A3",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "c632b3d8-3517-4e65-9950-f537d559144c",
-      "bezeichnung": "Sprinkleranlage",
-      "kategorie": "Brandschutz",
-      "hersteller": "Minimax",
-      "baujahr": 2017,
-      "standort": "Gesamte Lagerhalle",
+      "assetId": "40357597-d5d8-4f2c-9972-e0c62d0d06d4",
+      "name": "Sprinkleranlage",
+      "category": "Brandschutz",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "manufacturer": "Minimax",
+      "installationYear": 2017,
+      "location": "Gesamte Lagerhalle",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-003-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-09-09T00:00:00Z",
+      "nextMaintenanceDate": "2025-09-09T00:00:00Z",
       "legacyId": "BBL-003-A4",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "e676b7ad-e531-45ba-8710-97672d4a3e0d",
-      "bezeichnung": "Lüftungsanlage Lagerhalle",
-      "kategorie": "HVAC",
-      "hersteller": "Zehnder",
-      "baujahr": 2017,
-      "standort": "Dach Lagerhalle",
+      "assetId": "db185331-2ebb-41d7-b117-df0019b14580",
+      "name": "Lüftungsanlage Lagerhalle",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "manufacturer": "Zehnder",
+      "installationYear": 2017,
+      "location": "Dach Lagerhalle",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-003-005",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-04-24T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-24T00:00:00Z",
       "legacyId": "BBL-003-A5",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "7d7a30ad-450a-420e-8aae-f52e83a902ec",
-      "bezeichnung": "Hubarbeitsbühne",
-      "kategorie": "Logistik",
-      "hersteller": "Jungheinrich",
-      "baujahr": 2020,
-      "standort": "Hochregallager",
+      "assetId": "5fadbebd-3bfd-4035-b59c-375b9dc3e00f",
+      "name": "Hubarbeitsbühne",
+      "category": "Logistik",
+      "buildingIds": [
+        "BBL-003"
+      ],
+      "manufacturer": "Jungheinrich",
+      "installationYear": 2020,
+      "location": "Hochregallager",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-003-006",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-11-18T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-18T00:00:00Z",
       "legacyId": "BBL-003-A6",
-      "buildingIds": [
-        "BBL-003"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2025-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "2375dec2-17ee-4562-bdf4-73b5a5f3046a",
-      "bezeichnung": "Klimaanlage VRF-System",
-      "kategorie": "HVAC",
-      "hersteller": "Carrier",
-      "baujahr": 2020,
-      "standort": "Büroetagen 12-14",
+      "assetId": "579be8e7-64da-4943-a8dd-b2ab630205be",
+      "name": "Klimaanlage VRF-System",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-004"
+      ],
+      "manufacturer": "Carrier",
+      "installationYear": 2020,
+      "location": "Büroetagen 12-14",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-004-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-01-26T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-26T00:00:00Z",
       "legacyId": "BBL-004-A1",
-      "buildingIds": [
-        "BBL-004"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2025-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "5bdd2382-1a30-4a8b-b8d7-09f0c8d3ee28",
-      "bezeichnung": "Zutrittskontrollsystem",
-      "kategorie": "Sicherheit",
-      "hersteller": "HID Global",
-      "baujahr": 2020,
-      "standort": "Alle Eingänge",
+      "assetId": "e7185798-6e89-48a4-8884-4391a152b957",
+      "name": "Zutrittskontrollsystem",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-004"
+      ],
+      "manufacturer": "HID Global",
+      "installationYear": 2020,
+      "location": "Alle Eingänge",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-004-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-04-19T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-19T00:00:00Z",
       "legacyId": "BBL-004-A2",
-      "buildingIds": [
-        "BBL-004"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2025-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "fcee49e3-1e48-4d90-b7f5-2305af209da3",
-      "bezeichnung": "Brandmeldeanlage",
-      "kategorie": "Brandschutz",
-      "hersteller": "Honeywell",
-      "baujahr": 2020,
-      "standort": "Gesamte Mietfläche",
+      "assetId": "923f22ab-3c59-4c86-bf13-27ad0b5b8501",
+      "name": "Brandmeldeanlage",
+      "category": "Brandschutz",
+      "buildingIds": [
+        "BBL-004"
+      ],
+      "manufacturer": "Honeywell",
+      "installationYear": 2020,
+      "location": "Gesamte Mietfläche",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-004-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-02-08T00:00:00Z",
+      "nextMaintenanceDate": "2025-02-08T00:00:00Z",
       "legacyId": "BBL-004-A3",
-      "buildingIds": [
-        "BBL-004"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2025-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "fac590e4-4b5c-459e-86af-93f9f04fc48c",
-      "bezeichnung": "Ölheizungsanlage (Ersatz geplant)",
-      "kategorie": "HVAC",
-      "hersteller": "Weishaupt",
-      "baujahr": 1965,
-      "standort": "Heizzentrale UG",
+      "assetId": "91f5518a-a85c-433d-ad17-91b2c29030b3",
+      "name": "Ölheizungsanlage (Ersatz geplant)",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "manufacturer": "Weishaupt",
+      "installationYear": 1965,
+      "location": "Heizzentrale UG",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-005-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-04-23T00:00:00Z",
+      "nextMaintenanceDate": "2025-04-23T00:00:00Z",
       "legacyId": "BBL-005-A1",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "9d56aa6b-e445-4c35-b7c4-761223c3135e",
-      "bezeichnung": "Personenaufzug",
-      "kategorie": "Aufzüge",
-      "hersteller": "Schindler AG",
-      "baujahr": 2015,
-      "standort": "Treppenhaus Hauptgebäude",
+      "assetId": "4b6c9e0d-22bb-4fcf-b807-650fbd8f947b",
+      "name": "Personenaufzug",
+      "category": "Aufzüge",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "manufacturer": "Schindler AG",
+      "installationYear": 2015,
+      "location": "Treppenhaus Hauptgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-005-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-02-23T00:00:00Z",
+      "nextMaintenanceDate": "2025-02-23T00:00:00Z",
       "legacyId": "BBL-005-A2",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "6878a32b-24f4-4378-81fd-6f25737bcc26",
-      "bezeichnung": "Lüftungsanlage Schulungsräume",
-      "kategorie": "HVAC",
-      "hersteller": "Zehnder",
-      "baujahr": 2015,
-      "standort": "Dachgeschoss",
+      "assetId": "0f0ef047-0fce-4200-ab88-8e03ddc48d5c",
+      "name": "Lüftungsanlage Schulungsräume",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "manufacturer": "Zehnder",
+      "installationYear": 2015,
+      "location": "Dachgeschoss",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-005-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-01-19T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-19T00:00:00Z",
       "legacyId": "BBL-005-A3",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "d7ea2a57-34f7-410a-b440-0d33e9d76069",
-      "bezeichnung": "Brandmeldeanlage",
-      "kategorie": "Brandschutz",
-      "hersteller": "Siemens",
-      "baujahr": 2015,
-      "standort": "Gesamtgebäude",
+      "assetId": "82a1751e-5108-4b62-94ac-ab1c41d0fab1",
+      "name": "Brandmeldeanlage",
+      "category": "Brandschutz",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "manufacturer": "Siemens",
+      "installationYear": 2015,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-005-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-01-03T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-03T00:00:00Z",
       "legacyId": "BBL-005-A4",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "297c788b-661f-482c-8b1a-2c5dfa7d56c1",
-      "bezeichnung": "Beamer Konferenzraum A",
-      "kategorie": "Medientechnik",
-      "hersteller": "Epson",
-      "baujahr": 2022,
-      "standort": "Konferenzraum A, 2. OG",
+      "assetId": "966faefe-25f8-4e44-bbe2-12712fe8f67c",
+      "name": "Beamer Konferenzraum A",
+      "category": "Medientechnik",
+      "buildingIds": [
+        "BBL-005"
+      ],
+      "manufacturer": "Epson",
+      "installationYear": 2022,
+      "location": "Konferenzraum A, 2. OG",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-005-005",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-12-27T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-27T00:00:00Z",
       "legacyId": "BBL-005-A5",
-      "buildingIds": [
-        "BBL-005"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2027-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "c3d2a255-cb01-4f55-b56a-ecd75dea651d",
-      "bezeichnung": "VRF-Klimaanlage",
-      "kategorie": "HVAC",
-      "hersteller": "Daikin",
-      "baujahr": 2018,
-      "standort": "Gesamtgebäude",
+      "assetId": "6d29f306-1a7e-4822-8e20-8f4e282fe7be",
+      "name": "VRF-Klimaanlage",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "manufacturer": "Daikin",
+      "installationYear": 2018,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-006-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-10-15T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-15T00:00:00Z",
       "legacyId": "BBL-006-A1",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "5315fcf3-9a47-4e68-9b81-7dd37539bad0",
-      "bezeichnung": "Personenaufzug",
-      "kategorie": "Aufzüge",
-      "hersteller": "Mitsubishi Electric",
-      "baujahr": 1991,
-      "standort": "Hauptgebäude",
+      "assetId": "155fae4a-7da3-4c92-ac07-ba8cd290ec32",
+      "name": "Personenaufzug",
+      "category": "Aufzüge",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "manufacturer": "Mitsubishi Electric",
+      "installationYear": 1991,
+      "location": "Hauptgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-006-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-03-12T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-12T00:00:00Z",
       "legacyId": "BBL-006-A2",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "a3052840-dc85-4060-acc6-473ae3f4ff61",
-      "bezeichnung": "Erdbeben-Frühwarnsystem",
-      "kategorie": "Sicherheit",
-      "hersteller": "Omron",
-      "baujahr": 2018,
-      "standort": "Technikraum EG",
+      "assetId": "0056dd82-ab56-450d-9733-bc5290ee357a",
+      "name": "Erdbeben-Frühwarnsystem",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "manufacturer": "Omron",
+      "installationYear": 2018,
+      "location": "Technikraum EG",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-006-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-10-19T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-19T00:00:00Z",
       "legacyId": "BBL-006-A3",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "2a07a379-8b6f-4b17-a76d-6d2ebcc7f143",
-      "bezeichnung": "Videoüberwachungsanlage",
-      "kategorie": "Sicherheit",
-      "hersteller": "Panasonic",
-      "baujahr": 2018,
-      "standort": "Gesamtgebäude",
+      "assetId": "dabbab0a-a3dd-4aa8-97e5-af281f3fbd92",
+      "name": "Videoüberwachungsanlage",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-006"
+      ],
+      "manufacturer": "Panasonic",
+      "installationYear": 2018,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-006-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-05-06T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-06T00:00:00Z",
       "legacyId": "BBL-006-A4",
-      "buildingIds": [
-        "BBL-006"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "6dddadaa-1a25-4885-9d44-3363beb5cc71",
-      "bezeichnung": "Gasheizungsanlage",
-      "kategorie": "HVAC",
-      "hersteller": "Viessmann",
-      "baujahr": 2015,
-      "standort": "Heizzentrale UG",
+      "assetId": "c1631463-000f-4649-b00e-ea82aa4e0386",
+      "name": "Gasheizungsanlage",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "manufacturer": "Viessmann",
+      "installationYear": 2015,
+      "location": "Heizzentrale UG",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-007-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-06-15T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-15T00:00:00Z",
       "legacyId": "BBL-007-A1",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "e39900b6-145c-48f6-996a-11210b6e2ddc",
-      "bezeichnung": "Personenaufzug",
-      "kategorie": "Aufzüge",
-      "hersteller": "Schindler AG",
-      "baujahr": 2015,
-      "standort": "Treppenhaus",
+      "assetId": "f46e0e08-7602-41bd-9d07-4e7c4d8d4449",
+      "name": "Personenaufzug",
+      "category": "Aufzüge",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "manufacturer": "Schindler AG",
+      "installationYear": 2015,
+      "location": "Treppenhaus",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-007-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-09-17T00:00:00Z",
+      "nextMaintenanceDate": "2025-09-17T00:00:00Z",
       "legacyId": "BBL-007-A2",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "ded37e4b-f4ef-4840-8cac-69b2fd2def99",
-      "bezeichnung": "Gegensprechanlage",
-      "kategorie": "Sicherheit",
-      "hersteller": "Siedle",
-      "baujahr": 2015,
-      "standort": "Alle Wohnungen",
+      "assetId": "69b59e36-59b0-4679-a207-4241122767f0",
+      "name": "Gegensprechanlage",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "manufacturer": "Siedle",
+      "installationYear": 2015,
+      "location": "Alle Wohnungen",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-007-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-07-12T00:00:00Z",
+      "nextMaintenanceDate": "2025-07-12T00:00:00Z",
       "legacyId": "BBL-007-A3",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "9041fbf2-781d-49f8-935a-67a330af2312",
-      "bezeichnung": "Waschmaschinen Gemeinschaftsraum",
-      "kategorie": "Sanitär",
-      "hersteller": "Electrolux",
-      "baujahr": 2020,
-      "standort": "Waschküche UG",
+      "assetId": "c0f80eee-5437-43df-a0d6-942a6c1e5466",
+      "name": "Waschmaschinen Gemeinschaftsraum",
+      "category": "Sanitär",
+      "buildingIds": [
+        "BBL-007"
+      ],
+      "manufacturer": "Electrolux",
+      "installationYear": 2020,
+      "location": "Waschküche UG",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-007-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-12-07T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-07T00:00:00Z",
       "legacyId": "BBL-007-A4",
-      "buildingIds": [
-        "BBL-007"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2025-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "b929b31d-c3b6-41eb-90df-55e598b30dbe",
-      "bezeichnung": "Split-Klimaanlage Büro",
-      "kategorie": "HVAC",
-      "hersteller": "Carrier",
-      "baujahr": 2022,
-      "standort": "Bürotrakt",
+      "assetId": "30215f46-baf5-462a-8ec3-a879bc937ced",
+      "name": "Split-Klimaanlage Büro",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "manufacturer": "Carrier",
+      "installationYear": 2022,
+      "location": "Bürotrakt",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-008-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-11-23T00:00:00Z",
+      "nextMaintenanceDate": "2025-11-23T00:00:00Z",
       "legacyId": "BBL-008-A1",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2027-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "1836e7b3-a1e6-4582-bcbf-aacb76fe6d59",
-      "bezeichnung": "Split-Klimaanlage Residenz",
-      "kategorie": "HVAC",
-      "hersteller": "Carrier",
-      "baujahr": 2022,
-      "standort": "Residenz",
+      "assetId": "605f6aa3-e6d0-4022-afe2-b11a3e71812b",
+      "name": "Split-Klimaanlage Residenz",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "manufacturer": "Carrier",
+      "installationYear": 2022,
+      "location": "Residenz",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-008-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-05-22T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-22T00:00:00Z",
       "legacyId": "BBL-008-A2",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2027-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "34108685-01a3-49a2-86cf-9214ef996501",
-      "bezeichnung": "Solaranlage Warmwasser",
-      "kategorie": "Solar/Energie",
-      "hersteller": "Soletrol",
-      "baujahr": 2022,
-      "standort": "Dach",
+      "assetId": "a89d51ab-1e63-4e08-a937-3d1f01a0b21e",
+      "name": "Solaranlage Warmwasser",
+      "category": "Solar/Energie",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "manufacturer": "Soletrol",
+      "installationYear": 2022,
+      "location": "Dach",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-008-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-06-04T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-04T00:00:00Z",
       "legacyId": "BBL-008-A3",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2027-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "26276215-f820-4c0a-8d1c-fe9058fbb74f",
-      "bezeichnung": "Alarmanlage",
-      "kategorie": "Sicherheit",
-      "hersteller": "Intelbras",
-      "baujahr": 2022,
-      "standort": "Gesamtgebäude",
+      "assetId": "55eec0bc-3a41-4915-a8c7-ad2efb07b397",
+      "name": "Alarmanlage",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-008"
+      ],
+      "manufacturer": "Intelbras",
+      "installationYear": 2022,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-008-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-07-07T00:00:00Z",
+      "nextMaintenanceDate": "2025-07-07T00:00:00Z",
       "legacyId": "BBL-008-A4",
-      "buildingIds": [
-        "BBL-008"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2027-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "e81b050f-2bed-4552-ae72-70a42e0c7985",
-      "bezeichnung": "Präzisionsklimaanlage Serverraum",
-      "kategorie": "HVAC",
-      "hersteller": "Schneider Electric",
-      "baujahr": 2025,
-      "standort": "Serverräume A-D",
+      "assetId": "359593a9-a0ed-4255-9f29-0215920e0459",
+      "name": "Präzisionsklimaanlage Serverraum",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "manufacturer": "Schneider Electric",
+      "installationYear": 2025,
+      "location": "Serverräume A-D",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-009-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-05-14T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-14T00:00:00Z",
       "legacyId": "BBL-009-A1",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2030-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "5081bf5a-8a5b-4c93-b06f-396a9e91dae5",
-      "bezeichnung": "USV-Anlage 2MW",
-      "kategorie": "Elektro",
-      "hersteller": "ABB",
-      "baujahr": 2025,
-      "standort": "Elektrozentrale",
+      "assetId": "8745de32-5f9c-44a9-8f30-0850cee6cbd7",
+      "name": "USV-Anlage 2MW",
+      "category": "Elektro",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "manufacturer": "ABB",
+      "installationYear": 2025,
+      "location": "Elektrozentrale",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-009-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-01-06T00:00:00Z",
+      "nextMaintenanceDate": "2025-01-06T00:00:00Z",
       "legacyId": "BBL-009-A2",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2030-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "c28b6601-db10-4520-8a65-e465de143acc",
-      "bezeichnung": "Notstromdiesel 3MW",
-      "kategorie": "Elektro",
-      "hersteller": "Caterpillar",
-      "baujahr": 2025,
-      "standort": "Aussenbereich Nord",
+      "assetId": "e30d916b-c9ec-4901-93a2-cecaf0cdd62f",
+      "name": "Notstromdiesel 3MW",
+      "category": "Elektro",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "manufacturer": "Caterpillar",
+      "installationYear": 2025,
+      "location": "Aussenbereich Nord",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-009-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-05-19T00:00:00Z",
+      "nextMaintenanceDate": "2025-05-19T00:00:00Z",
       "legacyId": "BBL-009-A3",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2030-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "8c2aaa10-7fc2-4a0a-a4ca-af3eec9678d1",
-      "bezeichnung": "Brandlöschanlage Inergen",
-      "kategorie": "Brandschutz",
-      "hersteller": "Minimax",
-      "baujahr": 2025,
-      "standort": "Alle Serverräume",
+      "assetId": "9d36229f-33f9-40b3-9510-ec6a0a0c52fb",
+      "name": "Brandlöschanlage Inergen",
+      "category": "Brandschutz",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "manufacturer": "Minimax",
+      "installationYear": 2025,
+      "location": "Alle Serverräume",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-009-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-02-06T00:00:00Z",
+      "nextMaintenanceDate": "2025-02-06T00:00:00Z",
       "legacyId": "BBL-009-A4",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2030-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "5091003f-231f-462a-8f50-fd74709d0adf",
-      "bezeichnung": "Zutrittskontrollsystem",
-      "kategorie": "Sicherheit",
-      "hersteller": "Dormakaba",
-      "baujahr": 2025,
-      "standort": "Gesamtgebäude",
+      "assetId": "17ec78d3-8cb4-4f6b-85c0-d4b71b38630d",
+      "name": "Zutrittskontrollsystem",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "manufacturer": "Dormakaba",
+      "installationYear": 2025,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-009-005",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-03-08T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-08T00:00:00Z",
       "legacyId": "BBL-009-A5",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2030-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "2945751f-8d6b-4ace-aec0-6670b1427d93",
-      "bezeichnung": "Freikühler (Free Cooling)",
-      "kategorie": "HVAC",
-      "hersteller": "Güntner",
-      "baujahr": 2025,
-      "standort": "Dach",
+      "assetId": "5d59329e-7aff-4de1-9878-a24c16db3cb4",
+      "name": "Freikühler (Free Cooling)",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "manufacturer": "Güntner",
+      "installationYear": 2025,
+      "location": "Dach",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-009-006",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-07-16T00:00:00Z",
+      "nextMaintenanceDate": "2025-07-16T00:00:00Z",
       "legacyId": "BBL-009-A6",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2030-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "34c45c8b-5014-40ff-b58a-6ecc25f75aea",
-      "bezeichnung": "Gebäudeleitsystem",
-      "kategorie": "Gebäudeautomation",
-      "hersteller": "Siemens",
-      "baujahr": 2025,
-      "standort": "Leitwarte",
+      "assetId": "d9d92d97-5eaa-46c2-b0d3-01cd42cbff35",
+      "name": "Gebäudeleitsystem",
+      "category": "Gebäudeautomation",
+      "buildingIds": [
+        "BBL-009"
+      ],
+      "manufacturer": "Siemens",
+      "installationYear": 2025,
+      "location": "Leitwarte",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-009-007",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-08-21T00:00:00Z",
+      "nextMaintenanceDate": "2025-08-21T00:00:00Z",
       "legacyId": "BBL-009-A7",
-      "buildingIds": [
-        "BBL-009"
-      ]
+      "extensionData": {
+        "warrantyUntil": "2030-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "e38161ef-cb37-4ff0-972b-33fe864f83fe",
-      "bezeichnung": "Split-Klimaanlage",
-      "kategorie": "HVAC",
-      "hersteller": "Daikin",
-      "baujahr": 2016,
-      "standort": "Büro- und Residenzbereich",
+      "assetId": "2d5ceccc-4b31-4ae0-8596-c61c27437924",
+      "name": "Split-Klimaanlage",
+      "category": "HVAC",
+      "buildingIds": [
+        "BBL-010"
+      ],
+      "manufacturer": "Daikin",
+      "installationYear": 2016,
+      "location": "Büro- und Residenzbereich",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-010-001",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-06-22T00:00:00Z",
+      "nextMaintenanceDate": "2025-06-22T00:00:00Z",
       "legacyId": "BBL-010-A1",
-      "buildingIds": [
-        "BBL-010"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "8a5d9171-c1a2-4cee-b2e4-774ecbcaf152",
-      "bezeichnung": "Solaranlage Warmwasser",
-      "kategorie": "Solar/Energie",
-      "hersteller": "Rheem Australia",
-      "baujahr": 2016,
-      "standort": "Dach",
+      "assetId": "2ce7bb1e-1193-46be-8395-d25c3d67163e",
+      "name": "Solaranlage Warmwasser",
+      "category": "Solar/Energie",
+      "buildingIds": [
+        "BBL-010"
+      ],
+      "manufacturer": "Rheem Australia",
+      "installationYear": 2016,
+      "location": "Dach",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-010-002",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-12-05T00:00:00Z",
+      "nextMaintenanceDate": "2025-12-05T00:00:00Z",
       "legacyId": "BBL-010-A2",
-      "buildingIds": [
-        "BBL-010"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "daade1b3-7eb2-40ad-8335-b085161c6cfe",
-      "bezeichnung": "Alarmanlage",
-      "kategorie": "Sicherheit",
-      "hersteller": "Bosch Security",
-      "baujahr": 2016,
-      "standort": "Gesamtgebäude",
+      "assetId": "7f78f613-a478-4f7d-b831-eea0cd0902a3",
+      "name": "Alarmanlage",
+      "category": "Sicherheit",
+      "buildingIds": [
+        "BBL-010"
+      ],
+      "manufacturer": "Bosch Security",
+      "installationYear": 2016,
+      "location": "Gesamtgebäude",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-010-003",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-03-14T00:00:00Z",
+      "nextMaintenanceDate": "2025-03-14T00:00:00Z",
       "legacyId": "BBL-010-A3",
-      "buildingIds": [
-        "BBL-010"
-      ]
+      "extensionData": {
+        "warrantyUntil": null,
+        "technicalLifespan": 20
+      }
     },
     {
-      "id": "5e8195f2-d45e-4f63-a6de-020aa2380401",
-      "bezeichnung": "Videoüberwachung",
-      "kategorie": "Sicherheit",
-      "hersteller": "Hikvision",
-      "baujahr": 2020,
-      "standort": "Aussenbereich",
-      "legacyId": "BBL-010-A4",
+      "assetId": "196dc9fa-1a7f-4c9b-b18f-60c7c171c9f2",
+      "name": "Videoüberwachung",
+      "category": "Sicherheit",
       "buildingIds": [
         "BBL-010"
-      ]
+      ],
+      "manufacturer": "Hikvision",
+      "installationYear": 2020,
+      "location": "Aussenbereich",
+      "status": "In Betrieb",
+      "serialNumber": "SN-BBL-010-004",
+      "maintenanceInterval": "Jährlich",
+      "lastMaintenanceDate": "2024-10-23T00:00:00Z",
+      "nextMaintenanceDate": "2025-10-23T00:00:00Z",
+      "legacyId": "BBL-010-A4",
+      "extensionData": {
+        "warrantyUntil": "2025-12-31T00:00:00Z",
+        "technicalLifespan": 20
+      }
     }
   ]
 }

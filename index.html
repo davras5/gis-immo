@@ -6430,16 +6430,17 @@
         function loadMeasurementsForBuilding(building) {
             if (building && building.properties) {
                 var buildingId = building.properties.id;
-                // Filter from global allAreaMeasurements array
+                // Filter from global allAreaMeasurements array (DATAMODEL.md schema)
                 measurementsData = allAreaMeasurements
                     .filter(function(m) {
                         return m.buildingIds && m.buildingIds.includes(buildingId);
                     })
                     .map(function(m) {
                         return {
-                            id: m.id, areaType: m.areaType, value: m.value, unit: m.unit,
-                            source: m.source || 'Manuell', accuracy: m.accuracy,
-                            standard: m.standard, validFrom: m.validFrom, validUntil: m.validUntil || '—'
+                            id: m.areaMeasurementId, areaType: m.type, value: m.value, unit: m.unit,
+                            source: (m.extensionData && m.extensionData.source) || 'Manuell',
+                            accuracy: m.accuracy, standard: m.standard,
+                            validFrom: m.validFrom, validUntil: m.validUntil || '—'
                         };
                     });
             } else {
@@ -6527,16 +6528,16 @@
         function loadDocumentsForBuilding(building) {
             if (building && building.properties) {
                 var buildingId = building.properties.id;
-                // Filter from global allDocuments array
+                // Filter from global allDocuments array (DATAMODEL.md schema)
                 documentsData = allDocuments
                     .filter(function(d) {
                         return d.buildingIds && d.buildingIds.includes(buildingId);
                     })
                     .map(function(d) {
                         return {
-                            id: d.id, titel: d.titel, dokumentTyp: d.dokumentTyp,
-                            dateiformat: d.dateiformat, datum: d.datum,
-                            dateigroesse: d.dateigroesse, url: d.url || '#'
+                            id: d.documentId, titel: d.name, dokumentTyp: d.type,
+                            dateiformat: d.fileFormat, datum: d.validFrom,
+                            dateigroesse: d.fileSize, url: d.url || '#'
                         };
                     });
             } else {
@@ -6621,18 +6622,18 @@
         function loadKontakteForBuilding(building) {
             if (building && building.properties) {
                 var buildingId = building.properties.id;
-                // Filter from global allContacts array
+                // Filter from global allContacts array (DATAMODEL.md schema)
                 kontakteData = allContacts
                     .filter(function(k) {
                         return k.buildingIds && k.buildingIds.includes(buildingId);
                     })
                     .map(function(k) {
                         return {
-                            id: k.id,
+                            id: k.contactId,
                             name: k.name,
-                            rolle: k.rolle,
+                            rolle: k.role,
                             organisation: k.organisation,
-                            telefon: k.telefon,
+                            telefon: k.phone,
                             email: k.email
                         };
                     });
@@ -6718,19 +6719,19 @@
         function loadKostenForBuilding(building) {
             if (building && building.properties) {
                 var buildingId = building.properties.id;
-                // Filter from global allCosts array
+                // Filter from global allCosts array (DATAMODEL.md schema)
                 kostenData = allCosts
                     .filter(function(k) {
                         return k.buildingIds && k.buildingIds.includes(buildingId);
                     })
                     .map(function(k) {
                         return {
-                            id: k.id,
-                            kostengruppe: k.kostengruppe,
-                            kostenart: k.kostenart,
-                            betrag: k.betrag,
-                            einheit: k.einheit,
-                            stichtag: k.stichtag
+                            id: k.costId,
+                            kostengruppe: k.costGroup,
+                            kostenart: k.costType,
+                            betrag: k.amount,
+                            einheit: k.unit,
+                            stichtag: k.referenceDate
                         };
                     });
             } else {
@@ -6833,19 +6834,19 @@
         function loadVertraegeForBuilding(building) {
             if (building && building.properties) {
                 var buildingId = building.properties.id;
-                // Filter from global allContracts array
+                // Filter from global allContracts array (DATAMODEL.md schema)
                 vertraegeData = allContracts
                     .filter(function(v) {
                         return v.buildingIds && v.buildingIds.includes(buildingId);
                     })
                     .map(function(v) {
                         return {
-                            id: v.id,
-                            vertragsart: v.vertragsart,
-                            vertragspartner: v.vertragspartner,
-                            vertragsbeginn: v.vertragsbeginn,
-                            vertragsende: v.vertragsende,
-                            betrag: v.betrag,
+                            id: v.contractId,
+                            vertragsart: v.type,
+                            vertragspartner: v.contractPartner,
+                            vertragsbeginn: v.validFrom,
+                            vertragsende: v.validUntil,
+                            betrag: v.amount,
                             status: v.status
                         };
                     });
@@ -6953,19 +6954,19 @@
         function loadAusstattungForBuilding(building) {
             if (building && building.properties) {
                 var buildingId = building.properties.id;
-                // Filter from global allAssets array
+                // Filter from global allAssets array (DATAMODEL.md schema)
                 ausstattungData = allAssets
                     .filter(function(a) {
                         return a.buildingIds && a.buildingIds.includes(buildingId);
                     })
                     .map(function(a) {
                         return {
-                            id: a.id,
-                            bezeichnung: a.bezeichnung,
-                            kategorie: a.kategorie,
-                            hersteller: a.hersteller,
-                            baujahr: a.baujahr,
-                            standort: a.standort
+                            id: a.assetId,
+                            bezeichnung: a.name,
+                            kategorie: a.category,
+                            hersteller: a.manufacturer,
+                            baujahr: a.installationYear,
+                            standort: a.location
                         };
                     });
             } else {
