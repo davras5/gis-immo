@@ -4507,7 +4507,7 @@
 
         function navigateWithLandFilter() {
             if (!currentDetailBuilding) return;
-            var land = currentDetailBuilding.properties.land;
+            var land = currentDetailBuilding.properties.country;
             if (!land) return;
 
             // Reset all filters and set only land filter
@@ -4524,7 +4524,7 @@
 
         function navigateWithRegionFilter() {
             if (!currentDetailBuilding) return;
-            var region = currentDetailBuilding.properties.region;
+            var region = currentDetailBuilding.properties.stateProvincePrefecture;
             if (!region) return;
 
             // Reset all filters and set only region filter
@@ -5854,8 +5854,8 @@
                     matches = portfolioData.features.filter(function(f) {
                         var p = f.properties;
                         return (p.name && p.name.toLowerCase().includes(lowerTerm)) ||
-                               (p.adresse && p.adresse.toLowerCase().includes(lowerTerm)) ||
-                               (p.ort && p.ort.toLowerCase().includes(lowerTerm));
+                               (p.streetName && p.streetName.toLowerCase().includes(lowerTerm)) ||
+                               (p.city && p.city.toLowerCase().includes(lowerTerm));
                     });
                 }
                 resolve({ type: 'local', data: matches });
