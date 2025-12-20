@@ -16,6 +16,8 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 - [Entity: Document (Dokument)](#entity-document-dokument)
 - [Entity: Contact (Kontakt)](#entity-contact-kontakt)
 - [Entity: Asset (Ausstattung)](#entity-asset-ausstattung)
+- [Entity: Contract (Vertrag)](#entity-contract-vertrag)
+- [Entity: Cost (Kosten)](#entity-cost-kosten)
 - [Enumerations](#enumerations)
   - [Building Types](#building-types)
   - [Energy Types](#energy-types)
@@ -39,6 +41,7 @@ erDiagram
     Building ||--o{ Contract : "has"
     Building ||--o{ Certificate : "has"
     Building ||--o{ Asset : "has"
+    Building ||--o{ Cost : "has"
 
     Site {
         string siteId PK
@@ -108,6 +111,13 @@ erDiagram
         string name
         string category
         string manufacturer
+    }
+
+    Cost {
+        string costId PK
+        string costGroup
+        string costType
+        number amount
     }
 ```
 
@@ -191,17 +201,12 @@ Addresses represent the physical location of a building. A building can have mul
 | apartmentOrUnit | string | Unit or apartment number. | minLength: 1, maxLength: 50 | |
 | district | string | Borough or district within a city. | minLength: 1, maxLength: 50 | |
 | eventType | string, enum | Type of the event as domain event. Options: `AddressAdded`, `AddressUpdated` | | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for country-specific fields |
 | houseNumber | string | House number of the street. | minLength: 1, maxLength: 50 | Source: `hausnummer` |
 | postalCode | string | Postal code for mail sorting. | minLength: 1, maxLength: 15 | Source: `plz` |
-| stateProvincePrefecture | string | First-level administrative division (canton, state, province). | minLength: 1, maxLength: 50 | Source: `region` |
+| stateProvincePrefecture | string | First-level administrative division (state, province, canton). | minLength: 1, maxLength: 50 | Source: `region` |
 | streetName | string | Name of the street. | minLength: 1, maxLength: 150 | Extracted from `adresse` |
-| extensionData.formattedAddress | string | Pre-formatted full address string (e.g., "Bundesplatz 3, 3003 Bern") | | Swiss extension. Source: `adresse` |
-| extensionData.canton | string | Swiss canton code (e.g., "BE", "ZH", "GE") | | Swiss extension. Extracted from `region` |
-| extensionData.gemeinde | string | Municipality name | | Swiss extension |
-| extensionData.gemeindeNummer | string | Official municipality number (BFS-Nr.) | | Swiss extension |
-| extensionData.lv95East | number | Swiss LV95 East coordinate (E) | | Swiss extension |
-| extensionData.lv95North | number | Swiss LV95 North coordinate (N) | | Swiss extension |
+| extensionData.formattedAddress | string | Pre-formatted full address string | | Source: `adresse` |
 
 ### Example: Address Object
 
@@ -222,10 +227,7 @@ Addresses represent the physical location of a building. A building can have mul
     "longitude": 7.4448
   },
   "extensionData": {
-    "formattedAddress": "Bundesplatz 3, 3003 Bern",
-    "canton": "BE",
-    "lv95East": 2600000,
-    "lv95North": 1200000
+    "formattedAddress": "Bundesplatz 3, 3003 Bern"
   }
 }
 ```
@@ -248,24 +250,15 @@ Land represents a parcel of land or plot that belongs to a site. In the current 
 | **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Source: `gueltig_bis`, convert to ISO 8601 |
 | addressIds | array[string] | Array of address IDs linked to this land. | minLength: 1, maxLength: 50 per ID | |
 | eventType | string, enum | Type of the event as domain event. Options: `LandAdded`, `LandUpdated`, `LandDeleted` | | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for country-specific fields |
 | landCode | string | User specific land code. | minLength: 1, maxLength: 70 | |
-| landCoverage | string | Development level of land (e.g., "bebaut", "unbebaut", "teilweise bebaut"). | minLength: 1, maxLength: 50 | |
+| landCoverage | string | Development level of land. | minLength: 1, maxLength: 50 | |
 | landParcelNr | string | District/zoning number registered for the plot of land. | minLength: 1, maxLength: 50 | |
 | selfUse | boolean | Is the land self-used? | | |
 | status | string | Status of land. | minLength: 1, maxLength: 50 | |
 | tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
 | valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
-| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | Swiss extension. Source: `egrid` |
-| extensionData.parzellenNummer | string | Official Swiss parcel number | | Swiss extension |
-| extensionData.grundbuchKreis | string | Land registry district | | Swiss extension |
-| extensionData.grundbuchBlatt | string | Land registry folio number | | Swiss extension |
-| extensionData.katasterNummer | string | Cadastral number | | Swiss extension |
-| extensionData.gemeinde | string | Municipality name | | Swiss extension |
-| extensionData.kanton | string | Canton code (e.g., "BE", "ZH") | | Swiss extension |
-| extensionData.flaeche | number | Total land area in m² | | Swiss extension |
-| extensionData.nutzungszone | string | Zoning designation | | Swiss extension |
-| extensionData.bauzone | boolean | Is land in a building zone? | | Swiss extension |
+| extensionData.egrid | string | Federal property identifier (country-specific) | | Source: `egrid` |
 
 ### Example: Land Object
 
@@ -273,25 +266,13 @@ Land represents a parcel of land or plot that belongs to a site. In the current 
 {
   "landId": "BE-3003-1001",
   "name": "Bundesplatz Parzelle A",
-  "siteId": "SITE-BE-3003",
   "typeOfOwnership": "Owner",
   "validFrom": "1900-01-01T00:00:00Z",
   "validUntil": null,
   "addressIds": ["BBL-001-ADDR-1"],
-  "landCode": "BPL-A",
-  "landCoverage": "bebaut",
-  "landParcelNr": "1001",
-  "selfUse": true,
   "status": "Aktiv",
   "extensionData": {
-    "egrid": "CH123456789012",
-    "parzellenNummer": "1001",
-    "grundbuchKreis": "Bern",
-    "gemeinde": "Bern",
-    "kanton": "BE",
-    "flaeche": 5200,
-    "nutzungszone": "Kernzone",
-    "bauzone": true
+    "egrid": "CH123456789012"
   }
 }
 ```
@@ -341,14 +322,14 @@ The building is the core entity representing a physical structure in the portfol
 | tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
 | valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
 | yearOfLastRefurbishment | string | Year of last refurbishment. ISO 8601 format. | minLength: 20 | Source: `sanierung`, convert to ISO 8601 |
-| extensionData.egid | string | Eidgenössischer Gebäudeidentifikator (Federal Building Identifier) | | Swiss extension. Source: `egid` |
-| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | Swiss extension. Source: `egrid` |
-| extensionData.teilportfolio | string | Sub-portfolio category (e.g., "Verwaltungsgebäude") | | Swiss extension. Source: `teilportfolio` |
-| extensionData.teilportfolioGruppe | string | Sub-portfolio group (e.g., "Bundesverwaltung") | | Swiss extension. Source: `teilportfolio_gruppe` |
-| extensionData.region | string | Region/Canton | | Swiss extension. Source: `region` |
-| extensionData.heatingGenerator | string | Heating generator type (Wärmeerzeuger) | | Swiss extension. Source: `waermeerzeuger` |
-| extensionData.heatingSource | string | Heating source (Wärmequelle) | | Swiss extension. Source: `waermequelle` |
-| extensionData.hotWater | string | Hot water system description | | Swiss extension. Source: `warmwasser` |
+| extensionData.responsiblePerson | string | Name of responsible person for the building | | Source: `verantwortlich` |
+| extensionData.egid | string | Federal building identifier (country-specific) | | Source: `egid` |
+| extensionData.egrid | string | Federal property identifier (country-specific) | | Source: `egrid` |
+| extensionData.portfolio | string | Sub-portfolio category | | Source: `teilportfolio` |
+| extensionData.portfolioGroup | string | Portfolio group | | Source: `teilportfolio_gruppe` |
+| extensionData.heatingGenerator | string | Heating generator type | | Source: `waermeerzeuger` |
+| extensionData.heatingSource | string | Heating source | | Source: `waermequelle` |
+| extensionData.hotWater | string | Hot water system description | | Source: `warmwasser` |
 
 ### Example: Building Object
 
@@ -356,14 +337,12 @@ The building is the core entity representing a physical structure in the portfol
 {
   "buildingId": "BBL-001",
   "name": "Bundeshaus West",
-  "siteId": "BE-3003-1001",
   "primaryTypeOfBuilding": "Office Corporate",
   "secondaryTypeOfBuilding": "Mixed Use Office/Retail",
   "typeOfOwnership": "Owner",
   "validFrom": "1902-06-01T00:00:00Z",
   "validUntil": null,
   "addressIds": ["ADDR-001"],
-  "buildingCode": "BHW-BERN",
   "constructionYear": "1902-01-01T00:00:00Z",
   "buildingPermitDate": "1898-03-15T00:00:00Z",
   "yearOfLastRefurbishment": "2019-01-01T00:00:00Z",
@@ -373,13 +352,10 @@ The building is the core entity representing a physical structure in the portfol
   "monumentProtection": true,
   "status": "In Betrieb",
   "energyEfficiencyClass": "C",
-  "primaryEnergyType": "District heating",
   "extensionData": {
     "egid": "301001234",
-    "egrid": "CH123456789012",
-    "teilportfolio": "Verwaltungsgebäude",
-    "teilportfolioGruppe": "Bundesverwaltung",
-    "region": "Kanton Bern",
+    "portfolio": "Verwaltungsgebäude",
+    "portfolioGroup": "Bundesverwaltung",
     "heatingGenerator": "Fernwärme",
     "heatingSource": "Fernwärmenetz Stadt Bern",
     "hotWater": "Zentral (Fernwärme)"
@@ -663,6 +639,111 @@ Common asset categories for buildings:
 
 ---
 
+## Entity: Contract (Vertrag)
+
+Contracts represent service agreements, maintenance contracts, and other contractual arrangements associated with a building.
+
+### Schema Definition
+
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **contractId** | string | Unique identifier for the contract. | **mandatory**, minLength: 1, maxLength: 50 | Source: `vertraege[].id` |
+| **type** | string, enum | Type of contract. See [Contract Types](#contract-types). | **mandatory** | Source: `vertraege[].vertragsart` |
+| **buildingIds** | array[string] | Array of building IDs this contract belongs to. | **mandatory**, minLength: 1 | Derived from parent building |
+| **validFrom** | string | Contract start date. ISO 8601 format. | **mandatory**, minLength: 20 | Source: `vertraege[].vertragsbeginn`, convert to ISO 8601 |
+| eventType | string, enum | Type of the event as domain event. Options: `ContractAdded`, `ContractUpdated`, `ContractDeleted` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for country-specific fields |
+| contractPartner | string | Name of the contract partner or vendor. | minLength: 1, maxLength: 200 | Source: `vertraege[].vertragspartner` |
+| validUntil | string | Contract end date. ISO 8601 format. | minLength: 20, null allowed | Source: `vertraege[].vertragsende`, convert to ISO 8601 |
+| amount | number | Contract value or annual amount. | | Source: `vertraege[].betrag` |
+| currency | string | Currency code (ISO 4217). | minLength: 3, maxLength: 3 | Default: "CHF" for Swiss contracts |
+| status | string | Current contract status (e.g., "Aktiv", "Beendet"). | minLength: 1, maxLength: 50 | Source: `vertraege[].status` |
+
+### Contract Types
+
+Common contract types for buildings:
+
+| Type | Description |
+|------|-------------|
+| `Wartungsvertrag` | Maintenance contract |
+| `Reinigungsvertrag` | Cleaning contract |
+| `Sicherheitsdienst` | Security services |
+| `Mietvertrag` | Lease agreement |
+| `Servicevertrag` | General service contract |
+| `Versicherung` | Insurance contract |
+| `Sonstige` | Other |
+
+### Example: Contract Object
+
+```json
+{
+  "contractId": "BBL-001-V1",
+  "type": "Wartungsvertrag",
+  "buildingIds": ["BBL-001"],
+  "validFrom": "2020-01-01T00:00:00Z",
+  "validUntil": "2025-12-31T00:00:00Z",
+  "contractPartner": "Siemens Building Technologies AG",
+  "amount": 85000,
+  "currency": "CHF",
+  "status": "Aktiv"
+}
+```
+
+---
+
+## Entity: Cost (Kosten)
+
+Costs represent operating expenses, utility costs, and other recurring costs associated with a building. Costs are typically categorized using standard cost group codes.
+
+### Schema Definition
+
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **costId** | string | Unique identifier for the cost entry. | **mandatory**, minLength: 1, maxLength: 50 | Source: `kosten[].id` |
+| **costGroup** | string | Cost group code (e.g., DIN 18960 or Swiss SN 506 511). | **mandatory**, minLength: 1, maxLength: 10 | Source: `kosten[].kostengruppe` |
+| **costType** | string | Description of the cost type. | **mandatory**, minLength: 1, maxLength: 200 | Source: `kosten[].kostenart` |
+| **buildingIds** | array[string] | Array of building IDs this cost belongs to. | **mandatory**, minLength: 1 | Derived from parent building |
+| eventType | string, enum | Type of the event as domain event. Options: `CostAdded`, `CostUpdated`, `CostDeleted` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for country-specific fields |
+| amount | number | Cost amount. | | Source: `kosten[].betrag` |
+| unit | string | Unit of the cost (e.g., "CHF/Jahr", "CHF/Monat"). | minLength: 1, maxLength: 20 | Source: `kosten[].einheit` |
+| currency | string | Currency code (ISO 4217). | minLength: 3, maxLength: 3 | Extracted from `kosten[].einheit`, e.g., "CHF" |
+| period | string, enum | Cost period. Options: `Annual`, `Monthly`, `Quarterly`, `OneTime` | | Derived from `kosten[].einheit` |
+| referenceDate | string | Reference date for the cost entry. ISO 8601 format. | minLength: 20 | Source: `kosten[].stichtag`, convert to ISO 8601 |
+
+### Cost Groups (Swiss SN 506 511)
+
+Common cost group codes for building operations:
+
+| Code | Category | Description |
+|------|----------|-------------|
+| 311 | Operating | Electricity supply |
+| 312 | Operating | Heating energy |
+| 313 | Operating | Water supply |
+| 321 | Operating | Wastewater disposal |
+| 330 | Operating | Interior cleaning |
+| 350 | Operating | Security services |
+| 410 | Maintenance | Building construction maintenance |
+| 420 | Maintenance | Technical installations maintenance |
+
+### Example: Cost Object
+
+```json
+{
+  "costId": "BBL-001-K1",
+  "costGroup": "311",
+  "costType": "Stromversorgung",
+  "buildingIds": ["BBL-001"],
+  "amount": 185000,
+  "unit": "CHF/Jahr",
+  "currency": "CHF",
+  "period": "Annual",
+  "referenceDate": "2024-12-01T00:00:00Z"
+}
+```
+
+---
+
 ## Enumerations
 
 ### Building Types
@@ -709,7 +790,8 @@ The following entities are related to buildings and will be documented in separa
 | ~~**Document**~~ | ~~Related documents (plans, certificates)~~ | *(documented above)* |
 | ~~**Contact**~~ | ~~Contact persons for the building~~ | *(documented above)* |
 | ~~**Asset**~~ | ~~Technical equipment and installations~~ | *(documented above)* |
-| **Contract** | Service and maintenance contracts | 1 Building → n Contracts |
+| ~~**Contract**~~ | ~~Service and maintenance contracts~~ | *(documented above)* |
+| ~~**Cost**~~ | ~~Operating expenses and utility costs~~ | *(documented above)* |
 | **Certificate** | Building certifications (LEED, BREEAM, etc.) | 1 Building → n Certificates |
 | **Valuation** | Property valuations | 1 Building → n Valuations |
 
