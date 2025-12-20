@@ -884,6 +884,7 @@
         body.detail-active #detail-view {
             overflow: visible;
             align-self: flex-start;
+            min-height: calc(100vh - 120px); /* header 90px + footer ~30px */
         }
 
         /* Fix filter-pane height in detail view - collapse when closed */
@@ -2838,6 +2839,11 @@
             #gallery-view {
                 padding: var(--space-4);
             }
+
+            /* Adjust detail-view min-height for tablet header (70px) */
+            body.detail-active #detail-view {
+                min-height: calc(100vh - 100px); /* header 70px + footer ~30px */
+            }
         }
 
         /* Mobile breakpoint (< 768px) */
@@ -3135,6 +3141,11 @@
 
             #footer-links a {
                 margin-left: var(--space-3);
+            }
+
+            /* Adjust detail-view min-height for mobile (header wraps, estimate ~120px) */
+            body.detail-active #detail-view {
+                min-height: calc(100vh - 150px); /* header ~120px + footer ~30px */
             }
         }
 
