@@ -966,9 +966,9 @@
         /* When open, use fixed positioning below full header */
         body.detail-active #smart-drawer.open {
             position: fixed;
-            top: 200px; /* below header-main (90px) + detail-header (~56px) + detail-tabs (~54px) */
+            top: 214px; /* below header-main (90px) + header-detail (124px) */
             right: 0;
-            height: calc(100vh - 200px); /* viewport minus full header */
+            height: calc(100vh - 214px); /* viewport minus full header */
             z-index: 100;
         }
 
