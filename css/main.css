@@ -962,12 +962,13 @@
             border: none;
         }
 
-        /* When open, constrain to viewport height minus header */
+        /* When open, use fixed positioning to remove from flow */
         body.detail-active #smart-drawer.open {
-            align-self: flex-start;
-            height: calc(100vh - 120px); /* fixed height matching viewport */
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 90px; /* below header */
+            right: 0;
+            height: calc(100vh - 90px); /* viewport minus header */
+            z-index: 100;
         }
 
         .detail-header {
@@ -1106,8 +1107,14 @@
         .detail-content {
             overflow: visible;
             padding: var(--space-6);
+            transition: padding-right var(--transition-slow);
         }
-        
+
+        /* Add padding when drawer is open in detail view */
+        body.detail-active:has(#smart-drawer.open) .detail-content {
+            padding-right: calc(400px + var(--space-6));
+        }
+
         .detail-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -3035,9 +3042,15 @@
                 padding: var(--space-4);
             }
 
-            /* Smart-drawer sticky height for tablet */
+            /* Smart-drawer fixed positioning for tablet */
             body.detail-active #smart-drawer.open {
-                height: calc(100vh - 100px); /* fixed height matching viewport */
+                top: 70px; /* tablet header height */
+                height: calc(100vh - 70px);
+            }
+
+            /* Detail content padding for tablet drawer width */
+            body.detail-active:has(#smart-drawer.open) .detail-content {
+                padding-right: calc(340px + var(--space-6));
             }
         }
 
