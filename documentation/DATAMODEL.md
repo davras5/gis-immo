@@ -127,8 +127,8 @@ A site represents a logical grouping of buildings, such as a campus, property, o
 
 | Field | Type | Description | Constraints | Comment |
 |-------|------|-------------|-------------|---------|
-| **siteId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` |
-| **name** | string | Name of the site. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_name` |
+| **siteId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Not used in current demo |
+| **name** | string | Name of the site. | **mandatory**, minLength: 1, maxLength: 50 | Not used in current demo |
 | **type** | string, enum | Type of site. Options: `Education`, `Health Care`, `Hotel`, `Industrial`, `Lodging`, `Leisure & Recreation`, `Mixed Use`, `Office`, `Residential`, `Retail`, `Technology/Science`, `Other` | **mandatory** | Derived from `teilportfolio` or `objektart1` |
 | **addressIds** | array[string] | Array of address IDs linked to this site. | **mandatory**, minLength: 1, maxLength: 50 per ID | Collect from linked buildings |
 | **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
@@ -238,7 +238,7 @@ Land represents a parcel of land or plot that belongs to a site. In the current 
 |-------|------|-------------|-------------|---------|
 | **landId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` or generated |
 | **name** | string | Name of land (e.g., park, garden, parking). | **mandatory**, minLength: 1, maxLength: 200 | Source: `grundstueck_name` |
-| **siteId** | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Derived from site relationship |
+| **siteId** | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Not used in current demo (Site entity not implemented) |
 | **typeOfOwnership** | string, enum | Is the land owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Source: `eigentum`. "Eigentum Bund" → Owner |
 | **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
 | **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Source: `gueltig_bis`, convert to ISO 8601 |
@@ -304,7 +304,7 @@ The building is the core entity representing a physical structure in the portfol
 |-------|------|-------------|-------------|---------|
 | **buildingId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `id` |
 | **name** | string | User specific building name (e.g., "Bundeshaus West", "EMEA Headquarter"). | **mandatory**, minLength: 1, maxLength: 200 | Source: `name` |
-| **siteId** | string | Refers to the site which the building belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` |
+| **siteId** | string | Refers to the site which the building belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Not used in current demo (Site entity not implemented) |
 | **primaryTypeOfBuilding** | string, enum | Primary type of building use. See [Building Types](#building-types). | **mandatory** | Source: `objektart1`, needs value mapping |
 | **typeOfOwnership** | string, enum | Is the building owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Source: `eigentum`. "Eigentum Bund" → Owner, "Miete" → Tenant |
 | **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
