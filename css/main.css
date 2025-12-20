@@ -906,7 +906,7 @@
         .detail-header {
             background: var(--white);
             border-bottom: 1px solid var(--grey-300);
-            padding: 12px 24px;
+            padding: var(--space-4) var(--space-5); /* 16px 20px - matches panel headers */
         }
         
         .detail-header-inner {
