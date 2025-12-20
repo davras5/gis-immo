@@ -429,7 +429,6 @@
         /* ===== MAIN CONTENT ===== */
         #main {
             flex: 1;
-            min-height: 0;
             position: relative;
             display: flex;
             overflow: hidden;
@@ -437,7 +436,6 @@
 
         .main-content {
             flex: 1;
-            min-height: 0;
             display: flex;
             overflow: hidden;
             position: relative;
