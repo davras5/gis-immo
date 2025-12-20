@@ -19,25 +19,6 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 - [Entity: Contract (Vertrag)](#entity-contract-vertrag)
 - [Entity: Cost (Kosten)](#entity-cost-kosten)
 - [Entity: Operational Measurement (Preview)](#entity-operational-measurement-preview)
-- [Enumerations](#enumerations)
-  - [Site Types](#site-types)
-  - [Building Types](#building-types)
-  - [Ownership Types](#ownership-types)
-  - [Address Types](#address-types)
-  - [Tenant Structure](#tenant-structure)
-  - [Fossil Fuel Exposure](#fossil-fuel-exposure)
-  - [Energy Types](#energy-types)
-  - [Heating Types](#heating-types)
-  - [Area Measurement Units](#area-measurement-units)
-  - [Area Measurement Accuracy](#area-measurement-accuracy)
-  - [Area Measurement Standards](#area-measurement-standards)
-  - [Cost Periods](#cost-periods)
-  - [Operational Measurement Types](#operational-measurement-types)
-  - [Operational Measurement Units](#operational-measurement-units)
-  - [Procurement Types](#procurement-types)
-  - [Purpose Types](#purpose-types)
-  - [Space Types](#space-types)
-  - [Data Source Types](#data-source-types)
 - [Related Entities (Preview)](#related-entities-preview)
 - [Version History](#version-history)
 - [References](#references)
@@ -166,24 +147,30 @@ A site represents a logical grouping of buildings, such as a campus, property, o
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **siteId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Site ID | Standort-ID | Not used in current demo |
-| **name** | string | Name of the site. | **mandatory**, minLength: 1, maxLength: 50 | Site Name | Standortbezeichnung | Not used in current demo |
-| **type** | string, enum | Type of site. Options: `Education`, `Health Care`, `Hotel`, `Industrial`, `Lodging`, `Leisure & Recreation`, `Mixed Use`, `Office`, `Residential`, `Retail`, `Technology/Science`, `Other` | **mandatory** | Site Type | Standortart | Derived from `teilportfolio` or `objektart1` |
-| **addressIds** | array[string] | Array of address IDs linked to this site. | **mandatory**, minLength: 1, maxLength: 50 per ID | Addresses | Adressen | Collect from linked buildings |
-| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `gueltig_von`, convert to ISO 8601 |
-| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `gueltig_bis`, convert to ISO 8601 |
-| energyRatingIds | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | Energy Ratings | Energiebewertungen | |
-| eventType | string, enum | Type of the event as domain event. Options: `SiteAdded`, `SiteUpdated`, `SiteDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
-| siteCode | string | User specific site code. | minLength: 1, maxLength: 70 | Site Code | Standortcode | |
-| status | string | Status of site. | minLength: 1, maxLength: 50 | Status | Status | |
-| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | EGRID | EGRID | Swiss extension. Source: `egrid` |
-| extensionData.parzellenNummer | string | Official parcel number | | Parcel Number | Parzellennummer | Swiss extension |
-| extensionData.grundbuchKreis | string | Land registry district | | Land Registry | Grundbuchkreis | Swiss extension |
-| extensionData.katasterNummer | string | Cadastral number | | Cadastral No. | Katasternummer | Swiss extension |
-| extensionData.teilportfolioGruppe | string | Sub-portfolio group (e.g., "Bundesverwaltung") | | Portfolio Group | Teilportfolio Gruppe | Swiss extension. Source: `teilportfolio_gruppe` |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **siteId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Site ID | Standort-ID | Not used in current demo |
+| **name** | | string | Name of the site. | **mandatory**, minLength: 1, maxLength: 50 | Site Name | Standortbezeichnung | Not used in current demo |
+| **type** | | string, enum | Type of site. See [Site Types](#site-types). | **mandatory** | Site Type | Standortart | Derived from `teilportfolio` or `objektart1` |
+| **addressIds** | FK | array[string] | Array of address IDs linked to this site. | **mandatory**, minLength: 1, maxLength: 50 per ID | Addresses | Adressen | Collect from linked buildings |
+| **validFrom** | | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `gueltig_von`, convert to ISO 8601 |
+| **validUntil** | | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `gueltig_bis`, convert to ISO 8601 |
+| energyRatingIds | FK | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | Energy Ratings | Energiebewertungen | |
+| eventType | | string, enum | Type of the event as domain event. Options: `SiteAdded`, `SiteUpdated`, `SiteDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
+| siteCode | | string | User specific site code. | minLength: 1, maxLength: 70 | Site Code | Standortcode | |
+| status | | string | Status of site. | minLength: 1, maxLength: 50 | Status | Status | |
+| extensionData.egrid | | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | EGRID | EGRID | Swiss extension. Source: `egrid` |
+| extensionData.parzellenNummer | | string | Official parcel number | | Parcel Number | Parzellennummer | Swiss extension |
+| extensionData.grundbuchKreis | | string | Land registry district | | Land Registry | Grundbuchkreis | Swiss extension |
+| extensionData.katasterNummer | | string | Cadastral number | | Cadastral No. | Katasternummer | Swiss extension |
+| extensionData.teilportfolioGruppe | | string | Sub-portfolio group (e.g., "Bundesverwaltung") | | Portfolio Group | Teilportfolio Gruppe | Swiss extension. Source: `teilportfolio_gruppe` |
+
+### Site Types
+
+Options for Site `type` field:
+
+`Education`, `Health Care`, `Hotel`, `Industrial`, `Lodging`, `Leisure & Recreation`, `Mixed Use`, `Office`, `Residential`, `Retail`, `Technology/Science`, `Other`
 
 ### Example: Site Object
 
@@ -214,26 +201,32 @@ Addresses represent the physical location of a building. A building can have mul
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **addressId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Address ID | Adress-ID | Generated: buildingId + "-ADDR-1" |
-| **city** | string | Any official settlement including cities, towns, villages, hamlets, localities, etc. | **mandatory**, minLength: 1, maxLength: 100 | City | Ort | Source: `ort` |
-| **country** | string, enum | Sovereign nations with ISO-3166 code. Common: `CH`, `DE`, `FR`, `IT`, `AT`, `BE`, `US` | **mandatory** | Country | Land | Source: `land` (already ISO-3166) |
-| **type** | string, enum | Type of address. Options: `Primary`, `Other` | **mandatory** | Address Type | Adressart | Default: "Primary" for main address |
-| **geoCoordinates.geoCoordinateId** | string | Unique identifier for the coordinate set. | **mandatory**, minLength: 1, maxLength: 50 | Coordinate ID | Koordinaten-ID | Generated: buildingId + "-GEO-1" |
-| geoCoordinates.coordinateReferenceSystem | string | Specific coordinate reference system used (e.g., "WGS84", "LV95"). | minLength: 1, maxLength: 50 | Reference System | Referenzsystem | Default: "WGS84" for GeoJSON |
-| geoCoordinates.latitude | number | Latitude coordinate (WGS84: -90 to 90). | | Latitude | Breitengrad | Source: `geometry.coordinates[1]` |
-| geoCoordinates.longitude | number | Longitude coordinate (WGS84: -180 to 180). | | Longitude | Längengrad | Source: `geometry.coordinates[0]` |
-| additionalInformation | string | Additional information (building name, door number, etc.). | minLength: 1, maxLength: 500 | Additional Info | Zusatzinformation | |
-| apartmentOrUnit | string | Unit or apartment number. | minLength: 1, maxLength: 50 | Unit/Apt | Wohnung/Einheit | |
-| district | string | Borough or district within a city. | minLength: 1, maxLength: 50 | District | Bezirk | |
-| eventType | string, enum | Type of the event as domain event. Options: `AddressAdded`, `AddressUpdated` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
-| houseNumber | string | House number of the street. | minLength: 1, maxLength: 50 | House Number | Hausnummer | Source: `hausnummer` |
-| postalCode | string | Postal code for mail sorting. | minLength: 1, maxLength: 15 | Postal Code | PLZ | Source: `plz` |
-| stateProvincePrefecture | string | First-level administrative division (state, province, canton). | minLength: 1, maxLength: 50 | State/Province | Region/Kanton | Source: `region` |
-| streetName | string | Name of the street. | minLength: 1, maxLength: 150 | Street | Strasse | Extracted from `adresse` |
-| extensionData.formattedAddress | string | Pre-formatted full address string | | Full Address | Vollständige Adresse | Source: `adresse` |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **addressId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Address ID | Adress-ID | Generated: buildingId + "-ADDR-1" |
+| **city** | | string | Any official settlement including cities, towns, villages, hamlets, localities, etc. | **mandatory**, minLength: 1, maxLength: 100 | City | Ort | Source: `ort` |
+| **country** | | string, enum | Sovereign nations with ISO-3166 code. Common: `CH`, `DE`, `FR`, `IT`, `AT`, `BE`, `US` | **mandatory** | Country | Land | Source: `land` (already ISO-3166) |
+| **type** | | string, enum | Type of address. See [Address Types](#address-types). | **mandatory** | Address Type | Adressart | Default: "Primary" for main address |
+| **geoCoordinates.geoCoordinateId** | PK | string | Unique identifier for the coordinate set. | **mandatory**, minLength: 1, maxLength: 50 | Coordinate ID | Koordinaten-ID | Generated: buildingId + "-GEO-1" |
+| geoCoordinates.coordinateReferenceSystem | | string | Specific coordinate reference system used (e.g., "WGS84", "LV95"). | minLength: 1, maxLength: 50 | Reference System | Referenzsystem | Default: "WGS84" for GeoJSON |
+| geoCoordinates.latitude | | number | Latitude coordinate (WGS84: -90 to 90). | | Latitude | Breitengrad | Source: `geometry.coordinates[1]` |
+| geoCoordinates.longitude | | number | Longitude coordinate (WGS84: -180 to 180). | | Longitude | Längengrad | Source: `geometry.coordinates[0]` |
+| additionalInformation | | string | Additional information (building name, door number, etc.). | minLength: 1, maxLength: 500 | Additional Info | Zusatzinformation | |
+| apartmentOrUnit | | string | Unit or apartment number. | minLength: 1, maxLength: 50 | Unit/Apt | Wohnung/Einheit | |
+| district | | string | Borough or district within a city. | minLength: 1, maxLength: 50 | District | Bezirk | |
+| eventType | | string, enum | Type of the event as domain event. Options: `AddressAdded`, `AddressUpdated` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
+| houseNumber | | string | House number of the street. | minLength: 1, maxLength: 50 | House Number | Hausnummer | Source: `hausnummer` |
+| postalCode | | string | Postal code for mail sorting. | minLength: 1, maxLength: 15 | Postal Code | PLZ | Source: `plz` |
+| stateProvincePrefecture | | string | First-level administrative division (state, province, canton). | minLength: 1, maxLength: 50 | State/Province | Region/Kanton | Source: `region` |
+| streetName | | string | Name of the street. | minLength: 1, maxLength: 150 | Street | Strasse | Extracted from `adresse` |
+| extensionData.formattedAddress | | string | Pre-formatted full address string | | Full Address | Vollständige Adresse | Source: `adresse` |
+
+### Address Types
+
+Options for Address `type` field:
+
+`Primary`, `Other`
 
 ### Example: Address Object
 
@@ -267,25 +260,37 @@ Land represents a parcel of land or plot that belongs to a site. In the current 
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **landId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Land ID | Grundstück-ID | Source: `grundstueck_id` or generated |
-| **name** | string | Name of land (e.g., park, garden, parking). | **mandatory**, minLength: 1, maxLength: 200 | Land Name | Grundstückbezeichnung | Source: `grundstueck_name` |
-| **siteId** | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Site ID | Standort-ID | Not used in current demo (Site entity not implemented) |
-| **typeOfOwnership** | string, enum | Is the land owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Ownership | Eigentum | Source: `eigentum`. "Eigentum Bund" → Owner |
-| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `gueltig_von`, convert to ISO 8601 |
-| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `gueltig_bis`, convert to ISO 8601 |
-| addressIds | array[string] | Array of address IDs linked to this land. | minLength: 1, maxLength: 50 per ID | Addresses | Adressen | |
-| eventType | string, enum | Type of the event as domain event. Options: `LandAdded`, `LandUpdated`, `LandDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
-| landCode | string | User specific land code. | minLength: 1, maxLength: 70 | Land Code | Grundstückcode | |
-| landCoverage | string | Development level of land. | minLength: 1, maxLength: 50 | Land Coverage | Bebauungsgrad | |
-| landParcelNr | string | District/zoning number registered for the plot of land. | minLength: 1, maxLength: 50 | Parcel Number | Parzellennummer | |
-| selfUse | boolean | Is the land self-used? | | Self Use | Eigennutzung | |
-| status | string | Status of land. | minLength: 1, maxLength: 50 | Status | Status | |
-| tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | Tenant Structure | Mieterstruktur | |
-| valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | Valuations | Bewertungen | |
-| extensionData.egrid | string | Federal property identifier (country-specific) | | EGRID | EGRID | Source: `egrid` |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **landId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Land ID | Grundstück-ID | Source: `grundstueck_id` or generated |
+| **name** | | string | Name of land (e.g., park, garden, parking). | **mandatory**, minLength: 1, maxLength: 200 | Land Name | Grundstückbezeichnung | Source: `grundstueck_name` |
+| **siteId** | FK | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Site ID | Standort-ID | Not used in current demo (Site entity not implemented) |
+| **typeOfOwnership** | | string, enum | Is the land owned or leased? See [Ownership Types](#ownership-types). | **mandatory** | Ownership | Eigentum | Source: `eigentum`. "Eigentum Bund" → Owner |
+| **validFrom** | | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `gueltig_von`, convert to ISO 8601 |
+| **validUntil** | | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `gueltig_bis`, convert to ISO 8601 |
+| addressIds | FK | array[string] | Array of address IDs linked to this land. | minLength: 1, maxLength: 50 per ID | Addresses | Adressen | |
+| eventType | | string, enum | Type of the event as domain event. Options: `LandAdded`, `LandUpdated`, `LandDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
+| landCode | | string | User specific land code. | minLength: 1, maxLength: 70 | Land Code | Grundstückcode | |
+| landCoverage | | string | Development level of land. | minLength: 1, maxLength: 50 | Land Coverage | Bebauungsgrad | |
+| landParcelNr | | string | District/zoning number registered for the plot of land. | minLength: 1, maxLength: 50 | Parcel Number | Parzellennummer | |
+| selfUse | | boolean | Is the land self-used? | | Self Use | Eigennutzung | |
+| status | | string | Status of land. | minLength: 1, maxLength: 50 | Status | Status | |
+| tenantStructure | | string, enum | Tenant structure. See [Tenant Structure](#tenant-structure). | | Tenant Structure | Mieterstruktur | |
+| valuationIds | FK | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | Valuations | Bewertungen | |
+| extensionData.egrid | | string | Federal property identifier (country-specific) | | EGRID | EGRID | Source: `egrid` |
+
+### Ownership Types
+
+Options for `typeOfOwnership` field:
+
+`Owner`, `Tenant`
+
+### Tenant Structure
+
+Options for `tenantStructure` field:
+
+`Single-tenant`, `Multi-tenant`
 
 ### Example: Land Object
 
@@ -312,51 +317,86 @@ The building is the core entity representing a physical structure in the portfol
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **buildingId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Building ID | Objekt-ID | Source: `id` |
-| **name** | string | User specific building name (e.g., "Bundeshaus West", "EMEA Headquarter"). | **mandatory**, minLength: 1, maxLength: 200 | Building Name | Bezeichnung | Source: `name` |
-| **siteId** | string | Refers to the site which the building belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Site ID | Standort-ID | Not used in current demo (Site entity not implemented) |
-| **primaryTypeOfBuilding** | string, enum | Primary type of building use. See [Building Types](#building-types). | **mandatory** | Building Type | Objektart 1 | Source: `objektart1`, needs value mapping |
-| **typeOfOwnership** | string, enum | Is the building owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Ownership | Art Eigentum | Source: `eigentum`. "Eigentum Bund" → Owner, "Miete" → Tenant |
-| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `gueltig_von`, convert to ISO 8601 |
-| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `gueltig_bis`, convert to ISO 8601 |
-| addressIds | array[string] | Array of address IDs linked to this building. | minLength: 1, maxLength: 50 per ID | Addresses | Adressen | |
-| airConditioning | boolean | Does the building have air conditioning? | | Air Conditioning | Klimaanlage | |
-| buildingCode | string | User specific building code. | minLength: 1, maxLength: 70 | Building Code | Objektcode | |
-| buildingPermitDate | string | Building permit date. ISO 8601 format. | minLength: 20 | Permit Date | Baubewilligung | Source: `baubewilligung`, convert to ISO 8601 |
-| certificateIds | array[string] | Array of certificate IDs. | minLength: 1, maxLength: 50 per ID | Certificates | Zertifikate | |
-| constructionYear | string | Year of construction. ISO 8601 format. Use `yyyy-01-01T00:00:00Z` if only year is known. | minLength: 20 | Construction Year | Baujahr | Source: `baujahr`, convert year to ISO 8601 |
-| electricVehicleChargingStations | number | Number of EV charging stations. | maximum: 9999 | EV Charging | E-Ladestationen | Source: `ladestationen` |
-| energyEfficiencyClass | string | Energy Efficiency Class of Building (e.g., "A", "B", "C"). | minLength: 1, maxLength: 50 | Energy Class | Energieklasse | Source: `energieklasse` |
-| energyRatingIds | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | Energy Ratings | Energiebewertungen | |
-| eventType | string, enum | Type of the event as domain event. Options: `BuildingAdded`, `BuildingUpdated`, `BuildingDeleted` | | Event Type | Ereignistyp | |
-| expectedLifeEndDate | string | Expected end date of building lifecycle. ISO 8601 format. | minLength: 20 | Life End Date | Nutzungsende | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
-| fossilFuelExposure | string, enum | Fossil fuel exposure type. Options: `Extraction`, `Storage`, `Transport`, `Manufacture`, `Other`, `Not exposed` | | Fossil Fuel Exposure | Fossile Brennstoffe | |
-| monumentProtection | boolean | Is the building declared as a protected monument? | | Monument Protection | Denkmalschutz | Source: `denkmalschutz`. "Ja" → true, "Nein" → false |
-| netZeroEnergyBuilding | boolean | Is the building a net zero energy building? | | Net Zero Building | Nullenergiegebäude | |
-| numberOfEmployees | number | Number of employees. | maximum: 999999 | Employees | Mitarbeiter | |
-| parkingSpaces | number | Number of parking spaces. | maximum: 9999 | Parking Spaces | Parkplätze | Source: `parkplaetze` |
-| percentageOfOwnership | number | Percentage of ownership. | maximum: 100 | Ownership % | Eigentumsanteil | |
-| primaryEnergyType | string, enum | Primary type of energy used. See [Energy Types](#energy-types). | | Energy Type | Energieart | |
-| primaryWaterType | string | Type of water used. | minLength: 1, maxLength: 50 | Water Type | Wasserart | |
-| secondaryHeatingType | string, enum | Secondary type of heating. See [Heating Types](#heating-types). | | Heating Type | Heizungsart | |
-| secondaryTypeOfBuilding | string, enum | Secondary type of building use. See [Building Types](#building-types). | | Building Type 2 | Objektart 2 | Source: `objektart2`, needs value mapping |
-| selfUse | boolean | Is the building self-used? | | Self Use | Eigennutzung | |
-| status | string | Status of building (e.g., "In Betrieb", "In Renovation"). | minLength: 1, maxLength: 50 | Status | Status | Source: `status` |
-| tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | Tenant Structure | Mieterstruktur | |
-| valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | Valuations | Bewertungen | |
-| yearOfLastRefurbishment | string | Year of last refurbishment. ISO 8601 format. | minLength: 20 | Refurbishment | Sanierung | Source: `sanierung`, convert to ISO 8601 |
-| extensionData.numberOfFloors | number | Number of floors/stories in the building | | Floors | Anzahl Geschosse | Source: `geschosse` |
-| extensionData.responsiblePerson | string | Name of responsible person for the building | | Responsible | Verantwortlich | Source: `verantwortlich` |
-| extensionData.egid | string | Federal building identifier (country-specific) | | EGID | EGID | Source: `egid` |
-| extensionData.egrid | string | Federal property identifier (country-specific) | | EGRID | EGRID | Source: `egrid` |
-| extensionData.portfolio | string | Sub-portfolio category | | Portfolio | Teilportfolio | Source: `teilportfolio` |
-| extensionData.portfolioGroup | string | Portfolio group | | Portfolio Group | Teilportfolio Gruppe | Source: `teilportfolio_gruppe` |
-| extensionData.heatingGenerator | string | Heating generator type | | Heating System | Wärmeerzeuger | Source: `waermeerzeuger` |
-| extensionData.heatingSource | string | Heating source | | Heat Source | Wärmequelle | Source: `waermequelle` |
-| extensionData.hotWater | string | Hot water system description | | Hot Water | Warmwasser | Source: `warmwasser` |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **buildingId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Building ID | Objekt-ID | Source: `id` |
+| **name** | | string | User specific building name (e.g., "Bundeshaus West", "EMEA Headquarter"). | **mandatory**, minLength: 1, maxLength: 200 | Building Name | Bezeichnung | Source: `name` |
+| **siteId** | FK | string | Refers to the site which the building belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Site ID | Standort-ID | Not used in current demo (Site entity not implemented) |
+| **primaryTypeOfBuilding** | | string, enum | Primary type of building use. See [Building Types](#building-types). | **mandatory** | Building Type | Objektart 1 | Source: `objektart1`, needs value mapping |
+| **typeOfOwnership** | | string, enum | Is the building owned or leased? See [Ownership Types](#ownership-types). | **mandatory** | Ownership | Art Eigentum | Source: `eigentum`. "Eigentum Bund" → Owner, "Miete" → Tenant |
+| **validFrom** | | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `gueltig_von`, convert to ISO 8601 |
+| **validUntil** | | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `gueltig_bis`, convert to ISO 8601 |
+| addressIds | FK | array[string] | Array of address IDs linked to this building. | minLength: 1, maxLength: 50 per ID | Addresses | Adressen | |
+| airConditioning | | boolean | Does the building have air conditioning? | | Air Conditioning | Klimaanlage | |
+| buildingCode | | string | User specific building code. | minLength: 1, maxLength: 70 | Building Code | Objektcode | |
+| buildingPermitDate | | string | Building permit date. ISO 8601 format. | minLength: 20 | Permit Date | Baubewilligung | Source: `baubewilligung`, convert to ISO 8601 |
+| certificateIds | FK | array[string] | Array of certificate IDs. | minLength: 1, maxLength: 50 per ID | Certificates | Zertifikate | |
+| constructionYear | | string | Year of construction. ISO 8601 format. Use `yyyy-01-01T00:00:00Z` if only year is known. | minLength: 20 | Construction Year | Baujahr | Source: `baujahr`, convert year to ISO 8601 |
+| electricVehicleChargingStations | | number | Number of EV charging stations. | maximum: 9999 | EV Charging | E-Ladestationen | Source: `ladestationen` |
+| energyEfficiencyClass | | string | Energy Efficiency Class of Building (e.g., "A", "B", "C"). | minLength: 1, maxLength: 50 | Energy Class | Energieklasse | Source: `energieklasse` |
+| energyRatingIds | FK | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | Energy Ratings | Energiebewertungen | |
+| eventType | | string, enum | Type of the event as domain event. Options: `BuildingAdded`, `BuildingUpdated`, `BuildingDeleted` | | Event Type | Ereignistyp | |
+| expectedLifeEndDate | | string | Expected end date of building lifecycle. ISO 8601 format. | minLength: 20 | Life End Date | Nutzungsende | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
+| fossilFuelExposure | | string, enum | Fossil fuel exposure type. See [Fossil Fuel Exposure](#fossil-fuel-exposure). | | Fossil Fuel Exposure | Fossile Brennstoffe | |
+| monumentProtection | | boolean | Is the building declared as a protected monument? | | Monument Protection | Denkmalschutz | Source: `denkmalschutz`. "Ja" → true, "Nein" → false |
+| netZeroEnergyBuilding | | boolean | Is the building a net zero energy building? | | Net Zero Building | Nullenergiegebäude | |
+| numberOfEmployees | | number | Number of employees. | maximum: 999999 | Employees | Mitarbeiter | |
+| parkingSpaces | | number | Number of parking spaces. | maximum: 9999 | Parking Spaces | Parkplätze | Source: `parkplaetze` |
+| percentageOfOwnership | | number | Percentage of ownership. | maximum: 100 | Ownership % | Eigentumsanteil | |
+| primaryEnergyType | | string, enum | Primary type of energy used. See [Energy Types](#energy-types). | | Energy Type | Energieart | |
+| primaryWaterType | | string | Type of water used. | minLength: 1, maxLength: 50 | Water Type | Wasserart | |
+| secondaryHeatingType | | string, enum | Secondary type of heating. See [Heating Types](#heating-types). | | Heating Type | Heizungsart | |
+| secondaryTypeOfBuilding | | string, enum | Secondary type of building use. See [Building Types](#building-types). | | Building Type 2 | Objektart 2 | Source: `objektart2`, needs value mapping |
+| selfUse | | boolean | Is the building self-used? | | Self Use | Eigennutzung | |
+| status | | string | Status of building (e.g., "In Betrieb", "In Renovation"). | minLength: 1, maxLength: 50 | Status | Status | Source: `status` |
+| tenantStructure | | string, enum | Tenant structure. See [Tenant Structure](#tenant-structure). | | Tenant Structure | Mieterstruktur | |
+| valuationIds | FK | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | Valuations | Bewertungen | |
+| yearOfLastRefurbishment | | string | Year of last refurbishment. ISO 8601 format. | minLength: 20 | Refurbishment | Sanierung | Source: `sanierung`, convert to ISO 8601 |
+| extensionData.numberOfFloors | | number | Number of floors/stories in the building | | Floors | Anzahl Geschosse | Source: `geschosse` |
+| extensionData.responsiblePerson | | string | Name of responsible person for the building | | Responsible | Verantwortlich | Source: `verantwortlich` |
+| extensionData.egid | | string | Federal building identifier (country-specific) | | EGID | EGID | Source: `egid` |
+| extensionData.egrid | | string | Federal property identifier (country-specific) | | EGRID | EGRID | Source: `egrid` |
+| extensionData.portfolio | | string | Sub-portfolio category | | Portfolio | Teilportfolio | Source: `teilportfolio` |
+| extensionData.portfolioGroup | | string | Portfolio group | | Portfolio Group | Teilportfolio Gruppe | Source: `teilportfolio_gruppe` |
+| extensionData.heatingGenerator | | string | Heating generator type | | Heating System | Wärmeerzeuger | Source: `waermeerzeuger` |
+| extensionData.heatingSource | | string | Heating source | | Heat Source | Wärmequelle | Source: `waermequelle` |
+| extensionData.hotWater | | string | Hot water system description | | Hot Water | Warmwasser | Source: `warmwasser` |
+
+### Building Types
+
+Primary and secondary building type options:
+
+| Category | Values |
+|----------|--------|
+| Retail | `Retail`, `Retail High Street`, `Retail Retail Centers`, `Retail Shopping Center`, `Retail Strip Mall`, `Retail Lifestyle Center`, `Retail Warehouse`, `Retail Restaurants/Bars`, `Retail Other` |
+| Office | `Office`, `Office Corporate`, `Office Low-Rise Office`, `Office Mid-Rise Office`, `Office High-Rise Office`, `Office Medical Office`, `Office Business Park`, `Office Other` |
+| Industrial | `Industrial`, `Industrial Distribution Warehouse`, `Industrial Industrial Park`, `Industrial Manufacturing`, `Industrial Refrigerated Warehouse`, `Industrial Non-refrigerated Warehouse`, `Industrial Other` |
+| Residential | `Residential`, `Residential Multi-Family`, `Residential Low-Rise Multi-Family`, `Residential Mid-Rise Multi-Family`, `Residential High-Rise Multi-Family`, `Residential Family Homes`, `Residential Student Housing`, `Residential Retirement Living`, `Residential Other` |
+| Lodging | `Hotel`, `Lodging`, `Lodging Leisure & Recreation`, `Lodging Indoor Arena`, `Lodging Fitness Center`, `Lodging Performing Arts`, `Lodging Swimming Center`, `Lodging Museum/Gallery`, `Lodging Leisure & Recreation Other` |
+| Education | `Education`, `Education School`, `Education University`, `Education Library`, `Education Other` |
+| Technology/Science | `Technology/Science`, `Technology/Science Data Center`, `Technology/Science Laboratory/Life sciences`, `Technology/Science Other` |
+| Health Care | `Health Care`, `Health Care Health Care Center`, `Health Care Senior Homes`, `Health Care Other` |
+| Mixed Use | `Mixed Use`, `Mixed Use Office/Retail`, `Mixed Use Office/Residential`, `Mixed Use Office/Industrial`, `Mixed Use Other` |
+| Other | `Other`, `Other Parking (Indoors)`, `Other Self-Storage` |
+
+### Fossil Fuel Exposure
+
+Options for `fossilFuelExposure` field:
+
+`Extraction`, `Storage`, `Transport`, `Manufacture`, `Other`, `Not exposed`
+
+### Energy Types
+
+Options for `primaryEnergyType` field:
+
+`Natural Gas`, `Coal`, `Nuclear`, `Petroleum`, `Hydropower`, `Wind`, `Biomass`, `Geothermal`, `Solar`
+
+### Heating Types
+
+Options for `secondaryHeatingType` field:
+
+`District heating`, `Natural gas`, `Oil-based fuels`, `Solar thermal`, `Unspecified`, `Heat pump`, `Electricity (radiator)`, `Biomass`, `Micro combined heat and power`
 
 ### Example: Building Object
 
@@ -398,29 +438,57 @@ Area measurements capture floor areas, volumes, and other quantitative measureme
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **areaMeasurementId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Measurement ID | Bemessungs-ID | Source: `bemessungen[].id` |
-| **type** | string, enum | Type of the standard area. See [Area Types](#area-types). | **mandatory** | Area Type | Flächenart | Source: `bemessungen[].areaType`, needs value mapping |
-| **value** | number | Value of measurement. | **mandatory** | Value | Wert | Source: `bemessungen[].value` |
-| **unit** | string, enum | Unit area is measured with. Options: `sqm`, `sqft`, `acr` | **mandatory** | Unit | Einheit | Source: `bemessungen[].unit`. "m²" → sqm |
-| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `bemessungen[].validFrom`, convert to ISO 8601 |
-| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `bemessungen[].validUntil`, convert to ISO 8601 |
-| **bmEstimation** | boolean | Is the data estimated by BuildingMinds? | **mandatory** | BM Estimation | BM-Schätzung | Default: false for imported data |
-| accuracy | string, enum | Accuracy of area measurement. Options: `Estimated`, `Measured`, `Aggregated`, `Unknown` | | Accuracy | Genauigkeit | Source: `bemessungen[].accuracy`. "Gemessen" → Measured, "Geschätzt" → Estimated, "Berechnet" → Estimated, "Aggregiert" → Aggregated |
-| buildingIds | array[string] | Array of building IDs this measurement belongs to. | minLength: 1, maxLength: 50 per ID | Buildings | Gebäude | Derived from parent building |
-| eventType | string, enum | Type of the event as domain event. Options: `AreaMeasurementAdded`, `AreaMeasurementUpdated`, `AreaMeasurementDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
-| floorIds | array[string] | Array of floor IDs. | minLength: 1, maxLength: 50 per ID | Floors | Geschosse | |
-| landIds | array[string] | Array of land IDs. | minLength: 1, maxLength: 50 per ID | Land Parcels | Grundstücke | |
-| rentalUnit | array[string] | Array of rental unit IDs. | minLength: 1, maxLength: 50 per ID | Rental Units | Mieteinheiten | |
-| siteIds | array[string] | Array of site IDs. | minLength: 1, maxLength: 50 per ID | Sites | Standorte | |
-| spaceIds | array[string] | Array of space IDs. | minLength: 1, maxLength: 50 per ID | Spaces | Räume | |
-| standard | string, enum | Area measurement standard. Options: `DIN 277-1`, `MFG`, `IPMS`, `RICS`, `BOMA`, `NA` | | Standard | Norm | Source: `bemessungen[].standard`. "SIA 416" → extensionData, "DIN 277" → DIN 277-1 |
-| extensionData.siaStandard | string | Swiss SIA standard reference (e.g., "SIA 416", "SIA 380/1") | | SIA Standard | SIA-Norm | Swiss extension. Source: `bemessungen[].standard` |
-| extensionData.source | string | Data source (e.g., "CAD/BIM", "Vermessung", "Schätzmodell", "Manuell") | | Source | Quelle | Swiss extension. Source: `bemessungen[].source` |
-| extensionData.originalUnit | string | Original unit before conversion (e.g., "m²", "m³", "Stk") | | Original Unit | Urspr. Einheit | Swiss extension. Source: `bemessungen[].unit` |
-| extensionData.originalType | string | Original German area type name | | Original Type | Urspr. Flächenart | Swiss extension. Source: `bemessungen[].areaType` |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **areaMeasurementId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Measurement ID | Bemessungs-ID | Source: `bemessungen[].id` |
+| **type** | | string, enum | Type of the standard area. See [Area Types](#area-types). | **mandatory** | Area Type | Flächenart | Source: `bemessungen[].areaType`, needs value mapping |
+| **value** | | number | Value of measurement. | **mandatory** | Value | Wert | Source: `bemessungen[].value` |
+| **unit** | | string, enum | Unit area is measured with. See [Area Measurement Units](#area-measurement-units). | **mandatory** | Unit | Einheit | Source: `bemessungen[].unit`. "m²" → sqm |
+| **validFrom** | | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `bemessungen[].validFrom`, convert to ISO 8601 |
+| **validUntil** | | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis | Source: `bemessungen[].validUntil`, convert to ISO 8601 |
+| **bmEstimation** | | boolean | Is the data estimated by BuildingMinds? | **mandatory** | BM Estimation | BM-Schätzung | Default: false for imported data |
+| accuracy | | string, enum | Accuracy of area measurement. See [Area Measurement Accuracy](#area-measurement-accuracy). | | Accuracy | Genauigkeit | Source: `bemessungen[].accuracy`. "Gemessen" → Measured, "Geschätzt" → Estimated, "Berechnet" → Estimated, "Aggregiert" → Aggregated |
+| buildingIds | FK | array[string] | Array of building IDs this measurement belongs to. | minLength: 1, maxLength: 50 per ID | Buildings | Gebäude | Derived from parent building |
+| eventType | | string, enum | Type of the event as domain event. Options: `AreaMeasurementAdded`, `AreaMeasurementUpdated`, `AreaMeasurementDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
+| floorIds | FK | array[string] | Array of floor IDs. | minLength: 1, maxLength: 50 per ID | Floors | Geschosse | |
+| landIds | FK | array[string] | Array of land IDs. | minLength: 1, maxLength: 50 per ID | Land Parcels | Grundstücke | |
+| rentalUnit | FK | array[string] | Array of rental unit IDs. | minLength: 1, maxLength: 50 per ID | Rental Units | Mieteinheiten | |
+| siteIds | FK | array[string] | Array of site IDs. | minLength: 1, maxLength: 50 per ID | Sites | Standorte | |
+| spaceIds | FK | array[string] | Array of space IDs. | minLength: 1, maxLength: 50 per ID | Spaces | Räume | |
+| standard | | string, enum | Area measurement standard. See [Area Measurement Standards](#area-measurement-standards). | | Standard | Norm | Source: `bemessungen[].standard`. "SIA 416" → extensionData, "DIN 277" → DIN 277-1 |
+| extensionData.siaStandard | | string | Swiss SIA standard reference (e.g., "SIA 416", "SIA 380/1") | | SIA Standard | SIA-Norm | Swiss extension. Source: `bemessungen[].standard` |
+| extensionData.source | | string | Data source (e.g., "CAD/BIM", "Vermessung", "Schätzmodell", "Manuell") | | Source | Quelle | Swiss extension. Source: `bemessungen[].source` |
+| extensionData.originalUnit | | string | Original unit before conversion (e.g., "m²", "m³", "Stk") | | Original Unit | Urspr. Einheit | Swiss extension. Source: `bemessungen[].unit` |
+| extensionData.originalType | | string | Original German area type name | | Original Type | Urspr. Flächenart | Swiss extension. Source: `bemessungen[].areaType` |
+
+### Area Measurement Units
+
+| Value | Description |
+|-------|-------------|
+| `sqm` | Square meters (m²) |
+| `sqft` | Square feet (ft²) |
+| `acr` | Acres |
+
+### Area Measurement Accuracy
+
+| Value | Description |
+|-------|-------------|
+| `Estimated` | Estimated or calculated value |
+| `Measured` | Directly measured value |
+| `Aggregated` | Aggregated from multiple sources |
+| `Unknown` | Accuracy not specified |
+
+### Area Measurement Standards
+
+| Value | Description |
+|-------|-------------|
+| `DIN 277-1` | German standard for floor areas |
+| `MFG` | Mietflächenrichtlinie für gewerblichen Raum |
+| `IPMS` | International Property Measurement Standards |
+| `RICS` | Royal Institution of Chartered Surveyors |
+| `BOMA` | Building Owners and Managers Association |
+| `NA` | Not applicable / Other standard |
 
 ### Area Types
 
@@ -507,21 +575,21 @@ Documents represent files and records associated with a building, such as floor 
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **documentId** | string | Unique identifier for the document. | **mandatory**, minLength: 1, maxLength: 50 | Document ID | Dokument-ID | Source: `dokumente[].id` |
-| **name** | string | Title or name of the document. | **mandatory**, minLength: 1, maxLength: 200 | Document Name | Dokumentname | Source: `dokumente[].titel` |
-| **type** | string, enum | Type of document. See [Document Types](#document-types). | **mandatory** | Document Type | Dokumenttyp | Source: `dokumente[].dokumentTyp` |
-| **buildingIds** | array[string] | Array of building IDs this document belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
-| **validFrom** | string | Document date or effective date. ISO 8601 format. | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `dokumente[].datum`, convert to ISO 8601 |
-| eventType | string, enum | Type of the event as domain event. Options: `DocumentAdded`, `DocumentUpdated`, `DocumentDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
-| fileFormat | string | File format (e.g., "PDF", "DWG", "IFC"). | minLength: 1, maxLength: 20 | File Format | Dateiformat | Source: `dokumente[].dateiformat` |
-| fileSize | string | File size as string (e.g., "2.4 MB"). | minLength: 1, maxLength: 20 | File Size | Dateigrösse | Source: `dokumente[].dateigroesse` |
-| url | string | URL or path to the document file. | minLength: 1, maxLength: 500 | URL | URL | Source: `dokumente[].url` |
-| description | string | Description or notes about the document. | minLength: 1, maxLength: 1000 | Description | Beschreibung | |
-| version | string | Document version identifier. | minLength: 1, maxLength: 20 | Version | Version | |
-| validUntil | string | Expiry date for time-limited documents. ISO 8601 format. | minLength: 20, null allowed | Valid Until | Gültig bis | |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **documentId** | PK | string | Unique identifier for the document. | **mandatory**, minLength: 1, maxLength: 50 | Document ID | Dokument-ID | Source: `dokumente[].id` |
+| **name** | | string | Title or name of the document. | **mandatory**, minLength: 1, maxLength: 200 | Document Name | Dokumentname | Source: `dokumente[].titel` |
+| **type** | | string, enum | Type of document. See [Document Types](#document-types). | **mandatory** | Document Type | Dokumenttyp | Source: `dokumente[].dokumentTyp` |
+| **buildingIds** | FK | array[string] | Array of building IDs this document belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
+| **validFrom** | | string | Document date or effective date. ISO 8601 format. | **mandatory**, minLength: 20 | Valid From | Gültig von | Source: `dokumente[].datum`, convert to ISO 8601 |
+| eventType | | string, enum | Type of the event as domain event. Options: `DocumentAdded`, `DocumentUpdated`, `DocumentDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
+| fileFormat | | string | File format (e.g., "PDF", "DWG", "IFC"). | minLength: 1, maxLength: 20 | File Format | Dateiformat | Source: `dokumente[].dateiformat` |
+| fileSize | | string | File size as string (e.g., "2.4 MB"). | minLength: 1, maxLength: 20 | File Size | Dateigrösse | Source: `dokumente[].dateigroesse` |
+| url | | string | URL or path to the document file. | minLength: 1, maxLength: 500 | URL | URL | Source: `dokumente[].url` |
+| description | | string | Description or notes about the document. | minLength: 1, maxLength: 1000 | Description | Beschreibung | |
+| version | | string | Document version identifier. | minLength: 1, maxLength: 20 | Version | Version | |
+| validUntil | | string | Expiry date for time-limited documents. ISO 8601 format. | minLength: 20, null allowed | Valid Until | Gültig bis | |
 
 ### Document Types
 
@@ -562,20 +630,20 @@ Contacts represent persons associated with a building, such as property managers
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **contactId** | string | Unique identifier for the contact. | **mandatory**, minLength: 1, maxLength: 50 | Contact ID | Kontakt-ID | Source: `kontakte[].id` |
-| **name** | string | Full name of the contact person. | **mandatory**, minLength: 1, maxLength: 200 | Name | Name | Source: `kontakte[].name` |
-| **role** | string, enum | Role or function of the contact. See [Contact Roles](#contact-roles). | **mandatory** | Role | Rolle | Source: `kontakte[].rolle` |
-| **buildingIds** | array[string] | Array of building IDs this contact is associated with. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
-| eventType | string, enum | Type of the event as domain event. Options: `ContactAdded`, `ContactUpdated`, `ContactDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
-| organisation | string | Organisation or department. | minLength: 1, maxLength: 200 | Organisation | Organisation | Source: `kontakte[].organisation` |
-| phone | string | Phone number. | minLength: 1, maxLength: 30 | Phone | Telefon | Source: `kontakte[].telefon` |
-| email | string | Email address. | minLength: 1, maxLength: 100, format: email | Email | E-Mail | Source: `kontakte[].email` |
-| isPrimary | boolean | Is this the primary contact for the building? | | Primary Contact | Hauptkontakt | |
-| validFrom | string | Contact assignment start date. ISO 8601 format. | minLength: 20 | Valid From | Gültig von | |
-| validUntil | string | Contact assignment end date. ISO 8601 format. | minLength: 20, null allowed | Valid Until | Gültig bis | |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **contactId** | PK | string | Unique identifier for the contact. | **mandatory**, minLength: 1, maxLength: 50 | Contact ID | Kontakt-ID | Source: `kontakte[].id` |
+| **name** | | string | Full name of the contact person. | **mandatory**, minLength: 1, maxLength: 200 | Name | Name | Source: `kontakte[].name` |
+| **role** | | string, enum | Role or function of the contact. See [Contact Roles](#contact-roles). | **mandatory** | Role | Rolle | Source: `kontakte[].rolle` |
+| **buildingIds** | FK | array[string] | Array of building IDs this contact is associated with. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
+| eventType | | string, enum | Type of the event as domain event. Options: `ContactAdded`, `ContactUpdated`, `ContactDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
+| organisation | | string | Organisation or department. | minLength: 1, maxLength: 200 | Organisation | Organisation | Source: `kontakte[].organisation` |
+| phone | | string | Phone number. | minLength: 1, maxLength: 30 | Phone | Telefon | Source: `kontakte[].telefon` |
+| email | | string | Email address. | minLength: 1, maxLength: 100, format: email | Email | E-Mail | Source: `kontakte[].email` |
+| isPrimary | | boolean | Is this the primary contact for the building? | | Primary Contact | Hauptkontakt | |
+| validFrom | | string | Contact assignment start date. ISO 8601 format. | minLength: 20 | Valid From | Gültig von | |
+| validUntil | | string | Contact assignment end date. ISO 8601 format. | minLength: 20, null allowed | Valid Until | Gültig bis | |
 
 ### Contact Roles
 
@@ -615,22 +683,22 @@ Assets represent technical equipment, installations, and building components tha
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **assetId** | string | Unique identifier for the asset. | **mandatory**, minLength: 1, maxLength: 50 | Asset ID | Ausstattungs-ID | Source: `ausstattung[].id` |
-| **name** | string | Name or designation of the asset. | **mandatory**, minLength: 1, maxLength: 200 | Asset Name | Bezeichnung | Source: `ausstattung[].bezeichnung` |
-| **category** | string, enum | Category of the asset. See [Asset Categories](#asset-categories). | **mandatory** | Category | Kategorie | Source: `ausstattung[].kategorie` |
-| **buildingIds** | array[string] | Array of building IDs this asset belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
-| eventType | string, enum | Type of the event as domain event. Options: `AssetAdded`, `AssetUpdated`, `AssetDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
-| manufacturer | string | Manufacturer or vendor. | minLength: 1, maxLength: 200 | Manufacturer | Hersteller | Source: `ausstattung[].hersteller` |
-| installationYear | number | Year of installation. | minimum: 1800, maximum: 2100 | Installation Year | Einbaujahr | Source: `ausstattung[].baujahr` |
-| location | string | Location within the building. | minLength: 1, maxLength: 200 | Location | Standort | Source: `ausstattung[].standort` |
-| serialNumber | string | Serial number or asset tag. | minLength: 1, maxLength: 100 | Serial Number | Seriennummer | |
-| status | string | Current status (e.g., "In Betrieb", "Ausser Betrieb"). | minLength: 1, maxLength: 50 | Status | Status | |
-| maintenanceInterval | string | Maintenance interval (e.g., "Jährlich", "Monatlich"). | minLength: 1, maxLength: 50 | Maintenance Interval | Wartungsintervall | |
-| lastMaintenanceDate | string | Date of last maintenance. ISO 8601 format. | minLength: 20 | Last Maintenance | Letzte Wartung | |
-| nextMaintenanceDate | string | Date of next scheduled maintenance. ISO 8601 format. | minLength: 20 | Next Maintenance | Nächste Wartung | |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **assetId** | PK | string | Unique identifier for the asset. | **mandatory**, minLength: 1, maxLength: 50 | Asset ID | Ausstattungs-ID | Source: `ausstattung[].id` |
+| **name** | | string | Name or designation of the asset. | **mandatory**, minLength: 1, maxLength: 200 | Asset Name | Bezeichnung | Source: `ausstattung[].bezeichnung` |
+| **category** | | string, enum | Category of the asset. See [Asset Categories](#asset-categories). | **mandatory** | Category | Kategorie | Source: `ausstattung[].kategorie` |
+| **buildingIds** | FK | array[string] | Array of building IDs this asset belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
+| eventType | | string, enum | Type of the event as domain event. Options: `AssetAdded`, `AssetUpdated`, `AssetDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for Swiss-specific fields |
+| manufacturer | | string | Manufacturer or vendor. | minLength: 1, maxLength: 200 | Manufacturer | Hersteller | Source: `ausstattung[].hersteller` |
+| installationYear | | number | Year of installation. | minimum: 1800, maximum: 2100 | Installation Year | Einbaujahr | Source: `ausstattung[].baujahr` |
+| location | | string | Location within the building. | minLength: 1, maxLength: 200 | Location | Standort | Source: `ausstattung[].standort` |
+| serialNumber | | string | Serial number or asset tag. | minLength: 1, maxLength: 100 | Serial Number | Seriennummer | |
+| status | | string | Current status (e.g., "In Betrieb", "Ausser Betrieb"). | minLength: 1, maxLength: 50 | Status | Status | |
+| maintenanceInterval | | string | Maintenance interval (e.g., "Jährlich", "Monatlich"). | minLength: 1, maxLength: 50 | Maintenance Interval | Wartungsintervall | |
+| lastMaintenanceDate | | string | Date of last maintenance. ISO 8601 format. | minLength: 20 | Last Maintenance | Letzte Wartung | |
+| nextMaintenanceDate | | string | Date of next scheduled maintenance. ISO 8601 format. | minLength: 20 | Next Maintenance | Nächste Wartung | |
 
 ### Asset Categories
 
@@ -672,19 +740,19 @@ Contracts represent service agreements, maintenance contracts, and other contrac
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **contractId** | string | Unique identifier for the contract. | **mandatory**, minLength: 1, maxLength: 50 | Contract ID | Vertrags-ID | Source: `vertraege[].id` |
-| **type** | string, enum | Type of contract. See [Contract Types](#contract-types). | **mandatory** | Contract Type | Vertragsart | Source: `vertraege[].vertragsart` |
-| **buildingIds** | array[string] | Array of building IDs this contract belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
-| **validFrom** | string | Contract start date. ISO 8601 format. | **mandatory**, minLength: 20 | Valid From | Vertragsbeginn | Source: `vertraege[].vertragsbeginn`, convert to ISO 8601 |
-| eventType | string, enum | Type of the event as domain event. Options: `ContractAdded`, `ContractUpdated`, `ContractDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
-| contractPartner | string | Name of the contract partner or vendor. | minLength: 1, maxLength: 200 | Contract Partner | Vertragspartner | Source: `vertraege[].vertragspartner` |
-| validUntil | string | Contract end date. ISO 8601 format. | minLength: 20, null allowed | Valid Until | Vertragsende | Source: `vertraege[].vertragsende`, convert to ISO 8601 |
-| amount | number | Contract value or annual amount. | | Amount | Betrag | Source: `vertraege[].betrag` |
-| currency | string | Currency code (ISO 4217). | minLength: 3, maxLength: 3 | Currency | Währung | Default: "CHF" for Swiss contracts |
-| status | string | Current contract status (e.g., "Aktiv", "Beendet"). | minLength: 1, maxLength: 50 | Status | Status | Source: `vertraege[].status` |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **contractId** | PK | string | Unique identifier for the contract. | **mandatory**, minLength: 1, maxLength: 50 | Contract ID | Vertrags-ID | Source: `vertraege[].id` |
+| **type** | | string, enum | Type of contract. See [Contract Types](#contract-types). | **mandatory** | Contract Type | Vertragsart | Source: `vertraege[].vertragsart` |
+| **buildingIds** | FK | array[string] | Array of building IDs this contract belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
+| **validFrom** | | string | Contract start date. ISO 8601 format. | **mandatory**, minLength: 20 | Valid From | Vertragsbeginn | Source: `vertraege[].vertragsbeginn`, convert to ISO 8601 |
+| eventType | | string, enum | Type of the event as domain event. Options: `ContractAdded`, `ContractUpdated`, `ContractDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
+| contractPartner | | string | Name of the contract partner or vendor. | minLength: 1, maxLength: 200 | Contract Partner | Vertragspartner | Source: `vertraege[].vertragspartner` |
+| validUntil | | string | Contract end date. ISO 8601 format. | minLength: 20, null allowed | Valid Until | Vertragsende | Source: `vertraege[].vertragsende`, convert to ISO 8601 |
+| amount | | number | Contract value or annual amount. | | Amount | Betrag | Source: `vertraege[].betrag` |
+| currency | | string | Currency code (ISO 4217). | minLength: 3, maxLength: 3 | Currency | Währung | Default: "CHF" for Swiss contracts |
+| status | | string | Current contract status (e.g., "Aktiv", "Beendet"). | minLength: 1, maxLength: 50 | Status | Status | Source: `vertraege[].status` |
 
 ### Contract Types
 
@@ -724,19 +792,28 @@ Costs represent operating expenses, utility costs, and other recurring costs ass
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **costId** | string | Unique identifier for the cost entry. | **mandatory**, minLength: 1, maxLength: 50 | Cost ID | Kosten-ID | Source: `kosten[].id` |
-| **costGroup** | string | Cost group code (e.g., DIN 18960 or Swiss SN 506 511). | **mandatory**, minLength: 1, maxLength: 10 | Cost Group | Kostengruppe | Source: `kosten[].kostengruppe` |
-| **costType** | string | Description of the cost type. | **mandatory**, minLength: 1, maxLength: 200 | Cost Type | Kostenart | Source: `kosten[].kostenart` |
-| **buildingIds** | array[string] | Array of building IDs this cost belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
-| eventType | string, enum | Type of the event as domain event. Options: `CostAdded`, `CostUpdated`, `CostDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
-| amount | number | Cost amount. | | Amount | Betrag | Source: `kosten[].betrag` |
-| unit | string | Unit of the cost (e.g., "CHF/Jahr", "CHF/Monat"). | minLength: 1, maxLength: 20 | Unit | Einheit | Source: `kosten[].einheit` |
-| currency | string | Currency code (ISO 4217). | minLength: 3, maxLength: 3 | Currency | Währung | Extracted from `kosten[].einheit`, e.g., "CHF" |
-| period | string, enum | Cost period. Options: `Annual`, `Monthly`, `Quarterly`, `OneTime` | | Period | Periode | Derived from `kosten[].einheit` |
-| referenceDate | string | Reference date for the cost entry. ISO 8601 format. | minLength: 20 | Reference Date | Stichtag | Source: `kosten[].stichtag`, convert to ISO 8601 |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **costId** | PK | string | Unique identifier for the cost entry. | **mandatory**, minLength: 1, maxLength: 50 | Cost ID | Kosten-ID | Source: `kosten[].id` |
+| **costGroup** | | string | Cost group code (e.g., DIN 18960 or Swiss SN 506 511). | **mandatory**, minLength: 1, maxLength: 10 | Cost Group | Kostengruppe | Source: `kosten[].kostengruppe` |
+| **costType** | | string | Description of the cost type. | **mandatory**, minLength: 1, maxLength: 200 | Cost Type | Kostenart | Source: `kosten[].kostenart` |
+| **buildingIds** | FK | array[string] | Array of building IDs this cost belongs to. | **mandatory**, minLength: 1 | Buildings | Gebäude | Derived from parent building |
+| eventType | | string, enum | Type of the event as domain event. Options: `CostAdded`, `CostUpdated`, `CostDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | Container for country-specific fields |
+| amount | | number | Cost amount. | | Amount | Betrag | Source: `kosten[].betrag` |
+| unit | | string | Unit of the cost (e.g., "CHF/Jahr", "CHF/Monat"). | minLength: 1, maxLength: 20 | Unit | Einheit | Source: `kosten[].einheit` |
+| currency | | string | Currency code (ISO 4217). | minLength: 3, maxLength: 3 | Currency | Währung | Extracted from `kosten[].einheit`, e.g., "CHF" |
+| period | | string, enum | Cost period. See [Cost Periods](#cost-periods). | | Period | Periode | Derived from `kosten[].einheit` |
+| referenceDate | | string | Reference date for the cost entry. ISO 8601 format. | minLength: 20 | Reference Date | Stichtag | Source: `kosten[].stichtag`, convert to ISO 8601 |
+
+### Cost Periods
+
+| Value | Description |
+|-------|-------------|
+| `Annual` | Yearly cost |
+| `Monthly` | Monthly cost |
+| `Quarterly` | Quarterly cost |
+| `OneTime` | One-time cost |
 
 ### Cost Groups (Swiss SN 506 511)
 
@@ -779,32 +856,76 @@ Operational measurements track resource consumption (energy, water, waste) and e
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
-|-------|------|-------------|-------------|------------|------------|---------|
-| **operationalMeasurementId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Measurement ID | Betriebs-ID | |
-| **buildingId** | string | Unique identifier of the building this measurement belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Building ID | Objekt-ID | |
-| **type** | string, enum | General type of operational measurement. Options: `Energy`, `Water`, `Waste`, `Fugitive` | **mandatory** | Type | Art | |
-| **subType** | string, enum | Specific type of operational measurement. See [Operational Measurement SubTypes](#operational-measurement-subtypes). | **mandatory** | Sub Type | Unterart | |
-| **value** | number | Value of the measurement. | **mandatory** | Value | Wert | |
-| **unit** | string, enum | Unit of measurement. Options: `kWh`, `cubm`, `kg` | **mandatory** | Unit | Einheit | |
-| **validFrom** | string | Date validity starts. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | |
-| **validUntil** | string | Date validity ends. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid Until | Gültig bis | |
-| **procuredBy** | string, enum | Operational control information. Options: `Procured by third party`, `Self-procured`, `Unspecified` | **mandatory** | Procured By | Beschaffung | |
-| **purpose** | string, enum | Purpose of resource consumption. Options: `Space heating`, `Water heating`, `Heating (unspecified)`, `Cooling`, `Lighting`, `Elevator`, `Appliances`, `Other`, `Unspecified`, `Heat pump`, `EV charging` | **mandatory** | Purpose | Verwendungszweck | |
-| **spaceType** | string, enum | Reference to specific space type. Options: `Shared services/Common spaces`, `Tenant space`, `Landlord space`, `Whole building`, `Unspecified`, `Shared services`, `Common spaces`, `Outdoor`, `Exterior area`, `Parking` | **mandatory** | Space Type | Raumtyp | |
-| accuracy | string, enum | Accuracy of measurement. See [Accuracy Options](#accuracy-options). | | Accuracy | Genauigkeit | |
-| customerInfoSource | string, enum | Source of data. Options: `Export`, `Survey`, `Meter`, `Invoice` | | Data Source | Datenquelle | |
-| dataProvider | string | Name of the data provider. | minLength: 1, maxLength: 50 | Data Provider | Datenanbieter | |
-| eventType | string, enum | Type of the event as domain event. Options: `OperationalMeasurementAdded`, `OperationalMeasurementUpdated`, `OperationalMeasurementDeleted` | | Event Type | Ereignistyp | |
-| extensionData | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | |
-| isAutoApproved | boolean | Determines whether this value is auto approved or requires approval. | | Auto Approved | Auto-genehmigt | |
-| lifeCycleAssessment | array[string] | Life cycle assessment stages (ISO 14040). Options: `A1`, `A2`, `A3`, `A4`, `A5`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `C1`, `C2`, `C3`, `C4`, `D` | | LCA Stages | LCA-Phasen | |
-| measurementDate | string | Date measurement was taken. ISO 8601 format. | minLength: 20 | Measurement Date | Messdatum | |
-| name | string | Any descriptive name. | | Name | Bezeichnung | |
-| parentId | string | Parent entity ID. | | Parent ID | Übergeordnete ID | |
-| postingDate | string | Date measurement was posted. ISO 8601 format. | minLength: 20 | Posting Date | Buchungsdatum | |
-| sensorId | string | ID of meter for this reading. | | Sensor ID | Zähler-ID | |
-| valuationIds | array[string] | Array of valuation IDs. | | Valuations | Bewertungen | |
+| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) | Comment |
+|-------|-------|------|-------------|-------------|------------|------------|---------|
+| **operationalMeasurementId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Measurement ID | Betriebs-ID | |
+| **buildingId** | FK | string | Unique identifier of the building this measurement belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Building ID | Objekt-ID | |
+| **type** | | string, enum | General type of operational measurement. See [Operational Measurement Types](#operational-measurement-types). | **mandatory** | Type | Art | |
+| **subType** | | string, enum | Specific type of operational measurement. See [Operational Measurement SubTypes](#operational-measurement-subtypes). | **mandatory** | Sub Type | Unterart | |
+| **value** | | number | Value of the measurement. | **mandatory** | Value | Wert | |
+| **unit** | | string, enum | Unit of measurement. See [Operational Measurement Units](#operational-measurement-units). | **mandatory** | Unit | Einheit | |
+| **validFrom** | | string | Date validity starts. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von | |
+| **validUntil** | | string | Date validity ends. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid Until | Gültig bis | |
+| **procuredBy** | | string, enum | Operational control information. See [Procurement Types](#procurement-types). | **mandatory** | Procured By | Beschaffung | |
+| **purpose** | | string, enum | Purpose of resource consumption. See [Purpose Types](#purpose-types). | **mandatory** | Purpose | Verwendungszweck | |
+| **spaceType** | | string, enum | Reference to specific space type. See [Space Types](#space-types). | **mandatory** | Space Type | Raumtyp | |
+| accuracy | | string, enum | Accuracy of measurement. See [Accuracy Options](#accuracy-options). | | Accuracy | Genauigkeit | |
+| customerInfoSource | | string, enum | Source of data. See [Data Source Types](#data-source-types). | | Data Source | Datenquelle | |
+| dataProvider | | string | Name of the data provider. | minLength: 1, maxLength: 50 | Data Provider | Datenanbieter | |
+| eventType | | string, enum | Type of the event as domain event. Options: `OperationalMeasurementAdded`, `OperationalMeasurementUpdated`, `OperationalMeasurementDeleted` | | Event Type | Ereignistyp | |
+| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten | |
+| isAutoApproved | | boolean | Determines whether this value is auto approved or requires approval. | | Auto Approved | Auto-genehmigt | |
+| lifeCycleAssessment | | array[string] | Life cycle assessment stages (ISO 14040). Options: `A1`, `A2`, `A3`, `A4`, `A5`, `B1`, `B2`, `B3`, `B4`, `B5`, `B6`, `B7`, `C1`, `C2`, `C3`, `C4`, `D` | | LCA Stages | LCA-Phasen | |
+| measurementDate | | string | Date measurement was taken. ISO 8601 format. | minLength: 20 | Measurement Date | Messdatum | |
+| name | | string | Any descriptive name. | | Name | Bezeichnung | |
+| parentId | FK | string | Parent entity ID. | | Parent ID | Übergeordnete ID | |
+| postingDate | | string | Date measurement was posted. ISO 8601 format. | minLength: 20 | Posting Date | Buchungsdatum | |
+| sensorId | | string | ID of meter for this reading. | | Sensor ID | Zähler-ID | |
+| valuationIds | FK | array[string] | Array of valuation IDs. | | Valuations | Bewertungen | |
+
+### Operational Measurement Types
+
+| Value | Description |
+|-------|-------------|
+| `Energy` | Energy consumption (electricity, gas, heating, etc.) |
+| `Water` | Water consumption and discharge |
+| `Waste` | Waste generation and disposal |
+| `Fugitive` | Fugitive emissions (refrigerants, gases) |
+
+### Operational Measurement Units
+
+| Value | Description |
+|-------|-------------|
+| `kWh` | Kilowatt-hours (energy) |
+| `cubm` | Cubic meters (m³) - water, gas |
+| `kg` | Kilograms (waste, emissions) |
+
+### Procurement Types
+
+Options for `procuredBy` field:
+
+`Procured by third party`, `Self-procured`, `Unspecified`
+
+### Purpose Types
+
+Options for `purpose` field:
+
+`Space heating`, `Water heating`, `Heating (unspecified)`, `Cooling`, `Lighting`, `Elevator`, `Appliances`, `Other`, `Unspecified`, `Heat pump`, `EV charging`
+
+### Space Types
+
+Options for `spaceType` field:
+
+`Shared services/Common spaces`, `Tenant space`, `Landlord space`, `Whole building`, `Unspecified`, `Shared services`, `Common spaces`, `Outdoor`, `Exterior area`, `Parking`
+
+### Data Source Types
+
+| Value | Description |
+|-------|-------------|
+| `Export` | Exported from external system |
+| `Survey` | Collected via survey |
+| `Meter` | Read from meter |
+| `Invoice` | Extracted from invoice |
 
 ### Operational Measurement SubTypes
 
@@ -850,164 +971,6 @@ Operational measurements track resource consumption (energy, water, waste) and e
   "lifeCycleAssessment": ["B6"]
 }
 ```
-
----
-
-## Enumerations
-
-### Site Types
-
-Options for Site `type` field:
-
-`Education`, `Health Care`, `Hotel`, `Industrial`, `Lodging`, `Leisure & Recreation`, `Mixed Use`, `Office`, `Residential`, `Retail`, `Technology/Science`, `Other`
-
-### Building Types
-
-Primary and secondary building type options:
-
-| Category | Values |
-|----------|--------|
-| Retail | `Retail`, `Retail High Street`, `Retail Retail Centers`, `Retail Shopping Center`, `Retail Strip Mall`, `Retail Lifestyle Center`, `Retail Warehouse`, `Retail Restaurants/Bars`, `Retail Other` |
-| Office | `Office`, `Office Corporate`, `Office Low-Rise Office`, `Office Mid-Rise Office`, `Office High-Rise Office`, `Office Medical Office`, `Office Business Park`, `Office Other` |
-| Industrial | `Industrial`, `Industrial Distribution Warehouse`, `Industrial Industrial Park`, `Industrial Manufacturing`, `Industrial Refrigerated Warehouse`, `Industrial Non-refrigerated Warehouse`, `Industrial Other` |
-| Residential | `Residential`, `Residential Multi-Family`, `Residential Low-Rise Multi-Family`, `Residential Mid-Rise Multi-Family`, `Residential High-Rise Multi-Family`, `Residential Family Homes`, `Residential Student Housing`, `Residential Retirement Living`, `Residential Other` |
-| Lodging | `Hotel`, `Lodging`, `Lodging Leisure & Recreation`, `Lodging Indoor Arena`, `Lodging Fitness Center`, `Lodging Performing Arts`, `Lodging Swimming Center`, `Lodging Museum/Gallery`, `Lodging Leisure & Recreation Other` |
-| Education | `Education`, `Education School`, `Education University`, `Education Library`, `Education Other` |
-| Technology/Science | `Technology/Science`, `Technology/Science Data Center`, `Technology/Science Laboratory/Life sciences`, `Technology/Science Other` |
-| Health Care | `Health Care`, `Health Care Health Care Center`, `Health Care Senior Homes`, `Health Care Other` |
-| Mixed Use | `Mixed Use`, `Mixed Use Office/Retail`, `Mixed Use Office/Residential`, `Mixed Use Office/Industrial`, `Mixed Use Other` |
-| Other | `Other`, `Other Parking (Indoors)`, `Other Self-Storage` |
-
-### Ownership Types
-
-Options for `typeOfOwnership` field (Building, Land):
-
-`Owner`, `Tenant`
-
-### Address Types
-
-Options for Address `type` field:
-
-`Primary`, `Other`
-
-### Tenant Structure
-
-Options for `tenantStructure` field (Building, Land):
-
-`Single-tenant`, `Multi-tenant`
-
-### Fossil Fuel Exposure
-
-Options for Building `fossilFuelExposure` field:
-
-`Extraction`, `Storage`, `Transport`, `Manufacture`, `Other`, `Not exposed`
-
-### Energy Types
-
-Options for `primaryEnergyType`:
-
-`Natural Gas`, `Coal`, `Nuclear`, `Petroleum`, `Hydropower`, `Wind`, `Biomass`, `Geothermal`, `Solar`
-
-### Heating Types
-
-Options for `secondaryHeatingType`:
-
-`District heating`, `Natural gas`, `Oil-based fuels`, `Solar thermal`, `Unspecified`, `Heat pump`, `Electricity (radiator)`, `Biomass`, `Micro combined heat and power`
-
-### Area Measurement Units
-
-Options for Area Measurement `unit` field:
-
-| Value | Description |
-|-------|-------------|
-| `sqm` | Square meters (m²) |
-| `sqft` | Square feet (ft²) |
-| `acr` | Acres |
-
-### Area Measurement Accuracy
-
-Options for Area Measurement `accuracy` field:
-
-| Value | Description |
-|-------|-------------|
-| `Estimated` | Estimated or calculated value |
-| `Measured` | Directly measured value |
-| `Aggregated` | Aggregated from multiple sources |
-| `Unknown` | Accuracy not specified |
-
-### Area Measurement Standards
-
-Options for Area Measurement `standard` field:
-
-| Value | Description |
-|-------|-------------|
-| `DIN 277-1` | German standard for floor areas |
-| `MFG` | Mietflächenrichtlinie für gewerblichen Raum |
-| `IPMS` | International Property Measurement Standards |
-| `RICS` | Royal Institution of Chartered Surveyors |
-| `BOMA` | Building Owners and Managers Association |
-| `NA` | Not applicable / Other standard |
-
-### Cost Periods
-
-Options for Cost `period` field:
-
-| Value | Description |
-|-------|-------------|
-| `Annual` | Yearly cost |
-| `Monthly` | Monthly cost |
-| `Quarterly` | Quarterly cost |
-| `OneTime` | One-time cost |
-
-### Operational Measurement Types
-
-Options for Operational Measurement `type` field:
-
-| Value | Description |
-|-------|-------------|
-| `Energy` | Energy consumption (electricity, gas, heating, etc.) |
-| `Water` | Water consumption and discharge |
-| `Waste` | Waste generation and disposal |
-| `Fugitive` | Fugitive emissions (refrigerants, gases) |
-
-### Operational Measurement Units
-
-Options for Operational Measurement `unit` field:
-
-| Value | Description |
-|-------|-------------|
-| `kWh` | Kilowatt-hours (energy) |
-| `cubm` | Cubic meters (m³) - water, gas |
-| `kg` | Kilograms (waste, emissions) |
-
-### Procurement Types
-
-Options for Operational Measurement `procuredBy` field:
-
-`Procured by third party`, `Self-procured`, `Unspecified`
-
-### Purpose Types
-
-Options for Operational Measurement `purpose` field:
-
-`Space heating`, `Water heating`, `Heating (unspecified)`, `Cooling`, `Lighting`, `Elevator`, `Appliances`, `Other`, `Unspecified`, `Heat pump`, `EV charging`
-
-### Space Types
-
-Options for Operational Measurement `spaceType` field:
-
-`Shared services/Common spaces`, `Tenant space`, `Landlord space`, `Whole building`, `Unspecified`, `Shared services`, `Common spaces`, `Outdoor`, `Exterior area`, `Parking`
-
-### Data Source Types
-
-Options for Operational Measurement `customerInfoSource` field:
-
-| Value | Description |
-|-------|-------------|
-| `Export` | Exported from external system |
-| `Survey` | Collected via survey |
-| `Meter` | Read from meter |
-| `Invoice` | Extracted from invoice |
 
 ---
 
