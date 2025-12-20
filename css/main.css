@@ -926,13 +926,6 @@
             height: 0;
         }
 
-        /* When open in detail view, match content height instead of 100% */
-        body.detail-active #filter-pane.open {
-            height: auto;
-            align-self: flex-start;
-            min-height: calc(100vh - 120px);
-        }
-
         /* Fix AI panel height in detail view */
         /* When closed, collapse height to prevent affecting layout */
         body.detail-active #ai-assistant-panel:not(.show) {
