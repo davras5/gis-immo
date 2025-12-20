@@ -962,11 +962,12 @@
             border: none;
         }
 
-        /* When open, match detail-view height */
+        /* When open, constrain to viewport height minus header */
         body.detail-active #smart-drawer.open {
             align-self: flex-start;
-            min-height: calc(100vh - 120px); /* match detail-view height */
-            height: auto;
+            height: calc(100vh - 120px); /* fixed height matching viewport */
+            position: sticky;
+            top: 0;
         }
 
         .detail-header {
@@ -3041,7 +3042,7 @@
 
             /* Match smart-drawer height to detail-view on tablet */
             body.detail-active #smart-drawer.open {
-                min-height: calc(100vh - 100px); /* match detail-view height */
+                height: calc(100vh - 100px); /* fixed height matching viewport */
             }
         }
 
