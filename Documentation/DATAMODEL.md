@@ -12,20 +12,22 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 │   ┌─────────────┐         ┌─────────────┐         ┌─────────────┐          │
 │   │    Site     │ 1    n  │  Building   │ 1    n  │   Address   │          │
 │   │             │────────▶│             │────────▶│             │          │
-│   └─────────────┘         └──────┬──────┘         └─────────────┘          │
-│                                  │                                          │
-│                    ┌─────────────┼─────────────┐                           │
-│                    │             │             │                           │
-│                    ▼             ▼             ▼                           │
-│             ┌───────────┐ ┌───────────┐ ┌───────────┐                      │
-│             │ Bemessung │ │ Dokument  │ │  Kontakt  │                      │
-│             │  (Area)   │ │(Document) │ │ (Contact) │                      │
-│             └───────────┘ └───────────┘ └───────────┘                      │
+│   └──────┬──────┘         └──────┬──────┘         └─────────────┘          │
+│          │                       │                                          │
+│          │ 1    n                │                                          │
+│          ▼                       │                                          │
+│   ┌─────────────┐  ┌─────────────┼─────────────┐                           │
+│   │    Land     │  │             │             │                           │
+│   │(Grundstück) │  ▼             ▼             ▼                           │
+│   └─────────────┘  ┌───────────┐ ┌───────────┐ ┌───────────┐               │
+│                    │ Bemessung │ │ Dokument  │ │  Kontakt  │               │
+│                    │  (Area)   │ │(Document) │ │ (Contact) │               │
+│                    └───────────┘ └───────────┘ └───────────┘               │
 │                                                                              │
-│             ┌───────────┐ ┌───────────┐ ┌───────────┐                      │
-│             │  Vertrag  │ │Certificate│ │  Energy   │                      │
-│             │(Contract) │ │           │ │  Rating   │                      │
-│             └───────────┘ └───────────┘ └───────────┘                      │
+│                    ┌───────────┐ ┌───────────┐ ┌───────────┐               │
+│                    │  Vertrag  │ │Certificate│ │  Energy   │               │
+│                    │(Contract) │ │           │ │  Rating   │               │
+│                    └───────────┘ └───────────┘ └───────────┘               │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -351,6 +353,72 @@ For measurements that don't fit the standard area types (volumes, counts):
 
 ---
 
+## Entity: Land (Grundstück)
+
+Land represents a parcel of land or plot that belongs to a site. In the current demo, land information is partially embedded in building properties (`grundstueck_id`, `grundstueck_name`). In a production system, Land would be a separate entity allowing multiple land parcels per site.
+
+### Schema Definition
+
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **landId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` or generated |
+| **name** | string | Name of land (e.g., park, garden, parking). | **mandatory**, minLength: 1, maxLength: 200 | Source: `grundstueck_name` |
+| **siteId** | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Derived from site relationship |
+| **typeOfOwnership** | string, enum | Is the land owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Source: `eigentum`. "Eigentum Bund" → Owner |
+| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
+| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Source: `gueltig_bis`, convert to ISO 8601 |
+| addressIds | array[string] | Array of address IDs linked to this land. | minLength: 1, maxLength: 50 per ID | |
+| eventType | string, enum | Type of the event as domain event. Options: `LandAdded`, `LandUpdated`, `LandDeleted` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| landCode | string | User specific land code. | minLength: 1, maxLength: 70 | |
+| landCoverage | string | Development level of land (e.g., "bebaut", "unbebaut", "teilweise bebaut"). | minLength: 1, maxLength: 50 | |
+| landParcelNr | string | District/zoning number registered for the plot of land. | minLength: 1, maxLength: 50 | |
+| selfUse | boolean | Is the land self-used? | | |
+| status | string | Status of land. | minLength: 1, maxLength: 50 | |
+| tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
+| valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
+| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | Swiss extension. Source: `egrid` |
+| extensionData.parzellenNummer | string | Official Swiss parcel number | | Swiss extension |
+| extensionData.grundbuchKreis | string | Land registry district | | Swiss extension |
+| extensionData.grundbuchBlatt | string | Land registry folio number | | Swiss extension |
+| extensionData.katasterNummer | string | Cadastral number | | Swiss extension |
+| extensionData.gemeinde | string | Municipality name | | Swiss extension |
+| extensionData.kanton | string | Canton code (e.g., "BE", "ZH") | | Swiss extension |
+| extensionData.flaeche | number | Total land area in m² | | Swiss extension |
+| extensionData.nutzungszone | string | Zoning designation | | Swiss extension |
+| extensionData.bauzone | boolean | Is land in a building zone? | | Swiss extension |
+
+### Example: Land Object
+
+```json
+{
+  "landId": "BE-3003-1001",
+  "name": "Bundesplatz Parzelle A",
+  "siteId": "SITE-BE-3003",
+  "typeOfOwnership": "Owner",
+  "validFrom": "1900-01-01T00:00:00Z",
+  "validUntil": null,
+  "addressIds": ["BBL-001-ADDR-1"],
+  "landCode": "BPL-A",
+  "landCoverage": "bebaut",
+  "landParcelNr": "1001",
+  "selfUse": true,
+  "status": "Aktiv",
+  "extensionData": {
+    "egrid": "CH123456789012",
+    "parzellenNummer": "1001",
+    "grundbuchKreis": "Bern",
+    "gemeinde": "Bern",
+    "kanton": "BE",
+    "flaeche": 5200,
+    "nutzungszone": "Kernzone",
+    "bauzone": true
+  }
+}
+```
+
+---
+
 ## Enumerations
 
 ### Building Types
@@ -393,6 +461,7 @@ The following entities are related to buildings and will be documented in separa
 | ~~**Site**~~ | ~~A logical grouping of buildings~~ | *(documented above)* |
 | ~~**Address**~~ | ~~Physical address of a building~~ | *(documented above)* |
 | ~~**Bemessung (Area Measurement)**~~ | ~~Area and volume measurements~~ | *(documented above)* |
+| ~~**Land (Grundstück)**~~ | ~~Land parcels belonging to a site~~ | *(documented above)* |
 | **Dokument (Document)** | Related documents (plans, certificates) | 1 Building → n Documents |
 | **Kontakt (Contact)** | Contact persons for the building | 1 Building → n Contacts |
 | **Vertrag (Contract)** | Service and maintenance contracts | 1 Building → n Contracts |
@@ -411,6 +480,7 @@ The following entities are related to buildings and will be documented in separa
 | 0.3.0 | 2024-XX-XX | - | Added Site entity with Swiss extensions |
 | 0.4.0 | 2024-XX-XX | - | Consolidated to single schema table per entity with Comment column |
 | 0.5.0 | 2024-XX-XX | - | Added Area Measurement (Bemessung) entity with SIA type mappings |
+| 0.6.0 | 2024-XX-XX | - | Added Land (Grundstück) entity with Swiss cadastral extensions |
 
 ---
 
