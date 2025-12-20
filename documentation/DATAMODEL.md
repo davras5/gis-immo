@@ -597,6 +597,10 @@ A space represents a room or area within a floor. Spaces are the smallest spatia
 | `Balanced` | `Zu-/Abluft` | Balanced supply and exhaust |
 | `Heat-recovery` | `Wärmerückgewinnung` | Ventilation with heat recovery |
 
+#### Swiss Extension Fields (extensionData)
+
+No Swiss-specific extension fields are currently defined for the Space entity. The `extensionData` field is available for storing custom data as needed.
+
 #### Example: Space Object
 
 ```json
