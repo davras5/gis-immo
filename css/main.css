@@ -890,6 +890,12 @@
             flex: none;
         }
 
+        /* Hide panels in detail view - they're not relevant and break layout */
+        body.detail-active #filter-pane,
+        body.detail-active #ai-assistant-panel {
+            display: none;
+        }
+
         .detail-header {
             background: var(--white);
             border-bottom: 1px solid var(--grey-300);
