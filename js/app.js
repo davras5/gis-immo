@@ -520,11 +520,11 @@
 
             if (open) {
                 pane.classList.add('open');
-                filterBtn.classList.add('pane-open');
+                filterBtn.classList.add('panel-open');
                 filterBtn.setAttribute('aria-expanded', 'true');
             } else {
                 pane.classList.remove('open');
-                filterBtn.classList.remove('pane-open');
+                filterBtn.classList.remove('panel-open');
                 filterBtn.setAttribute('aria-expanded', 'false');
             }
 
@@ -2129,10 +2129,10 @@
 
             if (aiPanelOpen) {
                 aiAssistantPanel.classList.add('show');
-                aiAssistantBtn.classList.add('active');
+                aiAssistantBtn.classList.add('panel-open');
             } else {
                 aiAssistantPanel.classList.remove('show');
-                aiAssistantBtn.classList.remove('active');
+                aiAssistantBtn.classList.remove('panel-open');
             }
 
             // Resize map after transition completes
