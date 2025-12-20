@@ -1796,6 +1796,11 @@
             right: 360px;
         }
 
+        /* Detail view: ensure filter pane rule applies (higher specificity) */
+        body.detail-active .main-content:has(#filter-pane.open) .floating-controls {
+            right: 360px;
+        }
+
         /* ===== STYLE SWITCHER ===== */
         .style-switcher {
             position: relative;
