@@ -120,6 +120,13 @@
             --transition-fast: 0.15s ease;
             --transition-normal: 0.2s ease;
             --transition-slow: 0.3s ease;
+
+            /* ===== LAYOUT HEIGHT SYSTEM ===== */
+            /* Centralized height values to eliminate magic numbers */
+            --header-main-height: 90px;
+            --header-detail-height: 124px;
+            --footer-height: 27px;
+            --header-total-height: calc(var(--header-main-height) + var(--header-detail-height));
         }
         
         * {
@@ -151,7 +158,7 @@
             display: flex;
             align-items: center;
             padding: 0 var(--space-5);
-            height: 90px;
+            height: var(--header-main-height);
             border-bottom: 1px solid var(--grey-300);
             box-shadow: var(--shadow-md);
             position: relative;
@@ -978,9 +985,9 @@
         /* When open, use fixed positioning below full header */
         body.detail-active #smart-drawer.open {
             position: fixed;
-            top: 214px; /* below header-main (90px) + header-detail (124px) */
+            top: var(--header-total-height);
             right: 0;
-            height: calc(100vh - 214px - 27px); /* viewport minus header and footer */
+            height: calc(100vh - var(--header-total-height) - var(--footer-height));
             z-index: 100;
         }
 
@@ -2990,9 +2997,16 @@
 
         /* Tablet breakpoint (768px - 1024px) */
         @media screen and (max-width: 1024px) {
+            /* Override layout height variables for tablet */
+            :root {
+                --header-main-height: 70px;
+                --header-detail-height: 100px;
+                --footer-height: 30px;
+            }
+
             .header-main {
                 padding: 0 16px;
-                height: 70px;
+                height: var(--header-main-height);
             }
 
             #logo-text-img {
@@ -3055,10 +3069,10 @@
                 padding: var(--space-4);
             }
 
-            /* Smart-drawer fixed positioning for tablet */
+            /* Smart-drawer fixed positioning for tablet - uses overridden CSS variables */
             body.detail-active #smart-drawer.open {
-                top: 170px; /* header-main (70px) + detail-header (~50px) + detail-tabs (~50px) */
-                height: calc(100vh - 170px - 30px); /* minus footer */
+                top: var(--header-total-height);
+                height: calc(100vh - var(--header-total-height) - var(--footer-height));
             }
 
             /* Detail content padding for tablet drawer width */
