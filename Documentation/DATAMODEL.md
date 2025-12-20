@@ -48,61 +48,24 @@ A site represents a logical grouping of buildings, such as a campus, property, o
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints |
-|-------|------|-------------|-------------|
-| **siteId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 |
-| **name** | string | Name of the site. | **mandatory**, minLength: 1, maxLength: 50 |
-| **type** | string, enum | Type of site. See [Site Types](#site-types). | **mandatory** |
-| **addressIds** | array[string] | Array of address IDs linked to this site. | **mandatory**, minLength: 1, maxLength: 50 per ID |
-| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 |
-| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 (null allowed for currently valid records) |
-| energyRatingIds | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID |
-| eventType | string, enum | Type of the event as domain event. Options: `SiteAdded`, `SiteUpdated`, `SiteDeleted` | |
-| extensionData | object | Extension data for storing any custom data. | JSON object |
-| siteCode | string | User specific site code. | minLength: 1, maxLength: 70 |
-| status | string | Status of site. | minLength: 1, maxLength: 50 |
-
-### Site Types
-
-Options for the `type` field:
-
-- `Education`
-- `Health Care`
-- `Hotel`
-- `Industrial`
-- `Lodging`
-- `Leisure & Recreation`
-- `Mixed Use`
-- `Office`
-- `Residential`
-- `Retail`
-- `Technology/Science`
-- `Other`
-
-### Swiss-Specific Fields (BBL Extension)
-
-These fields are specific to the Swiss context and stored in `extensionData`:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) |
-| parzellenNummer | string | Official parcel number |
-| grundbuchKreis | string | Land registry district |
-| katasterNummer | string | Cadastral number |
-| teilportfolioGruppe | string | Sub-portfolio group (e.g., "Bundesverwaltung") |
-
-### Mapping: Current GeoJSON → Target Schema
-
-| Current Field (GeoJSON) | Target Field | Notes |
-|------------------------|--------------|-------|
-| `grundstueck_id` | `siteId` | Direct mapping |
-| `grundstueck_name` | `name` | Direct mapping |
-| (derived) | `type` | Derive from `teilportfolio` or `objektart1` |
-| (from building addresses) | `addressIds` | Collect from linked buildings |
-| `gueltig_von` | `validFrom` | Convert to ISO 8601 |
-| `gueltig_bis` | `validUntil` | Convert to ISO 8601 |
-| `teilportfolio_gruppe` | `extensionData.teilportfolioGruppe` | Swiss-specific |
-| `egrid` | `extensionData.egrid` | Swiss-specific |
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **siteId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` |
+| **name** | string | Name of the site. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_name` |
+| **type** | string, enum | Type of site. Options: `Education`, `Health Care`, `Hotel`, `Industrial`, `Lodging`, `Leisure & Recreation`, `Mixed Use`, `Office`, `Residential`, `Retail`, `Technology/Science`, `Other` | **mandatory** | Derived from `teilportfolio` or `objektart1` |
+| **addressIds** | array[string] | Array of address IDs linked to this site. | **mandatory**, minLength: 1, maxLength: 50 per ID | Collect from linked buildings |
+| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
+| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Source: `gueltig_bis`, convert to ISO 8601 |
+| energyRatingIds | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | |
+| eventType | string, enum | Type of the event as domain event. Options: `SiteAdded`, `SiteUpdated`, `SiteDeleted` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| siteCode | string | User specific site code. | minLength: 1, maxLength: 70 | |
+| status | string | Status of site. | minLength: 1, maxLength: 50 | |
+| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | Swiss extension. Source: `egrid` |
+| extensionData.parzellenNummer | string | Official parcel number | | Swiss extension |
+| extensionData.grundbuchKreis | string | Land registry district | | Swiss extension |
+| extensionData.katasterNummer | string | Cadastral number | | Swiss extension |
+| extensionData.teilportfolioGruppe | string | Sub-portfolio group (e.g., "Bundesverwaltung") | | Swiss extension. Source: `teilportfolio_gruppe` |
 
 ### Example: Site Object
 
@@ -133,213 +96,53 @@ The building is the core entity representing a physical structure in the portfol
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints |
-|-------|------|-------------|-------------|
-| **buildingId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 |
-| **name** | string | User specific building name (e.g., "Bundeshaus West", "EMEA Headquarter"). | **mandatory**, minLength: 1, maxLength: 200 |
-| **siteId** | string | Refers to the site which the building belongs to. | **mandatory**, minLength: 1, maxLength: 50 |
-| **primaryTypeOfBuilding** | string, enum | Primary type of building use. See [Building Types](#building-types). | **mandatory** |
-| **typeOfOwnership** | string, enum | Is the building owned or leased? Options: `Owner`, `Tenant` | **mandatory** |
-| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 |
-| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 (null allowed for currently valid records) |
-| addressIds | array[string] | Array of address IDs linked to this building. | minLength: 1, maxLength: 50 per ID |
-| airConditioning | boolean | Does the building have air conditioning? | |
-| buildingCode | string | User specific building code. | minLength: 1, maxLength: 70 |
-| buildingPermitDate | string | Building permit date. ISO 8601 format. | minLength: 20 |
-| certificateIds | array[string] | Array of certificate IDs. | minLength: 1, maxLength: 50 per ID |
-| constructionYear | string | Year of construction. ISO 8601 format. Use `yyyy-01-01T00:00:00Z` if only year is known. | minLength: 20 |
-| electricVehicleChargingStations | number | Number of EV charging stations. | maximum: 9999 |
-| energyEfficiencyClass | string | Energy Efficiency Class of Building (e.g., "A", "B", "C"). | minLength: 1, maxLength: 50 |
-| energyRatingIds | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID |
-| eventType | string, enum | Type of the event as domain event. Options: `BuildingAdded`, `BuildingUpdated`, `BuildingDeleted` | |
-| expectedLifeEndDate | string | Expected end date of building lifecycle. ISO 8601 format. | minLength: 20 |
-| extensionData | object | Extension data for storing any custom data. | JSON object |
-| fossilFuelExposure | string, enum | Fossil fuel exposure type. Options: `Extraction`, `Storage`, `Transport`, `Manufacture`, `Other`, `Not exposed` | |
-| monumentProtection | boolean | Is the building declared as a protected monument? | |
-| netZeroEnergyBuilding | boolean | Is the building a net zero energy building? | |
-| numberOfEmployees | number | Number of employees. | maximum: 999999 |
-| numberOfFloors | number | Number of floors/stories in the building. | |
-| parkingSpaces | number | Number of parking spaces. | maximum: 9999 |
-| percentageOfOwnership | number | Percentage of ownership. | maximum: 100 |
-| primaryEnergyType | string, enum | Primary type of energy used. See [Energy Types](#energy-types). | |
-| primaryWaterType | string | Type of water used. | minLength: 1, maxLength: 50 |
-| secondaryHeatingType | string, enum | Secondary type of heating. See [Heating Types](#heating-types). | |
-| secondaryTypeOfBuilding | string, enum | Secondary type of building use. See [Building Types](#building-types). | |
-| selfUse | boolean | Is the building self-used? | |
-| status | string | Status of building (e.g., "In Betrieb", "In Renovation"). | minLength: 1, maxLength: 50 |
-| tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | |
-| valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID |
-| yearOfLastRefurbishment | string | Year of last refurbishment. ISO 8601 format. | minLength: 20 |
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **buildingId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Source: `id` |
+| **name** | string | User specific building name (e.g., "Bundeshaus West", "EMEA Headquarter"). | **mandatory**, minLength: 1, maxLength: 200 | Source: `name` |
+| **siteId** | string | Refers to the site which the building belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Source: `grundstueck_id` |
+| **primaryTypeOfBuilding** | string, enum | Primary type of building use. See [Building Types](#building-types). | **mandatory** | Source: `objektart1`, needs value mapping |
+| **typeOfOwnership** | string, enum | Is the building owned or leased? Options: `Owner`, `Tenant` | **mandatory** | Source: `eigentum`. "Eigentum Bund" → Owner, "Miete" → Tenant |
+| **validFrom** | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Source: `gueltig_von`, convert to ISO 8601 |
+| **validUntil** | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Source: `gueltig_bis`, convert to ISO 8601 |
+| addressIds | array[string] | Array of address IDs linked to this building. | minLength: 1, maxLength: 50 per ID | |
+| airConditioning | boolean | Does the building have air conditioning? | | |
+| buildingCode | string | User specific building code. | minLength: 1, maxLength: 70 | |
+| buildingPermitDate | string | Building permit date. ISO 8601 format. | minLength: 20 | Source: `baubewilligung`, convert to ISO 8601 |
+| certificateIds | array[string] | Array of certificate IDs. | minLength: 1, maxLength: 50 per ID | |
+| constructionYear | string | Year of construction. ISO 8601 format. Use `yyyy-01-01T00:00:00Z` if only year is known. | minLength: 20 | Source: `baujahr`, convert year to ISO 8601 |
+| electricVehicleChargingStations | number | Number of EV charging stations. | maximum: 9999 | Source: `ladestationen` |
+| energyEfficiencyClass | string | Energy Efficiency Class of Building (e.g., "A", "B", "C"). | minLength: 1, maxLength: 50 | Source: `energieklasse` |
+| energyRatingIds | array[string] | Array of energy rating IDs. | minLength: 1, maxLength: 50 per ID | |
+| eventType | string, enum | Type of the event as domain event. Options: `BuildingAdded`, `BuildingUpdated`, `BuildingDeleted` | | |
+| expectedLifeEndDate | string | Expected end date of building lifecycle. ISO 8601 format. | minLength: 20 | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| fossilFuelExposure | string, enum | Fossil fuel exposure type. Options: `Extraction`, `Storage`, `Transport`, `Manufacture`, `Other`, `Not exposed` | | |
+| monumentProtection | boolean | Is the building declared as a protected monument? | | Source: `denkmalschutz`. "Ja" → true, "Nein" → false |
+| netZeroEnergyBuilding | boolean | Is the building a net zero energy building? | | |
+| numberOfEmployees | number | Number of employees. | maximum: 999999 | |
+| numberOfFloors | number | Number of floors/stories in the building. | | Source: `geschosse` |
+| parkingSpaces | number | Number of parking spaces. | maximum: 9999 | Source: `parkplaetze` |
+| percentageOfOwnership | number | Percentage of ownership. | maximum: 100 | |
+| primaryEnergyType | string, enum | Primary type of energy used. See [Energy Types](#energy-types). | | |
+| primaryWaterType | string | Type of water used. | minLength: 1, maxLength: 50 | |
+| secondaryHeatingType | string, enum | Secondary type of heating. See [Heating Types](#heating-types). | | |
+| secondaryTypeOfBuilding | string, enum | Secondary type of building use. See [Building Types](#building-types). | | Source: `objektart2`, needs value mapping |
+| selfUse | boolean | Is the building self-used? | | |
+| status | string | Status of building (e.g., "In Betrieb", "In Renovation"). | minLength: 1, maxLength: 50 | Source: `status` |
+| tenantStructure | string, enum | Tenant structure. Options: `Single-tenant`, `Multi-tenant` | | |
+| valuationIds | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | |
+| yearOfLastRefurbishment | string | Year of last refurbishment. ISO 8601 format. | minLength: 20 | Source: `sanierung`, convert to ISO 8601 |
+| extensionData.egid | string | Eidgenössischer Gebäudeidentifikator (Federal Building Identifier) | | Swiss extension. Source: `egid` |
+| extensionData.egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) | | Swiss extension. Source: `egrid` |
+| extensionData.teilportfolio | string | Sub-portfolio category (e.g., "Verwaltungsgebäude") | | Swiss extension. Source: `teilportfolio` |
+| extensionData.teilportfolioGruppe | string | Sub-portfolio group (e.g., "Bundesverwaltung") | | Swiss extension. Source: `teilportfolio_gruppe` |
+| extensionData.region | string | Region/Canton | | Swiss extension. Source: `region` |
+| extensionData.heatingGenerator | string | Heating generator type (Wärmeerzeuger) | | Swiss extension. Source: `waermeerzeuger` |
+| extensionData.heatingSource | string | Heating source (Wärmequelle) | | Swiss extension. Source: `waermequelle` |
+| extensionData.hotWater | string | Hot water system description | | Swiss extension. Source: `warmwasser` |
 
-### Swiss-Specific Fields (BBL Extension)
-
-These fields are specific to the Swiss context and stored in `extensionData`:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| egid | string | Eidgenössischer Gebäudeidentifikator (Federal Building Identifier) |
-| egrid | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier) |
-| grundstueckId | string | Property/parcel ID |
-| grundstueckName | string | Property/parcel name |
-| teilportfolio | string | Sub-portfolio category (e.g., "Verwaltungsgebäude") |
-| teilportfolioGruppe | string | Sub-portfolio group (e.g., "Bundesverwaltung") |
-| region | string | Region/Canton |
-| heatingSource | string | Heating source (Wärmequelle) |
-| hotWater | string | Hot water system description |
-| heatingGenerator | string | Heating generator type (Wärmeerzeuger) |
-
-### Mapping: Current GeoJSON → Target Schema
-
-| Current Field (GeoJSON) | Target Field | Notes |
-|------------------------|--------------|-------|
-| `id` | `buildingId` | Direct mapping |
-| `name` | `name` | Direct mapping |
-| `grundstueck_id` | `siteId` | Map to site entity |
-| `objektart1` | `primaryTypeOfBuilding` | Needs value mapping |
-| `objektart2` | `secondaryTypeOfBuilding` | Needs value mapping |
-| `eigentum` | `typeOfOwnership` | "Eigentum Bund" → "Owner", "Miete" → "Tenant" |
-| `gueltig_von` | `validFrom` | Convert to ISO 8601 |
-| `gueltig_bis` | `validUntil` | Convert to ISO 8601 |
-| `baujahr` | `constructionYear` | Convert year to ISO 8601 |
-| `baubewilligung` | `buildingPermitDate` | Convert to ISO 8601 |
-| `sanierung` | `yearOfLastRefurbishment` | Convert to ISO 8601 |
-| `energieklasse` | `energyEfficiencyClass` | Direct mapping |
-| `ladestationen` | `electricVehicleChargingStations` | Direct mapping |
-| `parkplaetze` | `parkingSpaces` | Direct mapping |
-| `geschosse` | `numberOfFloors` | Custom field (extensionData) |
-| `denkmalschutz` | `monumentProtection` | "Ja" → true, "Nein" → false |
-| `status` | `status` | Direct mapping |
-| `waermeerzeuger` | `extensionData.heatingGenerator` | Swiss-specific |
-| `waermequelle` | `extensionData.heatingSource` | Swiss-specific |
-| `warmwasser` | `extensionData.hotWater` | Swiss-specific |
-| `egid` | `extensionData.egid` | Swiss-specific |
-| `egrid` | `extensionData.egrid` | Swiss-specific |
-| `teilportfolio` | `extensionData.teilportfolio` | Swiss-specific |
-| `teilportfolio_gruppe` | `extensionData.teilportfolioGruppe` | Swiss-specific |
-| `region` | `extensionData.region` | Swiss-specific |
-
----
-
-## Enumerations
-
-### Building Types
-
-Primary and secondary building type options:
-
-**Retail**
-- `Retail`
-- `Retail High Street`
-- `Retail Retail Centers`
-- `Retail Shopping Center`
-- `Retail Strip Mall`
-- `Retail Lifestyle Center`
-- `Retail Warehouse`
-- `Retail Restaurants/Bars`
-- `Retail Other`
-
-**Office**
-- `Office`
-- `Office Corporate`
-- `Office Low-Rise Office`
-- `Office Mid-Rise Office`
-- `Office High-Rise Office`
-- `Office Medical Office`
-- `Office Business Park`
-- `Office Other`
-
-**Industrial**
-- `Industrial`
-- `Industrial Distribution Warehouse`
-- `Industrial Industrial Park`
-- `Industrial Manufacturing`
-- `Industrial Refrigerated Warehouse`
-- `Industrial Non-refrigerated Warehouse`
-- `Industrial Other`
-
-**Residential**
-- `Residential`
-- `Residential Multi-Family`
-- `Residential Low-Rise Multi-Family`
-- `Residential Mid-Rise Multi-Family`
-- `Residential High-Rise Multi-Family`
-- `Residential Family Homes`
-- `Residential Student Housing`
-- `Residential Retirement Living`
-- `Residential Other`
-
-**Lodging / Hotel**
-- `Hotel`
-- `Lodging`
-- `Lodging Leisure & Recreation`
-- `Lodging Indoor Arena`
-- `Lodging Fitness Center`
-- `Lodging Performing Arts`
-- `Lodging Swimming Center`
-- `Lodging Museum/Gallery`
-- `Lodging Leisure & Recreation Other`
-
-**Education**
-- `Education`
-- `Education School`
-- `Education University`
-- `Education Library`
-- `Education Other`
-
-**Technology / Science**
-- `Technology/Science`
-- `Technology/Science Data Center`
-- `Technology/Science Laboratory/Life sciences`
-- `Technology/Science Other`
-
-**Health Care**
-- `Health Care`
-- `Health Care Health Care Center`
-- `Health Care Senior Homes`
-- `Health Care Other`
-
-**Mixed Use**
-- `Mixed Use`
-- `Mixed Use Office/Retail`
-- `Mixed Use Office/Residential`
-- `Mixed Use Office/Industrial`
-- `Mixed Use Other`
-
-**Other**
-- `Other`
-- `Other Parking (Indoors)`
-- `Other Self-Storage`
-
-### Energy Types
-
-Options for `primaryEnergyType`:
-
-- `Natural Gas`
-- `Coal`
-- `Nuclear`
-- `Petroleum`
-- `Hydropower`
-- `Wind`
-- `Biomass`
-- `Geothermal`
-- `Solar`
-
-### Heating Types
-
-Options for `secondaryHeatingType`:
-
-- `District heating`
-- `Natural gas`
-- `Oil-based fuels`
-- `Solar thermal`
-- `Unspecified`
-- `Heat pump`
-- `Electricity (radiator)`
-- `Biomass`
-- `Micro combined heat and power`
-
----
-
-## Example: Building Object
+### Example: Building Object
 
 ```json
 {
@@ -384,76 +187,31 @@ Addresses represent the physical location of a building. A building can have mul
 
 ### Schema Definition
 
-| Field | Type | Description | Constraints |
-|-------|------|-------------|-------------|
-| **addressId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 |
-| **city** | string | Any official settlement including cities, towns, villages, hamlets, localities, etc. | **mandatory**, minLength: 1, maxLength: 100 |
-| **country** | string, enum | Sovereign nations with ISO-3166 code. See [Country Codes](#country-codes). | **mandatory** |
-| **type** | string, enum | Type of address. Options: `Primary`, `Other` | **mandatory** |
-| **geoCoordinates** | object | Geographic coordinate information. See [GeoCoordinates](#geocoordinates-sub-object). | contains mandatory fields |
-| additionalInformation | string | Additional information (building name, door number, etc.). | minLength: 1, maxLength: 500 |
-| apartmentOrUnit | string | Unit or apartment number. | minLength: 1, maxLength: 50 |
-| district | string | Borough or district within a city. | minLength: 1, maxLength: 50 |
-| eventType | string, enum | Type of the event as domain event. Options: `AddressAdded`, `AddressUpdated` | |
-| extensionData | object | Extension data for storing any custom data. | JSON object |
-| houseNumber | string | House number of the street. | minLength: 1, maxLength: 50 |
-| postalCode | string | Postal code for mail sorting. | minLength: 1, maxLength: 15 |
-| stateProvincePrefecture | string | First-level administrative division (canton, state, province). | minLength: 1, maxLength: 50 |
-| streetName | string | Name of the street. | minLength: 1, maxLength: 150 |
-
-### GeoCoordinates Sub-Object
-
-| Field | Type | Description | Constraints |
-|-------|------|-------------|-------------|
-| **geoCoordinateId** | string | Unique identifier for the coordinate set. | **mandatory**, minLength: 1, maxLength: 50 |
-| coordinateReferenceSystem | string | Specific coordinate reference system used (e.g., "WGS84", "LV95"). | minLength: 1, maxLength: 50 |
-| latitude | number | Latitude coordinate (WGS84: -90 to 90). | |
-| longitude | number | Longitude coordinate (WGS84: -180 to 180). | |
-
-### Swiss-Specific Fields (BBL Extension)
-
-These fields are specific to the Swiss context and stored in `extensionData`:
-
-| Field | Type | Description |
-|-------|------|-------------|
-| formattedAddress | string | Pre-formatted full address string (e.g., "Bundesplatz 3, 3003 Bern") |
-| canton | string | Swiss canton code (e.g., "BE", "ZH", "GE") |
-| gemeinde | string | Municipality name |
-| gemeindeNummer | string | Official municipality number (BFS-Nr.) |
-| lv95East | number | Swiss LV95 East coordinate (E) |
-| lv95North | number | Swiss LV95 North coordinate (N) |
-
-### Mapping: Current GeoJSON → Target Schema
-
-| Current Field (GeoJSON) | Target Field | Notes |
-|------------------------|--------------|-------|
-| (generated) | `addressId` | Generate from building ID + suffix (e.g., "BBL-001-ADDR-1") |
-| `ort` | `city` | Direct mapping |
-| `land` | `country` | Direct mapping (already ISO-3166) |
-| (default) | `type` | Default to "Primary" for main address |
-| `geometry.coordinates[0]` | `geoCoordinates.longitude` | From GeoJSON geometry |
-| `geometry.coordinates[1]` | `geoCoordinates.latitude` | From GeoJSON geometry |
-| `hausnummer` | `houseNumber` | Direct mapping |
-| `plz` | `postalCode` | Direct mapping |
-| `region` | `stateProvincePrefecture` | Direct mapping |
-| `adresse` | `extensionData.formattedAddress` | Full address string |
-| (extracted from region) | `extensionData.canton` | Extract canton code |
-
-### Country Codes
-
-The `country` field uses ISO-3166 alpha-2 codes. Common codes for BBL portfolio:
-
-| Code | Country |
-|------|---------|
-| `CH` | Switzerland |
-| `DE` | Germany |
-| `FR` | France |
-| `IT` | Italy |
-| `AT` | Austria |
-| `BE` | Belgium |
-| `US` | United States |
-
-Full list: All ISO-3166 alpha-2 codes (AF, AL, DZ, ... ZW)
+| Field | Type | Description | Constraints | Comment |
+|-------|------|-------------|-------------|---------|
+| **addressId** | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Generated: buildingId + "-ADDR-1" |
+| **city** | string | Any official settlement including cities, towns, villages, hamlets, localities, etc. | **mandatory**, minLength: 1, maxLength: 100 | Source: `ort` |
+| **country** | string, enum | Sovereign nations with ISO-3166 code. Common: `CH`, `DE`, `FR`, `IT`, `AT`, `BE`, `US` | **mandatory** | Source: `land` (already ISO-3166) |
+| **type** | string, enum | Type of address. Options: `Primary`, `Other` | **mandatory** | Default: "Primary" for main address |
+| **geoCoordinates.geoCoordinateId** | string | Unique identifier for the coordinate set. | **mandatory**, minLength: 1, maxLength: 50 | Generated: buildingId + "-GEO-1" |
+| geoCoordinates.coordinateReferenceSystem | string | Specific coordinate reference system used (e.g., "WGS84", "LV95"). | minLength: 1, maxLength: 50 | Default: "WGS84" for GeoJSON |
+| geoCoordinates.latitude | number | Latitude coordinate (WGS84: -90 to 90). | | Source: `geometry.coordinates[1]` |
+| geoCoordinates.longitude | number | Longitude coordinate (WGS84: -180 to 180). | | Source: `geometry.coordinates[0]` |
+| additionalInformation | string | Additional information (building name, door number, etc.). | minLength: 1, maxLength: 500 | |
+| apartmentOrUnit | string | Unit or apartment number. | minLength: 1, maxLength: 50 | |
+| district | string | Borough or district within a city. | minLength: 1, maxLength: 50 | |
+| eventType | string, enum | Type of the event as domain event. Options: `AddressAdded`, `AddressUpdated` | | |
+| extensionData | object | Extension data for storing any custom data. | JSON object | Container for Swiss-specific fields |
+| houseNumber | string | House number of the street. | minLength: 1, maxLength: 50 | Source: `hausnummer` |
+| postalCode | string | Postal code for mail sorting. | minLength: 1, maxLength: 15 | Source: `plz` |
+| stateProvincePrefecture | string | First-level administrative division (canton, state, province). | minLength: 1, maxLength: 50 | Source: `region` |
+| streetName | string | Name of the street. | minLength: 1, maxLength: 150 | Extracted from `adresse` |
+| extensionData.formattedAddress | string | Pre-formatted full address string (e.g., "Bundesplatz 3, 3003 Bern") | | Swiss extension. Source: `adresse` |
+| extensionData.canton | string | Swiss canton code (e.g., "BE", "ZH", "GE") | | Swiss extension. Extracted from `region` |
+| extensionData.gemeinde | string | Municipality name | | Swiss extension |
+| extensionData.gemeindeNummer | string | Official municipality number (BFS-Nr.) | | Swiss extension |
+| extensionData.lv95East | number | Swiss LV95 East coordinate (E) | | Swiss extension |
+| extensionData.lv95North | number | Swiss LV95 North coordinate (N) | | Swiss extension |
 
 ### Example: Address Object
 
@@ -484,14 +242,47 @@ Full list: All ISO-3166 alpha-2 codes (AF, AL, DZ, ... ZW)
 
 ---
 
+## Enumerations
+
+### Building Types
+
+Primary and secondary building type options:
+
+| Category | Values |
+|----------|--------|
+| Retail | `Retail`, `Retail High Street`, `Retail Retail Centers`, `Retail Shopping Center`, `Retail Strip Mall`, `Retail Lifestyle Center`, `Retail Warehouse`, `Retail Restaurants/Bars`, `Retail Other` |
+| Office | `Office`, `Office Corporate`, `Office Low-Rise Office`, `Office Mid-Rise Office`, `Office High-Rise Office`, `Office Medical Office`, `Office Business Park`, `Office Other` |
+| Industrial | `Industrial`, `Industrial Distribution Warehouse`, `Industrial Industrial Park`, `Industrial Manufacturing`, `Industrial Refrigerated Warehouse`, `Industrial Non-refrigerated Warehouse`, `Industrial Other` |
+| Residential | `Residential`, `Residential Multi-Family`, `Residential Low-Rise Multi-Family`, `Residential Mid-Rise Multi-Family`, `Residential High-Rise Multi-Family`, `Residential Family Homes`, `Residential Student Housing`, `Residential Retirement Living`, `Residential Other` |
+| Lodging | `Hotel`, `Lodging`, `Lodging Leisure & Recreation`, `Lodging Indoor Arena`, `Lodging Fitness Center`, `Lodging Performing Arts`, `Lodging Swimming Center`, `Lodging Museum/Gallery`, `Lodging Leisure & Recreation Other` |
+| Education | `Education`, `Education School`, `Education University`, `Education Library`, `Education Other` |
+| Technology/Science | `Technology/Science`, `Technology/Science Data Center`, `Technology/Science Laboratory/Life sciences`, `Technology/Science Other` |
+| Health Care | `Health Care`, `Health Care Health Care Center`, `Health Care Senior Homes`, `Health Care Other` |
+| Mixed Use | `Mixed Use`, `Mixed Use Office/Retail`, `Mixed Use Office/Residential`, `Mixed Use Office/Industrial`, `Mixed Use Other` |
+| Other | `Other`, `Other Parking (Indoors)`, `Other Self-Storage` |
+
+### Energy Types
+
+Options for `primaryEnergyType`:
+
+`Natural Gas`, `Coal`, `Nuclear`, `Petroleum`, `Hydropower`, `Wind`, `Biomass`, `Geothermal`, `Solar`
+
+### Heating Types
+
+Options for `secondaryHeatingType`:
+
+`District heating`, `Natural gas`, `Oil-based fuels`, `Solar thermal`, `Unspecified`, `Heat pump`, `Electricity (radiator)`, `Biomass`, `Micro combined heat and power`
+
+---
+
 ## Related Entities (Preview)
 
 The following entities are related to buildings and will be documented in separate sections:
 
 | Entity | Description | Relationship |
 |--------|-------------|--------------|
-| ~~**Site**~~ | ~~A logical grouping of buildings (e.g., campus, property)~~ | ~~1 Site → n Buildings~~ *(documented above)* |
-| ~~**Address**~~ | ~~Physical address of a building~~ | ~~1 Building → n Addresses~~ *(documented above)* |
+| ~~**Site**~~ | ~~A logical grouping of buildings~~ | *(documented above)* |
+| ~~**Address**~~ | ~~Physical address of a building~~ | *(documented above)* |
 | **Bemessung (Area Measurement)** | Area and volume measurements | 1 Building → n Measurements |
 | **Dokument (Document)** | Related documents (plans, certificates) | 1 Building → n Documents |
 | **Kontakt (Contact)** | Contact persons for the building | 1 Building → n Contacts |
@@ -509,6 +300,7 @@ The following entities are related to buildings and will be documented in separa
 | 0.1.0 | 2024-XX-XX | - | Initial draft - Building entity |
 | 0.2.0 | 2024-XX-XX | - | Added Address entity with Swiss extensions |
 | 0.3.0 | 2024-XX-XX | - | Added Site entity with Swiss extensions |
+| 0.4.0 | 2024-XX-XX | - | Consolidated to single schema table per entity with Comment column |
 
 ---
 
