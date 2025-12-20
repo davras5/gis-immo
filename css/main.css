@@ -856,6 +856,7 @@
         /* ===== DETAIL VIEW ===== */
         #detail-view {
             flex: 1;
+            min-height: 0;
             display: none;
             background: var(--grey-50);
             overflow-y: auto;
