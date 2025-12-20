@@ -999,7 +999,6 @@
         }
         
         .detail-content {
-            flex: 1;
             overflow: visible;
             padding: var(--space-6);
         }
