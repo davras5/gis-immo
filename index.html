@@ -47,15 +47,15 @@
             </div>
 
             <div class="view-toggle" role="tablist" aria-label="Ansicht wählen">
-                <button class="view-toggle-btn active" data-view="map" title="Karte" aria-label="Kartenansicht" role="tab" aria-selected="true">
+                <button class="view-toggle-btn active" data-view="map" title="Karte" aria-label="Kartenansicht" role="tab" aria-selected="true" id="tab-map" aria-controls="map-view">
                     <span class="material-symbols-outlined" aria-hidden="true">map</span>
                     <span class="view-label">Karte</span>
                 </button>
-                <button class="view-toggle-btn" data-view="list" title="Tabelle" aria-label="Tabellenansicht" role="tab" aria-selected="false">
+                <button class="view-toggle-btn" data-view="list" title="Tabelle" aria-label="Tabellenansicht" role="tab" aria-selected="false" id="tab-list" aria-controls="list-view">
                     <span class="material-symbols-outlined" aria-hidden="true">view_list</span>
                     <span class="view-label">Tabelle</span>
                 </button>
-                <button class="view-toggle-btn" data-view="gallery" title="Galerie" aria-label="Galerieansicht" role="tab" aria-selected="false">
+                <button class="view-toggle-btn" data-view="gallery" title="Galerie" aria-label="Galerieansicht" role="tab" aria-selected="false" id="tab-gallery" aria-controls="gallery-view">
                     <span class="material-symbols-outlined" aria-hidden="true">grid_view</span>
                     <span class="view-label">Galerie</span>
                 </button>
@@ -80,8 +80,19 @@
 
     <main id="main">
         <div class="main-content">
-            <div id="map-view" class="active">
+            <div id="map-view" class="active" role="tabpanel" aria-labelledby="tab-map">
             <div id="map"></div>
+
+            <!-- Error state for map loading failures -->
+            <div id="map-error-state" class="error-state" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 100;">
+                <span class="material-symbols-outlined error-state-icon" aria-hidden="true">error_outline</span>
+                <h3 class="error-state-title">Karte konnte nicht geladen werden</h3>
+                <p class="error-state-message">Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</p>
+                <button class="error-state-action" onclick="retryMapLoad()">
+                    <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+                    Erneut versuchen
+                </button>
+            </div>
             
             <nav id="accordion-panel">
                 <div class="accordion-item">
@@ -191,7 +202,17 @@
             </aside>
         </div>
 
-        <div id="list-view">
+        <div id="list-view" role="tabpanel" aria-labelledby="tab-list">
+            <!-- Error state for data loading failures -->
+            <div id="list-error-state" class="error-state" style="display: none;">
+                <span class="material-symbols-outlined error-state-icon" aria-hidden="true">error_outline</span>
+                <h3 class="error-state-title">Daten konnten nicht geladen werden</h3>
+                <p class="error-state-message">Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</p>
+                <button class="error-state-action" onclick="loadAllData()">
+                    <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+                    Erneut versuchen
+                </button>
+            </div>
             <!-- Table Container -->
             <div class="list-table-container">
                 <!-- Toolbar -->
@@ -286,7 +307,17 @@
             </div>
         </div>
         
-        <div id="gallery-view">
+        <div id="gallery-view" role="tabpanel" aria-labelledby="tab-gallery">
+            <!-- Error state for data loading failures -->
+            <div id="gallery-error-state" class="error-state" style="display: none;">
+                <span class="material-symbols-outlined error-state-icon" aria-hidden="true">error_outline</span>
+                <h3 class="error-state-title">Daten konnten nicht geladen werden</h3>
+                <p class="error-state-message">Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</p>
+                <button class="error-state-action" onclick="loadAllData()">
+                    <span class="material-symbols-outlined" aria-hidden="true">refresh</span>
+                    Erneut versuchen
+                </button>
+            </div>
             <div class="gallery-grid" id="gallery-grid"></div>
         </div>
         
@@ -316,21 +347,21 @@
                 </div>
             </div>
             
-            <div class="detail-tabs">
+            <div class="detail-tabs" role="tablist" aria-label="Objektdetails">
                 <div class="detail-tabs-inner">
-                    <div class="detail-tab active" data-tab="uebersicht">Übersicht</div>
-                    <div class="detail-tab" data-tab="bemessungen">Bemessungen</div>
-                    <div class="detail-tab" data-tab="kosten">Kosten</div>
-                    <div class="detail-tab" data-tab="vertraege">Verträge</div>
-                    <div class="detail-tab" data-tab="ausstattung">Ausstattung</div>
-                    <div class="detail-tab" data-tab="dokumente">Dokumente</div>
-                    <div class="detail-tab" data-tab="kontakte">Kontakte</div>
+                    <div class="detail-tab active" data-tab="uebersicht" role="tab" tabindex="0" aria-selected="true" id="detail-tab-uebersicht" aria-controls="panel-uebersicht">Übersicht</div>
+                    <div class="detail-tab" data-tab="bemessungen" role="tab" tabindex="-1" aria-selected="false" id="detail-tab-bemessungen" aria-controls="panel-bemessungen">Bemessungen</div>
+                    <div class="detail-tab" data-tab="kosten" role="tab" tabindex="-1" aria-selected="false" id="detail-tab-kosten" aria-controls="panel-kosten">Kosten</div>
+                    <div class="detail-tab" data-tab="vertraege" role="tab" tabindex="-1" aria-selected="false" id="detail-tab-vertraege" aria-controls="panel-vertraege">Verträge</div>
+                    <div class="detail-tab" data-tab="ausstattung" role="tab" tabindex="-1" aria-selected="false" id="detail-tab-ausstattung" aria-controls="panel-ausstattung">Ausstattung</div>
+                    <div class="detail-tab" data-tab="dokumente" role="tab" tabindex="-1" aria-selected="false" id="detail-tab-dokumente" aria-controls="panel-dokumente">Dokumente</div>
+                    <div class="detail-tab" data-tab="kontakte" role="tab" tabindex="-1" aria-selected="false" id="detail-tab-kontakte" aria-controls="panel-kontakte">Kontakte</div>
                 </div>
             </div>
             
             <div class="detail-content">
                 <!-- Tab Content: Übersicht -->
-                <div class="tab-content active" data-content="uebersicht">
+                <div class="tab-content active" data-content="uebersicht" role="tabpanel" id="panel-uebersicht" aria-labelledby="detail-tab-uebersicht">
                 <div class="detail-grid">
                     <div class="detail-left">
                         <div class="detail-section">
@@ -510,7 +541,7 @@
                 </div>
 
                 <!-- Tab Content: Bemessungen -->
-                <div class="tab-content" data-content="bemessungen">
+                <div class="tab-content" data-content="bemessungen" role="tabpanel" id="panel-bemessungen" aria-labelledby="detail-tab-bemessungen">
                     <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Bemessungen</div>
@@ -585,7 +616,7 @@
                 </div>
 
                 <!-- Tab Content: Kosten -->
-                <div class="tab-content" data-content="kosten">
+                <div class="tab-content" data-content="kosten" role="tabpanel" id="panel-kosten" aria-labelledby="detail-tab-kosten">
                     <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Kosten</div>
@@ -658,7 +689,7 @@
                 </div>
 
                 <!-- Tab Content: Verträge -->
-                <div class="tab-content" data-content="vertraege">
+                <div class="tab-content" data-content="vertraege" role="tabpanel" id="panel-vertraege" aria-labelledby="detail-tab-vertraege">
                     <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Verträge</div>
@@ -735,7 +766,7 @@
                 </div>
 
                 <!-- Tab Content: Ausstattung -->
-                <div class="tab-content" data-content="ausstattung">
+                <div class="tab-content" data-content="ausstattung" role="tabpanel" id="panel-ausstattung" aria-labelledby="detail-tab-ausstattung">
                     <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Ausstattung</div>
@@ -808,7 +839,7 @@
                 </div>
 
                 <!-- Tab Content: Dokumente -->
-                <div class="tab-content" data-content="dokumente">
+                <div class="tab-content" data-content="dokumente" role="tabpanel" id="panel-dokumente" aria-labelledby="detail-tab-dokumente">
                     <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Dokumente</div>
@@ -875,7 +906,7 @@
                 </div>
 
                 <!-- Tab Content: Kontakte -->
-                <div class="tab-content" data-content="kontakte">
+                <div class="tab-content" data-content="kontakte" role="tabpanel" id="panel-kontakte" aria-labelledby="detail-tab-kontakte">
                     <div class="detail-table-container">
                         <div class="detail-section">
                             <div class="detail-section-title">Kontakte</div>
