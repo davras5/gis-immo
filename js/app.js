@@ -581,6 +581,65 @@
             }
         }
 
+        // ===== DRAWER RESIZE =====
+        function initDrawerResize() {
+            var drawer = document.getElementById('smart-drawer');
+            var handle = drawer.querySelector('.smart-drawer-resize-handle');
+            if (!handle) return;
+
+            var isResizing = false;
+            var startX, startWidth;
+
+            // Get min/max from CSS variables
+            var styles = getComputedStyle(document.documentElement);
+            var minWidth = parseInt(styles.getPropertyValue('--drawer-min-width')) || 300;
+            var maxWidth = parseInt(styles.getPropertyValue('--drawer-max-width')) || 600;
+
+            // Load saved width from localStorage
+            var savedWidth = localStorage.getItem('drawerWidth');
+            if (savedWidth) {
+                document.documentElement.style.setProperty('--drawer-width', savedWidth + 'px');
+            }
+
+            handle.addEventListener('mousedown', function(e) {
+                isResizing = true;
+                startX = e.clientX;
+                startWidth = drawer.offsetWidth;
+                handle.classList.add('dragging');
+                document.body.style.cursor = 'ew-resize';
+                document.body.style.userSelect = 'none';
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (!isResizing) return;
+
+                // Calculate new width (dragging left = wider, right = narrower)
+                var delta = startX - e.clientX;
+                var newWidth = Math.min(maxWidth, Math.max(minWidth, startWidth + delta));
+
+                document.documentElement.style.setProperty('--drawer-width', newWidth + 'px');
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (!isResizing) return;
+
+                isResizing = false;
+                handle.classList.remove('dragging');
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+
+                // Save width to localStorage
+                var currentWidth = drawer.offsetWidth;
+                localStorage.setItem('drawerWidth', currentWidth);
+
+                // Resize map
+                if (window.map) {
+                    map.resize();
+                }
+            });
+        }
+
         function initFilterOptions() {
             if (!portfolioData) return;
 
@@ -913,6 +972,7 @@
                     // Initialize filter pane with options
                     initFilterOptions();
                     initFilterPane();
+                    initDrawerResize();
 
                     // Apply initial filters (this sets filteredData and updates count)
                     applyFilters();

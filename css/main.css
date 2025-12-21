@@ -127,6 +127,11 @@
             --header-detail-height: 124px;
             --footer-height: 27px;
             --header-total-height: calc(var(--header-main-height) + var(--header-detail-height));
+
+            /* Smart Drawer */
+            --drawer-width: 400px;
+            --drawer-min-width: 300px;
+            --drawer-max-width: 600px;
         }
         
         * {
@@ -189,10 +194,10 @@
         }
 
         /* Align header elements with detail-content when drawer is open */
-        /* 400px drawer + var(--space-6) to match detail-content padding */
+        /* drawer width + var(--space-6) to match detail-content padding */
         body:has(#smart-drawer.open) .header-detail .detail-header,
         body:has(#smart-drawer.open) .header-detail .detail-tabs {
-            padding-right: calc(400px + var(--space-6));
+            padding-right: calc(var(--drawer-width) + var(--space-6));
         }
 
         #logo-area {
@@ -1202,7 +1207,7 @@
 
         /* Add padding when drawer is open in detail view */
         body.detail-active:has(#smart-drawer.open) .detail-content {
-            padding-right: calc(400px + var(--space-6));
+            padding-right: calc(var(--drawer-width) + var(--space-6));
         }
 
         .detail-grid {
@@ -2064,8 +2069,8 @@
         }
 
         #ai-assistant-panel.show {
-            width: 400px;
-            min-width: 400px;
+            width: var(--drawer-width);
+            min-width: var(--drawer-width);
             border-left: 1px solid var(--grey-300);
             box-shadow: -4px 0 16px rgba(0,0,0,0.15);
         }
@@ -2438,6 +2443,7 @@
         /* ===== FILTER PANE ===== */
         /* ===== SMART DRAWER ===== */
         #smart-drawer {
+            position: relative;
             width: 0;
             min-width: 0;
             height: 100%;
@@ -2450,9 +2456,31 @@
         }
 
         #smart-drawer.open {
-            width: 400px;
-            min-width: 400px;
+            width: var(--drawer-width);
+            min-width: var(--drawer-min-width);
+            max-width: var(--drawer-max-width);
             border-left: 1px solid var(--grey-300);
+        }
+
+        .smart-drawer-resize-handle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            cursor: ew-resize;
+            background: transparent;
+            z-index: 10;
+            transition: background var(--transition-fast);
+        }
+
+        .smart-drawer-resize-handle:hover,
+        .smart-drawer-resize-handle.dragging {
+            background: var(--interactive-blue);
+        }
+
+        #smart-drawer:not(.open) .smart-drawer-resize-handle {
+            display: none;
         }
 
         .smart-drawer-header {
