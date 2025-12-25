@@ -4,51 +4,6 @@ This document describes the data model for the BBL Immobilienportfolio applicati
 
 ---
 
-## Table of Contents
-
-1. [Introduction](#1-introduction)
-   - 1.1 [Purpose & Scope](#11-purpose--scope)
-   - 1.2 [Design Principles](#12-design-principles)
-   - 1.3 [Swiss Context](#13-swiss-context)
-   - 1.4 [BuildingMinds Alignment](#14-buildingminds-alignment)
-2. [Architecture Overview](#2-architecture-overview)
-   - 2.1 [Entity Relationship Diagram](#21-entity-relationship-diagram)
-   - 2.2 [Entity Hierarchy](#22-entity-hierarchy)
-   - 2.3 [Demo vs. Production Implementation](#23-demo-vs-production-implementation)
-3. [Core Entities](#3-core-entities)
-   - 3.1 [Site (Standort) [Preview]](#31-site-standort-preview)
-   - 3.2 [Land (Grundstück)](#32-land-grundstück)
-   - 3.3 [Building (Gebäude)](#33-building-gebäude)
-   - 3.4 [Address (Adresse)](#34-address-adresse)
-   - 3.5 [Floor (Geschoss)](#35-floor-geschoss)
-   - 3.6 [Space (Raum)](#36-space-raum)
-4. [Measurement Entities](#4-measurement-entities)
-   - 4.1 [Area Measurement (Bemessung)](#41-area-measurement-bemessung)
-   - 4.2 [Operational Measurement (Betriebsmessung) [Preview]](#42-operational-measurement-betriebsmessung-preview)
-5. [Supporting Entities](#5-supporting-entities)
-   - 5.1 [Document (Dokument)](#51-document-dokument)
-   - 5.2 [Contact (Kontakt)](#52-contact-kontakt)
-   - 5.3 [Asset (Ausstattung)](#53-asset-ausstattung)
-   - 5.4 [Contract (Vertrag)](#54-contract-vertrag)
-   - 5.5 [Cost (Kosten)](#55-cost-kosten)
-6. [Future Entities [Preview]](#6-future-entities-preview)
-   - 6.1 [Certificate (Zertifikat)](#61-certificate-zertifikat)
-   - 6.2 [Valuation (Bewertung)](#62-valuation-bewertung)
-7. [Appendix A: Reference Tables](#7-appendix-a-reference-tables)
-   - A.1 [Shared Enumerations](#a1-shared-enumerations)
-   - A.2 [Building Types](#a2-building-types)
-   - A.3 [Area Types & SIA Mappings](#a3-area-types--sia-mappings)
-   - A.4 [Operational Measurement Types](#a4-operational-measurement-types)
-   - A.5 [Document, Contact & Contract Types](#a5-document-contact--contract-types)
-   - A.6 [Asset Categories & Cost Groups](#a6-asset-categories--cost-groups)
-8. [Appendix B: Data Transformation Guide](#8-appendix-b-data-transformation-guide)
-   - B.1 [Value Conversions](#b2-value-conversions)
-   - B.2 [ISO 8601 Date Handling](#b3-iso-8601-date-handling)
-9. [Version History](#9-version-history)
-10. [References](#10-references)
-
----
-
 ## 1. Introduction
 
 ### 1.1 Purpose & Scope
