@@ -5,24 +5,6 @@ Version 1.0 | Last Updated: December 2024
 
 ---
 
-## Table of Contents
-
-1. [Design Philosophy](#design-philosophy)
-2. [Design Principles](#design-principles)
-3. [Design Tokens](#design-tokens)
-4. [Typography](#typography)
-5. [Color System](#color-system)
-6. [Spacing & Layout](#spacing--layout)
-7. [Components](#components)
-8. [Patterns](#patterns)
-9. [Accessibility](#accessibility)
-10. [Responsive Design](#responsive-design)
-11. [Motion & Animation](#motion--animation)
-12. [Iconography](#iconography)
-13. [Best Practices](#best-practices)
-
----
-
 ## Design Philosophy
 
 ### Vision
