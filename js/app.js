@@ -3078,3 +3078,298 @@
         function renderCostsTable() { costsTable.render(); }
         function renderContractsTable() { contractsTable.render(); }
         function renderAssetsTable() { assetsTable.render(); }
+
+        // ===== MAP CONTEXT MENU =====
+
+        var contextMenu = document.getElementById('map-context-menu');
+        var contextMenuCoords = document.getElementById('context-menu-coords');
+        var contextMenuMeasure = document.getElementById('context-menu-measure');
+        var contextMenuPrint = document.getElementById('context-menu-print');
+        var contextMenuReport = document.getElementById('context-menu-report');
+        var measureDistanceDisplay = document.getElementById('measure-distance-display');
+        var measureDistanceValue = document.getElementById('measure-distance-value');
+        var measureDistanceClear = document.getElementById('measure-distance-clear');
+
+        // Store the clicked coordinates
+        var contextMenuLngLat = null;
+
+        // Measure distance state
+        var measureState = {
+            active: false,
+            startPoint: null,
+            endPoint: null,
+            startMarker: null,
+            endMarker: null,
+            lineLayerId: 'measure-line',
+            lineSourceId: 'measure-line-source'
+        };
+
+        // Show context menu on right-click
+        map.on('contextmenu', function(e) {
+            e.preventDefault();
+
+            // Store clicked coordinates
+            contextMenuLngLat = e.lngLat;
+
+            // Update coordinates display (lat, lon with 5 decimals)
+            var lat = contextMenuLngLat.lat.toFixed(5);
+            var lon = contextMenuLngLat.lng.toFixed(5);
+            contextMenuCoords.textContent = lat + ', ' + lon;
+            contextMenuCoords.classList.remove('copied');
+
+            // Update measure menu item based on state
+            if (measureState.active && measureState.startPoint) {
+                contextMenuMeasure.querySelector('span:last-child').textContent = 'Distanz zu hier';
+                contextMenuMeasure.classList.add('measure-active');
+            } else if (measureState.active) {
+                contextMenuMeasure.querySelector('span:last-child').textContent = 'Messung abbrechen';
+                contextMenuMeasure.classList.add('measure-active');
+            } else {
+                contextMenuMeasure.querySelector('span:last-child').textContent = 'Distanz messen';
+                contextMenuMeasure.classList.remove('measure-active');
+            }
+
+            // Get map container dimensions
+            var mapContainer = document.getElementById('map');
+            var mapRect = mapContainer.getBoundingClientRect();
+
+            // Calculate menu position relative to map container
+            var menuWidth = 200;
+            var menuHeight = 160;
+            var clickX = e.point.x;
+            var clickY = e.point.y;
+
+            // Edge detection
+            var flipHorizontal = (clickX + menuWidth) > mapRect.width;
+            var flipVertical = (clickY + menuHeight) > mapRect.height;
+
+            // Position the menu
+            contextMenu.style.left = clickX + 'px';
+            contextMenu.style.top = clickY + 'px';
+
+            // Apply flip classes
+            contextMenu.classList.toggle('flip-horizontal', flipHorizontal);
+            contextMenu.classList.toggle('flip-vertical', flipVertical);
+
+            // Show menu
+            contextMenu.classList.add('show');
+        });
+
+        // Hide context menu
+        function hideContextMenu() {
+            contextMenu.classList.remove('show');
+        }
+
+        // Close menu on map click
+        map.on('click', function() {
+            hideContextMenu();
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideContextMenu();
+                if (measureState.active) {
+                    clearMeasurement();
+                }
+            }
+        });
+
+        // Copy coordinates to clipboard
+        contextMenuCoords.addEventListener('click', function() {
+            var coordsText = contextMenuCoords.textContent;
+            navigator.clipboard.writeText(coordsText).then(function() {
+                contextMenuCoords.classList.add('copied');
+                showToast({
+                    type: 'success',
+                    title: 'Koordinaten kopiert',
+                    message: coordsText,
+                    duration: 2000
+                });
+                setTimeout(hideContextMenu, 300);
+            }).catch(function(err) {
+                showToast({
+                    type: 'error',
+                    title: 'Fehler beim Kopieren',
+                    message: 'Koordinaten konnten nicht kopiert werden',
+                    duration: 3000
+                });
+            });
+        });
+
+        // Print map
+        contextMenuPrint.addEventListener('click', function() {
+            hideContextMenu();
+            window.print();
+        });
+
+        // Report problem
+        contextMenuReport.addEventListener('click', function() {
+            hideContextMenu();
+            var lat = contextMenuLngLat.lat.toFixed(5);
+            var lon = contextMenuLngLat.lng.toFixed(5);
+            var subject = encodeURIComponent('Problem melden - GIS Immobilienportfolio');
+            var body = encodeURIComponent('Problembeschreibung:\n\n\n\n---\nKoordinaten: ' + lat + ', ' + lon + '\nURL: ' + window.location.href);
+            window.location.href = 'mailto:info@gis-immo.ch?subject=' + subject + '&body=' + body;
+        });
+
+        // ===== MEASURE DISTANCE FEATURE =====
+
+        // Haversine formula to calculate distance between two points
+        function haversineDistance(lat1, lon1, lat2, lon2) {
+            var R = 6371000; // Earth's radius in meters
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        // Format distance for display
+        function formatDistance(meters) {
+            if (meters >= 1000) {
+                return (meters / 1000).toFixed(2) + ' km';
+            }
+            return Math.round(meters) + ' m';
+        }
+
+        // Create a marker element for measurement points
+        function createMeasureMarker(isStart) {
+            var el = document.createElement('div');
+            el.style.width = '12px';
+            el.style.height = '12px';
+            el.style.borderRadius = '50%';
+            el.style.border = '2px solid white';
+            el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
+            el.style.background = isStart ? '#1976d2' : '#d32f2f';
+            el.style.cursor = 'pointer';
+            return el;
+        }
+
+        // Start or continue measurement
+        contextMenuMeasure.addEventListener('click', function() {
+            hideContextMenu();
+
+            if (!measureState.active) {
+                // Start new measurement - set start point
+                measureState.active = true;
+                measureState.startPoint = [contextMenuLngLat.lng, contextMenuLngLat.lat];
+
+                // Create start marker
+                measureState.startMarker = new mapboxgl.Marker({
+                    element: createMeasureMarker(true),
+                    anchor: 'center'
+                })
+                .setLngLat(measureState.startPoint)
+                .addTo(map);
+
+                // Show distance display with instruction
+                measureDistanceValue.textContent = 'Rechtsklick für Endpunkt';
+                measureDistanceDisplay.classList.add('show');
+
+                // Change cursor
+                map.getCanvas().style.cursor = 'crosshair';
+
+            } else if (measureState.startPoint && !measureState.endPoint) {
+                // Set end point and calculate distance
+                measureState.endPoint = [contextMenuLngLat.lng, contextMenuLngLat.lat];
+
+                // Create end marker
+                measureState.endMarker = new mapboxgl.Marker({
+                    element: createMeasureMarker(false),
+                    anchor: 'center'
+                })
+                .setLngLat(measureState.endPoint)
+                .addTo(map);
+
+                // Draw line between points
+                drawMeasureLine();
+
+                // Calculate and display distance
+                var distance = haversineDistance(
+                    measureState.startPoint[1], measureState.startPoint[0],
+                    measureState.endPoint[1], measureState.endPoint[0]
+                );
+                measureDistanceValue.textContent = formatDistance(distance);
+
+                // Reset cursor
+                map.getCanvas().style.cursor = '';
+
+            } else {
+                // Cancel measurement if clicked again
+                clearMeasurement();
+            }
+        });
+
+        // Draw line between measurement points
+        function drawMeasureLine() {
+            // Remove existing line if any
+            if (map.getLayer(measureState.lineLayerId)) {
+                map.removeLayer(measureState.lineLayerId);
+            }
+            if (map.getSource(measureState.lineSourceId)) {
+                map.removeSource(measureState.lineSourceId);
+            }
+
+            // Add line source
+            map.addSource(measureState.lineSourceId, {
+                type: 'geojson',
+                data: {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: [measureState.startPoint, measureState.endPoint]
+                    }
+                }
+            });
+
+            // Add line layer
+            map.addLayer({
+                id: measureState.lineLayerId,
+                type: 'line',
+                source: measureState.lineSourceId,
+                paint: {
+                    'line-color': '#1976d2',
+                    'line-width': 3,
+                    'line-dasharray': [2, 2]
+                }
+            });
+        }
+
+        // Clear measurement
+        function clearMeasurement() {
+            measureState.active = false;
+            measureState.startPoint = null;
+            measureState.endPoint = null;
+
+            // Remove markers
+            if (measureState.startMarker) {
+                measureState.startMarker.remove();
+                measureState.startMarker = null;
+            }
+            if (measureState.endMarker) {
+                measureState.endMarker.remove();
+                measureState.endMarker = null;
+            }
+
+            // Remove line
+            if (map.getLayer(measureState.lineLayerId)) {
+                map.removeLayer(measureState.lineLayerId);
+            }
+            if (map.getSource(measureState.lineSourceId)) {
+                map.removeSource(measureState.lineSourceId);
+            }
+
+            // Hide distance display
+            measureDistanceDisplay.classList.remove('show');
+
+            // Reset cursor
+            map.getCanvas().style.cursor = '';
+        }
+
+        // Clear button click
+        measureDistanceClear.addEventListener('click', function() {
+            clearMeasurement();
+        });

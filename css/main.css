@@ -3842,6 +3842,156 @@
             }
         }
 
+        /* ===== MAP CONTEXT MENU ===== */
+        .map-context-menu {
+            position: absolute;
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            min-width: 200px;
+            z-index: 1001;
+            display: none;
+            overflow: hidden;
+        }
+
+        .map-context-menu.show {
+            display: block;
+        }
+
+        /* Edge detection classes for flipping menu position */
+        .map-context-menu.flip-horizontal {
+            transform: translateX(-100%);
+        }
+
+        .map-context-menu.flip-vertical {
+            transform: translateY(-100%);
+        }
+
+        .map-context-menu.flip-horizontal.flip-vertical {
+            transform: translate(-100%, -100%);
+        }
+
+        .context-menu-coords {
+            padding: var(--space-3) var(--space-4);
+            font-size: var(--text-xs);
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            color: var(--grey-600);
+            background: var(--grey-50);
+            cursor: pointer;
+            transition: background var(--transition-fast), color var(--transition-fast);
+            user-select: none;
+        }
+
+        .context-menu-coords:hover {
+            background: var(--grey-100);
+            color: var(--grey-900);
+        }
+
+        .context-menu-coords.copied {
+            background: var(--status-active-bg);
+            color: var(--status-active-text);
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: var(--grey-200);
+        }
+
+        .context-menu-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            font-size: var(--text-sm);
+            color: var(--grey-700);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .context-menu-item:hover {
+            background: var(--grey-50);
+        }
+
+        .context-menu-item .material-symbols-outlined {
+            font-size: var(--icon-md);
+            color: var(--grey-500);
+        }
+
+        .context-menu-item:last-child {
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+        }
+
+        /* Measure mode active state */
+        .context-menu-item.measure-active {
+            background: var(--status-planning-bg);
+            color: var(--status-planning-text);
+        }
+
+        .context-menu-item.measure-active .material-symbols-outlined {
+            color: var(--status-planning-text);
+        }
+
+        /* ===== MEASURE DISTANCE DISPLAY ===== */
+        .measure-distance-display {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-3) var(--space-4);
+            display: none;
+            align-items: center;
+            gap: var(--space-3);
+            z-index: 1000;
+        }
+
+        .measure-distance-display.show {
+            display: flex;
+        }
+
+        .measure-distance-content {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .measure-distance-content .material-symbols-outlined {
+            font-size: var(--icon-md);
+            color: var(--status-planning);
+        }
+
+        #measure-distance-value {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--grey-900);
+            min-width: 80px;
+        }
+
+        .measure-distance-clear {
+            background: transparent;
+            border: none;
+            padding: var(--space-1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: background var(--transition-fast);
+        }
+
+        .measure-distance-clear:hover {
+            background: var(--grey-100);
+        }
+
+        .measure-distance-clear .material-symbols-outlined {
+            font-size: var(--icon-sm);
+            color: var(--grey-500);
+        }
+
         /* Print styles */
         @media print {
             #header,
@@ -3854,7 +4004,9 @@
             .btn-edit,
             #filter-pane,
             .toast-container,
-            .loading-overlay {
+            .loading-overlay,
+            .map-context-menu,
+            .measure-distance-display {
                 display: none !important;
             }
 
