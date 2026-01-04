@@ -254,6 +254,37 @@
                     <span>Hintergrund</span>
                 </button>
             </div>
+
+            <!-- Map Context Menu (Right-Click) -->
+            <div id="map-context-menu" class="map-context-menu">
+                <div class="context-menu-coords" id="context-menu-coords" title="Klicken zum Kopieren">
+                    47.37623, 8.53048
+                </div>
+                <div class="context-menu-divider"></div>
+                <div class="context-menu-item" id="context-menu-measure">
+                    <span class="material-symbols-outlined">straighten</span>
+                    <span>Distanz messen</span>
+                </div>
+                <div class="context-menu-item" id="context-menu-print">
+                    <span class="material-symbols-outlined">print</span>
+                    <span>Drucken</span>
+                </div>
+                <div class="context-menu-item" id="context-menu-report">
+                    <span class="material-symbols-outlined">flag</span>
+                    <span>Problem melden</span>
+                </div>
+            </div>
+
+            <!-- Measure Distance Display -->
+            <div id="measure-distance-display" class="measure-distance-display">
+                <div class="measure-distance-content">
+                    <span class="material-symbols-outlined">straighten</span>
+                    <span id="measure-distance-value">0 m</span>
+                </div>
+                <button id="measure-distance-clear" class="measure-distance-clear" title="Messung beenden">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
         </div>
 
         <div id="list-view">
