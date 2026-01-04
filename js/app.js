@@ -572,15 +572,6 @@
             drawer.setAttribute('data-active-tab', tab);
         }
 
-        // Legacy function for backward compatibility
-        function toggleFilterPane(open) {
-            if (open === false) {
-                toggleSmartDrawer(false);
-            } else {
-                toggleSmartDrawer(true, 'filter');
-            }
-        }
-
         // ===== DRAWER RESIZE =====
         function initDrawerResize() {
             var drawer = document.getElementById('smart-drawer');
@@ -984,10 +975,12 @@
                     initListToolbar();
                     initListPagination();
 
+                    // Always use the load event to avoid race conditions
+                    // If already loaded, the callback fires immediately
                     if (map.loaded()) {
                         addMapLayers();
                     } else {
-                        map.on('load', addMapLayers);
+                        map.once('load', addMapLayers);
                     }
 
                     // Check if URL has detail view
@@ -1641,7 +1634,7 @@
                         '</div>' +
                         '<div class="gallery-footer">' +
                             '<span>Baujahr ' + baujahr + '</span>' +
-                            '<a href="#" class="gallery-link" onclick="event.stopPropagation();" aria-label="Details zu ' + props.name + ' anzeigen">Details <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>' +
+                            '<a href="#" class="gallery-link" onclick="event.preventDefault(); event.stopPropagation();" aria-label="Details zu ' + props.name + ' anzeigen">Details <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>' +
                         '</div>' +
                     '</div>' +
                 '</div>';
@@ -1823,8 +1816,15 @@
             var pulseRadius = 24;
             var pulseOpacity = 0.4;
             var pulseDirection = 1;
+            var pulseAnimationId = null;
 
             function animatePulse() {
+                // Only animate if a building is selected
+                if (!selectedBuildingId) {
+                    pulseAnimationId = null;
+                    return;
+                }
+
                 pulseRadius += 0.3 * pulseDirection;
                 pulseOpacity -= 0.01 * pulseDirection;
 
@@ -1839,10 +1839,25 @@
                     map.setPaintProperty('portfolio-selected-pulse', 'circle-stroke-opacity', Math.max(0.1, pulseOpacity));
                 }
 
-                requestAnimationFrame(animatePulse);
+                pulseAnimationId = requestAnimationFrame(animatePulse);
             }
 
-            animatePulse();
+            // Start/stop pulse animation based on selection (exposed globally)
+            window.startPulseAnimation = function() {
+                if (pulseAnimationId === null) {
+                    pulseRadius = 24;
+                    pulseOpacity = 0.4;
+                    pulseDirection = 1;
+                    animatePulse();
+                }
+            };
+
+            window.stopPulseAnimation = function() {
+                if (pulseAnimationId !== null) {
+                    cancelAnimationFrame(pulseAnimationId);
+                    pulseAnimationId = null;
+                }
+            };
             
             map.on('mouseenter', 'portfolio-points', function() {
                 map.getCanvas().style.cursor = 'pointer';
@@ -1888,8 +1903,11 @@
         }
 
         // Reusable function to select a building
-        // UPDATED: Added flyToBuilding parameter (default false)
-        function selectBuilding(buildingId, flyToBuilding = false) {
+        // flyToBuilding: if true, map will fly to the building location
+        function selectBuilding(buildingId, flyToBuilding) {
+            // ES5 default parameter
+            if (flyToBuilding === undefined) flyToBuilding = false;
+
             // Find feature props
             var building = portfolioData.features.find(function(f) { return f.properties.buildingId === buildingId; });
             if (!building) return;
@@ -1950,6 +1968,12 @@
             if (map && map.getLayer('portfolio-selected-pulse')) {
                 map.setFilter('portfolio-selected-pulse', ['==', ['get', 'buildingId'], selectedBuildingId || '']);
             }
+            // Start or stop pulse animation based on selection
+            if (selectedBuildingId && typeof window.startPulseAnimation === 'function') {
+                window.startPulseAnimation();
+            } else if (typeof window.stopPulseAnimation === 'function') {
+                window.stopPulseAnimation();
+            }
         }
 
         function updateUrlWithSelection() {
@@ -1968,6 +1992,7 @@
         var searchSpinner = document.getElementById('search-spinner');
         var searchClearBtn = document.getElementById('search-clear-btn');
         var searchDebounceTimer;
+        var searchAbortController = null;
         
         // Listen for input
         searchInput.addEventListener('input', function(e) {
@@ -2022,8 +2047,15 @@
         });
         
         function performSearch(term) {
+            // Cancel any pending search requests
+            if (searchAbortController) {
+                searchAbortController.abort();
+            }
+            searchAbortController = new AbortController();
+            var signal = searchAbortController.signal;
+
             var promises = [];
-            
+
             // 1. Local Search
             promises.push(new Promise(function(resolve) {
                 var matches = [];
@@ -2038,20 +2070,30 @@
                 }
                 resolve({ type: 'local', data: matches });
             }));
-            
+
             // 2. Swisstopo Locations
-            promises.push(fetch('https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&limit=5&sr=4326&searchText=' + encodeURIComponent(term))
-                .then(r => r.json())
-                .then(data => ({ type: 'locations', data: data.results }))
-                .catch(e => ({ type: 'locations', data: [] })));
-                
+            promises.push(fetch('https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=locations&limit=5&sr=4326&searchText=' + encodeURIComponent(term), { signal: signal })
+                .then(function(r) { return r.json(); })
+                .then(function(data) { return { type: 'locations', data: data.results }; })
+                .catch(function(e) {
+                    if (e.name === 'AbortError') return { type: 'locations', data: [], aborted: true };
+                    return { type: 'locations', data: [] };
+                }));
+
             // 3. Swisstopo Layers
-            promises.push(fetch('https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=layers&limit=5&lang=de&searchText=' + encodeURIComponent(term))
-                .then(r => r.json())
-                .then(data => ({ type: 'layers', data: data.results }))
-                .catch(e => ({ type: 'layers', data: [] })));
-                
+            promises.push(fetch('https://api3.geo.admin.ch/rest/services/ech/SearchServer?type=layers&limit=5&lang=de&searchText=' + encodeURIComponent(term), { signal: signal })
+                .then(function(r) { return r.json(); })
+                .then(function(data) { return { type: 'layers', data: data.results }; })
+                .catch(function(e) {
+                    if (e.name === 'AbortError') return { type: 'layers', data: [], aborted: true };
+                    return { type: 'layers', data: [] };
+                }));
+
             Promise.all(promises).then(function(results) {
+                // Don't render if request was aborted (newer search in progress)
+                var wasAborted = results.some(function(r) { return r.aborted; });
+                if (wasAborted) return;
+
                 renderSearchResults(results);
                 searchSpinner.style.display = 'none';
             });
@@ -2191,7 +2233,7 @@
                     }
                 }
 
-                setTimeout(updateMenuTogglePosition, 10);
+                updateMenuTogglePositionDebounced();
             });
         });
 
@@ -2218,7 +2260,7 @@
                         treeContainer.innerHTML = '<div class="geokatalog-error">Keine Daten verfügbar</div>';
                     }
 
-                    setTimeout(updateMenuTogglePosition, 10);
+                    updateMenuTogglePositionDebounced();
                 })
                 .catch(function(error) {
                     console.error('Geokatalog Fehler:', error);
@@ -2274,7 +2316,7 @@
                         e.stopPropagation();
                         itemEl.classList.toggle('expanded');
                         nodeEl.classList.toggle('expanded');
-                        setTimeout(updateMenuTogglePosition, 10);
+                        updateMenuTogglePositionDebounced();
                     });
                 } else {
                     // Click on label does nothing for now (visual mockup)
@@ -2310,7 +2352,16 @@
                 menuToggle.style.top = '10px';
             }
         }
-        
+
+        // Debounced version to consolidate rapid calls
+        var menuToggleDebounceTimer = null;
+        function updateMenuTogglePositionDebounced() {
+            if (menuToggleDebounceTimer) {
+                clearTimeout(menuToggleDebounceTimer);
+            }
+            menuToggleDebounceTimer = setTimeout(updateMenuTogglePosition, 10);
+        }
+
         setTimeout(updateMenuTogglePosition, 100);
         
         menuToggle.addEventListener('click', function() {
@@ -2326,11 +2377,11 @@
                 menuToggleIcon.textContent = 'expand_more';
             }
             
-            setTimeout(updateMenuTogglePosition, 10);
+            updateMenuTogglePositionDebounced();
         });
-        
+
         var observer = new MutationObserver(function() {
-            setTimeout(updateMenuTogglePosition, 10);
+            updateMenuTogglePositionDebounced();
         });
         observer.observe(accordionPanel, { attributes: true, childList: true, subtree: true });
         
@@ -3195,6 +3246,7 @@
         // Share - use native system share
         contextMenuShare.addEventListener('click', function(e) {
             e.stopPropagation();
+            if (!contextMenuLngLat) return;
 
             // Generate share URL with coordinates
             var lat = contextMenuLngLat.lat.toFixed(5);
@@ -3244,6 +3296,7 @@
         // Report problem
         contextMenuReport.addEventListener('click', function() {
             hideContextMenu();
+            if (!contextMenuLngLat) return;
             var lat = contextMenuLngLat.lat.toFixed(5);
             var lon = contextMenuLngLat.lng.toFixed(5);
             var subject = encodeURIComponent('Problem melden - GIS Immobilienportfolio');
