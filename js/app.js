@@ -37,6 +37,7 @@
         var miniMap = null;
         var previousView = 'gallery';
         var selectedBuildingId = null;
+        var selectedParcelId = null;
         var searchMarker = null;
 
         // View dirty flags - track if view needs re-render after filter change
@@ -1936,9 +1937,8 @@
                 });
 
                 map.on('click', 'parcels-fill', function(e) {
-                    e.preventDefault();
                     var props = e.features[0].properties;
-                    showParcelPopup(props, e.lngLat);
+                    selectParcel(props.parcelId);
                 });
             }
 
@@ -1948,10 +1948,11 @@
                 var parcelFeatures = parcelData && parcelData.features ? map.queryRenderedFeatures(e.point, { layers: ['parcels-fill'] }) : [];
                 if (pointFeatures.length === 0 && parcelFeatures.length === 0) {
                     selectedBuildingId = null;
+                    selectedParcelId = null;
                     updateSelectedBuilding();
+                    updateSelectedParcel();
                     updateUrlWithSelection();
                     document.getElementById('info-panel').classList.remove('show');
-                    closeParcelPopup();
                 }
             });
 
@@ -1960,14 +1961,22 @@
                 updateMapFilter();
             }
 
-            // Select building from URL parameter if present
+            // Select building or parcel from URL parameter if present
             var urlBuildingId = urlParams.get('id');
+            var urlParcelId = urlParams.get('parcelId');
             if (urlBuildingId) {
                 var building = portfolioData.features.find(function(f) {
                     return f.properties.buildingId === urlBuildingId;
                 });
                 if (building) {
                     selectBuilding(urlBuildingId, true);
+                }
+            } else if (urlParcelId && parcelData && parcelData.features) {
+                var parcel = parcelData.features.find(function(f) {
+                    return f.properties.parcelId === urlParcelId;
+                });
+                if (parcel) {
+                    selectParcel(urlParcelId, true);
                 }
             }
         }
@@ -1988,10 +1997,15 @@
             var baujahr = extractYear(props.constructionYear) || '—';
             var statusColor = statusColors[props.status] || '#8B949C';
 
-            // Update selected ID
+            // Update selected IDs (clear parcel selection)
             selectedBuildingId = buildingId;
+            selectedParcelId = null;
             updateSelectedBuilding();
+            updateSelectedParcel();
             updateUrlWithSelection();
+
+            // Show preview image for buildings
+            document.getElementById('info-preview-image').style.display = 'block';
 
             // Find building index for placeholder image
             var buildingIndex = portfolioData.features.findIndex(function(f) {
@@ -2053,71 +2067,77 @@
             } else {
                 url.searchParams.delete('id');
             }
+            if (selectedParcelId) {
+                url.searchParams.set('parcelId', selectedParcelId);
+            } else {
+                url.searchParams.delete('parcelId');
+            }
             window.history.replaceState({}, '', url);
         }
 
-        // ===== PARCEL POPUP FUNCTIONALITY =====
-        var parcelPopupInstance = null;
+        // ===== PARCEL SELECTION FUNCTIONALITY =====
 
-        function showParcelPopup(props, lngLat) {
-            // Close any existing popup
-            closeParcelPopup();
+        // Helper function to calculate polygon centroid
+        function getPolygonCentroid(coordinates) {
+            var ring = coordinates[0]; // outer ring
+            var x = 0, y = 0, n = ring.length - 1; // exclude closing point
+            for (var i = 0; i < n; i++) {
+                x += ring[i][0];
+                y += ring[i][1];
+            }
+            return [x / n, y / n];
+        }
+
+        function selectParcel(parcelId, flyToParcel) {
+            // ES5 default parameter
+            if (flyToParcel === undefined) flyToParcel = false;
+
+            // Find parcel feature
+            var parcel = parcelData.features.find(function(f) { return f.properties.parcelId === parcelId; });
+            if (!parcel) return;
+
+            var props = parcel.properties;
 
             // Format area with thousand separators
             var formattedArea = Number(props.area || 0).toLocaleString('de-CH');
 
-            // Build popup HTML content
-            var popupHtml =
-                '<div class="parcel-popup">' +
-                    '<div class="parcel-popup-header">' +
-                        '<span class="material-symbols-outlined parcel-popup-icon">crop_free</span>' +
-                        '<span class="parcel-popup-title">Parzelle</span>' +
-                    '</div>' +
-                    '<div class="parcel-popup-content">' +
-                        '<div class="parcel-popup-name">' + escapeHtml(props.name || '—') + '</div>' +
-                        '<div class="parcel-popup-row">' +
-                            '<span class="parcel-popup-label">Parzellen-Nr.</span>' +
-                            '<span class="parcel-popup-value">' + escapeHtml(props.plotNumber || '—') + '</span>' +
-                        '</div>' +
-                        '<div class="parcel-popup-row">' +
-                            '<span class="parcel-popup-label">Gemeinde</span>' +
-                            '<span class="parcel-popup-value">' + escapeHtml(props.municipality || '—') + '</span>' +
-                        '</div>' +
-                        '<div class="parcel-popup-row">' +
-                            '<span class="parcel-popup-label">Kanton</span>' +
-                            '<span class="parcel-popup-value">' + escapeHtml(props.canton || '—') + '</span>' +
-                        '</div>' +
-                        '<div class="parcel-popup-row">' +
-                            '<span class="parcel-popup-label">Fläche</span>' +
-                            '<span class="parcel-popup-value">' + formattedArea + ' m²</span>' +
-                        '</div>' +
-                        '<div class="parcel-popup-row">' +
-                            '<span class="parcel-popup-label">Nutzungszone</span>' +
-                            '<span class="parcel-popup-value">' + escapeHtml(props.landUseZone || '—') + '</span>' +
-                        '</div>' +
-                        '<div class="parcel-popup-row">' +
-                            '<span class="parcel-popup-label">Eigentum</span>' +
-                            '<span class="parcel-popup-value">' + escapeHtml(props.ownershipType || '—') + '</span>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>';
+            // Update selected IDs (clear building selection)
+            selectedParcelId = parcelId;
+            selectedBuildingId = null;
+            updateSelectedBuilding();
+            updateSelectedParcel();
+            updateUrlWithSelection();
 
-            // Create Mapbox popup
-            parcelPopupInstance = new mapboxgl.Popup({
-                closeButton: true,
-                closeOnClick: false,
-                maxWidth: '320px',
-                className: 'parcel-mapbox-popup'
-            })
-                .setLngLat(lngLat)
-                .setHTML(popupHtml)
-                .addTo(map);
+            // Hide preview image for parcels
+            document.getElementById('info-preview-image').style.display = 'none';
+
+            // Build info panel HTML content
+            var infoHtml =
+                '<div class="info-section-title">Parzelle</div>' +
+                '<div class="info-location">' + escapeHtml(props.municipality || '—') + ', ' + escapeHtml(props.canton || '—') + '</div>' +
+                '<div class="info-row"><span class="info-label">Parzellen-ID</span><span class="info-value">' + escapeHtml(props.parcelId || '—') + '</span></div>' +
+                '<div class="info-row"><span class="info-label">Name</span><span class="info-value">' + escapeHtml(props.name || '—') + '</span></div>' +
+                '<div class="info-row"><span class="info-label">Parzellen-Nr.</span><span class="info-value">' + escapeHtml(props.plotNumber || '—') + '</span></div>' +
+                '<div class="info-row"><span class="info-label">Fläche</span><span class="info-value">' + formattedArea + ' m²</span></div>' +
+                '<div class="info-row"><span class="info-label">Nutzungszone</span><span class="info-value">' + escapeHtml(props.landUseZone || '—') + '</span></div>' +
+                '<div class="info-row"><span class="info-label">Eigentum</span><span class="info-value">' + escapeHtml(props.ownershipType || '—') + '</span></div>';
+
+            document.getElementById('info-body').innerHTML = infoHtml;
+            document.getElementById('info-panel').classList.add('show');
+
+            // Fly to parcel if requested
+            if (map && flyToParcel && parcel.geometry && parcel.geometry.coordinates) {
+                var center = getPolygonCentroid(parcel.geometry.coordinates);
+                map.flyTo({
+                    center: center,
+                    zoom: 16
+                });
+            }
         }
 
-        function closeParcelPopup() {
-            if (parcelPopupInstance) {
-                parcelPopupInstance.remove();
-                parcelPopupInstance = null;
+        function updateSelectedParcel() {
+            if (map && map.getLayer('parcels-highlight')) {
+                map.setFilter('parcels-highlight', ['==', ['get', 'parcelId'], selectedParcelId || '']);
             }
         }
 
