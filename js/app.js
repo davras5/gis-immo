@@ -1937,6 +1937,11 @@
                 });
 
                 map.on('click', 'parcels-fill', function(e) {
+                    // Check if a building point was also clicked - buildings take priority
+                    var buildingFeatures = map.queryRenderedFeatures(e.point, { layers: ['portfolio-points'] });
+                    if (buildingFeatures.length > 0) {
+                        return; // Let the building click handler handle it
+                    }
                     var props = e.features[0].properties;
                     selectParcel(props.parcelId);
                 });
