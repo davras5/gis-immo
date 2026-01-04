@@ -3085,7 +3085,7 @@
         var contextMenuCoords = document.getElementById('context-menu-coords');
         var contextMenuShare = document.getElementById('context-menu-share');
         var contextMenuMeasure = document.getElementById('context-menu-measure');
-        var contextMenuClearMeasure = document.getElementById('context-menu-clear-measure');
+        var contextMenuMeasureText = document.getElementById('context-menu-measure-text');
         var contextMenuPrint = document.getElementById('context-menu-print');
         var contextMenuReport = document.getElementById('context-menu-report');
         var measureDistanceDisplay = document.getElementById('measure-distance-display');
@@ -3093,6 +3093,16 @@
         var measureTotalDistance = document.getElementById('measure-total-distance');
         var measureTotalArea = document.getElementById('measure-total-area');
         var measureAreaRow = document.getElementById('measure-area-row');
+
+        // Share popup elements
+        var sharePopup = document.getElementById('share-popup');
+        var sharePopupClose = document.getElementById('share-popup-close');
+        var sharePopupLinkInput = document.getElementById('share-popup-link-input');
+        var sharePopupCopy = document.getElementById('share-popup-copy');
+        var shareEmail = document.getElementById('share-email');
+        var shareFacebook = document.getElementById('share-facebook');
+        var shareLinkedin = document.getElementById('share-linkedin');
+        var shareX = document.getElementById('share-x');
 
         // Store the clicked coordinates
         var contextMenuLngLat = null;
@@ -3112,6 +3122,9 @@
         map.on('contextmenu', function(e) {
             e.preventDefault();
 
+            // Hide share popup if open
+            sharePopup.classList.remove('show');
+
             // Store clicked coordinates
             contextMenuLngLat = e.lngLat;
 
@@ -3121,11 +3134,13 @@
             contextMenuCoords.textContent = lat + ', ' + lon;
             contextMenuCoords.classList.remove('copied');
 
-            // Show/hide clear measurement option based on state
-            if (measureState.active && measureState.points.length > 0) {
-                contextMenuClearMeasure.style.display = 'flex';
+            // Toggle measure menu text based on state
+            if (measureState.active) {
+                contextMenuMeasureText.textContent = 'Messung löschen';
+                contextMenuMeasure.querySelector('.material-symbols-outlined').textContent = 'delete';
             } else {
-                contextMenuClearMeasure.style.display = 'none';
+                contextMenuMeasureText.textContent = 'Distanz messen';
+                contextMenuMeasure.querySelector('.material-symbols-outlined').textContent = 'straighten';
             }
 
             // Get map container dimensions
@@ -3134,7 +3149,7 @@
 
             // Calculate menu position relative to map container
             var menuWidth = 200;
-            var menuHeight = measureState.active ? 220 : 180;
+            var menuHeight = 180;
             var clickX = e.point.x;
             var clickY = e.point.y;
 
@@ -3159,10 +3174,16 @@
             contextMenu.classList.remove('show');
         }
 
+        // Hide share popup
+        function hideSharePopup() {
+            sharePopup.classList.remove('show');
+        }
+
         // Close menu on Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 hideContextMenu();
+                hideSharePopup();
                 if (measureState.active) {
                     clearMeasurement();
                 }
@@ -3191,20 +3212,83 @@
             });
         });
 
-        // Share - copy coordinates
-        contextMenuShare.addEventListener('click', function() {
+        // Share - show share popup
+        contextMenuShare.addEventListener('click', function(e) {
+            e.stopPropagation();
+
+            // Generate share URL with coordinates
             var lat = contextMenuLngLat.lat.toFixed(5);
             var lon = contextMenuLngLat.lng.toFixed(5);
-            var coordsText = lat + ', ' + lon;
-            navigator.clipboard.writeText(coordsText).then(function() {
+            var shareUrl = window.location.origin + window.location.pathname + '?center=' + lon + ',' + lat + '&zoom=' + Math.round(map.getZoom());
+            sharePopupLinkInput.value = shareUrl;
+
+            // Position share popup next to context menu
+            var menuRect = contextMenu.getBoundingClientRect();
+            var mapContainer = document.getElementById('map');
+            var mapRect = mapContainer.getBoundingClientRect();
+
+            var popupLeft = menuRect.right - mapRect.left + 5;
+            var popupTop = menuRect.top - mapRect.top;
+
+            // Check if popup would go off screen
+            if (popupLeft + 280 > mapRect.width) {
+                popupLeft = menuRect.left - mapRect.left - 285;
+            }
+            if (popupTop + 200 > mapRect.height) {
+                popupTop = mapRect.height - 210;
+            }
+
+            sharePopup.style.left = popupLeft + 'px';
+            sharePopup.style.top = popupTop + 'px';
+
+            hideContextMenu();
+            sharePopup.classList.add('show');
+        });
+
+        // Close share popup
+        sharePopupClose.addEventListener('click', hideSharePopup);
+
+        // Copy share link
+        sharePopupCopy.addEventListener('click', function() {
+            navigator.clipboard.writeText(sharePopupLinkInput.value).then(function() {
                 showToast({
                     type: 'success',
-                    title: 'Koordinaten kopiert',
-                    message: coordsText,
+                    title: 'Link kopiert',
+                    message: 'Link wurde in die Zwischenablage kopiert',
                     duration: 2000
                 });
+                hideSharePopup();
             });
-            hideContextMenu();
+        });
+
+        // Share via Email
+        shareEmail.addEventListener('click', function() {
+            var subject = encodeURIComponent('GIS Immobilienportfolio - Standort');
+            var body = encodeURIComponent('Schauen Sie sich diesen Standort an:\n\n' + sharePopupLinkInput.value);
+            window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+            hideSharePopup();
+        });
+
+        // Share via Facebook
+        shareFacebook.addEventListener('click', function() {
+            var url = encodeURIComponent(sharePopupLinkInput.value);
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank', 'width=600,height=400');
+            hideSharePopup();
+        });
+
+        // Share via LinkedIn
+        shareLinkedin.addEventListener('click', function() {
+            var url = encodeURIComponent(sharePopupLinkInput.value);
+            window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank', 'width=600,height=400');
+            hideSharePopup();
+        });
+
+        // Share via X (Twitter)
+        shareX.addEventListener('click', function() {
+            var url = encodeURIComponent(sharePopupLinkInput.value);
+            var text = encodeURIComponent('GIS Immobilienportfolio - Standort');
+            window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + text, '_blank', 'width=600,height=400');
+            hideSharePopup();
         });
 
         // Print map
@@ -3329,10 +3413,22 @@
                     updateMeasureDisplay();
                 });
 
-                // Click on marker to delete it
+                // Click on marker: close polygon if first point, delete otherwise
                 markerEl.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    removeMeasurePoint(marker._measureIndex);
+                    var clickedIndex = marker._measureIndex;
+
+                    // If clicking on first point with 3+ points, close polygon
+                    if (clickedIndex === 0 && measureState.points.length >= 3 && !measureState.isClosed) {
+                        measureState.isClosed = true;
+                        updateMeasureLine();
+                        updateMeasureLabels();
+                        updateMeasureDisplay();
+                        return;
+                    }
+
+                    // Otherwise delete the point
+                    removeMeasurePoint(clickedIndex);
                 });
 
                 measureState.markers.push(marker);
@@ -3557,16 +3653,14 @@
             map.getCanvas().style.cursor = '';
         }
 
-        // Context menu - start measurement
+        // Context menu - toggle measurement (start or clear)
         contextMenuMeasure.addEventListener('click', function() {
             hideContextMenu();
-            startMeasurement();
-        });
-
-        // Context menu - clear measurement
-        contextMenuClearMeasure.addEventListener('click', function() {
-            hideContextMenu();
-            clearMeasurement();
+            if (measureState.active) {
+                clearMeasurement();
+            } else {
+                startMeasurement();
+            }
         });
 
         // Close button on measurement display
@@ -3577,6 +3671,7 @@
         // Map click handler for measurement mode
         map.on('click', function(e) {
             hideContextMenu();
+            hideSharePopup();
 
             if (!measureState.active) return;
 
