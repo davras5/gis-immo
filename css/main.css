@@ -3877,15 +3877,6 @@
             color: var(--status-active-text);
         }
 
-        .context-menu-coords.copied .material-symbols-outlined {
-            color: var(--status-active-text);
-        }
-
-        .context-menu-divider {
-            height: 1px;
-            background: var(--grey-200);
-        }
-
         .context-menu-item {
             display: flex;
             align-items: center;
@@ -3901,11 +3892,6 @@
             background: var(--grey-50);
         }
 
-        .context-menu-item .material-symbols-outlined {
-            font-size: var(--icon-md);
-            color: var(--grey-500);
-        }
-
         .context-menu-item:last-child {
             border-radius: 0 0 var(--radius-md) var(--radius-md);
         }
@@ -3914,87 +3900,6 @@
         .context-menu-item.measure-active {
             background: var(--status-planning-bg);
             color: var(--status-planning-text);
-        }
-
-        .context-menu-item.measure-active .material-symbols-outlined {
-            color: var(--status-planning-text);
-        }
-
-        /* ===== SHARE POPUP ===== */
-        .share-popup {
-            position: absolute;
-            background: var(--white);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-lg);
-            width: 280px;
-            z-index: 1002;
-            display: none;
-            overflow: hidden;
-        }
-
-        .share-popup.show {
-            display: block;
-        }
-
-        .share-popup-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: var(--space-3) var(--space-4);
-            background: var(--grey-50);
-            border-bottom: 1px solid var(--grey-200);
-            font-weight: var(--font-medium);
-            color: var(--grey-900);
-        }
-
-        .share-popup-close {
-            background: transparent;
-            border: none;
-            padding: var(--space-1);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            transition: background var(--transition-fast);
-        }
-
-        .share-popup-close:hover {
-            background: var(--grey-200);
-        }
-
-        .share-popup-close .material-symbols-outlined {
-            font-size: var(--icon-sm);
-            color: var(--grey-500);
-        }
-
-        .share-popup-icons {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-3);
-            padding: var(--space-4);
-            border-bottom: 1px solid var(--grey-100);
-        }
-
-        .share-popup-link {
-            padding: var(--space-3) var(--space-4);
-        }
-
-        .share-popup-link .share-link-label {
-            display: block;
-            font-size: var(--text-xs);
-            color: var(--grey-600);
-            margin-bottom: var(--space-2);
-        }
-
-        .share-popup-link .share-link-row {
-            display: flex;
-            gap: var(--space-2);
-        }
-
-        .share-popup-link .share-link-input {
-            flex: 1;
-            min-width: 0;
         }
 
         /* ===== MEASURE DISTANCE DISPLAY ===== */
