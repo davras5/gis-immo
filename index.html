@@ -261,10 +261,19 @@
                     47.37623, 8.53048
                 </div>
                 <div class="context-menu-divider"></div>
+                <div class="context-menu-item" id="context-menu-share">
+                    <span class="material-symbols-outlined">share</span>
+                    <span>Teilen</span>
+                </div>
                 <div class="context-menu-item" id="context-menu-measure">
                     <span class="material-symbols-outlined">straighten</span>
                     <span>Distanz messen</span>
                 </div>
+                <div class="context-menu-item" id="context-menu-clear-measure" style="display: none;">
+                    <span class="material-symbols-outlined">delete</span>
+                    <span>Messung löschen</span>
+                </div>
+                <div class="context-menu-divider" id="context-menu-divider-2"></div>
                 <div class="context-menu-item" id="context-menu-print">
                     <span class="material-symbols-outlined">print</span>
                     <span>Drucken</span>
@@ -277,13 +286,26 @@
 
             <!-- Measure Distance Display -->
             <div id="measure-distance-display" class="measure-distance-display">
-                <div class="measure-distance-content">
+                <div class="measure-distance-header">
                     <span class="material-symbols-outlined">straighten</span>
-                    <span id="measure-distance-value">0 m</span>
+                    <span>Distanz messen</span>
+                    <button id="measure-distance-close" class="measure-distance-close" title="Schliessen">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
                 </div>
-                <button id="measure-distance-clear" class="measure-distance-clear" title="Messung beenden">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
+                <div class="measure-distance-info">
+                    Klicken Sie auf die Karte, um einen Pfad zu zeichnen.
+                </div>
+                <div class="measure-distance-result" id="measure-distance-result">
+                    <div class="measure-result-row">
+                        <span class="measure-result-label">Gesamtdistanz:</span>
+                        <span class="measure-result-value" id="measure-total-distance">0 m</span>
+                    </div>
+                    <div class="measure-result-row" id="measure-area-row" style="display: none;">
+                        <span class="measure-result-label">Fläche:</span>
+                        <span class="measure-result-value" id="measure-total-area">0 m²</span>
+                    </div>
+                </div>
             </div>
         </div>
 

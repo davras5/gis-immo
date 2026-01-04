@@ -3935,43 +3935,40 @@
         /* ===== MEASURE DISTANCE DISPLAY ===== */
         .measure-distance-display {
             position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 40px;
+            left: 10px;
             background: var(--white);
-            border: 1px solid var(--grey-200);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-lg);
-            padding: var(--space-3) var(--space-4);
             display: none;
-            align-items: center;
-            gap: var(--space-3);
+            flex-direction: column;
+            width: 280px;
             z-index: 1000;
+            overflow: hidden;
         }
 
         .measure-distance-display.show {
             display: flex;
         }
 
-        .measure-distance-content {
+        .measure-distance-header {
             display: flex;
             align-items: center;
             gap: var(--space-2);
-        }
-
-        .measure-distance-content .material-symbols-outlined {
-            font-size: var(--icon-md);
-            color: var(--status-planning);
-        }
-
-        #measure-distance-value {
-            font-size: var(--text-sm);
-            font-weight: var(--font-semibold);
+            padding: var(--space-3) var(--space-4);
+            background: var(--grey-50);
+            border-bottom: 1px solid var(--grey-200);
+            font-weight: var(--font-medium);
             color: var(--grey-900);
-            min-width: 80px;
         }
 
-        .measure-distance-clear {
+        .measure-distance-header .material-symbols-outlined {
+            font-size: var(--icon-md);
+            color: var(--grey-600);
+        }
+
+        .measure-distance-close {
+            margin-left: auto;
             background: transparent;
             border: none;
             padding: var(--space-1);
@@ -3983,13 +3980,75 @@
             transition: background var(--transition-fast);
         }
 
-        .measure-distance-clear:hover {
-            background: var(--grey-100);
+        .measure-distance-close:hover {
+            background: var(--grey-200);
         }
 
-        .measure-distance-clear .material-symbols-outlined {
+        .measure-distance-close .material-symbols-outlined {
             font-size: var(--icon-sm);
             color: var(--grey-500);
+        }
+
+        .measure-distance-info {
+            padding: var(--space-3) var(--space-4);
+            font-size: var(--text-xs);
+            color: var(--grey-600);
+            border-bottom: 1px solid var(--grey-100);
+        }
+
+        .measure-distance-result {
+            padding: var(--space-3) var(--space-4);
+        }
+
+        .measure-result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-1) 0;
+        }
+
+        .measure-result-label {
+            font-size: var(--text-sm);
+            color: var(--grey-600);
+        }
+
+        .measure-result-value {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--grey-900);
+        }
+
+        /* Distance labels on map segments */
+        .measure-label {
+            background: var(--white);
+            border: 1px solid var(--grey-300);
+            border-radius: var(--radius-sm);
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: var(--font-medium);
+            color: var(--grey-800);
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* Measure marker styles */
+        .measure-marker {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid #000;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .measure-marker:hover {
+            transform: scale(1.3);
+        }
+
+        .measure-marker.dragging {
+            cursor: grabbing;
         }
 
         /* Print styles */

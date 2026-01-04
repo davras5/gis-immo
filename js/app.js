@@ -3083,25 +3083,29 @@
 
         var contextMenu = document.getElementById('map-context-menu');
         var contextMenuCoords = document.getElementById('context-menu-coords');
+        var contextMenuShare = document.getElementById('context-menu-share');
         var contextMenuMeasure = document.getElementById('context-menu-measure');
+        var contextMenuClearMeasure = document.getElementById('context-menu-clear-measure');
         var contextMenuPrint = document.getElementById('context-menu-print');
         var contextMenuReport = document.getElementById('context-menu-report');
         var measureDistanceDisplay = document.getElementById('measure-distance-display');
-        var measureDistanceValue = document.getElementById('measure-distance-value');
-        var measureDistanceClear = document.getElementById('measure-distance-clear');
+        var measureDistanceClose = document.getElementById('measure-distance-close');
+        var measureTotalDistance = document.getElementById('measure-total-distance');
+        var measureTotalArea = document.getElementById('measure-total-area');
+        var measureAreaRow = document.getElementById('measure-area-row');
 
         // Store the clicked coordinates
         var contextMenuLngLat = null;
 
-        // Measure distance state
+        // Measure distance state (Google Maps style - multi-point polyline)
         var measureState = {
             active: false,
-            startPoint: null,
-            endPoint: null,
-            startMarker: null,
-            endMarker: null,
+            points: [],           // Array of [lng, lat] coordinates
+            markers: [],          // Array of Mapbox markers
+            labelMarkers: [],     // Array of label markers for distances
+            lineSourceId: 'measure-line-source',
             lineLayerId: 'measure-line',
-            lineSourceId: 'measure-line-source'
+            isClosed: false       // True if polygon is closed
         };
 
         // Show context menu on right-click
@@ -3117,16 +3121,11 @@
             contextMenuCoords.textContent = lat + ', ' + lon;
             contextMenuCoords.classList.remove('copied');
 
-            // Update measure menu item based on state
-            if (measureState.active && measureState.startPoint) {
-                contextMenuMeasure.querySelector('span:last-child').textContent = 'Distanz zu hier';
-                contextMenuMeasure.classList.add('measure-active');
-            } else if (measureState.active) {
-                contextMenuMeasure.querySelector('span:last-child').textContent = 'Messung abbrechen';
-                contextMenuMeasure.classList.add('measure-active');
+            // Show/hide clear measurement option based on state
+            if (measureState.active && measureState.points.length > 0) {
+                contextMenuClearMeasure.style.display = 'flex';
             } else {
-                contextMenuMeasure.querySelector('span:last-child').textContent = 'Distanz messen';
-                contextMenuMeasure.classList.remove('measure-active');
+                contextMenuClearMeasure.style.display = 'none';
             }
 
             // Get map container dimensions
@@ -3135,7 +3134,7 @@
 
             // Calculate menu position relative to map container
             var menuWidth = 200;
-            var menuHeight = 160;
+            var menuHeight = measureState.active ? 220 : 180;
             var clickX = e.point.x;
             var clickY = e.point.y;
 
@@ -3159,11 +3158,6 @@
         function hideContextMenu() {
             contextMenu.classList.remove('show');
         }
-
-        // Close menu on map click
-        map.on('click', function() {
-            hideContextMenu();
-        });
 
         // Close menu on Escape key
         document.addEventListener('keydown', function(e) {
@@ -3197,6 +3191,22 @@
             });
         });
 
+        // Share - copy coordinates
+        contextMenuShare.addEventListener('click', function() {
+            var lat = contextMenuLngLat.lat.toFixed(5);
+            var lon = contextMenuLngLat.lng.toFixed(5);
+            var coordsText = lat + ', ' + lon;
+            navigator.clipboard.writeText(coordsText).then(function() {
+                showToast({
+                    type: 'success',
+                    title: 'Koordinaten kopiert',
+                    message: coordsText,
+                    duration: 2000
+                });
+            });
+            hideContextMenu();
+        });
+
         // Print map
         contextMenuPrint.addEventListener('click', function() {
             hideContextMenu();
@@ -3213,7 +3223,7 @@
             window.location.href = 'mailto:info@gis-immo.ch?subject=' + subject + '&body=' + body;
         });
 
-        // ===== MEASURE DISTANCE FEATURE =====
+        // ===== MEASURE DISTANCE FEATURE (Google Maps Style) =====
 
         // Haversine formula to calculate distance between two points
         function haversineDistance(lat1, lon1, lat2, lon2) {
@@ -3227,6 +3237,31 @@
             return R * c;
         }
 
+        // Calculate polygon area using Shoelace formula (in square meters)
+        function calculatePolygonArea(points) {
+            if (points.length < 3) return 0;
+
+            var n = points.length;
+            var area = 0;
+
+            // Convert to approximate meters (at the centroid latitude)
+            var avgLat = points.reduce(function(sum, p) { return sum + p[1]; }, 0) / n;
+            var latScale = 111320; // meters per degree latitude
+            var lonScale = 111320 * Math.cos(avgLat * Math.PI / 180); // meters per degree longitude
+
+            for (var i = 0; i < n; i++) {
+                var j = (i + 1) % n;
+                var xi = points[i][0] * lonScale;
+                var yi = points[i][1] * latScale;
+                var xj = points[j][0] * lonScale;
+                var yj = points[j][1] * latScale;
+                area += xi * yj;
+                area -= xj * yi;
+            }
+
+            return Math.abs(area / 2);
+        }
+
         // Format distance for display
         function formatDistance(meters) {
             if (meters >= 1000) {
@@ -3235,77 +3270,120 @@
             return Math.round(meters) + ' m';
         }
 
+        // Format area for display
+        function formatArea(sqMeters) {
+            if (sqMeters >= 1000000) {
+                return (sqMeters / 1000000).toFixed(2) + ' km²';
+            } else if (sqMeters >= 10000) {
+                return (sqMeters / 10000).toFixed(2) + ' ha';
+            }
+            return Math.round(sqMeters) + ' m²';
+        }
+
         // Create a marker element for measurement points
-        function createMeasureMarker(isStart) {
+        function createMeasureMarkerElement() {
             var el = document.createElement('div');
-            el.style.width = '12px';
-            el.style.height = '12px';
-            el.style.borderRadius = '50%';
-            el.style.border = '2px solid white';
-            el.style.boxShadow = '0 2px 4px rgba(0,0,0,0.3)';
-            el.style.background = isStart ? '#1976d2' : '#d32f2f';
-            el.style.cursor = 'pointer';
+            el.className = 'measure-marker';
             return el;
         }
 
-        // Start or continue measurement
-        contextMenuMeasure.addEventListener('click', function() {
-            hideContextMenu();
+        // Create a label element for distance display on segments
+        function createDistanceLabel(distance) {
+            var el = document.createElement('div');
+            el.className = 'measure-label';
+            el.textContent = formatDistance(distance);
+            return el;
+        }
 
-            if (!measureState.active) {
-                // Start new measurement - set start point
-                measureState.active = true;
-                measureState.startPoint = [contextMenuLngLat.lng, contextMenuLngLat.lat];
+        // Add a point to the measurement polyline
+        function addMeasurePoint(lngLat, index) {
+            var point = [lngLat.lng, lngLat.lat];
 
-                // Create start marker
-                measureState.startMarker = new mapboxgl.Marker({
-                    element: createMeasureMarker(true),
-                    anchor: 'center'
-                })
-                .setLngLat(measureState.startPoint)
-                .addTo(map);
-
-                // Show distance display with instruction
-                measureDistanceValue.textContent = 'Rechtsklick für Endpunkt';
-                measureDistanceDisplay.classList.add('show');
-
-                // Change cursor
-                map.getCanvas().style.cursor = 'crosshair';
-
-            } else if (measureState.startPoint && !measureState.endPoint) {
-                // Set end point and calculate distance
-                measureState.endPoint = [contextMenuLngLat.lng, contextMenuLngLat.lat];
-
-                // Create end marker
-                measureState.endMarker = new mapboxgl.Marker({
-                    element: createMeasureMarker(false),
-                    anchor: 'center'
-                })
-                .setLngLat(measureState.endPoint)
-                .addTo(map);
-
-                // Draw line between points
-                drawMeasureLine();
-
-                // Calculate and display distance
-                var distance = haversineDistance(
-                    measureState.startPoint[1], measureState.startPoint[0],
-                    measureState.endPoint[1], measureState.endPoint[0]
-                );
-                measureDistanceValue.textContent = formatDistance(distance);
-
-                // Reset cursor
-                map.getCanvas().style.cursor = '';
-
+            if (index === undefined) {
+                measureState.points.push(point);
+                index = measureState.points.length - 1;
             } else {
-                // Cancel measurement if clicked again
-                clearMeasurement();
+                measureState.points[index] = point;
             }
-        });
 
-        // Draw line between measurement points
-        function drawMeasureLine() {
-            // Remove existing line if any
+            // Create marker if new point
+            if (index >= measureState.markers.length) {
+                var markerEl = createMeasureMarkerElement();
+                var marker = new mapboxgl.Marker({
+                    element: markerEl,
+                    draggable: true,
+                    anchor: 'center'
+                })
+                .setLngLat(point)
+                .addTo(map);
+
+                // Store index on marker for reference
+                marker._measureIndex = index;
+
+                // Drag event to update point position
+                marker.on('drag', function() {
+                    var newLngLat = marker.getLngLat();
+                    measureState.points[marker._measureIndex] = [newLngLat.lng, newLngLat.lat];
+                    updateMeasureLine();
+                    updateMeasureLabels();
+                    updateMeasureDisplay();
+                });
+
+                // Click on marker to delete it
+                markerEl.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    removeMeasurePoint(marker._measureIndex);
+                });
+
+                measureState.markers.push(marker);
+            } else {
+                measureState.markers[index].setLngLat(point);
+            }
+
+            updateMeasureLine();
+            updateMeasureLabels();
+            updateMeasureDisplay();
+        }
+
+        // Remove a point from the measurement polyline
+        function removeMeasurePoint(index) {
+            if (measureState.points.length <= 1) {
+                clearMeasurement();
+                return;
+            }
+
+            // Remove point
+            measureState.points.splice(index, 1);
+
+            // Remove marker
+            measureState.markers[index].remove();
+            measureState.markers.splice(index, 1);
+
+            // Update marker indices
+            measureState.markers.forEach(function(m, i) {
+                m._measureIndex = i;
+            });
+
+            // Check if polygon was closed and now isn't
+            if (measureState.isClosed && measureState.points.length < 3) {
+                measureState.isClosed = false;
+            }
+
+            updateMeasureLine();
+            updateMeasureLabels();
+            updateMeasureDisplay();
+        }
+
+        // Update the measurement line on the map
+        function updateMeasureLine() {
+            var coordinates = measureState.points.slice();
+
+            // Close polygon if needed
+            if (measureState.isClosed && coordinates.length >= 3) {
+                coordinates.push(coordinates[0]);
+            }
+
+            // Remove existing layers
             if (map.getLayer(measureState.lineLayerId)) {
                 map.removeLayer(measureState.lineLayerId);
             }
@@ -3313,14 +3391,16 @@
                 map.removeSource(measureState.lineSourceId);
             }
 
-            // Add line source
+            if (coordinates.length < 2) return;
+
+            // Add source
             map.addSource(measureState.lineSourceId, {
                 type: 'geojson',
                 data: {
                     type: 'Feature',
                     geometry: {
                         type: 'LineString',
-                        coordinates: [measureState.startPoint, measureState.endPoint]
+                        coordinates: coordinates
                     }
                 }
             });
@@ -3331,30 +3411,141 @@
                 type: 'line',
                 source: measureState.lineSourceId,
                 paint: {
-                    'line-color': '#1976d2',
-                    'line-width': 3,
-                    'line-dasharray': [2, 2]
+                    'line-color': '#000000',
+                    'line-width': 2
                 }
             });
         }
 
-        // Clear measurement
+        // Update distance labels on segments
+        function updateMeasureLabels() {
+            // Remove existing labels
+            measureState.labelMarkers.forEach(function(m) { m.remove(); });
+            measureState.labelMarkers = [];
+
+            var points = measureState.points;
+            if (points.length < 2) return;
+
+            // Add label for each segment
+            for (var i = 0; i < points.length - 1; i++) {
+                var p1 = points[i];
+                var p2 = points[i + 1];
+                var distance = haversineDistance(p1[1], p1[0], p2[1], p2[0]);
+
+                // Midpoint of segment
+                var midLng = (p1[0] + p2[0]) / 2;
+                var midLat = (p1[1] + p2[1]) / 2;
+
+                var labelEl = createDistanceLabel(distance);
+                var labelMarker = new mapboxgl.Marker({
+                    element: labelEl,
+                    anchor: 'center'
+                })
+                .setLngLat([midLng, midLat])
+                .addTo(map);
+
+                measureState.labelMarkers.push(labelMarker);
+            }
+
+            // Add label for closing segment if polygon
+            if (measureState.isClosed && points.length >= 3) {
+                var pLast = points[points.length - 1];
+                var pFirst = points[0];
+                var closingDistance = haversineDistance(pLast[1], pLast[0], pFirst[1], pFirst[0]);
+
+                var closingMidLng = (pLast[0] + pFirst[0]) / 2;
+                var closingMidLat = (pLast[1] + pFirst[1]) / 2;
+
+                var closingLabelEl = createDistanceLabel(closingDistance);
+                var closingLabelMarker = new mapboxgl.Marker({
+                    element: closingLabelEl,
+                    anchor: 'center'
+                })
+                .setLngLat([closingMidLng, closingMidLat])
+                .addTo(map);
+
+                measureState.labelMarkers.push(closingLabelMarker);
+            }
+        }
+
+        // Update the measurement display panel
+        function updateMeasureDisplay() {
+            var points = measureState.points;
+            var totalDistance = 0;
+
+            // Calculate total distance
+            for (var i = 0; i < points.length - 1; i++) {
+                totalDistance += haversineDistance(
+                    points[i][1], points[i][0],
+                    points[i + 1][1], points[i + 1][0]
+                );
+            }
+
+            // Add closing distance if polygon
+            if (measureState.isClosed && points.length >= 3) {
+                totalDistance += haversineDistance(
+                    points[points.length - 1][1], points[points.length - 1][0],
+                    points[0][1], points[0][0]
+                );
+            }
+
+            measureTotalDistance.textContent = formatDistance(totalDistance);
+
+            // Calculate and show area if polygon
+            if (measureState.isClosed && points.length >= 3) {
+                var area = calculatePolygonArea(points);
+                measureTotalArea.textContent = formatArea(area);
+                measureAreaRow.style.display = 'flex';
+            } else {
+                measureAreaRow.style.display = 'none';
+            }
+        }
+
+        // Check if a click is near the first point (to close polygon)
+        function isNearFirstPoint(lngLat) {
+            if (measureState.points.length < 3) return false;
+
+            var firstPoint = measureState.points[0];
+            var distance = haversineDistance(lngLat.lat, lngLat.lng, firstPoint[1], firstPoint[0]);
+
+            // Within 20 meters or visible pixel distance
+            var pixelDistance = map.project(lngLat).dist(map.project({ lng: firstPoint[0], lat: firstPoint[1] }));
+
+            return pixelDistance < 15;
+        }
+
+        // Start measurement mode
+        function startMeasurement() {
+            measureState.active = true;
+            measureState.points = [];
+            measureState.markers = [];
+            measureState.labelMarkers = [];
+            measureState.isClosed = false;
+
+            measureDistanceDisplay.classList.add('show');
+            measureTotalDistance.textContent = '0 m';
+            measureAreaRow.style.display = 'none';
+
+            map.getCanvas().style.cursor = 'crosshair';
+        }
+
+        // Clear all measurement
         function clearMeasurement() {
             measureState.active = false;
-            measureState.startPoint = null;
-            measureState.endPoint = null;
+            measureState.isClosed = false;
 
-            // Remove markers
-            if (measureState.startMarker) {
-                measureState.startMarker.remove();
-                measureState.startMarker = null;
-            }
-            if (measureState.endMarker) {
-                measureState.endMarker.remove();
-                measureState.endMarker = null;
-            }
+            // Remove all markers
+            measureState.markers.forEach(function(m) { m.remove(); });
+            measureState.markers = [];
 
-            // Remove line
+            // Remove all labels
+            measureState.labelMarkers.forEach(function(m) { m.remove(); });
+            measureState.labelMarkers = [];
+
+            // Clear points
+            measureState.points = [];
+
+            // Remove line layer
             if (map.getLayer(measureState.lineLayerId)) {
                 map.removeLayer(measureState.lineLayerId);
             }
@@ -3362,14 +3553,45 @@
                 map.removeSource(measureState.lineSourceId);
             }
 
-            // Hide distance display
             measureDistanceDisplay.classList.remove('show');
-
-            // Reset cursor
             map.getCanvas().style.cursor = '';
         }
 
-        // Clear button click
-        measureDistanceClear.addEventListener('click', function() {
+        // Context menu - start measurement
+        contextMenuMeasure.addEventListener('click', function() {
+            hideContextMenu();
+            startMeasurement();
+        });
+
+        // Context menu - clear measurement
+        contextMenuClearMeasure.addEventListener('click', function() {
+            hideContextMenu();
             clearMeasurement();
+        });
+
+        // Close button on measurement display
+        measureDistanceClose.addEventListener('click', function() {
+            clearMeasurement();
+        });
+
+        // Map click handler for measurement mode
+        map.on('click', function(e) {
+            hideContextMenu();
+
+            if (!measureState.active) return;
+
+            // Check if clicking near first point to close polygon
+            if (isNearFirstPoint(e.lngLat) && !measureState.isClosed) {
+                measureState.isClosed = true;
+                updateMeasureLine();
+                updateMeasureLabels();
+                updateMeasureDisplay();
+                return;
+            }
+
+            // Don't add points if polygon is already closed
+            if (measureState.isClosed) return;
+
+            // Add new point
+            addMeasurePoint(e.lngLat);
         });
