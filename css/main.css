@@ -3872,24 +3872,12 @@
             transform: translate(-100%, -100%);
         }
 
-        .context-menu-coords {
-            padding: var(--space-3) var(--space-4);
-            font-size: var(--text-xs);
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-            color: var(--grey-600);
-            background: var(--grey-50);
-            cursor: pointer;
-            transition: background var(--transition-fast), color var(--transition-fast);
-            user-select: none;
-        }
-
-        .context-menu-coords:hover {
-            background: var(--grey-100);
-            color: var(--grey-900);
-        }
-
         .context-menu-coords.copied {
             background: var(--status-active-bg);
+            color: var(--status-active-text);
+        }
+
+        .context-menu-coords.copied .material-symbols-outlined {
             color: var(--status-active-text);
         }
 
@@ -3930,12 +3918,6 @@
 
         .context-menu-item.measure-active .material-symbols-outlined {
             color: var(--status-planning-text);
-        }
-
-        /* Arrow for submenu items */
-        .context-menu-arrow {
-            margin-left: auto;
-            font-size: var(--icon-sm) !important;
         }
 
         /* ===== SHARE POPUP ===== */
