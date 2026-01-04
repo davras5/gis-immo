@@ -1,0 +1,246 @@
+{
+  "type": "FeatureCollection",
+  "name": "BBL_Parzellen",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-001",
+        "buildingId": "BBL-001",
+        "plotNumber": "BE-3003-1001",
+        "name": "Bundesplatz Parzelle A",
+        "municipality": "Bern",
+        "canton": "BE",
+        "area": 3200,
+        "landUseZone": "Verwaltungszone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [7.4435, 46.9460],
+          [7.4447, 46.9460],
+          [7.4447, 46.9470],
+          [7.4435, 46.9470],
+          [7.4435, 46.9460]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-002",
+        "buildingId": "BBL-002",
+        "plotNumber": "DE-BER-10557-041",
+        "name": "Diplomatenviertel Lot 41",
+        "municipality": "Berlin",
+        "canton": "BE",
+        "area": 1800,
+        "landUseZone": "Diplomatische Zone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [13.3688, 52.5194],
+          [13.3702, 52.5194],
+          [13.3702, 52.5206],
+          [13.3688, 52.5206],
+          [13.3688, 52.5194]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-003",
+        "buildingId": "BBL-003",
+        "plotNumber": "ZH-8004-2045",
+        "name": "Industriegebiet Lagerstrasse",
+        "municipality": "Zürich",
+        "canton": "ZH",
+        "area": 12500,
+        "landUseZone": "Industriezone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [8.5310, 47.3760],
+          [8.5330, 47.3760],
+          [8.5330, 47.3778],
+          [8.5310, 47.3778],
+          [8.5310, 47.3760]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-004",
+        "buildingId": "BBL-004",
+        "plotNumber": "US-NY-10017-633",
+        "name": "Third Avenue Tower Unit 12-14",
+        "municipality": "New York",
+        "canton": "NY",
+        "area": 950,
+        "landUseZone": "Kommerzielle Zone",
+        "ownershipType": "Stockwerkeigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-73.9718, 40.7522],
+          [-73.9706, 40.7522],
+          [-73.9706, 40.7534],
+          [-73.9718, 40.7534],
+          [-73.9718, 40.7522]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-005",
+        "buildingId": "BBL-005",
+        "plotNumber": "GE-1202-0120",
+        "name": "Parcelle Lausanne-Nord",
+        "municipality": "Genf",
+        "canton": "GE",
+        "area": 5600,
+        "landUseZone": "Bildungszone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [6.1422, 46.2036],
+          [6.1442, 46.2036],
+          [6.1442, 46.2052],
+          [6.1422, 46.2052],
+          [6.1422, 46.2036]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-006",
+        "buildingId": "BBL-006",
+        "plotNumber": "JP-TKY-MNTK-5912",
+        "name": "Minami-Azabu Block 5",
+        "municipality": "Tokyo",
+        "canton": "TK",
+        "area": 2800,
+        "landUseZone": "Diplomatische Zone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [139.7340, 35.6510],
+          [139.7360, 35.6510],
+          [139.7360, 35.6530],
+          [139.7340, 35.6530],
+          [139.7340, 35.6510]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-007",
+        "buildingId": "BBL-007",
+        "plotNumber": "BS-4051-0022",
+        "name": "Steinenvorstadt Eckparzelle",
+        "municipality": "Basel",
+        "canton": "BS",
+        "area": 1450,
+        "landUseZone": "Wohnzone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [7.5876, 47.5588],
+          [7.5896, 47.5588],
+          [7.5896, 47.5604],
+          [7.5876, 47.5604],
+          [7.5876, 47.5588]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-008",
+        "buildingId": "BBL-008",
+        "plotNumber": "BR-BSB-SES-041",
+        "name": "Setor de Embaixadas Sul Lote 41",
+        "municipality": "Brasília",
+        "canton": "DF",
+        "area": 3500,
+        "landUseZone": "Diplomatische Zone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-47.8835, -15.7952],
+          [-47.8815, -15.7952],
+          [-47.8815, -15.7932],
+          [-47.8835, -15.7932],
+          [-47.8835, -15.7952]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-009",
+        "buildingId": "BBL-009",
+        "plotNumber": "TI-6934-0015",
+        "name": "Zona Industriale Bioggio",
+        "municipality": "Lugano",
+        "canton": "TI",
+        "area": 8200,
+        "landUseZone": "Industriezone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [8.9500, 46.0027],
+          [8.9524, 46.0027],
+          [8.9524, 46.0047],
+          [8.9500, 46.0047],
+          [8.9500, 46.0027]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "parcelId": "PCL-010",
+        "buildingId": "BBL-010",
+        "plotNumber": "AU-ACT-FOR-007",
+        "name": "Forrest Diplomatic Precinct",
+        "municipality": "Canberra",
+        "canton": "ACT",
+        "area": 2100,
+        "landUseZone": "Diplomatische Zone",
+        "ownershipType": "Eigentum"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [149.1235, -35.3130],
+          [149.1255, -35.3130],
+          [149.1255, -35.3110],
+          [149.1235, -35.3110],
+          [149.1235, -35.3130]
+        ]]
+      }
+    }
+  ]
+}
