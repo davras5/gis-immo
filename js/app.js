@@ -1937,8 +1937,13 @@
                 });
 
                 map.on('click', 'parcels-fill', function(e) {
-                    // Check if a building point was also clicked - buildings take priority
-                    var buildingFeatures = map.queryRenderedFeatures(e.point, { layers: ['portfolio-points'] });
+                    // Check if a building point is near the click - buildings take priority
+                    // Use a bounding box (15px) to match the building circle size (10px radius + stroke)
+                    var bbox = [
+                        [e.point.x - 15, e.point.y - 15],
+                        [e.point.x + 15, e.point.y + 15]
+                    ];
+                    var buildingFeatures = map.queryRenderedFeatures(bbox, { layers: ['portfolio-points'] });
                     if (buildingFeatures.length > 0) {
                         return; // Let the building click handler handle it
                     }
