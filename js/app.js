@@ -22,6 +22,7 @@
         
         // Variables
         var portfolioData = null;
+        var parcelData = null;
         var filteredData = null;
         var currentDetailBuilding = null;
 
@@ -940,7 +941,8 @@
                 fetchWithErrorHandling('data/contacts.json'),
                 fetchWithErrorHandling('data/contracts.json'),
                 fetchWithErrorHandling('data/assets.json'),
-                fetchWithErrorHandling('data/costs.json')
+                fetchWithErrorHandling('data/costs.json'),
+                fetchWithErrorHandling('data/parcels.geojson')
             ])
                 .then(function(results) {
                     // Validate and destructure results
@@ -953,6 +955,7 @@
                     allContracts = (results[4] && results[4].contracts) || [];
                     allAssets = (results[5] && results[5].assets) || [];
                     allCosts = (results[6] && results[6].costs) || [];
+                    parcelData = results[7];
 
                     // Validate portfolio data
                     if (!portfolioData || !portfolioData.features) {
@@ -1760,7 +1763,50 @@
                 type: 'geojson',
                 data: portfolioData
             });
-            
+
+            // Add parcels source and layers
+            if (parcelData && parcelData.features) {
+                map.addSource('parcels', {
+                    type: 'geojson',
+                    data: parcelData
+                });
+
+                // Parcel fill layer
+                map.addLayer({
+                    id: 'parcels-fill',
+                    type: 'fill',
+                    source: 'parcels',
+                    paint: {
+                        'fill-color': '#1976d2',
+                        'fill-opacity': 0.15
+                    }
+                });
+
+                // Parcel outline layer
+                map.addLayer({
+                    id: 'parcels-outline',
+                    type: 'line',
+                    source: 'parcels',
+                    paint: {
+                        'line-color': '#1976d2',
+                        'line-width': 2,
+                        'line-opacity': 0.8
+                    }
+                });
+
+                // Parcel hover highlight layer
+                map.addLayer({
+                    id: 'parcels-highlight',
+                    type: 'fill',
+                    source: 'parcels',
+                    filter: ['==', ['get', 'parcelId'], ''],
+                    paint: {
+                        'fill-color': '#1976d2',
+                        'fill-opacity': 0.35
+                    }
+                });
+            }
+
             // Main points layer
             map.addLayer({
                 id: 'portfolio-points',
@@ -1873,15 +1919,39 @@
                 // UPDATED: Pass 'false' so map does NOT zoom on click
                 selectBuilding(props.buildingId, false);
             });
-            
-            // Click on map (not on a point) to deselect
+
+            // PARCEL HANDLERS
+            if (parcelData && parcelData.features) {
+                map.on('mouseenter', 'parcels-fill', function(e) {
+                    map.getCanvas().style.cursor = 'pointer';
+                    if (e.features.length > 0) {
+                        var parcelId = e.features[0].properties.parcelId;
+                        map.setFilter('parcels-highlight', ['==', ['get', 'parcelId'], parcelId]);
+                    }
+                });
+
+                map.on('mouseleave', 'parcels-fill', function() {
+                    map.getCanvas().style.cursor = '';
+                    map.setFilter('parcels-highlight', ['==', ['get', 'parcelId'], '']);
+                });
+
+                map.on('click', 'parcels-fill', function(e) {
+                    e.preventDefault();
+                    var props = e.features[0].properties;
+                    showParcelPopup(props, e.lngLat);
+                });
+            }
+
+            // Click on map (not on a point or parcel) to deselect
             map.on('click', function(e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ['portfolio-points'] });
-                if (features.length === 0) {
+                var pointFeatures = map.queryRenderedFeatures(e.point, { layers: ['portfolio-points'] });
+                var parcelFeatures = parcelData && parcelData.features ? map.queryRenderedFeatures(e.point, { layers: ['parcels-fill'] }) : [];
+                if (pointFeatures.length === 0 && parcelFeatures.length === 0) {
                     selectedBuildingId = null;
                     updateSelectedBuilding();
                     updateUrlWithSelection();
                     document.getElementById('info-panel').classList.remove('show');
+                    closeParcelPopup();
                 }
             });
 
@@ -1984,6 +2054,71 @@
                 url.searchParams.delete('id');
             }
             window.history.replaceState({}, '', url);
+        }
+
+        // ===== PARCEL POPUP FUNCTIONALITY =====
+        var parcelPopupInstance = null;
+
+        function showParcelPopup(props, lngLat) {
+            // Close any existing popup
+            closeParcelPopup();
+
+            // Format area with thousand separators
+            var formattedArea = Number(props.area || 0).toLocaleString('de-CH');
+
+            // Build popup HTML content
+            var popupHtml =
+                '<div class="parcel-popup">' +
+                    '<div class="parcel-popup-header">' +
+                        '<span class="material-symbols-outlined parcel-popup-icon">crop_free</span>' +
+                        '<span class="parcel-popup-title">Parzelle</span>' +
+                    '</div>' +
+                    '<div class="parcel-popup-content">' +
+                        '<div class="parcel-popup-name">' + escapeHtml(props.name || '—') + '</div>' +
+                        '<div class="parcel-popup-row">' +
+                            '<span class="parcel-popup-label">Parzellen-Nr.</span>' +
+                            '<span class="parcel-popup-value">' + escapeHtml(props.plotNumber || '—') + '</span>' +
+                        '</div>' +
+                        '<div class="parcel-popup-row">' +
+                            '<span class="parcel-popup-label">Gemeinde</span>' +
+                            '<span class="parcel-popup-value">' + escapeHtml(props.municipality || '—') + '</span>' +
+                        '</div>' +
+                        '<div class="parcel-popup-row">' +
+                            '<span class="parcel-popup-label">Kanton</span>' +
+                            '<span class="parcel-popup-value">' + escapeHtml(props.canton || '—') + '</span>' +
+                        '</div>' +
+                        '<div class="parcel-popup-row">' +
+                            '<span class="parcel-popup-label">Fläche</span>' +
+                            '<span class="parcel-popup-value">' + formattedArea + ' m²</span>' +
+                        '</div>' +
+                        '<div class="parcel-popup-row">' +
+                            '<span class="parcel-popup-label">Nutzungszone</span>' +
+                            '<span class="parcel-popup-value">' + escapeHtml(props.landUseZone || '—') + '</span>' +
+                        '</div>' +
+                        '<div class="parcel-popup-row">' +
+                            '<span class="parcel-popup-label">Eigentum</span>' +
+                            '<span class="parcel-popup-value">' + escapeHtml(props.ownershipType || '—') + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+
+            // Create Mapbox popup
+            parcelPopupInstance = new mapboxgl.Popup({
+                closeButton: true,
+                closeOnClick: false,
+                maxWidth: '320px',
+                className: 'parcel-mapbox-popup'
+            })
+                .setLngLat(lngLat)
+                .setHTML(popupHtml)
+                .addTo(map);
+        }
+
+        function closeParcelPopup() {
+            if (parcelPopupInstance) {
+                parcelPopupInstance.remove();
+                parcelPopupInstance = null;
+            }
         }
 
         // ===== SEARCH FUNCTIONALITY =====
