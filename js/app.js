@@ -3083,6 +3083,7 @@
 
         var contextMenu = document.getElementById('map-context-menu');
         var contextMenuCoords = document.getElementById('context-menu-coords');
+        var contextMenuCoordsText = document.getElementById('context-menu-coords-text');
         var contextMenuShare = document.getElementById('context-menu-share');
         var contextMenuMeasure = document.getElementById('context-menu-measure');
         var contextMenuMeasureText = document.getElementById('context-menu-measure-text');
@@ -3131,7 +3132,7 @@
             // Update coordinates display (lat, lon with 5 decimals)
             var lat = contextMenuLngLat.lat.toFixed(5);
             var lon = contextMenuLngLat.lng.toFixed(5);
-            contextMenuCoords.textContent = lat + ', ' + lon;
+            contextMenuCoordsText.textContent = lat + ', ' + lon;
             contextMenuCoords.classList.remove('copied');
 
             // Toggle measure menu text based on state
@@ -3192,7 +3193,7 @@
 
         // Copy coordinates to clipboard
         contextMenuCoords.addEventListener('click', function() {
-            var coordsText = contextMenuCoords.textContent;
+            var coordsText = contextMenuCoordsText.textContent;
             navigator.clipboard.writeText(coordsText).then(function() {
                 contextMenuCoords.classList.add('copied');
                 showToast({
