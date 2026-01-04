@@ -59,7 +59,7 @@ This data model is designed for compatibility with the BuildingMinds platform sc
 ```mermaid
 erDiagram
     Site ||--o{ Building : contains
-    Site ||--o{ Land : contains
+    Building ||--o| Parcel : "sits on"
     Building ||--o{ Address : "has"
     Building ||--o{ Floor : "has"
     Building ||--o{ AreaMeasurement : "has"
@@ -88,11 +88,13 @@ erDiagram
         string status
     }
 
-    Land {
-        string landId PK
-        string siteId FK
+    Parcel {
+        string parcelId PK
+        string buildingId FK
         string name
-        string typeOfOwnership
+        string plotNumber
+        number area
+        string ownershipType
     }
 
     Address {
@@ -178,7 +180,7 @@ Entities are organized into functional groups:
 
 | Layer | Entities | Description |
 |-------|----------|-------------|
-| **Core** | Site, Land, Building, Address, Floor, Space | Primary real estate objects, their locations, and internal structures |
+| **Core** | Site, Building, Parcel, Address, Floor, Space | Primary real estate objects, their locations, and internal structures |
 | **Measurement** | Area Measurement, Operational Measurement | Quantitative data (areas, volumes, consumption) |
 | **Supporting** | Document, Contact, Asset, Contract, Cost | Administrative and operational associations |
 | **Future** | Certificate, Valuation | Planned entities for certifications and appraisals |
@@ -265,55 +267,71 @@ A site represents a logical grouping of buildings, such as a campus, property, o
 
 ---
 
-### 3.2 Land (Grundstück)
+### 3.2 Parcel (Parzelle)
 
-Land represents a parcel of land or plot that belongs to a site. In the current demo, land information is partially embedded in building properties (`grundstueck_id`, `grundstueck_name`). In a production system, Land would be a separate entity allowing multiple land parcels per site.
+A parcel represents a land plot on which a building sits. Parcels are stored as polygon geometries in a separate GeoJSON file (`data/parcels.geojson`) and linked to buildings via `buildingId`.
 
 #### Schema Definition
 
 | Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
 |-------|-------|------|-------------|-------------|------------|------------|
-| **landId** | PK | string | Unique identifier; must either originate from the previous system or be explicitly defined. | **mandatory**, minLength: 1, maxLength: 50 | Land ID | Grundstück-ID |
-| **name** | | string | Name of land (e.g., park, garden, parking). | **mandatory**, minLength: 1, maxLength: 200 | Land Name | Grundstückbezeichnung |
-| **siteId** | FK | string | Refers to the site which the land belongs to. | **mandatory**, minLength: 1, maxLength: 50 | Site ID | Standort-ID |
-| **typeOfOwnership** | | string, enum | Is the land owned or leased? See [Ownership Types](#a1-shared-enumerations). | **mandatory** | Ownership | Eigentum |
-| **validFrom** | | string | The record can be used from this date onwards. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20 | Valid From | Gültig von |
-| **validUntil** | | string | The record is valid until this date. ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ` | **mandatory**, minLength: 20, null allowed | Valid Until | Gültig bis |
-| addressIds | FK | array[string] | Array of address IDs linked to this land. | minLength: 1, maxLength: 50 per ID | Addresses | Adressen |
-| eventType | | string, enum | Type of the event as domain event. Options: `LandAdded`, `LandUpdated`, `LandDeleted` | | Event Type | Ereignistyp |
-| extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten |
-| landCode | | string | User specific land code. | minLength: 1, maxLength: 70 | Land Code | Grundstückcode |
-| landCoverage | | string | Development level of land. | minLength: 1, maxLength: 50 | Land Coverage | Bebauungsgrad |
-| landParcelNr | | string | District/zoning number registered for the plot of land. | minLength: 1, maxLength: 50 | Parcel Number | Parzellennummer |
-| selfUse | | boolean | Is the land self-used? | | Self Use | Eigennutzung |
-| status | | string | Status of land. | minLength: 1, maxLength: 50 | Status | Status |
-| tenantStructure | | string, enum | Tenant structure. See [Tenant Structure](#a1-shared-enumerations). | | Tenant Structure | Mieterstruktur |
-| valuationIds | FK | array[string] | Array of valuation IDs. | minLength: 1, maxLength: 50 per ID | Valuations | Bewertungen |
+| **parcelId** | PK | string | Unique identifier for the parcel. | **mandatory**, minLength: 1, maxLength: 50 | Parcel ID | Parzellen-ID |
+| **buildingId** | FK | string | Reference to the associated building. | **mandatory**, minLength: 1, maxLength: 50 | Building ID | Objekt-ID |
+| **plotNumber** | | string | Official cadastral plot number. | **mandatory**, minLength: 1, maxLength: 50 | Plot Number | Parzellen-Nr. |
+| **name** | | string | Descriptive name of the parcel. | **mandatory**, minLength: 1, maxLength: 200 | Parcel Name | Parzellenbezeichnung |
+| **municipality** | | string | Municipality or commune where the parcel is located. | **mandatory**, minLength: 1, maxLength: 100 | Municipality | Gemeinde |
+| **canton** | | string | Canton or region code (e.g., "BE", "ZH", "GE"). | **mandatory**, minLength: 2, maxLength: 10 | Canton | Kanton |
+| **area** | | number | Area of the parcel in square meters. | **mandatory**, minimum: 0 | Area | Fläche |
+| **landUseZone** | | string | Zoning classification (e.g., "Verwaltungszone", "Industriezone", "Wohnzone"). | minLength: 1, maxLength: 100 | Land Use Zone | Nutzungszone |
+| **ownershipType** | | string, enum | Type of ownership. See [Ownership Types](#a1-shared-enumerations). | **mandatory** | Ownership | Eigentum |
 
-#### Swiss Extension Fields (extensionData)
+#### Geometry
 
-| Field | PK/FK | Type | Description | Constraints | Alias (EN) | Alias (DE) |
-|-------|-------|------|-------------|-------------|------------|------------|
-| extensionData.egrid | FK | string | Eidgenössischer Grundstücksidentifikator (Federal Property Identifier). Reference to national Swiss cadastre. | minLength: 14, maxLength: 14 | EGRID | EGRID |
-
-#### Example: Land Object
+Parcels use **Polygon** geometry type (unlike buildings which use Point geometry). The polygon represents the boundary of the land parcel.
 
 ```json
 {
-  "landId": "BE-3003-1001",
-  "name": "Bundesplatz Parzelle A",
-  "typeOfOwnership": "Eigentümer",
-  "validFrom": "1900-01-01T00:00:00Z",
-  "validUntil": null,
-  "addressIds": ["BBL-001-ADDR-1"],
-  "status": "Aktiv",
-  "extensionData": {
-    "egrid": "CH123456789012"
+  "type": "Polygon",
+  "coordinates": [[
+    [7.4435, 46.9460],
+    [7.4447, 46.9460],
+    [7.4447, 46.9470],
+    [7.4435, 46.9470],
+    [7.4435, 46.9460]
+  ]]
+}
+```
+
+#### Example: Parcel Object
+
+```json
+{
+  "type": "Feature",
+  "properties": {
+    "parcelId": "PCL-001",
+    "buildingId": "BBL-001",
+    "plotNumber": "BE-3003-1001",
+    "name": "Bundesplatz Parzelle A",
+    "municipality": "Bern",
+    "canton": "BE",
+    "area": 3200,
+    "landUseZone": "Verwaltungszone",
+    "ownershipType": "Eigentum"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[
+      [7.4435, 46.9460],
+      [7.4447, 46.9460],
+      [7.4447, 46.9470],
+      [7.4435, 46.9470],
+      [7.4435, 46.9460]
+    ]]
   }
 }
 ```
 
-> **Note:** The demo uses German values (e.g., `"typeOfOwnership": "Eigentümer"`). For English implementations, use `"typeOfOwnership": "Owner"`.
+> **Note:** The demo uses German values (e.g., `"ownershipType": "Eigentum"`). For English implementations, use `"ownershipType": "Owner"`.
 
 ---
 
@@ -611,7 +629,7 @@ Area measurements capture floor areas, volumes, and other quantitative measureme
 | eventType | | string, enum | Type of the event as domain event. Options: `AreaMeasurementAdded`, `AreaMeasurementUpdated`, `AreaMeasurementDeleted` | | Event Type | Ereignistyp |
 | extensionData | | object | Extension data for storing any custom data. | JSON object | Extension Data | Erweiterungsdaten |
 | floorIds | FK | array[string] | Array of floor IDs. | minLength: 1, maxLength: 50 per ID | Floors | Geschosse |
-| landIds | FK | array[string] | Array of land IDs. | minLength: 1, maxLength: 50 per ID | Land Parcels | Grundstücke |
+| parcelIds | FK | array[string] | Array of parcel IDs. | minLength: 1, maxLength: 50 per ID | Parcels | Parzellen |
 | rentalUnit | FK | array[string] | Array of rental unit IDs. | minLength: 1, maxLength: 50 per ID | Rental Units | Mieteinheiten |
 | siteIds | FK | array[string] | Array of site IDs. | minLength: 1, maxLength: 50 per ID | Sites | Standorte |
 | spaceIds | FK | array[string] | Array of space IDs. | minLength: 1, maxLength: 50 per ID | Spaces | Räume |
@@ -1281,7 +1299,7 @@ Primary and secondary building type options for `primaryTypeOfBuilding` and `sec
 | `Tenant area` | `Mieterfläche` |
 | `Landlord area` | `Vermieterfläche` |
 
-##### Site / Land
+##### Site / Parcel
 
 | Value (EN) | Value (DE) |
 |------------|------------|
@@ -1671,7 +1689,7 @@ All dates must be converted to ISO 8601 format: `yyyy-mm-ddThh:mm:ssZ`
 | 0.3.0 | 2024-XX-XX | - | Added Site entity with Swiss extensions |
 | 0.4.0 | 2024-XX-XX | - | Consolidated to single schema table per entity with Comment column |
 | 0.5.0 | 2024-XX-XX | - | Added Area Measurement (Bemessung) entity with SIA type mappings |
-| 0.6.0 | 2024-XX-XX | - | Added Land (Grundstück) entity with Swiss cadastral extensions |
+| 0.6.0 | 2024-XX-XX | - | Added Parcel (Parzelle) entity with polygon geometry, linked to buildings |
 | 0.7.0 | 2024-XX-XX | - | Restructured document: grouped entities by function, consolidated enumerations to Appendix A, separated transformation rules to Appendix B |
 | 0.8.0 | 2024-XX-XX | - | Added Floor (Geschoss) and Space (Raum) entities with climate, ventilation, and occupancy fields |
 

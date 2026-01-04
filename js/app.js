@@ -2027,7 +2027,7 @@
             document.getElementById('info-preview-image').style.backgroundImage = 'url(' + imageUrl + ')';
 
             var infoHtml =
-                '<div class="info-section-title">' + (ext.portfolio || '—') + '</div>' +
+                '<div class="info-section-title">Gebäude</div>' +
                 '<div class="info-location">' + props.city + ', ' + props.country + '</div>' +
                 '<div class="info-row"><span class="info-label">Objekt-ID</span><span class="info-value">' + props.buildingId + '</span></div>' +
                 '<div class="info-row"><span class="info-label">Name</span><span class="info-value">' + props.name + '</span></div>' +
