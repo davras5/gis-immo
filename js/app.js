@@ -1666,7 +1666,22 @@
         }
         
         // ===== INITIALIZE MAP =====
-        
+
+        // Map style definitions (defined early for use in map initialization)
+        var mapStyles = {
+            'light-v11': { name: 'Light', url: 'mapbox://styles/mapbox/light-v11' },
+            'streets-v12': { name: 'Standard', url: 'mapbox://styles/mapbox/streets-v12' },
+            'satellite-v9': { name: 'Luftbild', url: 'mapbox://styles/mapbox/satellite-v9' },
+            'satellite-streets-v12': { name: 'Hybrid', url: 'mapbox://styles/mapbox/satellite-streets-v12' }
+        };
+
+        // Load saved map style from localStorage (default to light-v11)
+        var currentMapStyle = localStorage.getItem('mapStyle') || 'light-v11';
+        // Validate saved style exists, fallback to default if invalid
+        if (!mapStyles[currentMapStyle]) {
+            currentMapStyle = 'light-v11';
+        }
+
         // 1. Parse URL parameters for map state
         var urlParams = new URLSearchParams(window.location.search);
         var initialLat = parseFloat(urlParams.get('lat'));
@@ -1685,7 +1700,7 @@
 
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/light-v11',
+            style: mapStyles[currentMapStyle].url,
             center: startCenter,
             zoom: startZoom
         });
@@ -2382,18 +2397,10 @@
         });
 
         // ===== STYLE SWITCHER =====
-        var currentMapStyle = localStorage.getItem('mapStyle') || 'light-v11';
+        // Note: mapStyles and currentMapStyle are defined earlier (before map initialization)
         var styleSwitcherBtn = document.getElementById('style-switcher-btn');
         var stylePanel = document.getElementById('style-panel');
         var stylePanelOpen = false;
-
-        // Map style definitions
-        var mapStyles = {
-            'light-v11': { name: 'Light', url: 'mapbox://styles/mapbox/light-v11' },
-            'streets-v12': { name: 'Standard', url: 'mapbox://styles/mapbox/streets-v12' },
-            'satellite-v9': { name: 'Luftbild', url: 'mapbox://styles/mapbox/satellite-v9' },
-            'satellite-streets-v12': { name: 'Hybrid', url: 'mapbox://styles/mapbox/satellite-streets-v12' }
-        };
 
         // Generate thumbnail URL using Mapbox Static Images API
         function getStyleThumbnail(styleId, width, height) {
@@ -2482,13 +2489,6 @@
                 addMapLayers();
             }
         });
-
-        // Apply saved style on load (if different from default)
-        if (currentMapStyle !== 'light-v11') {
-            map.once('load', function() {
-                map.setStyle(mapStyles[currentMapStyle].url);
-            });
-        }
 
         // Initialize thumbnails after a short delay to ensure token is available
         setTimeout(initStyleThumbnails, 100);
