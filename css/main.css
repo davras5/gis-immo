@@ -2270,7 +2270,7 @@
         .detail-table {
             width: 100%;
             border-collapse: collapse;
-            table-layout: fixed;
+            table-layout: auto;
             font-size: var(--text-sm);
         }
 
@@ -2319,13 +2319,15 @@
             cursor: pointer;
         }
 
-        /* Shared column: checkbox (4% in both tables) */
+        /* ===== SHARED DETAIL TABLE COLUMN STYLES ===== */
+
+        /* Checkbox column: fixed width, centered */
         .detail-table .col-checkbox {
-            width: 4%;
+            width: 48px;
             text-align: center;
         }
 
-        /* ===== SHARED DETAIL TABLE STYLES ===== */
+        /* ID columns: fixed width for all tables */
         .detail-table .col-id,
         .detail-table [class*="-id"] {
             width: 150px;
@@ -2335,69 +2337,10 @@
             font-size: var(--text-xs);
             color: var(--grey-600);
         }
-        .detail-table .col-type { width: 18%; }
 
-        /* ===== MEASUREMENTS TABLE: 9 columns ===== */
-        /* checkbox:4% + id:150px + type:18% + area:10% + source:10% + accuracy:10% + standard:10% + from:9% + until:9% */
-        #measurements-table .col-area     { width: 10%; text-align: right; }
-        #measurements-table .col-source   { max-width: 10%; }
-        #measurements-table .col-accuracy { max-width: 10%; }
-        #measurements-table .col-standard { max-width: 10%; }
-        #measurements-table .col-from     { max-width: 9%; }
-        #measurements-table .col-until    { max-width: 9%; }
+        /* All other columns use auto width by default */
 
-        /* ===== DOCUMENTS TABLE: 7 columns ===== */
-        /* checkbox:4% + id:150px + title:34% + type:auto + format:10% + date:10% + size:auto */
-        #documents-table .col-title  { width: 34%; }
-        #documents-table .col-format { max-width: 10%; }
-        #documents-table .col-date   { max-width: 10%; }
-        #documents-table .col-size   { width: auto;}
-
-        /* ===== CONTACTS TABLE: 7 columns ===== */
-        /* checkbox:4% + id:150px + name:20% + role:16% + org:18% + phone:15% + email:auto */
-        #contacts-table .col-contact-name    { width: 20%; }
-        #contacts-table .col-contact-role    { width: 16%; }
-        #contacts-table .col-contact-org     { width: 18%; }
-        #contacts-table .col-contact-phone   { width: 15%; }
-        #contacts-table .col-contact-email   { width: auto; }
-
-        #contacts-table .col-contact-phone a,
-        #contacts-table .col-contact-email a {
-            color: var(--primary-red);
-            text-decoration: none;
-        }
-        #contacts-table .col-contact-phone a:hover,
-        #contacts-table .col-contact-email a:hover {
-            text-decoration: underline;
-        }
-
-        /* ===== COSTS TABLE: 7 columns ===== */
-        /* checkbox:4% + id:150px + group:12% + type:26% + amount:16% + unit:14% + date:auto */
-        #costs-table .col-cost-group   { width: 12%; }
-        #costs-table .col-cost-type    { width: 26%; }
-        #costs-table .col-cost-amount  { width: 16%; text-align: right; }
-        #costs-table .col-cost-unit    { width: 14%; }
-        #costs-table .col-cost-date    { width: auto; }
-
-        #costs-table td.col-cost-amount {
-            text-align: right;
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* ===== CONTRACTS TABLE: 8 columns ===== */
-        /* checkbox:4% + id:150px + type:17% + partner:26% + start:10% + end:10% + amount:14% + status:10% */
-        #contracts-table .col-contract-type     { width: 17%; }
-        #contracts-table .col-contract-partner  { width: 26%; }
-        #contracts-table .col-contract-start    { width: 10%; }
-        #contracts-table .col-contract-end      { width: 10%; }
-        #contracts-table .col-contract-amount   { width: 14%; text-align: right; }
-        #contracts-table .col-contract-status   { width: 10%; }
-
-        #contracts-table td.col-contract-amount {
-            text-align: right;
-            font-variant-numeric: tabular-nums;
-        }
-
+        /* ===== BADGE STYLES ===== */
         .contract-status {
             display: inline-block;
             padding: 2px 8px;
@@ -2416,18 +2359,6 @@
         .contract-status.status-expired {
             background: var(--status-inactive-bg);
             color: var(--status-inactive-text);
-        }
-
-        /* ===== ASSETS TABLE: 7 columns ===== */
-        /* checkbox:4% + id:150px + name:24% + category:14% + manufacturer:18% + year:10% + location:auto */
-        #assets-table .col-asset-name         { width: 24%; }
-        #assets-table .col-asset-category     { width: 14%; }
-        #assets-table .col-asset-manufacturer { width: 18%; }
-        #assets-table .col-asset-year         { width: 10%; text-align: center; }
-        #assets-table .col-asset-location     { width: auto; }
-
-        #assets-table td.col-asset-year {
-            text-align: center;
         }
 
         .kategorie-badge {
