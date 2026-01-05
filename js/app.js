@@ -1520,7 +1520,7 @@
                     '<td class="col-adresse">' + props.streetName + '</td>' +
                     '<td class="col-portfolio">' + (ext.portfolio || '—') + '</td>' +
                     '<td class="col-flaeche">' + flaeche + ' m²</td>' +
-                    '<td class="col-status"><span class="status-badge ' + statusClass + '"><span class="status-icon" aria-hidden="true"></span>' + props.status + '</span></td>' +
+                    '<td class="col-status"><span class="status-badge ' + statusClass + '">' + props.status + '</span></td>' +
                 '</tr>';
             });
 
@@ -1626,7 +1626,9 @@
                 var props = feature.properties;
                 var ext = props.extensionData || {};
                 var flaeche = Number(ext.netFloorArea || 0).toLocaleString('de-CH');
-                var baujahr = extractYear(props.constructionYear) || '—';
+                var statusClass = props.status === 'In Betrieb' ? 'status-active' :
+                                  props.status === 'In Renovation' ? 'status-renovation' :
+                                  props.status === 'In Planung' ? 'status-planning' : 'status-inactive';
                 // Use placeholder images
                 var imageUrl = placeholderImages[index % placeholderImages.length];
 
@@ -1640,10 +1642,7 @@
                         '<div class="gallery-meta">' +
                             '<span class="gallery-tag">' + (ext.portfolio || '—') + '</span>' +
                             '<span class="gallery-tag">' + flaeche + ' m²</span>' +
-                        '</div>' +
-                        '<div class="gallery-footer">' +
-                            '<span>Baujahr ' + baujahr + '</span>' +
-                            '<a href="#" class="gallery-link" onclick="event.preventDefault(); event.stopPropagation();" aria-label="Details zu ' + props.name + ' anzeigen">Details <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>' +
+                            '<span class="status-badge ' + statusClass + '">' + props.status + '</span>' +
                         '</div>' +
                     '</div>' +
                 '</div>';
@@ -3300,7 +3299,7 @@
                     return formatCurrency(contract.betrag);
                 }},
                 { key: 'status', className: 'col-contract-status', render: function(contract) {
-                    return '<span class="contract-status ' + getContractStatusClassName(contract.status) + '">' + contract.status + '</span>';
+                    return '<span class="status-badge ' + getContractStatusClassName(contract.status) + '">' + contract.status + '</span>';
                 }}
             ],
             searchFields: ['id', 'vertragsart', 'vertragspartner', 'vertragsbeginn', 'vertragsende', 'betrag', 'status']
