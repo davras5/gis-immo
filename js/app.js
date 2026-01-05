@@ -995,8 +995,9 @@
                     // Check if URL has detail view
                     var initialView = getViewFromURL();
                     var buildingId = getBuildingIdFromURL();
+                    var initialTab = getTabFromURL();
                     if (initialView === 'detail' && buildingId) {
-                        showDetailView(buildingId);
+                        showDetailView(buildingId, initialTab);
                     } else if (initialView !== 'map') {
                         switchView(initialView);
                     } else {
@@ -1040,8 +1041,13 @@
             var params = new URLSearchParams(window.location.search);
             return params.get('id');
         }
-        
-        function setViewInURL(view, buildingId) {
+
+        function getTabFromURL() {
+            var params = new URLSearchParams(window.location.search);
+            return params.get('tab') || 'overview';
+        }
+
+        function setViewInURL(view, buildingId, tab) {
             var url = new URL(window.location);
             url.searchParams.set('view', view);
             if (buildingId) {
@@ -1049,7 +1055,22 @@
             } else {
                 url.searchParams.delete('id');
             }
+            if (view === 'detail' && tab && tab !== 'overview') {
+                url.searchParams.set('tab', tab);
+            } else {
+                url.searchParams.delete('tab');
+            }
             window.history.pushState({}, '', url);
+        }
+
+        function setTabInURL(tab) {
+            var url = new URL(window.location);
+            if (tab && tab !== 'overview') {
+                url.searchParams.set('tab', tab);
+            } else {
+                url.searchParams.delete('tab');
+            }
+            window.history.replaceState({}, '', url);
         }
         
         function switchView(view) {
@@ -1113,30 +1134,33 @@
             }
         }
 
-        function showDetailView(buildingId) {
+        function showDetailView(buildingId, tab) {
             if (!portfolioData) return;
-            
+
+            // Default tab to overview if not specified
+            if (!tab) tab = 'overview';
+
             // Find building by ID
             var building = portfolioData.features.find(function(f) {
                 return f.properties.buildingId === buildingId;
             });
-            
+
             if (!building) {
                 console.error('Building not found:', buildingId);
                 return;
             }
-            
+
             currentDetailBuilding = building;
-            
+
             // Store previous view if not already in detail
             if (currentView !== 'detail') {
                 previousView = currentView;
             }
-            
-            // Update URL
-            setViewInURL('detail', buildingId);
+
+            // Update URL with view, building ID, and tab
+            setViewInURL('detail', buildingId, tab);
             currentView = 'detail';
-            
+
             // Hide all views, show detail
             document.getElementById('map-view').classList.remove('active');
             document.getElementById('list-view').classList.remove('active');
@@ -1157,9 +1181,39 @@
             document.querySelectorAll('.view-toggle-btn').forEach(function(btn) {
                 btn.classList.remove('active');
             });
-            
+
             // Populate detail view
             populateDetailView(building);
+
+            // Activate the specified tab
+            activateTab(tab);
+        }
+
+        function activateTab(tab) {
+            // Update active tab styling
+            document.querySelectorAll('.detail-tab').forEach(function(t) {
+                t.classList.remove('active');
+                if (t.dataset.tab === tab) {
+                    t.classList.add('active');
+                }
+            });
+
+            // Switch content visibility
+            document.querySelectorAll('.tab-content').forEach(function(content) {
+                content.classList.remove('active');
+            });
+            var targetContent = document.querySelector('.tab-content[data-content="' + tab + '"]');
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+
+            // Render table data for the tab
+            if (tab === 'measurements') renderMeasurementsTable();
+            if (tab === 'documents') renderDocumentsTable();
+            if (tab === 'contacts') renderContactsTable();
+            if (tab === 'costs') renderCostsTable();
+            if (tab === 'contracts') renderContractsTable();
+            if (tab === 'assets') renderAssetsTable();
         }
         
         function populateDetailView(building) {
@@ -1427,8 +1481,9 @@
         window.addEventListener('popstate', function() {
             var view = getViewFromURL();
             var buildingId = getBuildingIdFromURL();
+            var tab = getTabFromURL();
             if (view === 'detail' && buildingId) {
-                showDetailView(buildingId);
+                showDetailView(buildingId, tab);
             } else {
                 switchView(view);
             }
@@ -2647,6 +2702,9 @@
                 if (targetContent) {
                     targetContent.classList.add('active');
                 }
+
+                // Update URL with current tab
+                setTabInURL(targetTab);
 
                 // Render measurements table when switching to measurements tab
                 if (targetTab === 'measurements') {
