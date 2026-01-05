@@ -801,11 +801,16 @@
                 params.set('zoom', zoom.toFixed(2));
             }
 
-            // Add selected building if one is selected
+            // Add selected building or parcel if one is selected
             if (selectedBuildingId) {
                 params.set('id', selectedBuildingId);
+                params.delete('parcelId');
+            } else if (selectedParcelId) {
+                params.set('parcelId', selectedParcelId);
+                params.delete('id');
             } else {
                 params.delete('id');
+                params.delete('parcelId');
             }
 
             return baseUrl + '?' + params.toString();
@@ -2555,6 +2560,64 @@
             document.getElementById('info-panel').classList.remove('show');
             selectedBuildingId = null;
             updateSelectedBuilding();
+        });
+
+        // ===== INFO PANEL ZOOM TO =====
+        document.getElementById('info-zoom-to').addEventListener('click', function() {
+            if (selectedBuildingId && map) {
+                var building = portfolioData.features.find(function(f) {
+                    return f.properties.buildingId === selectedBuildingId;
+                });
+                if (building && building.geometry) {
+                    map.flyTo({
+                        center: building.geometry.coordinates,
+                        zoom: 16
+                    });
+                }
+            } else if (selectedParcelId && map) {
+                var parcel = parcelData.features.find(function(f) {
+                    return f.properties.parcelId === selectedParcelId;
+                });
+                if (parcel && parcel.geometry && parcel.geometry.coordinates) {
+                    var center = getPolygonCentroid(parcel.geometry.coordinates);
+                    map.flyTo({
+                        center: center,
+                        zoom: 16
+                    });
+                }
+            }
+        });
+
+        // ===== INFO PANEL SHARE =====
+        document.getElementById('info-share').addEventListener('click', function() {
+            var url = getShareUrl();
+            var title = 'BBL Immobilienportfolio';
+            var text = selectedBuildingId
+                ? 'Gebäude: ' + selectedBuildingId
+                : selectedParcelId
+                    ? 'Parzelle: ' + selectedParcelId
+                    : 'Kartenansicht';
+
+            // Use Web Share API if available
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: text,
+                    url: url
+                }).catch(function(err) {
+                    // User cancelled or error - silently ignore
+                    console.log('Share cancelled or failed:', err);
+                });
+            } else {
+                // Fallback: copy to clipboard
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(url).then(function() {
+                        showToast('Link in Zwischenablage kopiert');
+                    }).catch(function() {
+                        showToast('Kopieren fehlgeschlagen');
+                    });
+                }
+            }
         });
 
         // ===== DETAIL TABS =====
