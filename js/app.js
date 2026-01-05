@@ -1520,7 +1520,7 @@
                     '<td class="col-adresse">' + props.streetName + '</td>' +
                     '<td class="col-portfolio">' + (ext.portfolio || '—') + '</td>' +
                     '<td class="col-flaeche">' + flaeche + ' m²</td>' +
-                    '<td class="col-status"><span class="status-badge ' + statusClass + '"><span class="status-icon" aria-hidden="true"></span>' + props.status + '</span></td>' +
+                    '<td class="col-status"><span class="status-badge ' + statusClass + '">' + props.status + '</span></td>' +
                 '</tr>';
             });
 
@@ -3300,7 +3300,7 @@
                     return formatCurrency(contract.betrag);
                 }},
                 { key: 'status', className: 'col-contract-status', render: function(contract) {
-                    return '<span class="contract-status ' + getContractStatusClassName(contract.status) + '">' + contract.status + '</span>';
+                    return '<span class="status-badge ' + getContractStatusClassName(contract.status) + '">' + contract.status + '</span>';
                 }}
             ],
             searchFields: ['id', 'vertragsart', 'vertragspartner', 'vertragsbeginn', 'vertragsende', 'betrag', 'status']
