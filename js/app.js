@@ -1626,7 +1626,9 @@
                 var props = feature.properties;
                 var ext = props.extensionData || {};
                 var flaeche = Number(ext.netFloorArea || 0).toLocaleString('de-CH');
-                var baujahr = extractYear(props.constructionYear) || '—';
+                var statusClass = props.status === 'In Betrieb' ? 'status-active' :
+                                  props.status === 'In Renovation' ? 'status-renovation' :
+                                  props.status === 'In Planung' ? 'status-planning' : 'status-inactive';
                 // Use placeholder images
                 var imageUrl = placeholderImages[index % placeholderImages.length];
 
@@ -1640,10 +1642,7 @@
                         '<div class="gallery-meta">' +
                             '<span class="gallery-tag">' + (ext.portfolio || '—') + '</span>' +
                             '<span class="gallery-tag">' + flaeche + ' m²</span>' +
-                        '</div>' +
-                        '<div class="gallery-footer">' +
-                            '<span>Baujahr ' + baujahr + '</span>' +
-                            '<a href="#" class="gallery-link" onclick="event.preventDefault(); event.stopPropagation();" aria-label="Details zu ' + props.name + ' anzeigen">Details <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>' +
+                            '<span class="status-badge ' + statusClass + '">' + props.status + '</span>' +
                         '</div>' +
                     '</div>' +
                 '</div>';

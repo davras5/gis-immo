@@ -982,33 +982,6 @@
             font-size: var(--text-xs);
         }
         
-        .gallery-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: var(--space-3);
-            border-top: 1px solid var(--grey-100);
-            font-size: var(--text-xs);
-            color: var(--grey-600);
-        }
-        
-        .gallery-link {
-            color: var(--interactive-blue);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: var(--space-1);
-        }
-        
-        .gallery-link:hover {
-            text-decoration: underline;
-        }
-        
-        .gallery-link .material-symbols-outlined {
-            font-size: var(--icon-sm);
-        }
-
         /* ===== DETAIL VIEW ===== */
         #detail-view {
             flex: 1;
