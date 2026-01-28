@@ -1904,12 +1904,14 @@
                         }
                     }, beforeLayer);
 
-                    // Track the layer
+                    // Track the layer (including tileUrl and maxZoom for re-adding after style change)
                     activeSwisstopoLayers.push({
                         id: layerId,
                         title: title || layerId,
                         sourceId: sourceId,
-                        mapLayerId: mapLayerId
+                        mapLayerId: mapLayerId,
+                        tileUrl: tileUrl,
+                        maxZoom: maxZoom
                     });
 
                     // Update the UI and URL
@@ -1984,6 +1986,48 @@
             });
 
             container.innerHTML = html;
+        }
+
+        function readdSwisstopoLayers() {
+            // Re-add all Swisstopo layers after a map style change
+            if (activeSwisstopoLayers.length === 0) return;
+
+            activeSwisstopoLayers.forEach(function(layer) {
+                // Skip if source already exists (shouldn't happen, but safety check)
+                if (map.getSource(layer.sourceId)) return;
+
+                // Re-add raster source
+                map.addSource(layer.sourceId, {
+                    type: 'raster',
+                    tiles: [layer.tileUrl],
+                    tileSize: 256,
+                    maxzoom: layer.maxZoom,
+                    attribution: '&copy; <a href="https://www.swisstopo.admin.ch">swisstopo</a>'
+                });
+
+                // Find the layer to insert before
+                var beforeLayer = null;
+                if (map.getLayer(identifyHighlightLayerId)) {
+                    beforeLayer = identifyHighlightLayerId;
+                } else if (map.getLayer('parcels-fill')) {
+                    beforeLayer = 'parcels-fill';
+                } else if (map.getLayer('portfolio-points')) {
+                    beforeLayer = 'portfolio-points';
+                }
+
+                // Re-add raster layer
+                map.addLayer({
+                    id: layer.mapLayerId,
+                    type: 'raster',
+                    source: layer.sourceId,
+                    paint: {
+                        'raster-opacity': 0.7
+                    }
+                }, beforeLayer);
+            });
+
+            // Update checkbox states in UI
+            renderActiveLayersList();
         }
 
         // ===== SWISSTOPO FEATURE IDENTIFICATION =====
@@ -3232,6 +3276,9 @@
             if (portfolioData && !map.getSource('portfolio')) {
                 addMapLayers();
             }
+
+            // Re-add Swisstopo layers that were active before style change
+            readdSwisstopoLayers();
         });
 
         // Initialize thumbnails after a short delay to ensure token is available
