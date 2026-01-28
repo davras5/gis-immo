@@ -1821,21 +1821,21 @@
         
         // ===== SWISSTOPO LAYER MANAGEMENT =====
 
-        function addSwisstopoLayer(layerId, title) {
+        function addSwisstopoLayer(layerId, title, silent) {
             if (!layerId) {
-                showToast({ type: 'error', title: 'Fehler', message: 'Keine Layer-ID vorhanden.' });
+                if (!silent) showToast({ type: 'error', title: 'Fehler', message: 'Keine Layer-ID vorhanden.' });
                 return;
             }
 
             // Check if layer already added
             var existing = activeSwisstopoLayers.find(function(l) { return l.id === layerId; });
             if (existing) {
-                showToast({ type: 'info', title: 'Hinweis', message: 'Layer "' + title + '" ist bereits aktiv.' });
+                if (!silent) showToast({ type: 'info', title: 'Hinweis', message: 'Layer "' + title + '" ist bereits aktiv.' });
                 return;
             }
 
             // Show loading toast
-            showToast({ type: 'info', title: 'Lade Layer...', message: 'Metadaten werden abgerufen.', duration: 2000 });
+            if (!silent) showToast({ type: 'info', title: 'Lade Layer...', message: 'Metadaten werden abgerufen.', duration: 2000 });
 
             // Fetch layer metadata to get correct format and timestamp
             fetch('https://api3.geo.admin.ch/rest/services/api/MapServer/' + layerId + '?lang=de')
@@ -1912,14 +1912,15 @@
                         mapLayerId: mapLayerId
                     });
 
-                    // Update the UI
+                    // Update the UI and URL
                     renderActiveLayersList();
+                    updateUrlWithLayers();
 
-                    showToast({ type: 'success', title: 'Layer hinzugefügt', message: '"' + (title || layerId) + '" wurde zur Karte hinzugefügt.' });
+                    if (!silent) showToast({ type: 'success', title: 'Layer hinzugefügt', message: '"' + (title || layerId) + '" wurde zur Karte hinzugefügt.' });
                 })
                 .catch(function(e) {
                     console.error('Fehler beim Hinzufügen des Layers:', e);
-                    showToast({ type: 'error', title: 'Fehler', message: 'Layer "' + (title || layerId) + '" konnte nicht geladen werden.' });
+                    if (!silent) showToast({ type: 'error', title: 'Fehler', message: 'Layer "' + (title || layerId) + '" konnte nicht geladen werden.' });
                 });
         }
 
@@ -1942,6 +1943,7 @@
 
             activeSwisstopoLayers.splice(layerIndex, 1);
             renderActiveLayersList();
+            updateUrlWithLayers();
 
             showToast({ type: 'info', title: 'Layer entfernt', message: '"' + layer.title + '" wurde entfernt.' });
         };
@@ -2050,28 +2052,17 @@
 
         function identifySwisstopoFeatures(lngLat) {
             // Only identify if there are active layers
-            if (activeSwisstopoLayers.length === 0) {
-                console.log('Identify: No active layers');
-                return;
-            }
-
-            console.log('Identify: Active layers:', activeSwisstopoLayers.map(function(l) { return l.id; }));
+            if (activeSwisstopoLayers.length === 0) return;
 
             // Get visible layer IDs
             var visibleLayers = activeSwisstopoLayers.filter(function(layer) {
                 var visibility = map.getLayoutProperty(layer.mapLayerId, 'visibility');
-                console.log('Identify: Layer', layer.id, 'visibility:', visibility);
                 return visibility !== 'none';
             }).map(function(layer) {
                 return layer.id;
             });
 
-            if (visibleLayers.length === 0) {
-                console.log('Identify: No visible layers');
-                return;
-            }
-
-            console.log('Identify: Querying layers:', visibleLayers);
+            if (visibleLayers.length === 0) return;
 
             // Build the identify URL
             // Use tolerance=0 for exact point-in-polygon intersection
@@ -2088,21 +2079,15 @@
                 '&returnGeometry=true' +
                 '&lang=de';
 
-            console.log('Identify: Fetching URL:', url);
-
             fetch(url)
                 .then(function(response) {
                     if (!response.ok) throw new Error('Identify request failed');
                     return response.json();
                 })
                 .then(function(data) {
-                    console.log('Identify: Results count:', data.results ? data.results.length : 0);
                     if (data.results && data.results.length > 0) {
-                        console.log('Identify: First result layer:', data.results[0].layerBodId);
-                        console.log('Identify: Has geometry:', !!data.results[0].geometry);
                         showIdentifiedFeature(data.results[0], lngLat);
                     } else {
-                        console.log('Identify: No results found');
                         clearIdentifyHighlight();
                     }
                 })
@@ -2435,6 +2420,9 @@
 
             // Initialize highlight layer for Swisstopo feature identification
             initIdentifyHighlightLayer();
+
+            // Load background layers from URL parameters
+            loadLayersFromUrl();
         }
 
         // Reusable function to select a building
@@ -2533,6 +2521,31 @@
                 url.searchParams.delete('parcelId');
             }
             window.history.replaceState({}, '', url);
+        }
+
+        function updateUrlWithLayers() {
+            var url = new URL(window.location);
+            if (activeSwisstopoLayers.length > 0) {
+                var layerIds = activeSwisstopoLayers.map(function(l) { return l.id; });
+                url.searchParams.set('bgLayers', layerIds.join(','));
+            } else {
+                url.searchParams.delete('bgLayers');
+            }
+            window.history.replaceState({}, '', url);
+        }
+
+        function loadLayersFromUrl() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var bgLayers = urlParams.get('bgLayers');
+            if (bgLayers) {
+                var layerIds = bgLayers.split(',');
+                layerIds.forEach(function(layerId) {
+                    if (layerId.trim()) {
+                        // Pass silent=true to suppress toasts when loading from URL
+                        addSwisstopoLayer(layerId.trim(), layerId.trim(), true);
+                    }
+                });
+            }
         }
 
         // ===== PARCEL SELECTION FUNCTIONALITY =====
