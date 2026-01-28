@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.geo.admin.ch)",
+      "WebFetch(domain:api3.geo.admin.ch)",
+      "WebFetch(domain:wmts.geo.admin.ch)",
+      "Bash(curl:*)",
+      "Bash(python:*)"
+    ]
+  }
+}

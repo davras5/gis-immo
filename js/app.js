@@ -40,6 +40,9 @@
         var selectedParcelId = null;
         var searchMarker = null;
 
+        // Active Swisstopo layers added from search
+        var activeSwisstopoLayers = [];
+
         // View dirty flags - track if view needs re-render after filter change
         var listViewDirty = false;
         var galleryViewDirty = false;
@@ -1816,9 +1819,382 @@
             document.getElementById('coordinates').textContent = 'WGS 84 | Koordinaten: ' + lng + ', ' + lat;
         });
         
+        // ===== SWISSTOPO LAYER MANAGEMENT =====
+
+        function addSwisstopoLayer(layerId, title) {
+            if (!layerId) {
+                showToast({ type: 'error', title: 'Fehler', message: 'Keine Layer-ID vorhanden.' });
+                return;
+            }
+
+            // Check if layer already added
+            var existing = activeSwisstopoLayers.find(function(l) { return l.id === layerId; });
+            if (existing) {
+                showToast({ type: 'info', title: 'Hinweis', message: 'Layer "' + title + '" ist bereits aktiv.' });
+                return;
+            }
+
+            // Show loading toast
+            showToast({ type: 'info', title: 'Lade Layer...', message: 'Metadaten werden abgerufen.', duration: 2000 });
+
+            // Fetch layer metadata to get correct format and timestamp
+            fetch('https://api3.geo.admin.ch/rest/services/api/MapServer/' + layerId + '?lang=de')
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Layer-Metadaten nicht verfügbar');
+                    return response.json();
+                })
+                .then(function(metadata) {
+                    var sourceId = 'swisstopo-' + layerId;
+                    var mapLayerId = 'swisstopo-layer-' + layerId;
+                    var tileUrl;
+                    var maxZoom = 18;
+
+                    // Check if layer supports WMTS (has format specified)
+                    if (metadata.format) {
+                        // Use WMTS (faster, pre-rendered tiles)
+                        var tileFormat = metadata.format.replace('image/', '');
+                        var timestamp = 'current';
+                        if (metadata.timestamps && metadata.timestamps.length > 0) {
+                            timestamp = metadata.timestamps[0];
+                        }
+                        tileUrl = 'https://wmts.geo.admin.ch/1.0.0/' + layerId + '/default/' + timestamp + '/3857/{z}/{x}/{y}.' + tileFormat;
+
+                        if (metadata.maxScale) {
+                            maxZoom = Math.min(22, Math.max(0, Math.round(18 - Math.log2(metadata.maxScale / 500))));
+                        }
+                    } else {
+                        // Fall back to WMS (supports all layers with on-the-fly reprojection)
+                        tileUrl = 'https://wms.geo.admin.ch/?' +
+                            'SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap' +
+                            '&LAYERS=' + layerId +
+                            '&CRS=EPSG:3857' +
+                            '&BBOX={bbox-epsg-3857}' +
+                            '&WIDTH=256&HEIGHT=256' +
+                            '&FORMAT=image/png' +
+                            '&TRANSPARENT=true';
+                        maxZoom = 19; // WMS typically supports higher zoom
+                    }
+
+                    // Add raster source
+                    map.addSource(sourceId, {
+                        type: 'raster',
+                        tiles: [tileUrl],
+                        tileSize: 256,
+                        maxzoom: maxZoom,
+                        attribution: '&copy; <a href="https://www.swisstopo.admin.ch">swisstopo</a>'
+                    });
+
+                    // Find the layer to insert before (below highlight layer, parcels, and points)
+                    var beforeLayer = null;
+                    if (map.getLayer(identifyHighlightLayerId)) {
+                        beforeLayer = identifyHighlightLayerId;
+                    } else if (map.getLayer('parcels-fill')) {
+                        beforeLayer = 'parcels-fill';
+                    } else if (map.getLayer('portfolio-points')) {
+                        beforeLayer = 'portfolio-points';
+                    }
+
+                    // Add raster layer
+                    map.addLayer({
+                        id: mapLayerId,
+                        type: 'raster',
+                        source: sourceId,
+                        paint: {
+                            'raster-opacity': 0.7
+                        }
+                    }, beforeLayer);
+
+                    // Track the layer
+                    activeSwisstopoLayers.push({
+                        id: layerId,
+                        title: title || layerId,
+                        sourceId: sourceId,
+                        mapLayerId: mapLayerId
+                    });
+
+                    // Update the UI
+                    renderActiveLayersList();
+
+                    showToast({ type: 'success', title: 'Layer hinzugefügt', message: '"' + (title || layerId) + '" wurde zur Karte hinzugefügt.' });
+                })
+                .catch(function(e) {
+                    console.error('Fehler beim Hinzufügen des Layers:', e);
+                    showToast({ type: 'error', title: 'Fehler', message: 'Layer "' + (title || layerId) + '" konnte nicht geladen werden.' });
+                });
+        }
+
+        window.removeSwisstopoLayer = function(layerId) {
+            var layerIndex = activeSwisstopoLayers.findIndex(function(l) { return l.id === layerId; });
+            if (layerIndex === -1) return;
+
+            var layer = activeSwisstopoLayers[layerIndex];
+
+            try {
+                if (map.getLayer(layer.mapLayerId)) {
+                    map.removeLayer(layer.mapLayerId);
+                }
+                if (map.getSource(layer.sourceId)) {
+                    map.removeSource(layer.sourceId);
+                }
+            } catch (e) {
+                console.error('Fehler beim Entfernen des Layers:', e);
+            }
+
+            activeSwisstopoLayers.splice(layerIndex, 1);
+            renderActiveLayersList();
+
+            showToast({ type: 'info', title: 'Layer entfernt', message: '"' + layer.title + '" wurde entfernt.' });
+        };
+
+        window.toggleSwisstopoLayerVisibility = function(layerId) {
+            var layer = activeSwisstopoLayers.find(function(l) { return l.id === layerId; });
+            if (!layer) return;
+
+            var visibility = map.getLayoutProperty(layer.mapLayerId, 'visibility');
+            var newVisibility = visibility === 'none' ? 'visible' : 'none';
+            map.setLayoutProperty(layer.mapLayerId, 'visibility', newVisibility);
+
+            renderActiveLayersList();
+        };
+
+        function renderActiveLayersList() {
+            var container = document.getElementById('active-layers-list');
+            if (!container) return;
+
+            if (activeSwisstopoLayers.length === 0) {
+                container.innerHTML = '<div class="active-layers-empty">Keine Hintergrundkarten aktiv. Suchen Sie nach Karten über das Suchfeld.</div>';
+                return;
+            }
+
+            var html = '';
+            activeSwisstopoLayers.forEach(function(layer) {
+                var visibility = map.getLayoutProperty(layer.mapLayerId, 'visibility');
+                var isVisible = visibility !== 'none';
+                var checkedAttr = isVisible ? 'checked' : '';
+
+                html += '<div class="active-layer-item">' +
+                    '<button class="active-layer-remove" onclick="removeSwisstopoLayer(\'' + layer.id + '\')" title="Entfernen">' +
+                        '<span class="material-symbols-outlined">close</span>' +
+                    '</button>' +
+                    '<input type="checkbox" class="active-layer-checkbox" ' + checkedAttr + ' onchange="toggleSwisstopoLayerVisibility(\'' + layer.id + '\')" title="' + (isVisible ? 'Ausblenden' : 'Einblenden') + '">' +
+                    '<span class="active-layer-title">' + escapeHtml(layer.title) + '</span>' +
+                '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ===== SWISSTOPO FEATURE IDENTIFICATION =====
+
+        var identifiedFeaturePopup = null;
+        var identifyHighlightSourceId = 'swisstopo-identify-highlight';
+        var identifyHighlightLayerId = 'swisstopo-identify-highlight-layer';
+        var identifyHighlightOutlineLayerId = 'swisstopo-identify-highlight-outline';
+
+        function initIdentifyHighlightLayer() {
+            // Add empty source for highlighting identified features
+            if (!map.getSource(identifyHighlightSourceId)) {
+                map.addSource(identifyHighlightSourceId, {
+                    type: 'geojson',
+                    data: { type: 'FeatureCollection', features: [] }
+                });
+
+                // Find the layer to insert before (should be above Swisstopo layers, below parcels/points)
+                var beforeLayer = null;
+                if (map.getLayer('parcels-fill')) {
+                    beforeLayer = 'parcels-fill';
+                } else if (map.getLayer('portfolio-points')) {
+                    beforeLayer = 'portfolio-points';
+                }
+
+                // Add fill layer for polygons
+                map.addLayer({
+                    id: identifyHighlightLayerId,
+                    type: 'fill',
+                    source: identifyHighlightSourceId,
+                    paint: {
+                        'fill-color': '#ff6b00',
+                        'fill-opacity': 0.35
+                    }
+                }, beforeLayer);
+
+                // Add outline layer (above fill)
+                map.addLayer({
+                    id: identifyHighlightOutlineLayerId,
+                    type: 'line',
+                    source: identifyHighlightSourceId,
+                    paint: {
+                        'line-color': '#ff6b00',
+                        'line-width': 3,
+                        'line-opacity': 0.9
+                    }
+                }, beforeLayer);
+            }
+        }
+
+        function clearIdentifyHighlight() {
+            if (map.getSource(identifyHighlightSourceId)) {
+                map.getSource(identifyHighlightSourceId).setData({
+                    type: 'FeatureCollection',
+                    features: []
+                });
+            }
+            if (identifiedFeaturePopup) {
+                // Store reference and null it BEFORE removing to prevent infinite loop
+                // (popup.remove() fires 'close' event which would call this function again)
+                var popup = identifiedFeaturePopup;
+                identifiedFeaturePopup = null;
+                popup.remove();
+            }
+        }
+
+        function identifySwisstopoFeatures(lngLat) {
+            // Only identify if there are active layers
+            if (activeSwisstopoLayers.length === 0) {
+                console.log('Identify: No active layers');
+                return;
+            }
+
+            console.log('Identify: Active layers:', activeSwisstopoLayers.map(function(l) { return l.id; }));
+
+            // Get visible layer IDs
+            var visibleLayers = activeSwisstopoLayers.filter(function(layer) {
+                var visibility = map.getLayoutProperty(layer.mapLayerId, 'visibility');
+                console.log('Identify: Layer', layer.id, 'visibility:', visibility);
+                return visibility !== 'none';
+            }).map(function(layer) {
+                return layer.id;
+            });
+
+            if (visibleLayers.length === 0) {
+                console.log('Identify: No visible layers');
+                return;
+            }
+
+            console.log('Identify: Querying layers:', visibleLayers);
+
+            // Build the identify URL
+            // Use tolerance=0 for exact point-in-polygon intersection
+            // Per API docs: tolerance=0 with mapExtent=0,0,0,0 and imageDisplay=0,0,0 does exact intersection
+            var url = 'https://api3.geo.admin.ch/rest/services/all/MapServer/identify?' +
+                'geometry=' + lngLat.lng + ',' + lngLat.lat +
+                '&geometryType=esriGeometryPoint' +
+                '&geometryFormat=geojson' +
+                '&sr=4326' +
+                '&layers=all:' + visibleLayers.join(',') +
+                '&mapExtent=0,0,0,0' +
+                '&imageDisplay=0,0,0' +
+                '&tolerance=0' +
+                '&returnGeometry=true' +
+                '&lang=de';
+
+            console.log('Identify: Fetching URL:', url);
+
+            fetch(url)
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Identify request failed');
+                    return response.json();
+                })
+                .then(function(data) {
+                    console.log('Identify: Results count:', data.results ? data.results.length : 0);
+                    if (data.results && data.results.length > 0) {
+                        console.log('Identify: First result layer:', data.results[0].layerBodId);
+                        console.log('Identify: Has geometry:', !!data.results[0].geometry);
+                        showIdentifiedFeature(data.results[0], lngLat);
+                    } else {
+                        console.log('Identify: No results found');
+                        clearIdentifyHighlight();
+                    }
+                })
+                .catch(function(e) {
+                    console.error('Identify error:', e);
+                    clearIdentifyHighlight();
+                });
+        }
+
+        function showIdentifiedFeature(result, lngLat) {
+            // Remove existing popup FIRST (before setting new geometry)
+            // This prevents the old popup's close event from clearing our new geometry
+            if (identifiedFeaturePopup) {
+                var oldPopup = identifiedFeaturePopup;
+                identifiedFeaturePopup = null;
+                oldPopup.remove();
+            }
+
+            // Now highlight the geometry (after old popup is gone)
+            if (result.geometry) {
+                var feature = {
+                    type: 'Feature',
+                    geometry: result.geometry,
+                    properties: result.properties || {}
+                };
+
+                if (map.getSource(identifyHighlightSourceId)) {
+                    map.getSource(identifyHighlightSourceId).setData({
+                        type: 'FeatureCollection',
+                        features: [feature]
+                    });
+                }
+            }
+
+            // Build popup content
+            var props = result.properties || result.attributes || {};
+            var layerName = result.layerName || result.layerBodId || 'Feature';
+
+            var html = '<div class="identify-popup">';
+            html += '<div class="identify-popup-header">' + escapeHtml(layerName) + '</div>';
+            html += '<div class="identify-popup-content">';
+
+            // Display properties (limit to first 8 for readability)
+            var propCount = 0;
+            for (var key in props) {
+                if (props.hasOwnProperty(key) && propCount < 8) {
+                    var value = props[key];
+                    // Skip internal/technical fields
+                    if (key.startsWith('_') || key === 'id' || key === 'featureId') continue;
+                    // Skip null/undefined values
+                    if (value === null || value === undefined || value === '') continue;
+
+                    // Format the key (remove underscores, capitalize)
+                    var displayKey = key.replace(/_/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+
+                    html += '<div class="identify-prop">';
+                    html += '<span class="identify-prop-key">' + escapeHtml(displayKey) + ':</span> ';
+                    html += '<span class="identify-prop-value">' + escapeHtml(String(value)) + '</span>';
+                    html += '</div>';
+                    propCount++;
+                }
+            }
+
+            if (propCount === 0) {
+                html += '<div class="identify-prop"><em>Keine Attribute verfügbar</em></div>';
+            }
+
+            html += '</div></div>';
+
+            // Create and show popup
+            identifiedFeaturePopup = new mapboxgl.Popup({
+                closeButton: true,
+                closeOnClick: false,
+                maxWidth: '320px'
+            })
+                .setLngLat(lngLat)
+                .setHTML(html)
+                .addTo(map);
+
+            identifiedFeaturePopup.on('close', function() {
+                clearIdentifyHighlight();
+            });
+        }
+
         function addMapLayers() {
             if (!portfolioData) return;
-            
+
+            // Prevent duplicate source errors if called multiple times
+            if (map.getSource('portfolio')) {
+                return;
+            }
+
             map.addSource('portfolio', {
                 type: 'geojson',
                 data: portfolioData
@@ -2011,7 +2387,7 @@
                 });
             }
 
-            // Click on map (not on a point or parcel) to deselect
+            // Click on map (not on a point or parcel) to deselect or identify Swisstopo features
             map.on('click', function(e) {
                 var pointFeatures = map.queryRenderedFeatures(e.point, { layers: ['portfolio-points'] });
                 var parcelFeatures = parcelData && parcelData.features ? map.queryRenderedFeatures(e.point, { layers: ['parcels-fill'] }) : [];
@@ -2022,6 +2398,14 @@
                     updateSelectedParcel();
                     updateUrlWithSelection();
                     document.getElementById('info-panel').classList.remove('show');
+
+                    // Try to identify features from active Swisstopo layers
+                    if (activeSwisstopoLayers.length > 0) {
+                        identifySwisstopoFeatures(e.lngLat);
+                    }
+                } else {
+                    // Clear any Swisstopo highlight when selecting a portfolio feature
+                    clearIdentifyHighlight();
                 }
             });
 
@@ -2048,6 +2432,9 @@
                     selectParcel(urlParcelId, true);
                 }
             }
+
+            // Initialize highlight layer for Swisstopo feature identification
+            initIdentifyHighlightLayer();
         }
 
         // Reusable function to select a building
@@ -2364,7 +2751,9 @@
             if (layerResults.length > 0) {
                 html += '<div class="search-section-header">Karten hinzufügen...</div>';
                 layerResults.forEach(function(r) {
-                    html += '<div class="search-item" onclick="handleSearchClick(\'layer\', \'' + r.attrs.label.replace(/'/g, "\\'") + '\')">' +
+                    var layerId = r.attrs.layer || '';
+                    var layerTitle = r.attrs.title || r.attrs.label || layerId;
+                    html += '<div class="search-item" onclick="handleSearchClick(\'layer\', \'' + layerId.replace(/'/g, "\\'") + '\', null, null, null, \'' + layerTitle.replace(/'/g, "\\'") + '\')">' +
                             '<div class="search-item-title">' + r.attrs.label + '</div>' +
                             '</div>';
                 });
@@ -2379,7 +2768,7 @@
         }
         
         // Make this function global so onclick in HTML string works
-        window.handleSearchClick = function(type, id, lat, lon, zoom) {
+        window.handleSearchClick = function(type, id, lat, lon, zoom, title) {
             searchResults.classList.remove('active');
             
             if (currentView !== 'map') {
@@ -2428,7 +2817,7 @@
                 searchClearBtn.classList.add('visible');
 
             } else if (type === 'layer') {
-                alert('Layer "' + id + '" wird bald verfügbar sein.');
+                addSwisstopoLayer(id, title);
             }
         };
         

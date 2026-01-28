@@ -272,7 +272,19 @@
             line-height: var(--leading-normal);
             outline: none;
         }
-        
+
+        /* Hide browser's default clear button on search inputs */
+        #search-input::-webkit-search-cancel-button,
+        #search-input::-webkit-search-decoration {
+            -webkit-appearance: none;
+            appearance: none;
+            display: none;
+        }
+
+        #search-input::-ms-clear {
+            display: none;
+        }
+
         #search-input::placeholder {
             color: var(--grey-500);
         }
@@ -1706,6 +1718,132 @@
             padding: var(--space-5);
             color: var(--primary-red);
             font-size: var(--text-xs);
+        }
+
+        /* ===== ACTIVE LAYERS ===== */
+        .active-layers-list {
+            padding: 0;
+        }
+
+        .active-layers-empty {
+            text-align: center;
+            padding: var(--space-4);
+            color: var(--grey-500);
+            font-size: var(--text-xs);
+            line-height: 1.5;
+        }
+
+        .active-layer-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-3) var(--space-3);
+            border-bottom: 1px solid var(--grey-300);
+            gap: var(--space-2);
+            font-size: var(--text-sm);
+            color: var(--grey-900);
+        }
+
+        .active-layer-item:last-child {
+            border-bottom: none;
+        }
+
+        .active-layer-item:hover {
+            background: var(--grey-100);
+        }
+
+        .active-layer-remove {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border: none;
+            background: var(--grey-600);
+            cursor: pointer;
+            border-radius: 50%;
+            color: white;
+            flex-shrink: 0;
+            padding: 0;
+        }
+
+        .active-layer-remove:hover {
+            background: var(--grey-800);
+        }
+
+        .active-layer-remove .material-symbols-outlined {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .active-layer-checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--grey-500);
+            border-radius: 3px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: var(--interactive-blue);
+        }
+
+        .active-layer-title {
+            flex: 1;
+            color: var(--grey-900);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: default;
+        }
+
+        /* ===== IDENTIFY POPUP ===== */
+        .identify-popup {
+            font-family: inherit;
+        }
+
+        .identify-popup-header {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--grey-900);
+            padding-bottom: var(--space-2);
+            margin-bottom: var(--space-2);
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .identify-popup-content {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .identify-prop {
+            font-size: var(--text-xs);
+            padding: var(--space-1) 0;
+            line-height: 1.4;
+        }
+
+        .identify-prop-key {
+            color: var(--grey-500);
+            font-weight: 500;
+        }
+
+        .identify-prop-value {
+            color: var(--grey-800);
+        }
+
+        /* Mapbox popup overrides */
+        .mapboxgl-popup-content {
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mapboxgl-popup-close-button {
+            font-size: 18px;
+            padding: var(--space-1) var(--space-2);
+            color: var(--grey-500);
+        }
+
+        .mapboxgl-popup-close-button:hover {
+            background: var(--grey-100);
+            color: var(--grey-700);
         }
 
         #menu-toggle {
