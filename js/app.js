@@ -2052,6 +2052,9 @@
                     '</button>' +
                     '<input type="checkbox" class="active-layer-checkbox" ' + checkedAttr + ' onchange="toggleSwisstopoLayerVisibility(\'' + escapedId + '\')" title="' + (isVisible ? 'Ausblenden' : 'Einblenden') + '">' +
                     '<span class="active-layer-title">' + escapeHtml(layer.title) + '</span>' +
+                    '<button class="active-layer-info" onclick="showLayerInfo(\'' + escapedId + '\')" title="Layer-Informationen">' +
+                        '<span class="material-symbols-outlined">info</span>' +
+                    '</button>' +
                 '</div>';
             });
 
@@ -2997,6 +3000,63 @@
             });
         });
 
+        // ===== LAYER INFO MODAL =====
+        var layerInfoModal = document.getElementById('layer-info-modal');
+        var layerInfoContent = document.getElementById('layer-info-content');
+        var layerInfoCloseBtn = layerInfoModal ? layerInfoModal.querySelector('.layer-info-modal-close') : null;
+
+        function showLayerInfo(layerId) {
+            if (!layerInfoModal || !layerInfoContent || !layerId) return;
+
+            // Show modal with loading state
+            layerInfoContent.innerHTML = '<div class="layer-info-loading">Lade Informationen...</div>';
+            layerInfoModal.classList.add('show');
+
+            // Fetch layer legend/info
+            fetch('https://api3.geo.admin.ch/rest/services/api/MapServer/' + layerId + '/legend?lang=de')
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Layer-Informationen nicht verfügbar');
+                    return response.text();
+                })
+                .then(function(html) {
+                    layerInfoContent.innerHTML = html;
+                })
+                .catch(function(error) {
+                    console.error('Fehler beim Laden der Layer-Informationen:', error);
+                    layerInfoContent.innerHTML = '<div class="layer-info-loading">Informationen konnten nicht geladen werden.</div>';
+                });
+        }
+
+        function hideLayerInfo() {
+            if (layerInfoModal) {
+                layerInfoModal.classList.remove('show');
+            }
+        }
+
+        // Close modal on button click
+        if (layerInfoCloseBtn) {
+            layerInfoCloseBtn.addEventListener('click', hideLayerInfo);
+        }
+
+        // Close modal on backdrop click
+        if (layerInfoModal) {
+            layerInfoModal.addEventListener('click', function(e) {
+                if (e.target === layerInfoModal) {
+                    hideLayerInfo();
+                }
+            });
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && layerInfoModal && layerInfoModal.classList.contains('show')) {
+                hideLayerInfo();
+            }
+        });
+
+        // Make showLayerInfo globally accessible for onclick handlers
+        window.showLayerInfo = showLayerInfo;
+
         // ===== GEOKATALOG =====
         var geokatalogLoaded = false;
 
@@ -3006,11 +3066,7 @@
             checkboxes.forEach(function(checkbox) {
                 var layerId = checkbox.getAttribute('data-layer-id');
                 var isActive = activeSwisstopoLayers.some(function(l) { return l.id === layerId; });
-                if (isActive) {
-                    checkbox.classList.add('checked');
-                } else {
-                    checkbox.classList.remove('checked');
-                }
+                checkbox.checked = isActive;
             });
         }
 
@@ -3059,8 +3115,9 @@
                     arrowEl.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
                     nodeEl.appendChild(arrowEl);
                 } else {
-                    // Leaf node with checkbox
-                    var checkboxEl = document.createElement('span');
+                    // Leaf node with checkbox (native input for reliable checked state)
+                    var checkboxEl = document.createElement('input');
+                    checkboxEl.type = 'checkbox';
                     checkboxEl.className = 'node-checkbox';
                     // Store layer ID for later reference
                     if (item.layerBodId) {
@@ -3068,7 +3125,7 @@
                         // Check if layer is already active
                         var isActive = activeSwisstopoLayers.some(function(l) { return l.id === item.layerBodId; });
                         if (isActive) {
-                            checkboxEl.classList.add('checked');
+                            checkboxEl.checked = true;
                         }
                     }
                     nodeEl.appendChild(checkboxEl);
@@ -3080,11 +3137,19 @@
                 nodeEl.appendChild(labelEl);
 
                 // Add info icon to leaf nodes
-                if (!hasChildren) {
+                if (!hasChildren && item.layerBodId) {
                     var infoEl = document.createElement('span');
                     infoEl.className = 'node-info';
                     infoEl.innerHTML = '<span class="material-symbols-outlined">info</span>';
+                    infoEl.setAttribute('data-layer-id', item.layerBodId);
                     nodeEl.appendChild(infoEl);
+
+                    // Click on info icon shows layer info modal
+                    infoEl.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var lid = this.getAttribute('data-layer-id');
+                        if (lid) showLayerInfo(lid);
+                    });
                 }
 
                 itemEl.appendChild(nodeEl);
@@ -3108,6 +3173,8 @@
 
                     nodeEl.addEventListener('click', function(e) {
                         e.stopPropagation();
+                        // Don't toggle if clicking on info icon
+                        if (e.target.closest('.node-info')) return;
                         if (!layerId) return;
 
                         var checkboxEl = nodeEl.querySelector('.node-checkbox');
@@ -3115,10 +3182,10 @@
 
                         if (isActive) {
                             removeSwisstopoLayer(layerId);
-                            if (checkboxEl) checkboxEl.classList.remove('checked');
+                            if (checkboxEl) checkboxEl.checked = false;
                         } else {
                             addSwisstopoLayer(layerId, layerTitle, false);
-                            if (checkboxEl) checkboxEl.classList.add('checked');
+                            if (checkboxEl) checkboxEl.checked = true;
                         }
                     });
                 }

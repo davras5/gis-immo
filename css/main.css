@@ -1663,33 +1663,11 @@
         .catalog-node .node-checkbox {
             width: 16px;
             height: 16px;
-            border: 2px solid var(--grey-500);
-            border-radius: 3px;
+            margin: 0;
             margin-right: var(--space-3);
             flex-shrink: 0;
             cursor: pointer;
-        }
-
-        .catalog-node .node-checkbox:hover {
-            border-color: var(--grey-600);
-        }
-
-        .catalog-node .node-checkbox.checked {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            position: relative;
-        }
-
-        .catalog-node .node-checkbox.checked::after {
-            content: '';
-            position: absolute;
-            left: 4px;
-            top: 1px;
-            width: 4px;
-            height: 8px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
+            accent-color: var(--primary);
         }
 
         .catalog-node .node-label {
@@ -1810,6 +1788,31 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             cursor: default;
+        }
+
+        .active-layer-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            color: var(--grey-500);
+            flex-shrink: 0;
+            padding: 0;
+            transition: background var(--transition-normal), color var(--transition-normal);
+        }
+
+        .active-layer-info:hover {
+            background: var(--grey-200);
+            color: var(--grey-700);
+        }
+
+        .active-layer-info .material-symbols-outlined {
+            font-size: 18px;
         }
 
         /* ===== IDENTIFY POPUP ===== */
@@ -3846,6 +3849,176 @@
                 left: 20px;
                 right: 20px;
                 max-width: none;
+            }
+        }
+
+        /* ===== LAYER INFO MODAL ===== */
+        .layer-info-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            padding: var(--space-5);
+        }
+
+        .layer-info-modal.show {
+            display: flex;
+        }
+
+        .layer-info-modal-content {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            max-width: 600px;
+            max-height: 80vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .layer-info-modal-close {
+            position: absolute;
+            top: var(--space-3);
+            right: var(--space-3);
+            background: var(--grey-100);
+            border: none;
+            border-radius: var(--radius-full);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--grey-600);
+            transition: background var(--transition-normal), color var(--transition-normal);
+            z-index: 1;
+        }
+
+        .layer-info-modal-close:hover {
+            background: var(--grey-200);
+            color: var(--grey-900);
+        }
+
+        .layer-info-modal-close .material-symbols-outlined {
+            font-size: var(--icon-md);
+        }
+
+        .layer-info-body {
+            padding: var(--space-5);
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .layer-info-loading {
+            text-align: center;
+            padding: var(--space-8);
+            color: var(--grey-500);
+        }
+
+        /* Swisstopo legend styles */
+        .layer-info-body .legend-container {
+            font-size: var(--text-sm);
+            line-height: 1.6;
+        }
+
+        .layer-info-body .bod-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--grey-900);
+            margin: 0 0 var(--space-3) 0;
+        }
+
+        .layer-info-body .legend-abstract {
+            color: var(--grey-600);
+            margin: 0 0 var(--space-5) 0;
+            padding: var(--space-3);
+            background: var(--grey-50);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--primary);
+        }
+
+        .layer-info-body .legend-footer {
+            margin-top: var(--space-4);
+        }
+
+        .layer-info-body .legend-footer > span {
+            font-weight: var(--font-semibold);
+            color: var(--grey-900);
+            display: block;
+            margin-bottom: var(--space-2);
+        }
+
+        .layer-info-body .img-container {
+            background: var(--grey-50);
+            padding: var(--space-3);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-4);
+        }
+
+        .layer-info-body .img-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .layer-info-body table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--text-sm);
+        }
+
+        .layer-info-body table tr {
+            border-bottom: 1px solid var(--grey-200);
+        }
+
+        .layer-info-body table tr:last-child {
+            border-bottom: none;
+        }
+
+        .layer-info-body table td {
+            padding: var(--space-2) var(--space-3);
+            vertical-align: top;
+        }
+
+        .layer-info-body table td:first-child {
+            font-weight: var(--font-medium);
+            color: var(--grey-700);
+            width: 40%;
+            padding-left: 0;
+        }
+
+        .layer-info-body table td:last-child {
+            color: var(--grey-600);
+            padding-right: 0;
+        }
+
+        .layer-info-body table a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .layer-info-body table a:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 767px) {
+            .layer-info-modal {
+                padding: var(--space-3);
+            }
+
+            .layer-info-modal-content {
+                max-height: 90vh;
+            }
+
+            .layer-info-body {
+                padding: var(--space-4);
             }
         }
 
