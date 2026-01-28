@@ -1674,6 +1674,24 @@
             border-color: var(--grey-600);
         }
 
+        .catalog-node .node-checkbox.checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            position: relative;
+        }
+
+        .catalog-node .node-checkbox.checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
         .catalog-node .node-label {
             flex: 1;
         }
