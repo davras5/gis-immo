@@ -353,6 +353,9 @@
             // Update object count
             updateObjectCount();
 
+            // Update export count
+            updateExportCount();
+
             // Update filter button state
             updateFilterButtonState();
 
@@ -786,19 +789,311 @@
             }
         });
 
-        // Export Handler (Platzhalter/Demo)
-        function handleExport(format) {
-            var formatNames = {
-                'csv': 'CSV (.csv)',
-                'excel': 'Excel (.xlsx)',
-                'geojson': 'GeoJSON (.geojson)'
-            };
-            alert('Export als ' + formatNames[format] + '\n\nDiese Funktion ist ein Platzhalter und wird in einer zukünftigen Version implementiert.');
+        // ===== EXPORT PANEL FUNCTIONS =====
+        var selectedExportFormat = 'geojson';
 
-            // Close dropdown
-            document.querySelectorAll('.dropdown-menu').forEach(function(dropdown) {
-                dropdown.classList.remove('show');
+        function initExportPanel() {
+            // Format card selection
+            document.querySelectorAll('.export-format-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.export-format-card').forEach(function(c) {
+                        c.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    selectedExportFormat = this.getAttribute('data-format');
+                });
             });
+
+            // Data selection change
+            var dataSelection = document.getElementById('export-data-selection');
+            if (dataSelection) {
+                dataSelection.addEventListener('change', updateExportCount);
+            }
+
+            // Export button
+            var exportBtn = document.getElementById('export-btn');
+            if (exportBtn) {
+                exportBtn.addEventListener('click', performExport);
+            }
+
+            // Initial count update
+            updateExportCount();
+        }
+
+        function updateExportCount() {
+            var countEl = document.getElementById('export-count');
+            var dataSelection = document.getElementById('export-data-selection');
+            if (!countEl || !dataSelection) return;
+
+            var count = 0;
+            var selection = dataSelection.value;
+
+            if (selection === 'filtered') {
+                count = filteredData ? filteredData.length : 0;
+            } else if (selection === 'all') {
+                count = portfolioData ? portfolioData.length : 0;
+            } else if (selection === 'selected') {
+                count = selectedBuildingId ? 1 : 0;
+            }
+
+            countEl.textContent = count + ' Objekt' + (count !== 1 ? 'e' : '') + ' werden exportiert';
+        }
+
+        function getExportData() {
+            var dataSelection = document.getElementById('export-data-selection');
+            var selection = dataSelection ? dataSelection.value : 'filtered';
+
+            if (selection === 'filtered') {
+                return filteredData || [];
+            } else if (selection === 'all') {
+                return portfolioData || [];
+            } else if (selection === 'selected' && selectedBuildingId) {
+                var building = portfolioData.find(function(b) {
+                    return b.properties.buildingId === selectedBuildingId;
+                });
+                return building ? [building] : [];
+            }
+            return [];
+        }
+
+        function performExport() {
+            var data = getExportData();
+            if (data.length === 0) {
+                showToast({ type: 'error', message: 'Keine Daten zum Exportieren vorhanden' });
+                return;
+            }
+
+            var btn = document.getElementById('export-btn');
+            var originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span><span>Exportiere...</span>';
+            btn.disabled = true;
+
+            setTimeout(function() {
+                try {
+                    switch (selectedExportFormat) {
+                        case 'geojson':
+                            exportGeoJSON(data);
+                            break;
+                        case 'csv':
+                            exportCSV(data);
+                            break;
+                        case 'kml':
+                            exportKML(data);
+                            break;
+                        case 'shapefile':
+                            exportShapefile(data);
+                            break;
+                    }
+                    showToast({ type: 'success', message: 'Export erfolgreich abgeschlossen' });
+                } catch (e) {
+                    console.error('Export error:', e);
+                    showToast({ type: 'error', message: 'Fehler beim Export: ' + e.message });
+                }
+
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }, 300);
+        }
+
+        function exportGeoJSON(data) {
+            var includeCoords = document.getElementById('export-coords').checked;
+            var includeParcels = document.getElementById('export-parcels').checked;
+
+            var featureCollection = {
+                type: 'FeatureCollection',
+                features: data.map(function(feature) {
+                    var exportFeature = JSON.parse(JSON.stringify(feature));
+                    if (!includeCoords) {
+                        delete exportFeature.geometry;
+                    }
+                    return exportFeature;
+                })
+            };
+
+            // Add parcels if requested
+            if (includeParcels && parcelsData && parcelsData.features) {
+                featureCollection.features = featureCollection.features.concat(
+                    parcelsData.features.map(function(f) {
+                        return JSON.parse(JSON.stringify(f));
+                    })
+                );
+            }
+
+            var blob = new Blob([JSON.stringify(featureCollection, null, 2)], { type: 'application/geo+json' });
+            downloadBlob(blob, 'bbl-portfolio-export.geojson');
+        }
+
+        function exportCSV(data) {
+            var allFields = document.getElementById('export-all-fields').checked;
+            var visibleOnly = document.getElementById('export-visible-only').checked;
+            var includeCoords = document.getElementById('export-coords').checked;
+
+            // Define columns
+            var columns = ['buildingId', 'name', 'address', 'city', 'country', 'status', 'energyClass', 'flaeche'];
+
+            if (allFields && !visibleOnly) {
+                columns = ['buildingId', 'name', 'address', 'postalCode', 'city', 'country', 'region',
+                          'status', 'ownershipType', 'portfolioGroup', 'buildingType', 'energyClass',
+                          'flaeche', 'constructedYear', 'refurbishmentYear', 'parkingSpaces', 'evChargingStations'];
+            }
+
+            if (includeCoords) {
+                columns.push('longitude', 'latitude');
+            }
+
+            // Build CSV content
+            var csvContent = columns.join(';') + '\n';
+
+            data.forEach(function(feature) {
+                var props = feature.properties || {};
+                var row = columns.map(function(col) {
+                    if (col === 'longitude' && feature.geometry && feature.geometry.coordinates) {
+                        return feature.geometry.coordinates[0];
+                    }
+                    if (col === 'latitude' && feature.geometry && feature.geometry.coordinates) {
+                        return feature.geometry.coordinates[1];
+                    }
+                    var value = props[col];
+                    if (value === null || value === undefined) return '';
+                    // Escape quotes and wrap in quotes if contains separator
+                    var strValue = String(value);
+                    if (strValue.includes(';') || strValue.includes('"') || strValue.includes('\n')) {
+                        strValue = '"' + strValue.replace(/"/g, '""') + '"';
+                    }
+                    return strValue;
+                });
+                csvContent += row.join(';') + '\n';
+            });
+
+            var blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8' }); // BOM for Excel
+            downloadBlob(blob, 'bbl-portfolio-export.csv');
+        }
+
+        function exportKML(data) {
+            var includeCoords = document.getElementById('export-coords').checked;
+
+            var kmlContent = '<?xml version="1.0" encoding="UTF-8"?>\n';
+            kmlContent += '<kml xmlns="http://www.opengis.net/kml/2.2">\n';
+            kmlContent += '  <Document>\n';
+            kmlContent += '    <name>BBL Immobilienportfolio</name>\n';
+            kmlContent += '    <description>Export vom ' + new Date().toLocaleDateString('de-CH') + '</description>\n';
+
+            // Define styles for different statuses
+            var statusStyles = {
+                'In Betrieb': { color: 'ff50af4c', icon: 'grn-circle' },
+                'In Renovation': { color: 'ff0098ff', icon: 'orange-circle' },
+                'In Planung': { color: 'fff39621', icon: 'blu-circle' },
+                'Ausser Betrieb': { color: 'ff9e9e9e', icon: 'grey-circle' }
+            };
+
+            Object.keys(statusStyles).forEach(function(status) {
+                var style = statusStyles[status];
+                kmlContent += '    <Style id="style-' + status.replace(/\s/g, '-') + '">\n';
+                kmlContent += '      <IconStyle>\n';
+                kmlContent += '        <color>' + style.color + '</color>\n';
+                kmlContent += '        <scale>1.0</scale>\n';
+                kmlContent += '        <Icon><href>http://maps.google.com/mapfiles/kml/paddle/' + style.icon + '.png</href></Icon>\n';
+                kmlContent += '      </IconStyle>\n';
+                kmlContent += '    </Style>\n';
+            });
+
+            data.forEach(function(feature) {
+                var props = feature.properties || {};
+                var coords = feature.geometry && feature.geometry.coordinates ? feature.geometry.coordinates : [0, 0];
+                var status = props.status || 'In Betrieb';
+
+                kmlContent += '    <Placemark>\n';
+                kmlContent += '      <name>' + escapeXml(props.name || 'Unbekannt') + '</name>\n';
+                kmlContent += '      <description><![CDATA[\n';
+                kmlContent += '        <b>Adresse:</b> ' + escapeXml(props.address || '') + '<br>\n';
+                kmlContent += '        <b>Stadt:</b> ' + escapeXml(props.city || '') + '<br>\n';
+                kmlContent += '        <b>Status:</b> ' + escapeXml(status) + '<br>\n';
+                kmlContent += '        <b>Energieklasse:</b> ' + escapeXml(props.energyClass || '-') + '<br>\n';
+                kmlContent += '        <b>Fläche:</b> ' + (props.flaeche ? props.flaeche.toLocaleString('de-CH') + ' m²' : '-') + '\n';
+                kmlContent += '      ]]></description>\n';
+                kmlContent += '      <styleUrl>#style-' + status.replace(/\s/g, '-') + '</styleUrl>\n';
+
+                if (includeCoords) {
+                    kmlContent += '      <Point>\n';
+                    kmlContent += '        <coordinates>' + coords[0] + ',' + coords[1] + ',0</coordinates>\n';
+                    kmlContent += '      </Point>\n';
+                }
+
+                kmlContent += '    </Placemark>\n';
+            });
+
+            kmlContent += '  </Document>\n';
+            kmlContent += '</kml>';
+
+            var blob = new Blob([kmlContent], { type: 'application/vnd.google-earth.kml+xml' });
+            downloadBlob(blob, 'bbl-portfolio-export.kml');
+        }
+
+        function exportShapefile(data) {
+            // Shapefile export requires external library or server-side processing
+            // For now, we'll export as GeoJSON with a note about conversion
+            showToast({ type: 'info', title: 'Shapefile-Export', message: 'GeoJSON wird erstellt. Konvertieren Sie mit QGIS oder ogr2ogr zu Shapefile.' });
+
+            var includeCoords = document.getElementById('export-coords').checked;
+
+            var featureCollection = {
+                type: 'FeatureCollection',
+                name: 'bbl_portfolio',
+                crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' } },
+                features: data.map(function(feature) {
+                    var exportFeature = JSON.parse(JSON.stringify(feature));
+                    // Flatten properties for shapefile compatibility (10 char field names)
+                    if (exportFeature.properties) {
+                        var props = exportFeature.properties;
+                        exportFeature.properties = {
+                            bldg_id: props.buildingId,
+                            name: (props.name || '').substring(0, 254),
+                            address: (props.address || '').substring(0, 254),
+                            city: (props.city || '').substring(0, 80),
+                            country: (props.country || '').substring(0, 80),
+                            status: (props.status || '').substring(0, 50),
+                            energy_cls: props.energyClass,
+                            area_m2: props.flaeche,
+                            built_year: props.constructedYear,
+                            portfolio: (props.portfolioGroup || '').substring(0, 80)
+                        };
+                    }
+                    if (!includeCoords) {
+                        delete exportFeature.geometry;
+                    }
+                    return exportFeature;
+                })
+            };
+
+            var blob = new Blob([JSON.stringify(featureCollection, null, 2)], { type: 'application/geo+json' });
+            downloadBlob(blob, 'bbl-portfolio-for-shapefile.geojson');
+        }
+
+        function escapeXml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&apos;');
+        }
+
+        function downloadBlob(blob, filename) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Legacy export handler for dropdown menu
+        function handleExport(format) {
+            selectedExportFormat = format;
+            performExport();
         }
 
         // ===== SHARE FUNCTIONS =====
@@ -1216,6 +1511,7 @@
                     initFilterOptions();
                     initFilterPane();
                     initDrawerResize();
+                    initExportPanel();
 
                     // Apply initial filters (this sets filteredData and updates count)
                     applyFilters();
@@ -3222,6 +3518,11 @@
                     // Show print preview when Drucken accordion is opened
                     if (lastSpan && lastSpan.textContent.trim() === 'Drucken') {
                         showPrintPreview();
+                    }
+
+                    // Update export count when Export accordion is opened
+                    if (lastSpan && lastSpan.textContent.trim() === 'Export') {
+                        updateExportCount();
                     }
 
                     // Expand Geokatalog to full height

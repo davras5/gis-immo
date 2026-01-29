@@ -246,7 +246,79 @@
                         <span>Export</span>
                     </div>
                     <div class="accordion-content">
-                        Exportieren Sie Portfolio-Daten in verschiedenen Formaten: GeoJSON für Web-Anwendungen, CSV für Excel, KML für Google Earth oder Shapefile für GIS-Software.
+                        <div class="export-panel">
+                            <div class="export-section">
+                                <label class="export-section-label">Datenauswahl</label>
+                                <select id="export-data-selection" class="export-select">
+                                    <option value="filtered">Aktuelle Ansicht</option>
+                                    <option value="all">Alle Objekte</option>
+                                    <option value="selected">Nur ausgewähltes Objekt</option>
+                                </select>
+                                <span class="export-count" id="export-count"></span>
+                            </div>
+
+                            <div class="export-section">
+                                <label class="export-section-label">Format wählen</label>
+                                <div class="export-format-grid">
+                                    <button class="export-format-card active" data-format="geojson">
+                                        <span class="export-format-icon">{ }</span>
+                                        <span class="export-format-name">GeoJSON</span>
+                                        <span class="export-format-desc">Web-Anwendungen</span>
+                                    </button>
+                                    <button class="export-format-card" data-format="csv">
+                                        <span class="export-format-icon"><span class="material-symbols-outlined">table_view</span></span>
+                                        <span class="export-format-name">CSV</span>
+                                        <span class="export-format-desc">Excel / Tabellen</span>
+                                    </button>
+                                    <button class="export-format-card" data-format="kml">
+                                        <span class="export-format-icon"><span class="material-symbols-outlined">location_on</span></span>
+                                        <span class="export-format-name">KML</span>
+                                        <span class="export-format-desc">Google Earth</span>
+                                    </button>
+                                    <button class="export-format-card" data-format="shapefile">
+                                        <span class="export-format-icon"><span class="material-symbols-outlined">hexagon</span></span>
+                                        <span class="export-format-name">Shapefile</span>
+                                        <span class="export-format-desc">GIS-Software</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="export-section">
+                                <label class="export-section-label">Optionen</label>
+                                <div class="export-options">
+                                    <label class="export-checkbox-label">
+                                        <input type="checkbox" id="export-coords" checked>
+                                        <span>Koordinaten einschliessen</span>
+                                    </label>
+                                    <label class="export-checkbox-label">
+                                        <input type="checkbox" id="export-all-fields" checked>
+                                        <span>Alle Attribute exportieren</span>
+                                    </label>
+                                    <label class="export-checkbox-label">
+                                        <input type="checkbox" id="export-visible-only">
+                                        <span>Nur sichtbare Spalten</span>
+                                    </label>
+                                    <label class="export-checkbox-label">
+                                        <input type="checkbox" id="export-parcels">
+                                        <span>Parzellen einschliessen</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="export-section">
+                                <label class="export-section-label">Koordinatensystem</label>
+                                <select id="export-crs" class="export-select">
+                                    <option value="EPSG:4326">WGS 84 (EPSG:4326)</option>
+                                    <option value="EPSG:2056">CH1903+ / LV95 (EPSG:2056)</option>
+                                    <option value="EPSG:21781">CH1903 / LV03 (EPSG:21781)</option>
+                                </select>
+                            </div>
+
+                            <button id="export-btn" class="export-btn">
+                                <span class="material-symbols-outlined">download</span>
+                                <span>Exportieren</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -1319,8 +1391,10 @@
     <footer id="footer">
         <div id="coordinates">WGS 84 | Koordinaten: --</div>
         <div id="footer-links">
-            <a href="https://www.admin.ch/gov/de/start/rechtliches.html" target="_blank">Rechtliches</a>
             <a href="https://github.com/davras5/gis-immo" target="_blank">Quellcode</a>
+            <a href="https://www.admin.ch/gov/de/start/rechtliches.html" target="_blank">Rechtliches</a>
+            <a href="https://www.bbl.admin.ch/de/hilfe" target="_blank">Hilfe</a>
+            <a href="https://www.bbl.admin.ch/de/kontakt" target="_blank">Kontakt</a>
         </div>
     </footer>
 

@@ -1700,6 +1700,172 @@
             box-shadow: var(--shadow-sm);
         }
 
+        /* ===== EXPORT PANEL ===== */
+        .export-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .export-section {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .export-section-label {
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+            color: var(--grey-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .export-select {
+            width: 100%;
+            padding: var(--space-2) var(--space-3);
+            border: 1px solid var(--grey-300);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            font-size: var(--text-sm);
+            color: var(--grey-900);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+        }
+
+        .export-select:hover {
+            border-color: var(--grey-500);
+        }
+
+        .export-select:focus {
+            outline: none;
+            border-color: var(--accent-panel);
+        }
+
+        .export-count {
+            font-size: var(--text-xs);
+            color: var(--grey-500);
+            margin-top: var(--space-1);
+        }
+
+        .export-format-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-2);
+        }
+
+        .export-format-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-3);
+            border: 1px solid var(--grey-300);
+            border-radius: var(--radius-sm);
+            background: var(--white);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .export-format-card:hover {
+            border-color: var(--grey-500);
+            background: var(--grey-50);
+        }
+
+        .export-format-card.active {
+            border-color: var(--accent-panel);
+            background: rgba(0, 60, 105, 0.05);
+            box-shadow: 0 0 0 1px var(--accent-panel);
+        }
+
+        .export-format-icon {
+            font-size: var(--text-lg);
+            color: var(--grey-700);
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .export-format-card.active .export-format-icon {
+            color: var(--accent-panel);
+        }
+
+        .export-format-icon .material-symbols-outlined {
+            font-size: 24px;
+        }
+
+        .export-format-name {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--grey-900);
+        }
+
+        .export-format-desc {
+            font-size: var(--text-xs);
+            color: var(--grey-500);
+        }
+
+        .export-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .export-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-sm);
+            color: var(--grey-900);
+            cursor: pointer;
+        }
+
+        .export-checkbox-label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: var(--accent-panel);
+        }
+
+        .export-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--accent-panel);
+            color: white;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            cursor: pointer;
+            transition: background var(--transition-normal);
+        }
+
+        .export-btn:hover {
+            background: var(--grey-800);
+        }
+
+        .export-btn:active {
+            background: var(--grey-900);
+        }
+
+        .export-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .export-btn .material-symbols-outlined {
+            font-size: 18px;
+        }
+
         /* ===== GEOKATALOG TREE ===== */
         .geokatalog-header .geokatalog-theme-switch {
             font-size: var(--text-sm);
