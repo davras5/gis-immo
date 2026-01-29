@@ -886,6 +886,233 @@
             }
         }
 
+        // ===== PRINT FUNCTIONS =====
+        function generatePrintPDF() {
+            var orientation = document.getElementById('print-orientation').value;
+            var scale = document.getElementById('print-scale').value;
+            var includeLegend = document.getElementById('print-legend').checked;
+            var includeGrid = document.getElementById('print-grid').checked;
+
+            var btn = document.getElementById('print-pdf-btn');
+            var originalText = btn.textContent;
+            btn.textContent = 'Wird erstellt...';
+            btn.disabled = true;
+
+            // Get print dimensions based on orientation
+            var printDimensions = getPrintDimensions(orientation);
+
+            // Create print container
+            var printContainer = document.createElement('div');
+            printContainer.id = 'print-container';
+            printContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: ' + printDimensions.width + 'mm; height: ' + printDimensions.height + 'mm; background: white; z-index: 10000; padding: 10mm; box-sizing: border-box;';
+
+            // Create header
+            var header = document.createElement('div');
+            header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 5mm; padding-bottom: 3mm; border-bottom: 1px solid #ccc;';
+            header.innerHTML = '<div style="font-size: 14pt; font-weight: bold;">BBL Immobilienportfolio</div><div style="font-size: 10pt; color: #666;">' + new Date().toLocaleDateString('de-CH') + '</div>';
+            printContainer.appendChild(header);
+
+            // Create map container
+            var mapContainer = document.createElement('div');
+            var mapHeight = printDimensions.height - 40; // Account for header and footer
+            if (includeLegend) mapHeight -= 25; // Reserve space for legend
+            mapContainer.style.cssText = 'width: 100%; height: ' + mapHeight + 'mm; border: 1px solid #ccc; position: relative; overflow: hidden;';
+
+            // Clone map canvas
+            if (map) {
+                var mapCanvas = map.getCanvas();
+                var clonedCanvas = document.createElement('canvas');
+                clonedCanvas.width = mapCanvas.width;
+                clonedCanvas.height = mapCanvas.height;
+                var ctx = clonedCanvas.getContext('2d');
+                ctx.drawImage(mapCanvas, 0, 0);
+                clonedCanvas.style.cssText = 'width: 100%; height: 100%; object-fit: contain;';
+                mapContainer.appendChild(clonedCanvas);
+
+                // Add coordinate grid overlay if requested
+                if (includeGrid) {
+                    var gridOverlay = document.createElement('div');
+                    gridOverlay.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;';
+                    gridOverlay.innerHTML = createCoordinateGrid();
+                    mapContainer.appendChild(gridOverlay);
+                }
+
+                // Add scale bar
+                var scaleBar = document.createElement('div');
+                scaleBar.style.cssText = 'position: absolute; bottom: 5mm; left: 5mm; background: rgba(255,255,255,0.9); padding: 2mm 3mm; border-radius: 2px; font-size: 8pt;';
+                var currentScale = scale === 'auto' ? Math.round(getMapScale()) : parseInt(scale);
+                scaleBar.textContent = 'Massstab 1:' + currentScale.toLocaleString('de-CH');
+                mapContainer.appendChild(scaleBar);
+
+                // Add north arrow
+                var northArrow = document.createElement('div');
+                northArrow.style.cssText = 'position: absolute; top: 5mm; right: 5mm; background: rgba(255,255,255,0.9); padding: 2mm; border-radius: 2px; text-align: center;';
+                northArrow.innerHTML = '<div style="font-size: 16pt;">↑</div><div style="font-size: 8pt;">N</div>';
+                mapContainer.appendChild(northArrow);
+            }
+            printContainer.appendChild(mapContainer);
+
+            // Add legend if requested
+            if (includeLegend) {
+                var legend = document.createElement('div');
+                legend.style.cssText = 'margin-top: 5mm; padding: 3mm; border: 1px solid #ccc; font-size: 9pt;';
+                legend.innerHTML = '<div style="font-weight: bold; margin-bottom: 2mm;">Legende</div>' +
+                    '<div style="display: flex; gap: 10mm; flex-wrap: wrap;">' +
+                    '<span><span style="display: inline-block; width: 10px; height: 10px; background: #4CAF50; border-radius: 50%; margin-right: 2mm;"></span>In Betrieb</span>' +
+                    '<span><span style="display: inline-block; width: 10px; height: 10px; background: #FF9800; border-radius: 50%; margin-right: 2mm;"></span>In Renovation</span>' +
+                    '<span><span style="display: inline-block; width: 10px; height: 10px; background: #2196F3; border-radius: 50%; margin-right: 2mm;"></span>In Planung</span>' +
+                    '<span><span style="display: inline-block; width: 10px; height: 10px; background: #9E9E9E; border-radius: 50%; margin-right: 2mm;"></span>Ausser Betrieb</span>' +
+                    '</div>';
+                printContainer.appendChild(legend);
+            }
+
+            // Add footer
+            var footer = document.createElement('div');
+            footer.style.cssText = 'margin-top: 3mm; padding-top: 3mm; border-top: 1px solid #ccc; font-size: 8pt; color: #666; display: flex; justify-content: space-between;';
+            footer.innerHTML = '<span>Quelle: BBL Immobilienportfolio</span><span>© ' + new Date().getFullYear() + ' Bundesamt für Bauten und Logistik</span>';
+            printContainer.appendChild(footer);
+
+            document.body.appendChild(printContainer);
+
+            // Create print-specific styles
+            var printStyles = document.createElement('style');
+            printStyles.id = 'print-styles';
+            printStyles.textContent = '@media print { body > *:not(#print-container) { display: none !important; } #print-container { position: static !important; } @page { size: ' + (orientation.includes('landscape') ? 'landscape' : 'portrait') + '; margin: 0; } }';
+            document.head.appendChild(printStyles);
+
+            // Trigger print dialog
+            setTimeout(function() {
+                window.print();
+
+                // Cleanup after print dialog closes
+                setTimeout(function() {
+                    document.body.removeChild(printContainer);
+                    document.head.removeChild(printStyles);
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 500);
+            }, 100);
+        }
+
+        function getPrintDimensions(orientation) {
+            var dimensions = {
+                'portrait-a4': { width: 210, height: 297 },
+                'landscape-a4': { width: 297, height: 210 },
+                'portrait-a3': { width: 297, height: 420 },
+                'landscape-a3': { width: 420, height: 297 }
+            };
+            return dimensions[orientation] || dimensions['landscape-a4'];
+        }
+
+        function getMapScale() {
+            if (!map) return 25000;
+            var center = map.getCenter();
+            var zoom = map.getZoom();
+            // Calculate approximate scale based on zoom level at given latitude
+            var metersPerPixel = 156543.03392 * Math.cos(center.lat * Math.PI / 180) / Math.pow(2, zoom);
+            // Assume 96 DPI screen
+            var pixelsPerMeter = 96 / 0.0254;
+            return Math.round(metersPerPixel * pixelsPerMeter);
+        }
+
+        function createCoordinateGrid() {
+            // Create a simple SVG grid overlay
+            return '<svg width="100%" height="100%" style="position: absolute; top: 0; left: 0;">' +
+                '<defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">' +
+                '<path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>' +
+                '</pattern></defs>' +
+                '<rect width="100%" height="100%" fill="url(#grid)"/>' +
+                '</svg>';
+        }
+
+        // ===== PRINT PREVIEW OVERLAY =====
+        var printPreviewOverlay = null;
+
+        function createPrintPreviewOverlay() {
+            if (printPreviewOverlay) return;
+
+            var mapView = document.getElementById('map-view');
+            if (!mapView) return;
+
+            printPreviewOverlay = document.createElement('div');
+            printPreviewOverlay.className = 'print-preview-overlay';
+            printPreviewOverlay.innerHTML = '<svg><defs><mask id="print-preview-mask"><rect width="100%" height="100%" fill="white"/><rect id="print-crop-rect" fill="black"/></mask></defs><rect width="100%" height="100%" fill="rgba(0,0,0,0.5)" mask="url(#print-preview-mask)"/></svg><div class="print-preview-crop"><div class="print-preview-label"></div></div>';
+            mapView.appendChild(printPreviewOverlay);
+        }
+
+        function showPrintPreview() {
+            createPrintPreviewOverlay();
+            if (printPreviewOverlay) {
+                printPreviewOverlay.classList.add('active');
+                updatePrintPreview();
+            }
+        }
+
+        function hidePrintPreview() {
+            if (printPreviewOverlay) {
+                printPreviewOverlay.classList.remove('active');
+            }
+        }
+
+        function updatePrintPreview() {
+            if (!printPreviewOverlay || !printPreviewOverlay.classList.contains('active')) return;
+
+            var mapView = document.getElementById('map-view');
+            if (!mapView) return;
+
+            var orientation = document.getElementById('print-orientation').value;
+            var printDims = getPrintDimensions(orientation);
+            var aspectRatio = printDims.width / printDims.height;
+
+            var viewRect = mapView.getBoundingClientRect();
+            var viewWidth = viewRect.width;
+            var viewHeight = viewRect.height;
+
+            // Calculate print area dimensions to fit in map view (with padding)
+            var padding = 60;
+            var maxWidth = viewWidth - (padding * 2);
+            var maxHeight = viewHeight - (padding * 2);
+
+            var cropWidth, cropHeight;
+            if (maxWidth / aspectRatio <= maxHeight) {
+                cropWidth = maxWidth;
+                cropHeight = maxWidth / aspectRatio;
+            } else {
+                cropHeight = maxHeight;
+                cropWidth = maxHeight * aspectRatio;
+            }
+
+            // Center the crop area
+            var cropX = (viewWidth - cropWidth) / 2;
+            var cropY = (viewHeight - cropHeight) / 2;
+
+            // Update SVG mask rectangle
+            var maskRect = printPreviewOverlay.querySelector('#print-crop-rect');
+            if (maskRect) {
+                maskRect.setAttribute('x', cropX);
+                maskRect.setAttribute('y', cropY);
+                maskRect.setAttribute('width', cropWidth);
+                maskRect.setAttribute('height', cropHeight);
+            }
+
+            // Update crop border element
+            var cropBorder = printPreviewOverlay.querySelector('.print-preview-crop');
+            if (cropBorder) {
+                cropBorder.style.left = cropX + 'px';
+                cropBorder.style.top = cropY + 'px';
+                cropBorder.style.width = cropWidth + 'px';
+                cropBorder.style.height = cropHeight + 'px';
+            }
+
+            // Update label
+            var label = printPreviewOverlay.querySelector('.print-preview-label');
+            if (label) {
+                var formatLabel = orientation.includes('a3') ? 'A3' : 'A4';
+                var orientLabel = orientation.includes('landscape') ? 'Querformat' : 'Hochformat';
+                label.textContent = formatLabel + ' ' + orientLabel;
+            }
+        }
+
         // Column Toggle Handler
         function handleColumnToggle(checkbox) {
             var columnClass = checkbox.getAttribute('data-column');
@@ -2978,6 +3205,9 @@
                 document.querySelectorAll('.accordion-content').forEach(function(c) { c.classList.remove('show'); });
                 geokatalogAccordion.classList.remove('expanded');
 
+                // Hide print preview when any accordion closes
+                hidePrintPreview();
+
                 if (!isActive) {
                     this.classList.add('active');
                     content.classList.add('show');
@@ -2989,6 +3219,11 @@
                         updateShareLink();
                     }
 
+                    // Show print preview when Drucken accordion is opened
+                    if (lastSpan && lastSpan.textContent.trim() === 'Drucken') {
+                        showPrintPreview();
+                    }
+
                     // Expand Geokatalog to full height
                     if (isGeokatalog) {
                         geokatalogAccordion.classList.add('expanded');
@@ -2998,6 +3233,19 @@
 
                 updateMenuTogglePositionDebounced();
             });
+        });
+
+        // Print orientation change - update preview
+        var printOrientationSelect = document.getElementById('print-orientation');
+        if (printOrientationSelect) {
+            printOrientationSelect.addEventListener('change', updatePrintPreview);
+        }
+
+        // Update print preview on window resize
+        window.addEventListener('resize', function() {
+            if (printPreviewOverlay && printPreviewOverlay.classList.contains('active')) {
+                updatePrintPreview();
+            }
         });
 
         // ===== LAYER INFO MODAL =====

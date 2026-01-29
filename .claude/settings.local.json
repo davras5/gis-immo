@@ -5,7 +5,8 @@
       "WebFetch(domain:api3.geo.admin.ch)",
       "WebFetch(domain:wmts.geo.admin.ch)",
       "Bash(curl:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(find:*)"
     ]
   }
 }
