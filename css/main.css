@@ -4396,7 +4396,8 @@
         .measure-distance-display {
             position: absolute;
             bottom: 40px;
-            left: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--white);
             border-radius: var(--radius-md);
             box-shadow: var(--shadow-lg);
